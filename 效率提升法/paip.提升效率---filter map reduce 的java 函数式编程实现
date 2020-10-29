@@ -1,0 +1,123 @@
+
+#paip.提升效率---filter map reduce 的java 函数式编程实现
+========================================================
+#----------------------index索引------------------
+++函数式编程的好处儿以及缺点
+++actual code 实际代码如下
+---filter 实现...
+--- map 实现..
+---reduce
+---调用
+
+##函数式编程的好处儿以及缺点
+----------------------------
+从声明式编程 代替  命令式编程 的观点来看,函数式编程是个好东东..why >>>how
+大多时间哈,,可以容易的理解..
+大多时间哈,更是代码短....
+
+但是,有时候,代码更多,更长的...估计是java7 没实现lambda 表达式造成的吧..
+reduce 使用的递归,可能更多的对象生成,,以及堆栈溢出...毕竟,现在的电脑都是基于寄存器的...不是基于堆栈机器..不是基于lambda list机...
+
+
+作者 老哇的爪子 Attilax 艾龙，  EMAIL:1466519819@qq.com
+来源： http://blog.csdn.net/attilax
+
+##actual code 实际代码如下
+----------------
+
+###filter 实现...
+public static <atiType> atiType filterO4(atiType arr, Func func) {
+		// List li = new ArrayList();
+		// for (int i = 0; i < objLi.size(); i++) {
+		// String string = objLi.get(i);
+		// boolean o = (Boolean) func.invoke(string);
+		// if (!o)
+		// li.add(string);
+		// }
+
+		List li = new ArrayList();
+		if (arr instanceof String[]) {
+			String[] sa = (String[]) arr;
+			for (int i = 0; i < sa.length; i++) {
+				String charx = sa[i];
+				if (!(Boolean) func.invoke(charx))
+					li.add(charx);
+
+			}
+			return (atiType) toStrArr(li);
+		}
+		if (arr instanceof List) {
+			 List li3=(List) arr;
+			for (int i = 0; i <li3.size(); i++) {
+				String charx = (String) li3.get(i);
+				if (!(Boolean) func.invoke(charx))
+					li.add(charx);
+
+			}
+			return (atiType)  (li);
+		}
+
+		return null;
+	}
+
+	### map 实现..
+	
+	public static List<String> mapx(Object li, Func function) {
+		List lir = new ArrayList();
+		if (li instanceof List) {
+			List objLi = (List) li;
+			for (int i = 0; i < objLi.size(); i++) {
+				Object o = function.invoke(objLi.get(i));
+
+				lir.add(i, o);
+			}
+		} else {
+			Object[] objLi = (Object[]) li;
+			for (int i = 0; i < objLi.length; i++) {
+				lir.add(function.invoke(objLi[i]));
+			}
+		}
+		return lir;
+	}
+	
+###reduce
+public static <atiType,retType> retType reduceO4d(atiType obj,   Func function) {
+	
+		retType lastVal = null;
+		
+		if (obj instanceof List) {
+			if(lastVal==null)
+				lastVal=(retType) new ArrayList();
+			
+			List objLi = (List) obj;
+			for (int i = 0; i < objLi.size(); i++) {
+				lastVal =   (retType) function.invoke(lastVal, objLi.get(i));
+
+			}
+			return (retType) lastVal;
+		}
+		return null;
+	}
+###调用
+public static void main(String[] args) {
+		String f = "c:\\li.txt";
+		List<String> li = filex.read2list(f);
+		List<String> li2 = listUtil.reduceO4d(li, new Func() {
+
+			@Override
+			public Object invoke(Object... o) {
+				List Last = (List) o[0];
+				String s = (String) o[1];
+				if (s.contains("@")) {
+					String[] a = s.split("\\t");
+					String nowSlect = a[0].trim().replaceAll("@", "");
+					List li_now=listUtil.toList(nowSlect);
+					li_now=listUtil.deDulicate(li_now);
+					return  Last.addAll(li_now);
+				}
+				return Last;
+
+			}
+		});
+		filex.saveList2file(li2, "c:\\catch.txt");
+	}

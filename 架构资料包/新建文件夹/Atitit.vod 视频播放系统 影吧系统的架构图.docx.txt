@@ -1,0 +1,27 @@
+Atitit.vod 视频播放系统 影吧系统的架构图 架构体系 解决方案
+
+运行平台：跨平台 android ios pc mobile
+-------------前端 界面-----------------
+Web组件化
+Js css html的动态加载 ，容器化运行，ajax  iframe
+Css icon类库
+Select以及focus机制的支持
+Js对android三大键盘home,back,menu的支持
+Js容器滚动操作类库
+滚动到顶，滚动到底，getCurSelectItem
+软键盘（支持键盘操作)
+
+
+---------------中间以及后端
+Jsbridge
+Url 表达式执行器dataservice
+兼容数据库模式，与文件系统模式
+Js的后端dsl执行器
+linq
+Sql 的where表达式ast解析器
+拼音库（方便软键盘搜索）
+ioc
+
+
+
+

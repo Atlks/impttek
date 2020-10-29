@@ -1,0 +1,298 @@
+atitit..sql update语法的词法分析，与语法ast构建
+
+11
+11
+11
+22
+33
+55
+66
+88
+8
+
+要使用sql udpate语法的dsl ，需要写个解释器。。
+主要应用在orm框架上，使得update 跟个insert的语法统一
+
+注意的要点：：
+单引号的转义实现
+单引号内的逗号，等号的实现。
+
+
+作者:: 老哇的爪子 Attilax 艾龙，  EMAIL:1466519819@qq.com
+转载请注明来源： http://blog.csdn.net/attilax
+
+词法分析的实现
+扫描器的实现 SqlUpExpTokener
+
+s = "fld1=1,fld2='at''t,lax',fld3='val3'";
+
+	public List getTokenList(String s) {
+		// DslPaserContext context = new DslPaserContext();
+		Context4sqlUpExp context = new Context4sqlUpExp();
+		context.setState(new iniState());
+
+		int n = 0;
+		while (!(context.state instanceof FinishState)) {
+			// System.out.println(n);
+			// ����
+			context.request(s);
+			n++;
+			if (n > 200)
+				break;
+		}
+
+		for (Token tk : context.tokenList) {
+			// if(tk.value.trim().length()>0)
+			System.out.println(tk.value + "===");
+		}
+		return (List) context.tokenList;
+	}
+
+等号操作符的转态 EqxState 
+
+
+public class EqxState implements State {
+
+	@Override
+	public void handle(String sampleParameter, Context context) {
+		Context4sqlUpExp ctt = (Context4sqlUpExp) context;
+		char curchar = ctt.curchar;
+
+		if (ctt.lastKeystate instanceof CommaState || ctt.lastKeystate instanceof CommaState || ctt.lastKeystate instanceof com.attilax.dsm.state.iniState) {
+			Token tk = new Token();
+			tk.value = ctt.curToken.value.trim();
+			ctt.tokenList.add(tk);
+			ctt.tokenList.add(new Token() {
+				{
+					this.value = "=";
+				}
+			});
+			ctt.curToken = new Token();
+			ctt.lastKeystate=new EqxState();
+		} else
+			ctt.curToken.value += curchar;
+			ctt.curcharIndex++;
+
+	}
+
+单引号的转态 SingleQuoeState 
+public class SingleQuoeState implements State {
+
+	/* (non-Javadoc)
+	 * @see com.attilax.designpatter.statepatter.State#handle(java.lang.String)
+	 */
+	@Override
+	public void handle(String sampleParameter) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/* (non-Javadoc)
+	 * @see com.attilax.designpatter.statepatter.State#handle(java.lang.String, com.attilax.designpatter.statepatter.Context)
+	 */
+	@Override
+	public void handle(String sampleParameter, Context context) {
+		Context4sqlUpExp ctt = (Context4sqlUpExp) context;
+	    char curchar=ctt.curchar; 
+	   
+	   ctt. SingleQuoeCount++;
+	 //   ctt.curToken.value+=curchar;
+	    
+	    
+	    //sec queot 
+	    if( nextAlsoSq(ctt) &&  ctt. SingleQuoeCount%2==0 )
+	    {
+	    	ctt.curToken.value=ctt.curToken.value+new StringBuffer().append(curchar).toString();
+	    	ctt.curcharIndex++;
+	    return;
+	    	
+	    }
+	    else   if( preAlsoSq(ctt) &&  ctt. SingleQuoeCount%2==1 )
+	    {
+	    	ctt.curToken.value=ctt.curToken.value+new StringBuffer().append(curchar).toString();
+	    	ctt.curcharIndex++;
+	    return;
+	    }
+	    
+	    else if(ctt.lastKeystate instanceof EqxState)
+	    {
+	    	
+	    	  ctt.curToken=new Token();
+	    	  ctt.lastKeystate=new SingleQuoetStartState();
+		  
+	    }
+	    else if (ctt.lastKeystate instanceof SingleQuoetStartState )//first queot
+	    {
+	    	  Token tk=new Token();
+			    tk.value=ctt.curToken.value;
+			    ctt.tokenList.add(tk);
+			//    ctt.tokenList.add(new Token(){{ this.value="," ; }});
+			    ctt.curToken=new Token();
+			    ctt.lastKeystate=new SingleQuoeEndState();
+	    }
+
+	    
+	    
+	    ctt.curcharIndex++;
+	    
+
+	}
+
+			/**
+		@author attilax 老哇的爪子
+		@since   p2g m_n_5
+		 
+		 */
+	private boolean preAlsoSq(Context4sqlUpExp ctt) {
+		if(	 ctt.charArr[ctt.curcharIndex-1]=='\'')
+			return true;
+		else
+			return false;
+	}
+
+		/**
+		@author attilax 老哇的爪子
+		 * @param ctt 
+		@since   p2g m_c_s
+		 
+		 */
+	private boolean nextAlsoSq(Context4sqlUpExp ctt) {
+		try {
+			if(	 ctt.charArr[ctt.curcharIndex+1]=='\'')
+				return true;
+			else
+				return false;
+			 
+		
+		} catch (ArrayIndexOutOfBoundsException e) {
+			return false;
+		}
+	
+	}
+}
+
+逗号操作的转态 CommaState
+public void handle(String sampleParameter, Context context) {
+		
+		
+		
+		Context4sqlUpExp ctt = (Context4sqlUpExp) context;
+		char curchar = ctt.curchar;
+
+		  if(ctt.lastKeystate instanceof EqxState  )
+		{
+			  //
+			  Token tk=new Token();
+			  tk.value=ctt.curToken.value.trim();
+			  ctt.tokenList.add(tk);
+			  
+			ctt.tokenList.add(new Token() {
+				{
+					this.value = ",";
+				}
+			});
+			ctt.curToken = new Token();
+			
+			ctt.lastKeystate = new CommaState();
+		}
+		  else if(  ctt.lastKeystate instanceof SingleQuoeEndState)
+		  {
+				ctt.tokenList.add(new Token() {
+					{
+						this.value = ",";
+					}
+				});
+				ctt.curToken = new Token();
+				
+				ctt.lastKeystate = new CommaState(); 
+				 ctt. SingleQuoeCount=0;
+		  }
+		  else
+		{
+			 ctt.curToken.value+=curchar;
+		}
+
+		// ctt.curToken.value+=curchar;
+		ctt.curcharIndex++;
+		
+
+	}
+
+构建语法树ast 
+
+这里使用map作为Ast的存储格式。。最终序列化为json
+
+public class AstBuilder {
+
+	public Context ctx = new Context();
+
+	// ����ı��ʽ
+
+	public AbstractExpression expression;
+
+	public Map astRoot = new HashMap();
+
+	private String expStr;
+
+	@SuppressWarnings("all")
+	public static void main(String[] args) throws CantFindRitBrack {
+		String expStr2 = " method1( param1;\r\n method2(param2);";
+		expStr2 = "fld1=1,fld2='at''t,lax',fld3='val3'";
+		AstBuilder clt = new AstBuilder(expStr2);
+		clt.tkr = new SqlUpExpTokener();
+		Object rzt = clt.build();// AST
+
+		System.out.println(JSONObject.fromObject(clt.astRoot).toString(10));
+	//	System.out.println(JsonUtil4jackjson.buildNormalBinder().toJson(rzt));
+
+	}
+
+	// ���캯������,������
+
+	public AstBuilder(String expStr) throws CantFindRitBrack {
+		this.expStr = expStr;
+
+	}
+
+	Tokener tkr;
+	List<Token> tokenList;
+
+	private Object build() throws CantFindRitBrack {
+		tokenList = tkr.getTokenList(this.expStr);
+		// ����һ����ջ������������Ⱥ�˳��
+
+		// Stack<AbstractExpression> stack = ctx.stack;
+
+		// ����
+
+		for (int i = 0; i < tokenList.size(); i++) {
+			Token tk = tokenList.get(i);
+			if (tk.value.equals(",")   ) {
+				Token key = tokenList.get(i - 3);
+				this.astRoot.put(key.value, tokenList.get(i - 1).value);
+			}
+			if( i==tokenList.size()-1  )
+			{
+				this.astRoot.put(tokenList.get(i - 2).value, tokenList.get(i).value);
+			}
+			
+
+		}
+		return this.astRoot;
+		// ���������׳���
+
+		// this.expression = stack.pop();
+
+	}
+
+
+最终输出ast结构
+{
+          "fld1": "1",
+          "fld3": "val3",
+          "fld2": "at''t,lax"
+}
+
+
+
+

@@ -1,0 +1,753 @@
+您查询的关键词是：osgi架构 。如果打开速度慢，可以尝试快速版；如果想保存快照，可以添加到搜藏。
+	
+(百度和网页http://yangguo.javaeye.com/blog/436720的作者无关，不对其内容负责。百度快照谨为网络故障时之索引，不代表被搜索网站的即时页面。)
+	
+  
+
+
+  
+  
+  
+  
+    
+      
+  首页
+  新闻
+  论坛
+  问答
+  博客
+  招聘
+  更多 ▼
+  
+    专栏
+    
+    圈子
+    搜索
+  
+      
+      您还未登录 !
+    我的应用
+    登录
+    注册
+  
+    
+
+    
+      
+        
+南阳草庐
+        
+          
+        
+        永久域名 http://yangguo.javaeye.com
+      
+      
+      
+      
+        
+          
+
+
+          
+
+
+ 
+  
+    
+    
+      内部类与匿名内部类
+      
+      
+    
+  
+  
+    2009-07-31
+    
+OSGi架构研究
+                    
+  
+
+  
+    
+OSGi架构研究
+
+
+OSGi概述
+
+
+       OSGi是Open Service Gateway Initiative的简称，该组织建立于1999年，是一个非赢利机构，旨在建立一个开放的服务规范，为通过网络向设备提供服务建立开放的标准。OSGi并不是专为家庭网络而制定的，除了住宅网关，像车载电脑等其他移动嵌入式设备也都可以通过OSGi接入Internet，获取不同的应用服务。它为服务供应商、软件供应商、网关开发人员以及设备供应商提供了一个开放、通用的架构，使它们能互动地开发、部署和管理服务。其软件环境基于Sun的 JAVA虚拟机，并不涉及具体的连接协议。对于任何新设备，它都能够灵活地将其纳入现有网络。可以使用OSGi的对象包括各种数字和模拟的机顶盒、服务网关、有线电视电缆调制解调器、消费类电子产品、PC、工业计算机、汽车等。 
+
+ 
+
+OSGi体系结构
+
+
+以下是一张OSGi的体系结构图：
+
+
+
+从上图的层次结构可以看出，Native Operating System层代表的是本地硬件与操作系统，Java VM层为跨平台应用提供了可能。而再往上，就是OSGi framework了。
+
+Bundle实际就是一个具有jar(Java ARchive)格式的文件，其中包含了java的class文件和其他资源文件（比如图标，配置文件等等）。Bundle可以在自己的manifest 文件中说明自己能够提供哪些java包，其他bundle如果在自己的manifest文件中指定了它需要这个包，那他们之间就可能产生java包的依赖关系，这样多个bundle之间就可以共享java包。
+
+OSGi在R4中将功能分为几层，包括：安全层、模块层、生命周期层、服务层和实际的服务。OSGi的核心实现即为OSGi框架，它本身也是一个OSGi Bundle。
+
+
+
+
+名称(层)
+
+
+
+职责或功能
+
+
+
+Security（安全层）
+
+
+
+对OSGi环境中应用的部署和管理提供更好的安全控制。
+
+
+
+Modules（模块层）
+
+
+
+主要负责bundle的安装部署，更新和卸载。
+
+
+
+Life Cycle(生命周期层）
+
+
+
+为Bundle组件的安全和生命周期操作提供了API定义，该层位于安全层和模块层之上。
+
+
+
+Services(服务层)
+
+
+
+定义了一个与生命周期层紧密结合的组件动态交互模型。OSGi中的服务是实现了一个或多个Java接口的Java对象，通过将这些对象依据其实现的接口注册到服务注册表中，Bundle组件可以发布自己的服务，查找使用服务，注册监听处理服务的状态变更等。
+
+
+
+Actual Services(实际的服务)
+
+
+
+OSGi定义的一些标准的服务接口如日志服务（Log Service），包管理服务（Package Admin Service）、启动级别服务（Start Level Service）、HTTP服务（Http Service）、配置服务（Config Admin Service）、用户管理服务(User Admin Service)等。
+
+
+ 
+
+OSGi容器
+
+
+现在比较流行的开放源码的OSGi容器有以下三种:
+
+ 
+
+a)  Equinox容器是参照OSGi规范第4版实现的，它构成了Eclipse IDE的核心—模块化的Java运行时；它实现了OSGi规范4中规定的必须强制实现的功能，同时，它也实现了OSGi规范中大部分的可选功能；
+
+ 
+
+b) Knoflerfish是OSGi规范第3版和第4版的开源实现，它实现了OSGi规范规定的必须实现的功能及部分可选功能；
+
+ 
+
+c) Apache的Felix是Apache软件基金会实现的OSGi开源容器。
+
+ 
+
+ 
+
+
+
+
+OSGi项目实践
+
+
+技术是做出来的，不是想出来的。
+
+以下，我将使用Equonix作为OSGi容器，来做一个小项目，将一天以来学习到的知识用到具体实践之中。
+
+便携设备越来越多，连家庭主妇身边都可能有个PDA或者智能手机，优秀的家庭主妇都是管帐的高手，相信做一个支出管理系统会大卖特卖。现在忽略PDA或是智能机用的是什么硬件配置以及接口，用Swing来模拟前端界面。
+
+ 
+
+我把这个系统命名为ExpenseManager,下面是系统的包结构：
+
+ 
+
+ 
+
+pratice.domain       用来放实体类
+
+pratice.service       存放支出管理系统提供服务的接口及其实现类 
+
+pratice.uri              界面相关的类
+
+ 
+
+完成1.0版时的包结构如下：
+
+
+
+ 
+
+
+
+ 
+
+其中，Expense是代表一条消费记录的实体类，其定义如下：
+
+public class Expense {
+
+    
+
+    private int id;          //消费ID
+
+    private String date; //消费时间
+
+    private String item; //消费项目
+
+    private float money;     //消费额
+
+    
+
+    public String getDate() {
+
+       return date;
+
+    }
+
+    public void setDate(String date) {
+
+       this.date = date;
+
+    }
+
+……//省略其它属性get,set方法
+
+}
+
+ExpenseDB类代表一个存储消费记录的数据库表，提供插入，检索数据，查询列名等操作，类图如下：
+
+
+
+
+
+ 
+
+ 
+ 
+ 
+
+ExpenseManagerService是系统的服务接口，定义系统可以向外提供的功能，在1.0版中只实现了增加支出记录功能，以后可逐步增加诸如，删除，修改，统记等功能。下面给出接口及其实现类代码：
+
+ 
+
+public interface ExpenseManagerService {
+
+    public void addExpense(Expense expense);
+
+}
+
+ 
+
+public class ExpenseManagerServiceImpl implements ExpenseManagerService {
+
+    private ExpenseDB expenseDB;
+
+    public ExpenseManagerServiceImpl(ExpenseDB expenseDB) {
+
+       this.expenseDB = expenseDB;
+
+    }
+
+    public void addExpense(Expense expense) {
+
+       expenseDB.addExpense(expense);
+
+    }
+
+}
+
+ 
+
+ExpenseManagerURI类是界面类，也是bundle中的Activator，继续自JFrame，同时实现BundleActivator接口。只要在MANIFEST.MF中指定
+
+Bundle-Activator: pratice.uri.ExpenseManagerURI
+
+framework就能通过ClassLoader找到pratice.uri.ExpenseManagerURI.class并加载后，就可以通过newInstance()方法创建一个BundleActivator的实例，然后调用public void start(BundleContext context)方法和void stop(BundleContext context)方法来管理bundle的生命周期。代码略。
+
+       AddExpenseDialog是增加支出记录的对话框。
+
+ 
+
+MANIFEST.MF文件内容如下：
+
+Manifest-Version: 1.0
+
+Bundle-ManifestVersion: 2
+
+Bundle-Name: ExpenseManager Plug-in
+
+Bundle-SymbolicName: ExpenseManager
+
+Bundle-Version: 1.0.0
+
+Bundle-Activator: pratice.uri.ExpenseManagerURI
+
+Bundle-Localization: plugin
+
+Import-Package: org.osgi.framework;version="1.3.0"
+
+ 
+
+布署到Equonix容器后，执行效果见下图：
+
+
+
+
+ 
+ 
+
+ 
+
+
+
+点击添加记录，跳出加支出记录的对话框。
+
+
+
+
+
+ 
+
+
+
+输入数据提交后，在管理系统界面点击支出列表，罗列出支出记录。
+
+
+
+ 
+
+为显示OSGi架构支持即插即用，动态部署的特性，在1.1版中增加统计消费额的功能，只要执行Equonix框架提供的更新命令，framework就完成对bundle的升级工作。为此，对源代码进行相应修改。
+
+ExpenseManagerService接口增加统计方法，实现类与ExpenseDB类作相应修改。
+
+ 
+
+public interface ExpenseManagerService {  
+
+    public void addExpense(Expense expense);
+
+    public float sumAllCost(); 
+
+}
+
+public class ExpenseManagerServiceImpl implements ExpenseManagerService {
+
+    private ExpenseDB expenseDB;
+
+    public ExpenseManagerServiceImpl(ExpenseDB expenseDB) {
+
+       this.expenseDB = expenseDB;
+
+    }
+
+    public void addExpense(Expense expense) {
+
+       expenseDB.addExpense(expense);
+
+    }
+
+    public float sumAllCost() {
+
+       return expenseDB.sumAllCost();
+
+    }
+
+}
+
+public class ExpenseDB {
+
+    
+
+    private List<Expense> expenseList;
+
+……//其余代码省略
+
+    public float sumAllCost() {
+
+       float sum = 0;
+
+       for(int i = 0; i <= expenseList.size(); i++ ){
+
+           sum += ((Expense)expenseList.get(i)).getMoney();
+
+       }
+
+       return sum;
+
+    }
+
+}
+
+MANIFEST.MF文件内容如下：
+
+Manifest-Version: 1.0
+
+Bundle-ManifestVersion: 2
+
+Bundle-Name
+
+  
+  
+    
+      
+        
+          
+          
+          大小: 23.8 KB
+        
+      
+    
+      
+        
+          
+          
+          大小: 59.7 KB
+        
+      
+    
+      
+        
+          
+          
+          大小: 61.5 KB
+        
+      
+    
+      
+        
+          
+          
+          大小: 2.8 KB
+        
+      
+    
+      
+        
+          
+          
+          大小: 4.7 KB
+        
+      
+    
+      
+        
+          
+          
+          大小: 8 KB
+        
+      
+    
+      
+        
+          
+          
+          大小: 15.1 KB
+        
+      
+    
+      
+        
+          
+          
+          大小: 5.5 KB
+        
+      
+    
+      
+        
+          
+          
+          大小: 11.2 KB
+        
+      
+    
+      
+        
+          
+          
+          大小: 6.5 KB
+        
+      
+    
+      
+        
+          
+          
+          大小: 11.4 KB
+        
+      
+    
+    
+      
+        查看图片附件
+      
+    
+  
+
+
+  
+
+  
+  
+
+  
+    
+      内部类与匿名内部类
+      
+      
+    
+  
+
+  
+    
+      00:04
+      浏览 (395)
+            评论 (0)
+      分类: OSGi
+      
+      
+      
+      相关推荐
+    
+  
+
+  
+    
+评论
+    
+    
+    
+    
+  
+
+  
+    
+发表评论
+          
+      
+                 
+
+
+  
+
+
+
+
+
+
+          
+您还没有登录，请登录后发表评论(快捷键 Alt+S / Ctrl+Enter) 
+        
+        
+      
+      
+
+
+
+
+
+
+        
+
+        
+          
+          
+            
+            yangguo
+          
+          
+            
+              浏览: 20485 次
+              性别: 
+              来自: 深圳
+              
+              
+                详细资料
+                留言簿
+              
+              
+            
+            
+搜索本博客
+                         
+              
+                     
+          
+            
+              
+最近访客 >>更多访客
+              
+                
+                  
+                  yunyanmiman
+                
+              
+                
+                  
+                  shenhaixie
+                
+              
+                
+                  
+                  bdk82924
+                
+              
+                
+                  
+                  yanghui628
+                
+              
+            
+          
+                      
+              
+博客分类
+              
+                全部博客 (34)
+                
+                  OSGi (1)
+                
+                  Linux (0)
+                
+                  Spring (0)
+                
+                  DB (4)
+                
+                  Java (24)
+                
+                  J2EE (4)
+                
+                  Flex (1)
+                
+              
+            
+            
+              
+                
+我的相册
+                
+                  
+                  EasyMonitor1.5.png
+ 共 5 张
+                
+              
+            
+            
+              
+                
+我的留言簿 >>更多留言
+                
+                  
+                    
+                      http://www.javaeye.com/topic/888964     能 ...
+                      -- by yanghui628
+                    
+                  
+                    
+                       好厉害
+                      -- by citybuster_one
+                    
+                  
+                    
+                      我是一位 女系统架构师  现在 我的工资 是9000  原来工资是4000  我是 ...
+                      -- by Eric.K.Feng
+                    
+                  
+                
+              
+            
+            
+              
+其他分类
+              
+                我的收藏 (42)
+                                                我的论坛主题贴 (24)
+                我的所有论坛贴 (513)
+                我的精华良好贴 (1)
+                              
+            
+            
+            
+              
+最近加入圈子
+              
+                
+              
+            
+            
+                          
+                
+存档
+                
+                  
+                    2011-01 (2)
+                  
+                    2010-12 (1)
+                  
+                    2010-11 (2)
+                  
+                  更多存档...
+                
+              
+                        
+              
+评论排行榜
+              
+                
+                  JAVA程序员情书
+                
+                  web开发的轮回，到最后又回到jsp
+                
+                  告诉你什么是优雅的代码(3)------山寨拼音 ...
+                
+                  告诉你什么是优雅的设计(1)--------EasyMon ...
+                
+                  html5-贪食蛇     
+                
+              
+            
+            
+              
+                
+                
+              
+            
+            
+          
+        
+      
+
+      
+        
+          
+          声明：JavaEye文章版权属于作者，受法律保护。没有作者书面许可不得转载。若作者同意转载，必须以超链接形式标明文章原始出处和作者。
+          (c) 2003-2010 JavaEye.com.   All rights reserved. 上海炯耐计算机软件有限公司 [ 沪ICP备05023328号 ]
+        
+      
+    
+    
+    
+  
+
+

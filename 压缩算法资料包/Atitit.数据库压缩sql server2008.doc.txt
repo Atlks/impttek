@@ -1,0 +1,36 @@
+Atitit.数据库压缩sql server2008  
+
+11
+11
+11
+1
+使用os的压缩好像cant
+
+压缩主文件
+
+清理日志文件
+尝试方法三：　　
+代码 
+use DB_NAME
+sp_dboption DB_NAME, "trunc. log on chkpt.", true
+checkpoint
+sp_dboption DB_NAME, "autoshrink", true 
+每一行指令请单独执行。其中的DB_NAME是指Database Name，在执行完语法后的数小时至数十小时，该LOG档会逐渐释放空间，最后大约都会维持在数1024KB左右。
+有没有更快的方法呢？
+尝试方法四：（请提前备份文件！！）
+1. Detach数据库。
+2.删除log文件。
+3. 附加数据库，选移除log文件，此时SQL Server 会自动重新建立一个512K 的Log 文件。
+附图：
+
+
+
+
+方法五（没有试过，请提前备份文件！！）：
+
+ 1. 停止 SQL Server 的服务
+ 2. 使用删除 Log文件
+ 3. 重新启动SQL Server 服务，此时SQL Server 会自动重新建立一个1MB 的Log 文件。
+
+SQL Server 2008如何压缩日志(log)文件？ - 邀月 - 博客园.htm
+

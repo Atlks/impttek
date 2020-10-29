@@ -1,0 +1,52 @@
+atitit.系统架构图 的设计 与工具 attilax总结
+
+11
+11
+11
+22
+22
+22
+2
+
+架构图的4个版式（标准，(左右)悬挂
+
+
+
+架构图的层次结构（下属，同事，助手）
+
+
+
+_jQuery_ç»ç»ç»æå¾æä»¶âjOrgChart_
+
+jOrgchart 是一个用来实现组织结构图的 jQuery 插件。
+主要特性：
+支持拖拽修改子节点
+支持节点缩放展示
+方便的修改CSS定义样式
+超轻量级
+兼容性好，基本支持所有浏览器
+
+
+
+wps ppt
+组织机构图在wps的word文档中是没有的，而office的word上是有插入组织机构图这一项的，不过小编还是在wps的ppt中找到了插入组织机构图这一项，在ppt中做好后可以复制图片到word文档中就可以咯！
+作者:: 老哇的爪子 Attilax 艾龙，  EMAIL:1466519819@qq.com
+转载请注明来源： http://blog.csdn.net/attilax
+
+使用EDraw画系统架构图
+
+
+系统架构常用软件:
+1. MindManager 画思维导图
+2. Microsoft Office Visio 内有uml建模工具, 上图也可以用此软件画出来
+3. Axure RP Pro 可以用来画产品原型 
+
+
+_Smartdraw_ç¾åº¦ç¾ç§_
+
+SmartDraw是世界上最流行的商业绘图软件。2006 年获美国政府司法部 (U.S. Department of Justice) 专用软件，2007获美国政府商务部 (US Department of Commence)选用。SmartDra...
+55M
+
+
+
+

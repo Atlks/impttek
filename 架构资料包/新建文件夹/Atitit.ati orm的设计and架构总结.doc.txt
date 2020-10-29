@@ -1,0 +1,129 @@
+Atitit.ati orm的设计and架构总结 适用于java c# php版
+
+11
+11
+11
+11
+22
+44
+4
+
+
+
+
+
+Orm的目标
+动态obj
+Hb的api(meger,save,update,del)
+Orm的概念
+saveOrUpdate后的对象会纳入session的管理，对象的状态会跟数据库同步，再次查询该对象会直接从session中取，merge后的对象不会纳入session的管理，再次查询该对象还是会从数据库中取。.
+
+对于hibernate，它的对象有三种状态，transient、persistent、detached
+下边是常见的翻译办法：
+transient：瞬态或者自由态
+persistent：持久化状态
+detached：脱管状态或者游离态
+脱管状态的实例可以通过调用save()、persist()或者saveOrUpdate()方法进行持久化。
+persist和merge： 没有和数据库进行同步
+save和update：    处理后的数据处于持久状态，换句话说，调用sql进行和数据库同步的步骤。
+总的来说，对于长事务的处理，应该使用persist和merge。减少数据库交互
+
+作者:: 老哇的爪子 Attilax 艾龙，  EMAIL:1466519819@qq.com
+转载请注明来源： http://blog.csdn.net/attilax
+
+
+动态obj
+
+Proj.amazon .spider
+ public object hanlder(object obj, ClassLibrary1.com.attilax.lang.FilterFilterChain nextChain)
+        {
+            Dictionary<string, Object> ormObj = new Dictionary<string, object>();
+            ormObj.Add("table", "ecs_goods");
+
+
+            Dictionary<string, Object> flds_frm = (Dictionary<string, Object>)obj;
+            Dictionary<string, Object> flds = new Dictionary<string, object>();
+            flds.Add("goods_name", flds_frm["title"]);
+            flds.Add("goods_desc", "goods_descxxx");
+          //  flds.Add("good_nam
+            ormObj.Add("fields", flds);
+
+            AtiOrmX ormx = (AtiOrmX)new IocX().getBean("ormx");
+
+            return ormx.save(ormObj);
+        }
+
+
+-------code
+public  class AtiOrmX
+    {
+      public Ioc ioc;
+
+      public Object save(Object ormObj)
+      {
+          String sql = SqlX.getSql(ormObj);
+          Console.WriteLine("--orm sql:" + sql);
+          DbUtil dbx = (DbUtil)ioc.getBean("dbx");
+      return     dbx.exec(sql);
+      }
+}
+
+
+
+ public class SqlX
+    {
+        public static string getSql(object ormObj)
+        {
+          //  throw new NotImplementedException();
+            Dictionary<String, Object> ormobjMap = ((Dictionary<String, Object>)ormObj) ;
+            Dictionary<String, Object> fldMap = (Dictionary<String, Object>)ormobjMap["fields"];
+
+            System.Collections.Generic.List<object> flds = new List<object>();
+            System.Collections.Generic.List<object> fld_vals = new List<object>();
+            foreach (var item in fldMap)
+            {
+                flds.Add(item.Key);
+                fld_vals.Add("'"+ item.Value+"'");
+                Console.WriteLine(item.Key + item.Value);
+            }
+
+            String fld_s = ListX.join(",", flds);
+            String v_s = ListX.join(",", fld_vals);
+            String sql = " insert into " + ormobjMap["table"] + "(@flds)values(@vs)";
+            sql = sql.Replace("@flds", fld_s); sql = sql.Replace("@vs", v_s);
+            return sql;
+        }
+    }
+
+
+
+    public class DbUtil
+    {
+
+        public Object exec(string sql)
+        {
+            MySqlConnection mysqlcon = this.getmysqlcon();
+            mysqlcon.Open();
+            MySqlCommand mysqlcom = new MySqlCommand(sql, mysqlcon);
+            int r = mysqlcom.ExecuteNonQuery();
+            mysqlcom.Dispose();
+            mysqlcon.Close();
+            mysqlcon.Dispose();
+            return r;
+        }
+
+
+------ioc
+
+
+          facMap.Add("dbx", () =>
+          {
+
+              DbUtil dbx = new DbUtil();
+              return dbx;
+
+          });
+
+参考
+hibernate的各种保存方式的区别 （save_persist_merge） - 昼不懂夜的黑的日志 - 网易博客.html
+

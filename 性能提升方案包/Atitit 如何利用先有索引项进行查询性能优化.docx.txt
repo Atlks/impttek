@@ -1,0 +1,65 @@
+Atitit 如何利用先有索引项进行查询性能优化
+
+
+	1.1. 再分析的话就是我们所写的查询条件，其实大部分情况也无非以下几种：	1
+	1.2. 范围查找 动态索引查找	1
+	1.2.1. 索引联合 所谓的索引联合，就是根据就是根据筛选条件的不同，拆分成不同的条件，去匹配不同的索引项。	2
+	1.3. 索引交叉	2
+
+
+再分析的话就是我们所写的查询条件，其实大部分情况也无非以下几种：
+1、等于谓词：select ...where...column=@parameter
+2、比较谓词：select ...where...column> or < or  <> or <= or >= @parameter
+3、范围谓词：select ...where...column in or not in  or between and @parameter
+4、逻辑谓词：select ...where...一个谓词 or、and 其它谓词 or、and 更多谓词....
+我们就依次分析上面几种情况下，如何利用索引进行查询优化的
+
+
+范围查找 动态索引查找
+
+SELECT OrderID
+FROM Orders
+WHERE ShipPostalCode IN (N'05022',N'99362')
+
+所以SQL Server尽量想采取索引查找的方式，其实IN关键字和OR关键字逻辑是一样的。
+于是上面的查询条件就转换成了： 
+                       [Northwind].[dbo].[Orders].[ShipPostalCode]=N'05022' 
+                        OR 
+                       [Northwind].[dbo].[Orders].[ShipPostalCode]=N'99362'
+这样就可以采用索引查找了，先查找第一个结果，然后再查找第二个，而这个过程在SQL Server中就被称为：动态索引查找
+
+所以变成参数后首先解决的问题就是去重问题，2个一样的变成1个。
+
+索引联合 所谓的索引联合，就是根据就是根据筛选条件的不同，拆分成不同的条件，去匹配不同的索引项。
+SELECT OrderID 
+FROM ORDERS
+WHERE OrderDate BETWEEN '1998-01-01' AND '1998-01-07'
+OR ShippedDate BETWEEN '1998-01-01' AND '1998-01-07'
+这段代码是查询出订单中的订单日期在1998年1月1日到1998年1月7日的或者发货日期同样在1998年1月1日到1998年1月7日的。
+逻辑很简单，我们知道在这种表里面这两个字段都有索引项。所以这个查询在SQL Server中就有了两个选择：
+ 
+1、一次性的来个索引扫描根据匹配结果项输出，这样简单有效，但是如果订单表数据量比较大的话，性能就会很差，因为大部分数据就根本不是我们想要的，还要浪费时间去扫描。
+2、就是通过两列的索引字段直接查找获取这部分数据，这样可以直接减少数据表的扫描量，但是带来的问题就是，如果分开扫描，有一部分数据就是重复的：那些同时在1998年1月1日到1998年1月7日的订单，发货日期也在这段时间内，因为两个扫描项都包含，所以再输出的时候需要将这部分重复数据去掉。
+
+索引交叉
+奉上一个AND的一个连接谓词的操作方式，这个方式被称为：索引交叉，意思就是说如果两个或多个筛选条件如果采用的索引是交叉进行的，那么使用一个就可以进行查询。
+来看个语句就明白了
+这里我们采用了的谓词连接方式为AND，所以在实际执行的时候，虽然两列都存在非聚集索引，理论都可以使用，但是我们只要选一个最优的索引进行查找，另外一个直接使用书签查找出来就可以。省去了前面介绍的各种神马排序去重....流聚合去重....等等不人性的操作。
+
+
+SQL Server调优系列基础篇（索引运算总结） - 指尖流淌 - 博客园.html
+
+
+SQL Server调优系列基础篇（索引运算总结） - 指尖流淌 - 博客园.html
+
+作者:: 绰号:老哇的爪子claw of Eagle 偶像破坏者Iconoclast image-smasher
+捕鸟王"Bird Catcher 王中之王King of Kings 虔诚者Pious 宗教信仰捍卫者 Defender of the Faith. 卡拉卡拉红斗篷 Caracalla red cloak
+简称：： Emir Attilax Akbar 埃米尔 阿提拉克斯 阿克巴
+全名：：Emir Attilax Akbar bin Mahmud bin  attila bin Solomon Al Rapanui 
+埃米尔 阿提拉克斯 阿克巴 本 马哈茂德 本 阿提拉 本 所罗门  阿尔 拉帕努伊   
+常用名：艾提拉（艾龙），   EMAIL:1466519819@qq.com
+转载请注明来源：attilax的专栏   http://blog.csdn.net/attilax
+--Atiend
+
+
+

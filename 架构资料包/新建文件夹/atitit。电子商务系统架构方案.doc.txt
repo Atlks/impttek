@@ -1,0 +1,29 @@
+atitit。电子商务系统架构方案  
+业务ui与功能，参照ecshopp
+支持的服务端os linux ，windows
+语言与数据库
+java+mysql
+
+ui界面与交互
+jquery+angular+mvc+spa
+界面html5化
+中间服务层
+guice+spring
+平台化
+插件化
+dsl化
+数据服务层
+hiberna+dbutil+atiorm
+
+
+跨平台化
+java+html5
+
+反向代理apache
+web服务器resin
+分布式cache
+memcache作为分布式缓存。
+时间与费用
+1个月  2万块
+
+

@@ -1,0 +1,203 @@
+Atitit 常用sdk 模块 组织架构切分 规范与范例attilax总结
+
+
+常用200个模块
+
+2017/04/12  22:01    <DIR>          acc    账户
+2017/04/12  22:01    <DIR>          agent  代理
+2017/04/12  22:01    <DIR>          agt    代理
+2017/04/12  22:01    <DIR>          agtCommiss   提成模块
+2017/04/12  22:01    <DIR>          agtNrechg   充值提成模块
+2017/04/12  22:01    <DIR>          anno  注解
+2017/04/12  22:01    <DIR>          api   api模块
+2017/04/12  22:01    <DIR>          ast   ast语法树模块
+2017/04/12  22:01    <DIR>          asyn   异步
+2017/04/12  22:01    <DIR>          atian   输入法
+2017/04/12  22:01    <DIR>          atitime  时间
+2017/04/12  22:00    <DIR>          attilaxsite  
+2017/04/12  22:01    <DIR>          auth  权限
+2017/04/12  21:59    <DIR>          auto   
+2017/04/12  22:00    <DIR>          autoKmplt
+2017/04/12  22:01    <DIR>          award   抽奖
+2017/04/12  22:01    <DIR>          bankcard  银行卡模块
+2017/04/12  21:59    <DIR>          biz   商业模块
+2017/04/12  22:01    <DIR>          c   c语言相关模块
+2017/04/12  22:00    <DIR>          cache  缓冲
+2017/04/12  22:01    <DIR>          captcha   验证码
+2017/04/12  22:01    <DIR>          CashTicket   打票
+2017/04/12  22:00    <DIR>          cate  分类
+2017/04/12  22:01    <DIR>          cfg  配置
+2017/04/12  22:01    <DIR>          chChar  汉字相关模块
+2017/04/12  22:01    <DIR>          clr   垃圾文件清理模块
+2017/04/12  22:01    <DIR>          cmd   命令行模块
+2017/04/12  22:01    <DIR>          cms    cms模块
+2017/04/12  22:01    <DIR>          cn     汉字模块
+2017/04/12  22:01    <DIR>          coll   集合
+2017/04/12  22:01    <DIR>          collection  集合
+2017/04/12  22:01    <DIR>          compass   压缩
+2017/04/12  22:01    <DIR>          concur   并发
+2017/04/12  22:01    <DIR>          conn_reduce   连接压缩
+2017/04/12  22:01    <DIR>          console   控制台模块
+2017/04/12  22:01    <DIR>          convert  数据转换
+2017/04/12  22:00    <DIR>          core   核心模块
+2017/04/12  22:01    <DIR>          corePkg
+2017/04/12  22:01    <DIR>          count   统计模块
+2017/04/12  22:01    <DIR>          cplusplus  c++相关模块
+2017/04/12  22:01    <DIR>          crud   crud模块
+2017/04/12  21:59    <DIR>          csharp   c#相关模块
+2017/04/12  22:01    <DIR>          csv       csv文件读写模块
+2017/04/12  22:01    <DIR>          curr    并发
+2017/04/12  22:01    <DIR>          dao   dao数据操作模块
+2017/04/12  22:01    <DIR>          data   数据模块
+2017/04/12  22:00    <DIR>          datadic  数据字典
+2017/04/12  22:01    <DIR>          dataService  数据服务
+2017/04/12  22:00    <DIR>          date  日期模块
+2017/04/12  22:01    <DIR>          db  数据库
+2017/04/12  22:00    <DIR>          dbEngieer   数据库引擎
+2017/04/12  22:00    <DIR>          dbManager  数据库管理器
+2017/04/12  21:59    <DIR>          designpatter  设计模式
+2017/04/12  22:03    <DIR>          dev   开发相关模块
+2017/04/12  22:00    <DIR>          dom    dom模块
+2017/04/12  21:59    <DIR>          dotnet   .net相关模块
+2017/04/12  22:01    <DIR>          dsl      dsl模块
+2017/04/12  22:01    <DIR>          dsm     dsm模块
+2017/04/12  22:00    <DIR>          effect   特效
+2017/04/12  22:00    <DIR>          encode 编码
+2017/04/12  22:01    <DIR>          encry 编码
+2017/04/12  22:00    <DIR>          eq   linq eq表达式模块
+2017/04/12  22:00    <DIR>          err  错误处理模块
+2017/04/12  22:01    <DIR>          ex   异常处理模块
+2017/04/12  22:01    <DIR>          exception   异常处理模块
+2017/04/12  22:00    <DIR>          exop   异常处理模块
+2017/04/12  22:00    <DIR>          fdb   文件数据库模块
+2017/04/12  22:01    <DIR>          fdbms  文件数据库管理模块
+2017/04/12  22:00    <DIR>          fieldMap  字段映射模块
+2017/04/12  22:01    <DIR>          fileTrans  文件传输门口
+2017/04/12  22:01    <DIR>          fileup  文件上传模块
+2017/04/12  22:00    <DIR>          floatWin  悬浮窗模块
+2017/04/12  22:01    <DIR>          folderClr   文件夹清理模块
+2017/04/12  22:01    <DIR>          formatter   格式化模块
+2017/04/12  22:00    <DIR>          frontchk  前端检查模块
+2017/04/12  22:01    <DIR>          fsm     fsm模块
+2017/04/12  22:00    <DIR>          function  功能模块
+2017/04/12  22:01    <DIR>          gui   gui模块
+2017/04/12  22:00    <DIR>          hb   hibernate相关模块
+2017/04/12  22:01    <DIR>          hre   远程接口模块
+2017/04/12  22:01    <DIR>          html  html相关模块
+2017/04/12  22:01    <DIR>          ico   ico模块
+2017/04/12  22:00    <DIR>          iecss3  css模块
+2017/04/12  22:00    <DIR>          im    图像模块
+2017/04/12  22:00    <DIR>          images  图像模块
+2017/04/12  22:01    <DIR>          img  图像模块
+2017/04/12  22:01    <DIR>          index  索引模块
+2017/04/12  22:01    <DIR>          inputmethod  输入法模块
+2017/04/12  22:01    <DIR>          io   io模块
+2017/04/12  22:01    <DIR>          ioc  ioc模块
+2017/04/12  22:01    <DIR>          jar  jar处理模块
+2017/04/12  22:01    <DIR>          javafx  javafx相关模块
+2017/04/12  22:01    <DIR>          jql  jql模块
+2017/04/12  22:01    <DIR>          jquery-ui-1.11.4.custom
+2017/04/12  22:01    <DIR>          js  js相关模块
+2017/04/12  22:00    <DIR>          jsbridge  jsbridge相关模块
+2017/04/12  22:01    <DIR>          json  json相关模块
+2017/04/12  22:01    <DIR>          laisens  license相关模块
+2017/04/12  22:01    <DIR>          lang  核心模块
+2017/04/12  22:01    <DIR>          linq  linq模块
+2017/04/12  22:00    <DIR>          loading  loading模块
+2017/04/12  22:01    <DIR>          log  日志模块
+2017/04/12  22:01    <DIR>          logPkg 日志模块
+2017/04/12  22:00    <DIR>          map  map模块
+2017/04/12  22:00    <DIR>          math  数学模块
+2017/04/12  22:00    <DIR>          meadsi  输入法模块
+2017/04/12  22:00    <DIR>          media  多媒体模块
+2017/04/12  22:01    <DIR>          meta  元信息模块
+2017/04/12  22:01    <DIR>          mizian  输入法模块
+2017/04/12  22:00    <DIR>          monitor  守护模块
+2017/04/12  22:01    <DIR>          mov  电影模块
+2017/04/12  22:00    <DIR>          movcms  电影模块
+2017/04/12  22:01    <DIR>          mvChkrNs
+2017/04/12  22:02    <DIR>          mysql   
+2017/04/12  22:01    <DIR>          namespace  命名空间模块
+2017/04/12  22:01    <DIR>          net   网络模块
+2017/04/12  22:01    <DIR>          noticer  通知模块
+2017/04/12  22:01    <DIR>          oodb   oodb模块
+2017/04/12  22:01    <DIR>          oodbStoreEngine  oodb存储引擎
+2017/04/12  22:01    <DIR>          order   订单模块
+2017/04/12  22:01    <DIR>          orders   订单模块
+2017/04/12  22:01    <DIR>          orm   orm模块
+2017/04/12  22:01    <DIR>          page   翻页模块
+2017/04/12  22:01    <DIR>          pagging 翻页模块
+2017/04/12  22:00    <DIR>          parte
+2017/04/12  22:01    <DIR>          persistence   持久化
+2017/04/12  22:01    <DIR>          php   php相关模块
+2017/04/12  22:00    <DIR>          player  播放器
+2017/04/12  22:00    <DIR>          plugin  插件模块
+2017/04/12  22:00    <DIR>          preview  预览模块
+2017/04/12  22:01    <DIR>          process  进程模块
+2017/04/12  22:01    <DIR>          query  查询模块
+2017/04/12  22:01    <DIR>          rails  rails模块
+2017/04/12  22:00    <DIR>          rechg  充值模块
+2017/04/12  22:01    <DIR>          ref   反射模块
+2017/04/12  22:01    <DIR>          reflect 反射模块
+2017/04/12  22:01    <DIR>          report  报表模块
+2017/04/12  22:00    <DIR>          researchUtil  研发工具模块
+2017/04/12  21:59    <DIR>          resources  资源模块
+2017/04/12  22:01    <DIR>          rest  rest接口相关门口
+2017/04/12  22:07                 0 sdkorg.txt 
+2017/04/12  22:00    <DIR>          search  搜索模块
+2017/04/12  22:01    <DIR>          secury  安全模块
+2017/04/12  22:01    <DIR>          seo  seo模块
+2017/04/12  22:00    <DIR>          service  service相关模块
+2017/04/12  22:01    <DIR>          setup  安装门口
+2017/04/12  22:01    <DIR>          shbye  验证码识别模块
+2017/04/12  22:01    <DIR>          sms  短信门口
+2017/04/12  22:00    <DIR>          sound  声音模块
+2017/04/12  22:01    <DIR>          spri  spring相关模块
+2017/04/12  22:01    <DIR>          sql  sql模块
+2017/04/12  22:01    <DIR>          sso  sso模块
+2017/04/12  22:01    <DIR>          store  存储模块
+2017/04/12  22:01    <DIR>          Stream  stream流处理模块
+2017/04/12  22:01    <DIR>          sync  同步模块
+2017/04/12  22:00    <DIR>          sys  系统模块 
+2017/04/12  22:01    <DIR>          sysmana 系统管理模块
+2017/04/12  21:59    <DIR>          System   系统
+2017/04/12  21:59    <DIR>          table  表格模块
+2017/04/12  22:01    <DIR>          task  任务管理模块
+2017/04/12  22:00    <DIR>          templete  模板模块
+2017/04/12  22:01    <DIR>          text 文本模块
+2017/04/12  22:01    <DIR>          time  时间模块
+2017/04/12  22:01    <DIR>          timer  定时器模块
+2017/04/12  22:01    <DIR>          tmpl  模板模块
+2017/04/12  22:01    <DIR>          token token管理模块
+2017/04/12  22:01    <DIR>          trigger  触发器模块
+2017/04/12  22:01    <DIR>          ui  ui模块 
+2017/04/12  22:01    <DIR>          up  文件上传模块
+2017/04/12  22:01    <DIR>          upload 文件上传模块
+2017/04/12  22:01    <DIR>          urldsl  url dsl 模块
+2017/04/12  22:01    <DIR>          urlrewrite   url重写模块
+2017/04/12  22:01    <DIR>          user  用户模块
+2017/04/12  21:59    <DIR>          uti  工具模块
+2017/04/12  22:01    <DIR>          util 工具模块
+
+2017/04/12  22:00    <DIR>          valide  校验模块
+2017/04/12  22:01    <DIR>          vbs  vbs相关模块
+2017/04/12  22:01    <DIR>          vcf  vcf模块
+2017/04/12  22:01    <DIR>          verifycode  验证码模块
+2017/04/12  22:01    <DIR>          vm  vm虚拟机相关模块
+2017/04/12  22:01    <DIR>          web  web模块
+2017/04/12  22:01    <DIR>          webshell  webshell模块
+2017/04/12  22:01    <DIR>          wechat  微信相关模块
+2017/04/12  22:01    <DIR>          wrmi   wrmi 模块
+2017/04/12  22:01    <DIR>          xml  xml相关模块
+2017/04/12  22:01    <DIR>          _notes
+
+
+作者:: 绰号:老哇的爪子claw of Eagle 偶像破坏者Iconoclast image-smasher
+捕鸟王"Bird Catcher  kok  虔诚者Pious 宗教信仰捍卫者 Defender Of the Faith. 卡拉卡拉红斗篷 Caracalla red cloak 万兽之王
+简称：： Emir Attilax Akbar 埃米尔 阿提拉克斯 阿克巴
+全名：：Emir Attilax Akbar bin Mahmud bin  attila bin Solomon bin adam Al Rapanui 
+埃米尔 阿提拉克斯 阿克巴 本 马哈茂德 本 阿提拉 本 所罗门 本亚当  阿尔 拉帕努伊
+常用名：艾提拉（艾龙），  EMAIL:1466519819@qq.com
+ 
+ 
+

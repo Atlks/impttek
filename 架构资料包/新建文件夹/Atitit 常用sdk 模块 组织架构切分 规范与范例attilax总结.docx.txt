@@ -1,0 +1,220 @@
+Atitit 常用sdk 模块 组织架构切分 规范与范例attilax总结
+
+
+常用200个模块
+
+2017/04/12  22:01    <DIR>          acc
+2017/04/12  22:01    <DIR>          agent
+2017/04/12  22:01    <DIR>          agt
+2017/04/12  22:01    <DIR>          agtCommiss
+2017/04/12  22:01    <DIR>          agtNrechg
+2017/04/12  22:01    <DIR>          anno
+2017/04/12  22:01    <DIR>          api
+2017/04/12  22:01    <DIR>          ast
+2017/04/12  22:01    <DIR>          asyn
+2017/04/12  22:01    <DIR>          atian
+2017/04/12  22:01    <DIR>          atitime
+2017/04/12  22:00    <DIR>          attilaxsite
+2017/04/12  22:01    <DIR>          auth
+2017/04/12  21:59    <DIR>          auto
+2017/04/12  22:00    <DIR>          autoKmplt
+2017/04/12  22:01    <DIR>          award
+2017/04/12  22:01    <DIR>          bankcard
+2017/04/12  21:59    <DIR>          biz
+2017/04/12  22:01    <DIR>          c
+2017/04/12  22:00    <DIR>          cache
+2017/04/12  22:01    <DIR>          captcha
+2017/04/12  22:01    <DIR>          CashTicket
+2017/04/12  22:00    <DIR>          cate
+2017/04/12  22:01    <DIR>          cfg
+2017/04/12  22:01    <DIR>          chChar
+2017/04/12  22:01    <DIR>          clr
+2017/04/12  22:01    <DIR>          cmd
+2017/04/12  22:01    <DIR>          cms
+2017/04/12  22:01    <DIR>          cn
+2017/04/12  22:01    <DIR>          coll
+2017/04/12  22:01    <DIR>          collection
+2017/04/12  22:01    <DIR>          compass
+2017/04/12  22:01    <DIR>          concur
+2017/04/12  22:01    <DIR>          conn_reduce
+2017/04/12  22:01    <DIR>          console
+2017/04/12  22:01    <DIR>          convert
+2017/04/12  22:00    <DIR>          core
+2017/04/12  22:01    <DIR>          corePkg
+2017/04/12  22:01    <DIR>          count
+2017/04/12  22:01    <DIR>          cplusplus
+2017/04/12  22:01    <DIR>          crud
+2017/04/12  21:59    <DIR>          csharp
+2017/04/12  22:01    <DIR>          csv
+2017/04/12  22:01    <DIR>          curr
+2017/04/12  22:01    <DIR>          dao
+2017/04/12  22:01    <DIR>          data
+2017/04/12  22:00    <DIR>          datadic
+2017/04/12  22:01    <DIR>          dataService
+2017/04/12  22:00    <DIR>          date
+2017/04/12  22:01    <DIR>          db
+2017/04/12  22:00    <DIR>          dbEngieer
+2017/04/12  22:00    <DIR>          dbManager
+2017/04/12  21:59    <DIR>          designpatter
+2017/04/12  22:03    <DIR>          dev
+2017/04/12  22:00    <DIR>          dom
+2017/04/12  21:59    <DIR>          dotnet
+2017/04/12  22:01    <DIR>          dsl
+2017/04/12  22:01    <DIR>          dsm
+2017/04/12  22:00    <DIR>          effect
+2017/04/12  22:00    <DIR>          encode
+2017/04/12  22:01    <DIR>          encry
+2017/04/12  22:00    <DIR>          eq
+2017/04/12  22:00    <DIR>          err
+2017/04/12  22:01    <DIR>          ex
+2017/04/12  22:01    <DIR>          exception
+2017/04/12  22:00    <DIR>          exop
+2017/04/12  22:00    <DIR>          fdb
+2017/04/12  22:01    <DIR>          fdbms
+2017/04/12  22:00    <DIR>          fieldMap
+2017/04/12  22:01    <DIR>          fileTrans
+2017/04/12  22:01    <DIR>          fileup
+2017/04/12  22:00    <DIR>          floatWin
+2017/04/12  22:01    <DIR>          folderClr
+2017/04/12  22:01    <DIR>          formatter
+2017/04/12  22:00    <DIR>          frontchk
+2017/04/12  22:01    <DIR>          fsm
+2017/04/12  22:00    <DIR>          function
+2017/04/12  22:01    <DIR>          gui
+2017/04/12  22:00    <DIR>          hb
+2017/04/12  22:01    <DIR>          hre
+2017/04/12  22:01    <DIR>          html
+2017/04/12  22:01    <DIR>          ico
+2017/04/12  22:00    <DIR>          iecss3
+2017/04/12  22:00    <DIR>          im
+2017/04/12  22:00    <DIR>          images
+2017/04/12  22:01    <DIR>          img
+2017/04/12  22:01    <DIR>          index
+2017/04/12  22:01    <DIR>          inputmethod
+2017/04/12  22:01    <DIR>          io
+2017/04/12  22:01    <DIR>          ioc
+2017/04/12  22:01    <DIR>          jar
+2017/04/12  22:01    <DIR>          javafx
+2017/04/12  22:01    <DIR>          jql
+2017/04/12  22:01    <DIR>          jquery-ui-1.11.4.custom
+2017/04/12  22:01    <DIR>          js
+2017/04/12  22:00    <DIR>          jsbridge
+2017/04/12  22:01    <DIR>          json
+2017/04/12  22:01    <DIR>          laisens
+2017/04/12  22:01    <DIR>          lang
+2017/04/12  22:01    <DIR>          linq
+2017/04/12  22:00    <DIR>          loading
+2017/04/12  22:01    <DIR>          log
+2017/04/12  22:01    <DIR>          logPkg
+2017/04/12  22:00    <DIR>          map
+2017/04/12  22:00    <DIR>          math
+2017/04/12  22:00    <DIR>          meadsi
+2017/04/12  22:00    <DIR>          media
+2017/04/12  22:01    <DIR>          meta
+2017/04/12  22:01    <DIR>          mizian
+2017/04/12  22:00    <DIR>          monitor
+2017/04/12  22:01    <DIR>          mov
+2017/04/12  22:00    <DIR>          movcms
+2017/04/12  22:01    <DIR>          mvChkrNs
+2017/04/12  22:02    <DIR>          mysql
+2017/04/12  22:01    <DIR>          namespace
+2017/04/12  22:01    <DIR>          net
+2017/04/12  22:01    <DIR>          noticer
+2017/04/12  22:01    <DIR>          oodb
+2017/04/12  22:01    <DIR>          oodbStoreEngine
+2017/04/12  22:01    <DIR>          order
+2017/04/12  22:01    <DIR>          orders
+2017/04/12  22:01    <DIR>          orm
+2017/04/12  22:01    <DIR>          page
+2017/04/12  22:01    <DIR>          pagging
+2017/04/12  22:00    <DIR>          parte
+2017/04/12  22:01    <DIR>          persistence
+2017/04/12  22:01    <DIR>          php
+2017/04/12  22:00    <DIR>          player
+2017/04/12  22:00    <DIR>          plugin
+2017/04/12  22:00    <DIR>          preview
+2017/04/12  22:01    <DIR>          process
+2017/04/12  22:01    <DIR>          query
+2017/04/12  22:01    <DIR>          rails
+2017/04/12  22:00    <DIR>          rechg
+2017/04/12  22:01    <DIR>          ref
+2017/04/12  22:01    <DIR>          reflect
+2017/04/12  22:01    <DIR>          report
+2017/04/12  22:00    <DIR>          researchUtil
+2017/04/12  21:59    <DIR>          resources
+2017/04/12  22:01    <DIR>          rest
+2017/04/12  22:07                 0 sdkorg.txt
+2017/04/12  22:00    <DIR>          search
+2017/04/12  22:01    <DIR>          secury
+2017/04/12  22:01    <DIR>          seo
+2017/04/12  22:00    <DIR>          service
+2017/04/12  22:01    <DIR>          setup
+2017/04/12  22:01    <DIR>          shbye
+2017/04/12  22:01    <DIR>          sms
+2017/04/12  22:00    <DIR>          sound
+2017/04/12  22:01    <DIR>          spri
+2017/04/12  22:01    <DIR>          sql
+2017/04/12  22:01    <DIR>          sso
+2017/04/12  22:01    <DIR>          store
+2017/04/12  22:01    <DIR>          Stream
+2017/04/12  22:01    <DIR>          sync
+2017/04/12  22:00    <DIR>          sys
+2017/04/12  22:01    <DIR>          sysmana
+2017/04/12  21:59    <DIR>          System
+2017/04/12  21:59    <DIR>          table
+2017/04/12  22:01    <DIR>          task
+2017/04/12  22:00    <DIR>          templete
+2017/04/12  22:01    <DIR>          text
+2017/04/12  22:01    <DIR>          time
+2017/04/12  22:01    <DIR>          timer
+2017/04/12  22:01    <DIR>          tmpl
+2017/04/12  22:01    <DIR>          token
+2017/04/12  22:01    <DIR>          trigger
+2017/04/12  22:01    <DIR>          ui
+2017/04/12  22:01    <DIR>          up
+2017/04/12  22:01    <DIR>          upload
+2017/04/12  22:01    <DIR>          urldsl
+2017/04/12  22:01    <DIR>          urlrewrite
+2017/04/12  22:01    <DIR>          user
+2017/04/12  21:59    <DIR>          uti
+2017/04/12  22:01    <DIR>          util
+2017/04/12  22:00    <DIR>          valide
+2017/04/12  22:01    <DIR>          vbs
+2017/04/12  22:01    <DIR>          vcf
+2017/04/12  22:01    <DIR>          verifycode
+2017/04/12  22:01    <DIR>          vm
+2017/04/12  22:01    <DIR>          web
+2017/04/12  22:01    <DIR>          webshell
+2017/04/12  22:01    <DIR>          wechat
+2017/04/12  22:01    <DIR>          wrmi
+2017/04/12  22:01    <DIR>          xml
+2017/04/12  22:01    <DIR>          _notes
+
+
+作者:: 绰号:老哇的爪子claw of Eagle 偶像破坏者Iconoclast image-smasher
+捕鸟王"Bird Catcher  kok  虔诚者Pious 宗教信仰捍卫者 Defender Of the Faith. 卡拉卡拉红斗篷 Caracalla red cloak 万兽之王
+简称：： Emir Attilax Akbar 埃米尔 阿提拉克斯 阿克巴
+全名：：Emir Attilax Akbar bin Mahmud bin  attila bin Solomon bin adam Al Rapanui 埃米尔 阿提拉克斯 阿克巴 本 马哈茂德 本 阿提拉 本 所罗门 本亚当  阿尔 拉帕努伊
+常用名：艾提拉（艾龙），  EMAIL:1466519819@qq.com
+ 
+ 
+头衔：uke总部o2o负责人，全球网格化项目创始人，
+uke交友协会会长  uke捕猎协会会长 Emir Uke部落首席大酋长，
+ 
+uke宗教与文化融合事务部部长， uke宗教改革委员会副主席
+uke制度与重大会议委员会委员长，uke保安部首席大队长,uke制度检查委员会副会长，
+ 
+uke 首席cto   软件部门总监 技术部副总监  研发部门总监主管  产品部副经理 项目部副经理   uke科技研究院院长uke软件培训大师
+ 
+uke波利尼西亚区大区连锁负责人 汤加王国区域负责人 uke克尔格伦群岛区连锁负责人，莱恩群岛区连锁负责人，uke布维岛和南乔治亚和南桑威奇群岛大区连锁负责人
+ Uke软件标准化协会理事长理事长 Uke 数据库与存储标准化协会副会长
+ 
+uke终身教育学校副校长   Uke医院 与医学院方面的创始人
+ uec学院校长， uecip图像处理机器视觉专业系主任   uke文档检索专业系主任
+Uke图像处理与机器视觉学院首席院长
+Uke 户外运动协会理事长  度假村首席大村长   uke出版社编辑总编
+ 
+转载请注明来源：attilax的专栏  ?http://blog.csdn.net/attilax
+--Atiend  v8
+
+

@@ -1,0 +1,361 @@
+Atitit.antlr实现词法分析
+
+	1.1.  antlrworks-1.4.3.jar   wizard	1
+	1.2. 词法的类型 id，int,float ,comment,str,char,white space	2
+	1.3. 3.1词法文件的规定	3
+	1.4. 3.2字符编码定义	4
+	1.5. 最后需要考虑的词法的定义	5
+	1.5.2. 文法可视化	5
+	1.6. 或者使用antlrworks生成需要的词法分析器	6
+	1.6.2. 查看每一个标识符的代码	7
+	1.6.3. 表达式验证	7
+	1.7. 获取tokens	9
+	1.8. Token的含义and type	11
+	1.9. 3.3终结符定义方法	11
+	1.10. 3.11大小写敏感	12
+	1.11. contains grammar SimpleCalc; names must be identical。	13
+	1.12. org.antlr.runtime.tree.CommonTree cannot be cast to org.antlr.tool.GrammarAST	13
+	1.13. no viable alternative at character '='	14
+	1.14. Antlr 支持多种目标语言，可以把生成的分析器生成为 Java，C#，C，Python，JavaScript 等多种语言	14
+	1.15. 关键字and运算符的定义	14
+	2. 参考	15
+
+
+ antlrworks-1.4.3.jar   wizard
+
+
+
+词法的类型 id，int,float ,comment,str,char,white space
+Zai antlr里面儿的keyword是所有的大写
+ public static final int CHAR=4;
+    public static final int COMMENT=5;
+    public static final int ESC_SEQ=6;
+    public static final int EXPONENT=7;
+    public static final int FLOAT=8;
+    public static final int HEX_DIGIT=9;
+    public static final int ID=10;
+    public static final int INT=11;
+    public static final int OCTAL_ESC=12;
+    public static final int STRING=13;
+    public static final int UNICODE_ESC=14;
+public static final int WS=15;
+
+
+读者可能对"单词"感到有点疑惑，不明白到底什么才是词法分析中所说的"单词"。试图回答这个问题就必须了解几个基本概念。这里，引入几个程序设计语言相关的名词。
+（1）标识符：用户自定义的变量名、函数名等字符串。
+（2）关键字：具有特殊含义的标识符。
+（3）运算符：例如＋、－、*、/ 等。
+（4）常量：例如3.24、92等。
+（5）界符：具有特殊含义的符号，如分号、括号等。
+
+作者::  ★(attilax)>>>   绰号:老哇的爪子 （ 全名：：Attilax Akbar Al Rapanui 阿提拉克斯 阿克巴 阿尔 拉帕努伊 ） 汉字名：艾龙，  EMAIL:1466519819@qq.com
+转载请注明来源： http://blog.csdn.net/attilax
+
+
+
+
+
+这里面的ID INT FLOAT什么的并不是关键字，可以自定义的..
+3.1词法文件的规定
+与第二章中的例子不同，在ANTLR中词法分析定义的规则名必须以大写字母开头如“LETTER”，“NewLine”。我们在第一章示例中的词法分析部分与语法分析部分合写到一个E.g文件中，ANTLR允许把词法分析部分和语法分析写分别写到两个文件中。
+T.g文件存放语法定义：
+grammar T;
+Options {tokenVocab = T2;}
+a : B*;
+
+
+T2.g文件存放词法定义：
+lexer grammar T2;
+B : ‘b’;
+将词法分析放到单独的文件中时文法的名称也要和文件的名称相同，在grammar关键字之前要加入lexer关键字。上例中的T.g文件生成语法分析类TParser，T2.g文件生成词法分析类T2Lexer。在T.g中要加入一个设置项tokenVocab来指定语法文件所需的词法单词是来自T2.g。这样就可以按照第一章示例中的方法编译运行分析器了。
+
+
+3.2字符编码定义
+词法分析与源代码直接接触，因为源代码是由字符串组成的，所以我们需要定义字符的方法。ANTLR有两种方法定义字符，第一种方法是：ANTLR可以直接使用字符本身很简单直观的定义基本符号。
+CHAR : ‘a’ | ‘b’ | ‘c’;
+但这种定义只限于ASCII码的字符，下面的定义是不合法的。
+CHAR : ‘代码’;
+定义汉字这样除ASCII码以外的字符只能用第二种方法十六进制编码定义法。使用“\u”开头加四位十六进制数定义来定义一个字符。
+CHAR : ‘\u0040’;
+C#中使用String.Format("{0:x} {1:x}", Convert.ToInt32('代'), Convert.ToInt32('码'));可以获得汉字的编码。如上面的CHAR : ‘代码’;我们可以定义为：
+CHAR : '\u4ee3' '\u7801';
+编码有很多种GB2312的编码范围是A1A1 ~ FEFE，去掉未定义的区域之后可以理解为实际编码范围是A1A1 ~ F7FE。GBK的整体编码范围是为8140 ~ FEFE。 BIG5字符编码范围是A140 ~ F97E。
+字符集
+编码范围
+GB2312
+A1A1 ~ 7E7E
+GBK
+8140 ~ FEFE
+BIG5
+A140 ~ F97E
+Unicode
+000000 ~ 10FFFF
+UTF-8
+000000 ~ 10FFFF
+
+其中汉字在GB2312中的编码范围为：‘\uB0A1' .. '\uF7FE'，汉字在Unicode编码范围为：’\u4E00’ .. ‘\u9FA5’ | ‘\uF900’ .. ‘\uFA2D’。
+
+最后需要考虑的词法的定义
+，在 Antlr 中语法定义和词法定义通过规则的第一个字符来区别， 规定语法定义符号的第一个字母小写，而词法定义符号的第一个字母大写。算术表达式中用到了 4 类记号 ( 在 Antlr 中被称为 Token)，分别是标识符 ID，表示一个变量；常量 INT，表示一个常数；换行符 NEWLINE 和空格 WS，空格字符在语言处理时将被跳过，skip() 是词法分析器类的一个方法。如清单 3 所示：
+
+清单 3. 记号定义
+ ID : ('a'..'z' |'A'..'Z')+ ; 
+ INT : '0'..'9' + ; 
+ NEWLINE:'\r' ? '\n' ; 
+ WS : (' ' |'\t' |'\n' |'\r' )+ {skip();} ;
+
+文法可视化
+使用 Antlrworks 打开 Expr.g，Antlrworks 对每一个文法定义都做了可视化显示。整体的文法定义如图 3：
+图 3. 文法定义的可视化
+
+其中语法规则和词法记号的定义都有对应的图形表示方式。比如语法规则 atom 的图示形式如图 4 所示：
+图 4. 语法规则 atom 的可视化
+
+词法记号 ID 的图示形式如图 5 所示：
+图 5. 词法记号 ID 的可视化
+
+使用 Antlrworks 还可以对语法分析树可视化，在 Antlrworks 的 GUI 窗口中，点击 Run ->Debug, 在 Input Text 窗口中输入 a+(2 + b)，Start Rule 选择 prog, 然后完成调试，可以看到 a+(2 + b) 时的语法分析树，如图 6 所示：
+
+
+或者使用antlrworks生成需要的词法分析器
+ >>menubar >gene  。。  到个g文件../output目录下面
+
+Or use antlr tool..
+
+运行 Antlr  生成需要的词法分析器
+完成文法定义之后，即可以运行 Antlr，为我们生成需要的词法分析器和语法分析器。在命令行运行以下下命令，如清单 4 所示：
+清单 4. 运行 Antlr
+java  org.antlr.Tool  c:/
+antlr_intro\src\expr\Expr.g
+
+成功运行Antlr之后，将为我们生成 3 个文件，Expr.tokens、ExprLexer.java和ExprParser.java。其中Expr.tokens为文法中用到的各种符号做了数字化编号，我们可以不关注这个文件。ExprLexer是Antlr生成的词法分析器，ExprParser是Antlr 生成的语法分析器，如图 1 所示。
+图 1. Antlr 生成结果
+
+
+查看每一个标识符的代码
+Antlrwork hto select left menu symb..then menubar >gene>show rule coe
+Then show the code form lexelParser...java..
+
+表达式验证
+基于 Antlr 生成的词法分析器和语法分析器后，可以基于它们来验证我们的输入的表达式是否合法。我们需要调用 Antlr 的 API 完成以下 Java 程序，如清单 5 所示：
+清单 5. 调用分析器
+ public static void run(String expr) throws Exception { 
+ ANTLRStringStream in = new ANTLRStringStream(expr); 
+ ExprLexer lexer = new ExprLexer(in); 
+	 CommonTokenStream tokens = new CommonTokenStream(lexer); 
+	 ExprParser parser = new ExprParser(tokens); 
+	 parser.prog(); 	
+ }
+对每一个输入的字符串，我们构造一个 ANTLRStringStream 流 in，用 in 构造词法分析器 lexer，词法分析的作用是产生记号，用词法分析器 lexer 构造一个记号流 tokens，然后再使用 tokens 构造语法分析器 parser，至此已经完成词法分析和语法分析的准备工作。最终调用语法分析器的规则 prog，完成对表达式的验证。详细的 Java 程序参考样例代码中的 Test.java。
+当输入合法的的表达式时，分析器没有任何输出，表示语言被分析器接受；当输入的表达式违反文法规则时，比如“a + (b * 3”，分析器输出 line 0:-1 mismatched input '<EOF>' expecting ')'；提示期待一个右括号却遇到了结束符号。如图 2 所示：
+图 2. 表达式验证结果
+
+
+
+获取tokens
+
+	public static void main(String[] args) {
+	 
+run(" where=\"atiq422\"   ");
+System.out.println("--f");
+	}
+	public static void run(String expr) { 
+		 ANTLRStringStream in = new ANTLRStringStream(expr); 
+		 grm1 lexer = new grm1(in); 
+			 CommonTokenStream tokens = new CommonTokenStream(lexer); 
+			 System.out.println(AtiJson.toJson(tokens));
+		//	 ExprParser parser = new ExprParser(tokens); 
+	//		 parser.prog(); 	
+		 }
+
+
+line 1:5 no viable alternative at character '='
+{
+	"numberOfOnChannelTokens":3,
+	"tokenSource":{
+		"backtrackingLevel":0,
+		"charIndex":15,
+		"charPositionInLine":15,
+		"charStream":{
+			"charPositionInLine":15,
+			"line":1
+		},
+		"delegates":[],
+		"eOFToken":{
+			"channel":0,
+			"charPositionInLine":15,
+			"inputStream":{"$ref":"$.tokenSource.charStream"},
+			"line":1,
+			"startIndex":15,
+			"stopIndex":15,
+			"text":"<EOF>",
+			"tokenIndex":-1,
+			"type":-1
+		},
+		"grammarFileName":"C:\\Users\\Administrator\\Documents\\antrl1\\grm1.g",
+		"line":1,
+		"numberOfSyntaxErrors":0,
+		"ruleInvocationStack":[],
+		"ruleMemoizationCacheSize":0,
+		"text":""
+	},
+	"tokens":[
+		{
+			"channel":0,
+			"charPositionInLine":0,
+			"inputStream":{"$ref":"$.tokenSource.charStream"},
+			"line":1,
+			"startIndex":0,
+			"stopIndex":4,
+			"text":"where",
+			"tokenIndex":0,
+			"type":10
+		},
+		{
+			"channel":0,
+			"charPositionInLine":6,
+			"inputStream":{"$ref":"$.tokenSource.charStream"},
+			"line":1,
+			"startIndex":6,
+			"stopIndex":14,
+			"text":"\"atiq422\"",
+			"tokenIndex":1,
+			"type":13
+		},
+		{
+			"channel":0,
+			"charPositionInLine":15,
+			"inputStream":{"$ref":"$.tokenSource.charStream"},
+			"line":1,
+			"startIndex":15,
+			"stopIndex":15,
+			"text":"<EOF>",
+			"tokenIndex":2,
+			"type":-1
+		}
+	]
+}
+--f
+--f
+Token的含义and type
+	"type":13
+public class grm1 extends Lexer {
+    public static final int EOF=-1;
+    public static final int CHAR=4;
+    public static final int COMMENT=5;
+    public static final int ESC_SEQ=6;
+    public static final int EXPONENT=7;
+    public static final int FLOAT=8;
+    public static final int HEX_DIGIT=9;
+    public static final int ID=10;
+    public static final int INT=11;
+    public static final int OCTAL_ESC=12;
+    public static final int STRING=13;
+    public static final int UNICODE_ESC=14;
+    public static final int WS=15;
+
+3.3终结符定义方法
+LETTER : ‘A’ | ‘B’ | ‘C’ | ‘D’ | ‘E’ | ‘F’ | ‘G’ | ‘H’ | ‘I’ | ‘J’ | ‘K’ | ‘L’ | ‘M’ | ‘N’ | ‘O’ | ‘P’ | ‘Q’ | ‘R’ | ‘S’ | ‘T’ | ‘U’ | ‘V’ | ‘W’ | ‘X’ | ‘Y’ | ‘Z’ | ‘a’ | ‘b’ | ‘c’ | ‘d’ | ‘e’ | ‘f’ | ‘g’ | ‘h’ | ‘i’ | ‘j’ | ‘k’ | ‘l’ | ‘m’ | ‘n’ | ‘o’ | ‘p’ | ‘q’ | ‘r’ | ‘s’ | ‘t’ | ‘u’ | ‘v’ | ‘w’ | ‘x’ | ‘y’ | ‘z’;
+“..”符号，从上面的LETTER示例可以看出，定义一个表示英文字母的符号写起来非常繁琐。为了让定义变得简单ANTLR加入“..”符号通过指定首尾的字符可以很方便的定义一定范围内的字符。
+LETTER : ‘A’ .. ‘Z’ | ‘a’ .. ‘z’;
+“~”符号，如果我们想表示除某些符号以外的符号时，可以使用“~”符号。“~”代表取反的意思。
+A : ~ ‘B’;
+符号A匹配除字符“B”以外的所有字符。
+A : ~ (‘A’ | ‘B’); B : ~(‘A’ .. ‘B’); C : ~‘\u00FF';
+上面的例子中定义三个符号。符号A匹配除字符“A”和“B”以外的所有字符，符号B匹配除大写字符母以外的所有字符。符号C匹配除编码为“u00FF”的字符以外的所有字符。
+“.”符号，ANTLR中可以用“.”表示单个任意字符，起通配符的作用。
+A : .; B : .*; C : .* ‘C’; D : ~ .;//error
+上面的例子中符号A匹配一个任意字符，符号B符号匹配0到多个任意字符，符号C匹配0到多个任意字符直到遇到字符“C”为止。D的定义是错误的，不能定义任意字符以外的字符。
+
+
+3.4 skip()方法
+有些字符是不属于源程序范畴内的，这些字符在分析过程中应该忽略掉。在ANTLR中可以在词法定义中加入skip();，(如果是C#为目标语言为Skip();)。在规则的定义的之后与表示定义结束的分号之前加入“{skip();}”。例如下面定义了一个跳过空白的词法定义。
+WS : ( ' ' | '\t' | '\n' | '\r' ) + {skip();} ;
+空白符号WS中有空格符、制表符、回车和换行符，当遇到这些字符时词法分析程序会调用skip()方法跳过这些字符。
+B : 'A' | 'B' {Skip();} | 'C' ;
+上面的例子中符号B只在匹配字符“B”时跳过，从这个例子可以看出{Skip();}要写在忽略内容的后面，如果它处于某选择分支中那么它只对某分支起作用。下面我们定义一些实际中经常出现的词法定义。
+INT : DIGIT+;
+DIGIT : ‘0’ .. ‘9’;
+INT 定义了整型数，整型数是由1个或多0到9的数字组成的。下面我们来定义浮点数，浮点数的整数部分至少要有一位数字，小数部分是可有可无的，如要有小数部分则至少要有1位小数位。
+FLOAT : DIGIT+ (‘.’ DIGIT+)?;
+下面是一个对于java语言中注释的定义。
+COMMENT : '/*' . * '*/' {skip();} ;
+LINE_COMMENT : '//' ~ ('\n' | '\r') * '\r'? '\n' {skip();} ;
+/* */ 和 // 代表的注释部分被忽略掉，下面我们给出完全的示例并运行它。
+
+3.11大小写敏感
+ANTLR中没有大小写是否敏感的设置项，所以只能象下面的词法规则这样定义大小写不敏感的单词。
+SELECT : ('S'|'s')('E'|'e')('L'|'l')('E'|'e')('C'|'c')('T'|'t') ;
+FROM : ('F'|'f')('R'|'r')('O'|'o')('M'|'m');
+
+下面是运行分析器的代码。
+TestSkipLexer lex = new TestSkipLexer(new ANTLRFileStream("f1.txt"));
+CommonTokenStream tokenStream = new CommonTokenStream(lex);
+TestSkipParser parser = new TestSkipParser(tokenStream);
+TestSkipParser.a_return aReturn = parser.a();
+contains grammar SimpleCalc; names must be identical。
+注意: 语法文件名必须跟grammar指定的名称一致，否则ANTLR生成时会报错error(8):  file *** contains grammar SimpleCalc; names must be identical。
+org.antlr.runtime.tree.CommonTree cannot be cast to org.antlr.tool.GrammarAST
+G文件错误。格式。  要加个 prog才ok了。。
+
+或者使用lexer关键字显示是个lexel文件...
+
+----err code
+ grammar grm1;
+
+
+
+ID  :	('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')*
+    ;
+
+INT :	'0'..'9'+
+    ;
+----ok code
+lexer  grammar grm1;
+
+ID  :	('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')*
+    ;
+ 
+
+完整code
+
+grammar grm1;
+
+prog: stat 
+ ; 
+ stat: expr 
+	  |NEWLINE 
+ ;
+ 
+  expr : multExpr (('+'|'-') multExpr)* 
+ ; 
+ multExpr : atom (('*'|'/') atom)* 
+ ; 
+ atom:  '(' expr ')' 
+       | INT  
+    | ID  
+ ;
+
+ID  :	('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')*
+    ;
+
+INT :	'0'..'9'+
+    ;
+ no viable alternative at character '='
+
+
+Antlr 支持多种目标语言，可以把生成的分析器生成为 Java，C#，C，Python，JavaScript 等多种语言
+，默认目标语言为 Java，通过 options {language=?;} 来改变目标语言。我们的例子中目标语言为 Java。
+3.11本章小结
+本章讲述了ANTLR如何定义词法规则，包括：定义各种编码的字符，通配符“.”和“..”、“~”、“.”符号的用法，skip()方法的用法，$channel = HIDDEN输入频道，greedy=false的用法和注意事项，fragment词法规则的用法。这些内容为ANTLR中词法分析中基础，后面章节还会讲述词法规则中潜入代码和词法中的二义性的内容。学完本章后读者应该可以定义一种语言的基本词法规则，下一章我们讲述如何在词法规则的基础上定义语法规则的内容。
+
+关键字and运算符的定义
+可以自定义Select ,from ......  ,最好还是,统统的opchar
+Opchar : '='|’+’;
+参考
+[转载] ANTLR——词法分析 - 6DAN_HUST - 博客园.html
+使用 Antlr 开发领域语言.html
+【整理】antlr语法中的fragment _ 在路上.html
+
+
+

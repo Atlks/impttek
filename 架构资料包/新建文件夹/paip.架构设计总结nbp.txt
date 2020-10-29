@@ -1,0 +1,32 @@
+1．Duplicated Code
+  代码重复几乎是最常见的异味了。他也是Refactoring 的主要目标之一。代码重复往往来自于copy-and-paste 的编程风格。与他相对应OAOO 是一个好系统的重要标志（请参见我的duplicated code 一文：http://www.erptao.org/download.php?op=viewsdownload&sid=6）。
+
+
+2．Long method
+  它是传统结构化的“遗毒“。一个方法应当具有自我独立的意图，不要把几个意图放在一起，我的《大类和长方法》一文中有具体描述。
+  
+  把方法分成私有和公有，这是变态控制，Ruby里不需要这样做
+  
+  在商业层面，一个永久不变的声音是：测试和重构就是拖延工期。看来这原创团队都是比较明智的。
+  
+  
+  package避免俄罗斯套娃风格:com.neu.util
+  
+  Reflection
+Bytecode manipulation 
+ThreadLocals
+Classloaders
+Weak/Soft references
+Sockets 
+
+2.Bytecode manipulation.
+
+字节码操作，如果我看到你在Java EE应用程序里直接使用CGLIB或ASM，我可能会立即跑开。
+
+最糟糕的事情莫过于在编译期间没有任何可执行的代码。实际上，当产品在运行时，你根本不知道哪块代码在运行。所以，当你遇到麻烦时，会自然地把错误抛给运行时故障排除和调试，不过这样反而会更麻烦。
+
+
+根据特征和功能划分(package-by-feature),,,2.而不是包(package)的命名和划分按照行为和层次划分(package-by-layer)
+
+
+java动态代理（JDK和cglib） - C'est la vie - 博客园.htm

@@ -1,0 +1,11 @@
+Atitit .架构设计----通用service 还是专用service
+
+通用的dataService还是需要啊..
+
+常用的service ,  userSerive ,orderService,Cateservice可以专门实现一个也...
+
+中间走ok.,月容易的...
+
+
+不常用的service走,不专门实现兰..
+

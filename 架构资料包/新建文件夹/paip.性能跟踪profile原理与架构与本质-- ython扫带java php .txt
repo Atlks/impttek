@@ -1,0 +1,102 @@
+
+paip.性能跟踪profile原理与架构与本质-- ython扫带java php
+
+##背景
+弄个个输入法音标转换atiEnPH工具,老是python性能不的上K,7k记录浏览过k要30分钟了.
+
+##目标
+ 分析一个程序的性能，最终都归结为回答4个基本的问题：
+
+    程序运行速度有多快？
+    运行速度瓶颈在哪儿？
+    程序使用了多少内存？
+    内存泄露发生在哪里？
+	谁引用着泄漏的对象？ 
+	
+	
+	作者 老哇的爪子 Attilax 艾龙，  EMAIL:1466519819@qq.com
+转载请注明来源： http://blog.csdn.net/attilax
+	
+#工具cProfile,objgraph
+谁引用着泄漏的对象？ 这个可以使用对象引用图来看见..
+ 该命令的输出应该是一副PNG图像，保存在/tmp/backrefs.png，它看起来是像这样：
+
+back refrences
+
+最下面有红字的盒子是我们感兴趣的对象。我们可以看到，它被符号x引用了一次，被列表y引用了三次。如果是x引起了一个内存泄漏，我们可以使用这个方法，通过跟踪它的所有引用，来检查为什么它没有自动的被释放。
+
+回顾一下，objgraph 使我们可以：
+
+    显示占据python程序内存的头N个对象
+    显示一段时间以后哪些对象被删除活增加了
+    在我们的脚本中显示某个给定对象的所有引用
+
+#测试代码
+import cProfile
+ 
+#直接把分析结果打印到控制台
+cProfile.run("mainx()")
+#把分析结果保存到文件中,不过内容可读性差...需要调用pstats模块分析结果
+#cProfile.run("foo()", "result")
+#还可以直接使用命令行进行操作
+#>python -m cProfile myscript.py -o result
+
+
+def convert2atiEnPn(phntc):#17.3s  49tse
+        """  æk@sentjueit   >>  e@k@sen@tju@ei@t
+        """
+        r=""
+        
+        #print ("o412")
+        #print(map)
+        #100test logx abt 3s
+        #logx("  phntc:---"+phntc)
+        li= SybalbeList(phntc)   #7.6s 
+        #logx("  syblist:---")
+        #print_li(li)
+        for sbl in li:
+            #all saveval invoke time safeVal 5.6s    446tse
+            #todox gaicheng  jude modul ..only   0.1s  
+            #yuln ...python d excepti jon fei resource l a .
+            myvowel=safeVal (map, sbl.vowel,  "")
+            mycnst=safeVal (map,  sbl.csnt , "")
+            r=r+"@"+mycnst+"-"+myvowel
+       # phntc=trim(phntc)
+      
+        return r
+		
+#第一的测试
+       157277 function calls in 20.648 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000   20.648   20.648 <string>:1(<module>)
+       49    0.006    0.000   17.359    0.354 <string>:15(convert2atiEnPn)
+       49    0.003    0.000    1.105    0.023 <string>:2(updatexo4)
+        1    0.003    0.003   20.648   20.648 <string>:37(mainx)		
+		
+#第二次:
+
+	      118375 function calls in 9.266 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    9.265    9.265 <string>:1(<module>)
+       49    0.002    0.000    6.395    0.131 <string>:15(convert2atiEnPn)
+       49    0.003    0.000    1.155    0.024 <string>:2(updatexo4)
+        1    0.004    0.004    9.265    9.265 <string>:39(mainx)	
+
+#分析结果:
+能看见,python的异常很消耗性能.   使用 if key in map 代替异常,,,性能消耗从5s直到个0.1s
+日志也比较消耗性能		
+	
+#java跟php的profile
+java jprofile,.. php xdebug..
+
+
+参考
+关于Python Profilers性能分析器 - btchenguang - 博客园.htm
+Python性能分析指南 - 技术翻译 - 开源中国社区.htm
+Python--字典-fussfuss1-ChinaUnix博客.htm

@@ -1,0 +1,66 @@
+Atitit  文件上传  架构设计 实现机制 解决方案  实践java php c#.net js javascript  c++ python
+
+
+	1. 上传的几点要求	2
+	1.1. 本地预览	2
+	1.2. 2 无刷新	2
+	1.3. 3 进度显示	2
+	1.4. 断点续传	2
+	1.5. 跨bs  cs	2
+	1.6. 带进度条	2
+	1.7. 完成提示动画效果..	2
+	2. 实现原理利用FormData对象,你可以使用一系列的键值对来模拟一个完整的表单,然后使用XMLHttpRequest发送这个"表单".	2
+	3. 如果需要显示进度条，实时显示文件上传进度 需要使用Ajaxj技术..up到个在的iframe黑头.. 工作原理 其实际就是在处理上传文件的同时，将上传进度的信息例如文件总长吨，已经上传多少，传输速率写入session中，客户端游览器 利用Ajax技术再新开一个独立的进程从session中获取上传进度信息，并实时显示，Ajax技术能够 不刷新页面获取服务器数据。session 可看做是服务器内存，可以用于存放少量的客户信息。	3
+	4. Php的实现	3
+	4.1. Java与php的不同点	4
+	5. 参考	4
+
+
+上传的几点要求
+本地预览
+2 无刷新
+3 进度显示
+断点续传
+跨bs  cs
+带进度条
+完成提示动画效果..
+
+实现原理利用FormData对象,你可以使用一系列的键值对来模拟一个完整的表单,然后使用XMLHttpRequest发送这个"表单".
+这个是XMLHttpRequest 2.0提供的一个类
+
+你还可以使用jQuery来发送FormData,但必须要正确的设置相关选项:
+如果需要显示进度条，实时显示文件上传进度
+需要使用Ajaxj技术..up到个在的iframe黑头..
+工作原理
+其实际就是在处理上传文件的同时，将上传进度的信息例如文件总长吨，已经上传多少，传输速率写入session中，客户端游览器
+利用Ajax技术再新开一个独立的进程从session中获取上传进度信息，并实时显示，Ajax技术能够 不刷新页面获取服务器数据。session
+可看做是服务器内存，可以用于存放少量的客户信息。
+
+
+上传监听器
+commons-fileupload版1.2支持上传监听，只需要实现一个监听器，并把它添加到上传组件上即可。监听器需要实现它的progresslistener
+
+
+Php的实现
+这个临时的复制文件会在脚本结束时消失。要保存被上传的文件，我们需要把它拷贝到另外的位置：
+<?php
+if (isset($_POST['upload'])) { 
+	var_dump($_FILES);
+	
+	//		//第三个参数是“true”表示能创建多级目录，iconv防止中文目录乱码
+
+	//	$res=mkdir(iconv("UTF-8", "GBK", $path),0777,true); 
+	$f=dirname(__FILE__).'/up_tmpx2/'.time().'.jpg';
+		mkdir(dirname( $f),0777,true); 	move_uploaded_file($_FILES['upfile']['tmp_name'], $f);
+	//header('location: test.php');
+	exit;
+
+Java与php的不同点
+Php需要move内存文件到临时文件
+Jva的直接stream写入
+参考
+atitit.ajax上传文件的实现原理 与设计 - attilax的专栏 - 博客频道 - CSDN.NET.htm
+atitit.jquery ajax html5上传图片 文件
+
+
+

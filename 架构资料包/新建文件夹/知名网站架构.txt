@@ -1,0 +1,1 @@
+了各个知名大型网站的架构，MySpace的五个里程碑、Flickr的架构、YouTube的架构、PlentyOfFish的架构、WikiPedia的架构。这几

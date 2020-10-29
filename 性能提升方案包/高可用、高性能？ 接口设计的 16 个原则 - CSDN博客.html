@@ -1,0 +1,1486 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <link rel="canonical" href="https://blog.csdn.net/gitchat/article/details/78705978"/> 
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="referrer" content="always">
+    <meta name="description" content="本文来自作者 LY 在 GitChat 上分享「如何设计出高可用、高性能的接口」，「阅读原文」查看交流实录
+
+「文末高能」
+
+编辑 | 嘉仔
+
+发起这个 Chat 只是一时兴起，想了一些点就写出来了，但自己一读，感觉一点干货都没有，真是汗颜。但还是也希望此拙文能带来一些你的思考，欢迎交流。
+
+
+接口设计需要考虑哪些方面
+
+
+接口的命名。
+
+请求参数。
+
+支持的协议。" />
+    <meta name="keywords" content="" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+    <meta name="shenma-site-verification" content="5a59773ab8077d4a62bf469ab966a63b_1497598848">
+    <script src="https://csdnimg.cn/release/phoenix/vendor/tingyun/tingyun-rum-blog.js"></script>
+
+    <link href="https://csdnimg.cn/public/favicon.ico" rel="SHORTCUT ICON">
+    <title>高可用、高性能？ 接口设计的 16 个原则 - CSDN博客</title>
+    
+            <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/detail-4eebab50e6.min.css">
+        <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/themes/skin3-template/skin3-template-02ffddfbf5.min.css">
+
+    <script type="text/javascript">
+        var username = "gitchat";
+        var blog_address = "https://blog.csdn.net/gitchat";
+        var static_host = "https://csdnimg.cn/release/phoenix/";
+        var currentUserName = ""; 
+        var isShowAds = true;
+        var isOwner = false;
+        var loginUrl = "https://passport.csdn.net/account/login?from=https://blog.csdn.net/gitchat/article/details/78705978"
+        var blogUrl = "https://blog.csdn.net/";
+        var curSkin = "skin3-template";
+    </script>
+    <script type="text/javascript">
+        // Traffic Stats of the entire Web site By baidu
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?6bcd52f51e9b3dce32bec4a3997715ac";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+        // Traffic Stats of the entire Web site By baidu end
+    </script>
+    <script src="https://csdnimg.cn/public/common/libs/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script src="https://csdnimg.cn/rabbit/exposure-click/main-1.0.6.js"></script>
+        <script type="text/javascript" src="https://csdnimg.cn/pubfooter/js/tracking-1.0.2.js" charset="utf-8"></script>
+        <link rel="stylesheet" href="https://csdnimg.cn/public/sandalstrap/1.3/css/sandalstrap.min.css"> 
+    <style>
+        .MathJax, .MathJax_Message, .MathJax_Preview{
+            display: none
+        }
+    </style>
+</head>
+<body>    
+    <link rel="stylesheet" href="https://csdnimg.cn/public/common/toolbar/content_toolbar_css/content_toolbar.css">
+    <script id="toolbar-tpl-scriptId" src="https://csdnimg.cn/public/common/toolbar/js/content_toolbar.js" type="text/javascript" domain="https://blog.csdn.net/"></script>
+    <script src="https://csdnimg.cn/public/sandalstrap/1.3/fonts/csdnc/csdnc.js"></script><link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/blog_code-c3a0c33d5c.css">
+<link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/vendor/pagination/paging.css">
+<script type="text/javascript" src="//static.mediav.com/js/mvf_news_feed.js"></script>
+
+<header>
+	<div class="container d-flex clearfix">
+		<div class="title-box">
+			<h6 class="title-blog">
+				<a href="https://blog.csdn.net/gitchat">GitChat技术杂谈</a>
+			</h6>
+			<p class="description">来自 GitChat 上分享的实用技术</p>
+		</div>
+		<div class="opt-box d-flex justify-content-end">
+			<a class="btn btn-sm" href="https://blog.csdn.net/gitchat/rss/list">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#csdnc-rss"></use>
+					</svg>RSS订阅</a>
+					</div>
+	</div>
+</header><script src="https://dup.baidustatic.com/js/ds.js"></script>
+<div class="container clearfix pt0" id="mainBox">
+    <main>
+        <div class="blog-content-box">
+	<div class="article-title-box">
+			<span class="article-type type-2 float-left">转</span>		<h6 class="title-article">高可用、高性能？ 接口设计的 16 个原则</h6>
+	</div>
+	<div class="article-info-box">
+		<div class="article-bar-top d-flex">
+												<span class="time">2017年12月04日 00:00:00</span>
+			<div class="float-right">
+				<span class="read-count">阅读数：2974</span>
+											</div>
+		</div>
+	</div>
+	<article>
+		<div id="article_content" class="article_content clearfix csdn-tracking-statistics" data-pid="blog"  data-mod=popu_307  data-dsm = "post" >
+                    <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/htmledit_views-0a60691e80.css" />
+            <div class="htmledit_views">
+                
+<div class="rich_media_content" id="js_content">
+<p style="text-align:center;"><img height="80" title="引导关注" width="510" src="https://ss.csdn.net/p?http://mmbiz.qpic.cn/mmbiz/cZV2hRpuAPhQmPPCyMGfbceYAFImOiaof6b5Xs4EK5icZZrd6eHINiaVW7mHcIT0co5FcjMT3GnD8wRYRdFQ6FGGg/640.gif?wxfrom=5&amp;wx_lazy=1" style="text-align:center;font-size:16px;letter-spacing:1.5px;color:rgb(62,62,62);visibility:visible !important;" alt="640.gif?wxfrom=5&amp;wx_lazy=1" /></p>
+<p style="margin:15px 8px 10px;font-size:16px;white-space:normal;min-height:1em;background-color:rgb(255,255,255);letter-spacing:1.5px;line-height:1.75em;">
+<span style="color:rgb(178,178,178);font-size:13px;">本文来自作者</span><span style="font-size:13px;"><span style="color:rgb(136,136,136);"> </span><span><span style="color:rgb(141,141,141);">LY</span></span><span style="color:rgb(62,62,62);"> <span style="color:rgb(178,178,178);">在 <strong>GitChat </strong>上分享「如何设计出高可用、高性能的接口</span></span><span style="color:rgb(178,178,178);">」，</span></span><span style="color:rgb(178,178,178);font-size:13px;">「<span style="color:rgb(171,25,66);">阅读原文</span>」查看交流实录</span></p>
+<p style="margin:15px 8px 10px;font-size:16px;white-space:normal;min-height:1em;color:rgb(62,62,62);background-color:rgb(255,255,255);text-align:right;letter-spacing:1.5px;line-height:1.75em;">
+<span style="color:rgb(178,178,178);font-size:13px;">「<span style="color:rgb(171,25,66);">文末高能</span>」</span></p>
+<p style="margin:15px 8px 25px;font-size:16px;white-space:normal;min-height:1em;color:rgb(62,62,62);background-color:rgb(255,255,255);letter-spacing:1.5px;line-height:1.75em;">
+<span style="font-size:13px;color:rgb(178,178,178);">编辑 | 嘉仔</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="font-size:15px;color:rgb(85,85,85);">发起这个 Chat 只是一时兴起，想了一些点就写出来了，但自己一读，感觉一点干货都没有，真是汗颜。但还是也希望此拙文能带来一些你的思考，欢迎交流。</span><br /></p>
+<h3 style="margin:1.3em 8px 1em;font-weight:bold;font-size:1.3em;white-space:normal;line-height:1.75em;letter-spacing:1.5px;">
+<span style="font-size:18px;color:rgb(240,150,28);">接口设计需要考虑哪些方面</span></h3>
+<ol class="list-paddingleft-2" style="margin-left:8px;margin-right:8px;"><li>
+<p style="line-height:1.75em;letter-spacing:1.5px;"><span style="color:rgb(85,85,85);font-size:14px;">接口的命名。</span></p>
+</li><li>
+<p style="line-height:1.75em;letter-spacing:1.5px;"><span style="color:rgb(85,85,85);font-size:14px;">请求参数。</span></p>
+</li><li>
+<p style="line-height:1.75em;letter-spacing:1.5px;"><span style="color:rgb(85,85,85);font-size:14px;">支持的协议。</span></p>
+</li><li>
+<p style="line-height:1.75em;letter-spacing:1.5px;"><span style="color:rgb(85,85,85);font-size:14px;">TPS、并发数、响应时长。</span></p>
+</li><li>
+<p style="line-height:1.75em;letter-spacing:1.5px;"><span style="color:rgb(85,85,85);font-size:14px;">数据存储。DB选型、缓存选型。</span></p>
+</li><li>
+<p style="line-height:1.75em;letter-spacing:1.5px;"><span style="color:rgb(85,85,85);font-size:14px;">是否需要依赖于第三方。</span></p>
+</li><li>
+<p style="line-height:1.75em;letter-spacing:1.5px;"><span style="color:rgb(85,85,85);font-size:14px;">接口是否拆分。</span></p>
+</li><li>
+<p style="line-height:1.75em;letter-spacing:1.5px;"><span style="color:rgb(85,85,85);font-size:14px;">接口是否需要幂等。</span></p>
+</li><li>
+<p style="line-height:1.75em;letter-spacing:1.5px;"><span style="color:rgb(85,85,85);font-size:14px;">防刷。</span></p>
+</li><li>
+<p style="line-height:1.75em;letter-spacing:1.5px;"><span style="color:rgb(85,85,85);font-size:14px;">接口限流、降级。</span></p>
+</li><li>
+<p style="line-height:1.75em;letter-spacing:1.5px;"><span style="color:rgb(85,85,85);font-size:14px;">负载均衡器支持。</span></p>
+</li><li>
+<p style="line-height:1.75em;letter-spacing:1.5px;"><span style="color:rgb(85,85,85);font-size:14px;">如何部署。</span></p>
+</li><li>
+<p style="line-height:1.75em;letter-spacing:1.5px;"><span style="color:rgb(85,85,85);font-size:14px;">是否需要服务治理。</span></p>
+</li><li>
+<p style="line-height:1.75em;letter-spacing:1.5px;"><span style="color:rgb(85,85,85);font-size:14px;">是否存在单点。</span></p>
+</li><li>
+<p style="line-height:1.75em;letter-spacing:1.5px;"><span style="color:rgb(85,85,85);font-size:14px;">接口是否资源包、预加载还是内置。</span></p>
+</li><li>
+<p style="line-height:1.75em;letter-spacing:1.5px;"><span style="color:rgb(85,85,85);font-size:14px;">是否需要本地缓存。</span></p>
+</li><li>
+<p style="line-height:1.75em;letter-spacing:1.5px;"><span style="color:rgb(85,85,85);font-size:14px;">是否需要分布式缓存、缓存穿透怎么办。</span></p>
+</li><li>
+<p style="line-height:1.75em;letter-spacing:1.5px;"><span style="color:rgb(85,85,85);font-size:14px;">是否需要白名单。</span></p>
+</li></ol><p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="font-size:15px;color:rgb(85,85,85);">当我们设计接口，我们或多或少都会有上面列举的一些考虑，我们只有想的更多才能让让我们的接口更加完善，我个人觉得100%完美的接口是不存在，只有适合才是最重要。</span></p>
+<h3 style="margin:1.3em 8px 1em;font-weight:bold;font-size:1.3em;white-space:normal;line-height:1.75em;letter-spacing:1.5px;">
+<span style="font-size:18px;color:rgb(240,150,28);">接口设计原则</span></h3>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<strong><span style="font-size:15px;color:rgb(85,85,85);">原则一：</span></strong><span style="font-size:15px;color:rgb(85,85,85);">必须符合Restful，统一返回格式，约定业务层错误编码，每个编码可以携带可选的错误信息。</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<strong><span style="font-size:15px;color:rgb(85,85,85);">原则二： </span></strong><span style="font-size:15px;color:rgb(85,85,85);">命名必须规范、优雅。</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<strong><span style="font-size:15px;color:rgb(85,85,85);">原则三：</span></strong><span style="font-size:15px;color:rgb(85,85,85);">单一性。</span></p>
+<blockquote>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="font-size:14px;color:rgb(136,136,136);">单一性是指接口要做的事情应该是一个比较单一的事情，比如登陆接口，登陆完成应该只是返回登陆成功以后一些用户信息即可，</span><span style="font-size:14px;color:rgb(136,136,136);">但很多人为了减少接口交互，返回一大堆额外的数据。</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="font-size:14px;color:rgb(136,136,136);">比如有人设计一个用户列表接口，接口他返回每一条数据都是包含用户了一大堆跟另外无关的数据，结果一问，原来其他无关的数据是他下一步想要获取的，想达成数据的懒加</span><span style="color:rgb(136,136,136);"><span style="font-size:14px;">载</span><span style="font-size:15px;">。</span></span></p>
+</blockquote>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<strong><span style="font-size:15px;color:rgb(85,85,85);">原则四：</span></strong><span style="font-size:15px;color:rgb(85,85,85);">可扩展。</span></p>
+<blockquote>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="font-size:14px;color:rgb(136,136,136);">接口扩展性，是指设计接口的时候多想想多种情况，多考虑各个方面，其实我觉得单独将扩展性放在这里也是不妥的，感觉说的跟单一性有点相反的意思，其实这个不是这个意思。</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="font-size:14px;color:rgb(136,136,136);">这边的扩展性是指我们的接口充分考虑客户端，想想他们是如何调用的，他要怎样使用我的代码，他会如何扩展我的代码，不要把过多的工作写在你的接口里面，而应该把更多的主动权交给客户程序员。</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="font-size:14px;color:rgb(136,136,136);">如获取不同的列表数据接口，我们不可能将每个列表都写成一个接口。 还有一点，我这里特别想指出来的是很多开发人员为了省事（姑且只能这么理解），将接口设计当成只是 app 页面展示。</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="font-size:14px;color:rgb(136,136,136);">这些人将一个页面展示就用一个接口实现，而不考虑这些数据是不是属于不同的模块、是不是属于不同的展示范畴、结果下次视觉一改，整个接口又得重写，不能复用。</span></p>
+</blockquote>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<strong><span style="font-size:15px;color:rgb(85,85,85);">原则五：</span></strong><span style="font-size:15px;color:rgb(85,85,85);">必须有文档。</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="font-size:15px;color:rgb(85,85,85);">良好的接口设计，离不开清晰的接口文档表述。文档表述一定要足够详细</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<strong><span style="font-size:15px;color:rgb(85,85,85);">原则六：</span></strong><span style="font-size:15px;color:rgb(85,85,85);">产品心。</span></p>
+<blockquote>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="color:rgb(136,136,136);font-size:14px;">为什么我说要有产品心？因为我觉得很多人忽略了这一点。我来说一下假如开发一个app，如果一开始连个交互文档给你都没有的话，你怎么设计接口？</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="color:rgb(136,136,136);font-size:14px;">所以我觉得作为一个服务端后台开发人员应该要有产品心，特别是对于交互文档应该好好理解，因为这些都会对我们的接口设计有很大的影响。</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="color:rgb(136,136,136);font-size:14px;">我在设计接口的时候就很常发现很多交互文档根本就走不通，产品没有考虑到位，交互文档缺失，这时候作为一个开发要主动推动，完善。</span></p>
+</blockquote>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<strong><span style="font-size:15px;color:rgb(85,85,85);">原则七：</span></strong><span style="font-size:15px;color:rgb(85,85,85);">第三方服务接口数据能缓存就缓存。</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<strong><span style="font-size:15px;color:rgb(85,85,85);">原则八：</span></strong><span style="font-size:15px;color:rgb(85,85,85);">第三方服务需要做降级。</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<strong><span style="font-size:15px;color:rgb(85,85,85);">原则九：</span></strong><span style="font-size:15px;color:rgb(85,85,85);">建议消除单点。</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<strong><span style="font-size:15px;color:rgb(85,85,85);">原则十：</span></strong><span style="font-size:15px;color:rgb(85,85,85);">接口粒度要小。</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<strong><span style="font-size:15px;color:rgb(85,85,85);">原则十一：</span></strong><span style="font-size:15px;color:rgb(85,85,85);">客户端能处理的逻辑就不要给服务端处理，减少服务端压力。</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<strong><span style="font-size:15px;color:rgb(85,85,85);">原则十二：</span></strong><span style="font-size:15px;color:rgb(85,85,85);">资源预加载。</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<strong><span style="font-size:15px;color:rgb(85,85,85);">原则十三：</span></strong><span style="font-size:15px;color:rgb(85,85,85);">不要过度设计。</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<strong><span style="font-size:15px;color:rgb(85,85,85);">原则十四：</span></strong><span style="font-size:15px;color:rgb(85,85,85);">缓存尽量不要穿透。</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<strong><span style="font-size:15px;color:rgb(85,85,85);">原则十五：</span></strong><span style="font-size:15px;color:rgb(85,85,85);">接口能缓存就缓存。</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<strong><span style="font-size:15px;color:rgb(85,85,85);">原则十六：</span></strong><span style="font-size:15px;color:rgb(85,85,85);">思辨大于执行</span></p>
+<h3 style="margin:1.3em 8px 1em;font-weight:bold;font-size:1.3em;white-space:normal;line-height:1.75em;letter-spacing:1.5px;">
+<span style="font-size:18px;color:rgb(240,150,28);">如何保证接口的高可用、高性能</span></h3>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="font-size:15px;color:rgb(85,85,85);">上面也列举很多需要考虑和设计的原则，其实还有很多方面，我这边也不是特别全面。</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="font-size:15px;color:rgb(85,85,85);">居于上面列举的这些考虑点，其实这边说服务是更恰当，能把上面说的点做好，其实接口也是比较可靠，如何设计以及保证接口的高可用和高性能。可以思考一下以下几个 point</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="font-size:15px;color:rgb(85,85,85);">高性能：如果我们发现这个接口tps和响应时间没有达到我们的要求怎么办。</span></p>
+<ul class="list-paddingleft-2" style="margin-left:8px;margin-right:8px;"><li>
+<p style="line-height:1.75em;margin-top:.5em !important;margin-bottom:.5em !important;letter-spacing:1.5px;">
+<span style="color:rgb(85,85,85);font-size:14px;">A：数据存储方面：我们会想数据库有没有分库、分表、有没有做主从，有没有读写分离、字段是否有加索引、是否存在慢 sql，数据库引擎是否选用合适、是不是用了事务；</span></p>
+<p style="line-height:1.75em;margin-top:.5em !important;margin-bottom:.5em !important;letter-spacing:1.5px;">
+<span style="color:rgb(85,85,85);font-size:14px;">其次我们会想到是不是引用了分布式缓存、缓存 key 大小是否合适，失效时间是否设置合理，会不会大量缓存穿透、有没有引入本地缓存。</span></p>
+</li><li>
+<p style="line-height:1.75em;margin-top:.5em !important;margin-bottom:.5em !important;letter-spacing:1.5px;">
+<span style="color:rgb(85,85,85);font-size:14px;">B：业务方面：是否有大量的计算、能否异步处理。是否需要引入线程池或者 MQ 来异步处理任务。有没有必要将接口进行垂直拆分和水平拆分、将接口粒度变小。</span></p>
+</li><li>
+<p style="line-height:1.75em;margin-top:.5em !important;margin-bottom:.5em !important;letter-spacing:1.5px;">
+<span style="color:rgb(85,85,85);font-size:14px;">C：其他方面：nginx 层面做缓存、加机器、用 ssd，资源放 cdn，多机房部署、资源文件预加载。</span></p>
+</li></ul><p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="font-size:15px;color:rgb(85,85,85);">高可用：如何保证服务高可用，需要从几个维度来实现：</span></p>
+<ul class="list-paddingleft-2" style="margin-left:8px;margin-right:8px;"><li>
+<p style="line-height:1.75em;letter-spacing:1.5px;"><span style="color:rgb(85,85,85);font-size:14px;">A：消除单点，基于高可用第二位。</span></p>
+</li><li>
+<p style="line-height:1.75em;letter-spacing:1.5px;"><span style="color:rgb(85,85,85);font-size:14px;">B：能做集群的全部做集群。譬如 Redis 集群、mysql集群、MongoDB副本集。</span></p>
+</li><li>
+<p style="line-height:1.75em;letter-spacing:1.5px;"><span style="color:rgb(85,85,85);font-size:14px;">C：能做读写分离的都做读写分离。</span></p>
+</li><li>
+<p style="line-height:1.75em;letter-spacing:1.5px;"><span style="color:rgb(85,85,85);font-size:14px;">D：异地多机房部署，接入 GSLB</span></p>
+</li><li>
+<p style="line-height:1.75em;letter-spacing:1.5px;"><span style="color:rgb(85,85,85);font-size:14px;">E：必须有限流、降级机制。</span></p>
+</li><li>
+<p style="line-height:1.75em;letter-spacing:1.5px;"><span style="color:rgb(85,85,85);font-size:14px;">F：监控。高可用的保证，基于第一位。</span></p>
+</li></ul><p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="font-size:15px;color:rgb(85,85,85);">下图是从一个基本的请求出发来梳理需要涉及到各个段，以及各个端能做的事情。谈谈接口服务，但不局限于接口本身。</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;">
+<img class="img_loading" src="https://ss.csdn.net/p?http://mmbiz.qpic.cn/mmbiz_png/0vU1ia3htaaOoKIbb10qloiaWRS80nKpuEFFhjvybH1abbEXOMqRxiaicY6SNAH8o2jU80uEY5gvlibHlaUGWGoWWHA/0?wx_fmt=png" alt="0?wx_fmt=png" /></p>
+<ol class="list-paddingleft-2" style="margin-left:8px;margin-right:8px;"><li>
+<p style="line-height:1.75em;margin-top:.5em !important;margin-bottom:.5em !important;letter-spacing:1.5px;">
+<span style="color:rgb(85,85,85);font-size:14px;">客户端：资源预加载、限制请求、数据上报。我这边就拿客户端来举个例子。接口服务所依赖的资源包或者一些公共配置预加载在本地，减少接口的交互，通过请求配置文件是否更新，code是否是304等来；</span></p>
+<p style="line-height:1.75em;margin-top:.5em !important;margin-bottom:.5em !important;letter-spacing:1.5px;">
+<span style="color:rgb(85,85,85);font-size:14px;">接口做一些请求限制，比如抢红包、抢券等，单位时间内N次点击只请求一次等；接口失败数据上报来；这就是客户端可以做到的对接口有帮助的事情</span></p>
+</li><li>
+<p style="line-height:1.75em;margin-top:.5em !important;margin-bottom:.5em !important;letter-spacing:1.5px;">
+<span style="color:rgb(85,85,85);font-size:14px;">GSLB/HttpDNS：多机房部署、流量切换、域名劫持，一般技术和业务比较成熟的公司这一层。</span></p>
+</li><li>
+<p style="line-height:1.75em;margin-top:.5em !important;margin-bottom:.5em !important;letter-spacing:1.5px;">
+<span style="color:rgb(85,85,85);font-size:14px;">资源文件放CDN。</span></p>
+</li><li>
+<p style="line-height:1.75em;margin-top:.5em !important;margin-bottom:.5em !important;letter-spacing:1.5px;">
+<span style="color:rgb(85,85,85);font-size:14px;">负载均衡器：lVS+Nginx是互联网常用的做负载均衡，可以实现四层/七层负载均衡；这里除了可以分流、转发以外，我们用的更多的基于令牌桶限流、缓存。</span></p>
+</li><li>
+<p style="line-height:1.75em;margin-top:.5em !important;margin-bottom:.5em !important;letter-spacing:1.5px;">
+<span style="color:rgb(85,85,85);font-size:14px;">本地缓存。本地缓存能减少我们访问DB或者分布式缓存，本地缓存推荐使用guava，guava里面有很多特性很好用，例如基于令牌桶的限流；当缓存失效时只穿透一个请求去访问后端。</span></p>
+</li><li>
+<p style="line-height:1.75em;margin-top:.5em !important;margin-bottom:.5em !important;letter-spacing:1.5px;">
+<span style="color:rgb(85,85,85);font-size:14px;">线程池。</span></p>
+</li><li>
+<p style="line-height:1.75em;margin-top:.5em !important;margin-bottom:.5em !important;letter-spacing:1.5px;">
+<span style="color:rgb(85,85,85);font-size:14px;">模块拆分。将一个项目按功能模块拆分，一个接口也可以按业务粒度进行拆分。</span></p>
+</li><li>
+<p style="line-height:1.75em;margin-top:.5em !important;margin-bottom:.5em !important;letter-spacing:1.5px;">
+<span style="color:rgb(85,85,85);font-size:14px;">数据中心。提供数据支撑，譬如黑名单。</span></p>
+</li><li>
+<p style="line-height:1.75em;margin-top:.5em !important;margin-bottom:.5em !important;letter-spacing:1.5px;">
+<span style="color:rgb(85,85,85);font-size:14px;">数据库。加索引、分库、分表、读写分离</span></p>
+</li><li>
+<p style="line-height:1.75em;margin-top:.5em !important;margin-bottom:.5em !important;letter-spacing:1.5px;">
+<span style="color:rgb(85,85,85);font-size:14px;">分布式缓存。数据分片、拆分大key，并做集群，采用分布式锁</span></p>
+</li><li>
+<p style="line-height:1.75em;margin-top:.5em !important;margin-bottom:.5em !important;letter-spacing:1.5px;">
+<span style="color:rgb(85,85,85);font-size:14px;">MQ。做接口拆分利器，异步操作。</span></p>
+</li><li>
+<p style="line-height:1.75em;margin-top:.5em !important;margin-bottom:.5em !important;letter-spacing:1.5px;">
+<span style="color:rgb(85,85,85);font-size:14px;">其他服务。限流、防刷以及降级（特别是第三方服务，保证第三方服务down掉不要影响我们自身的服务）。在这里也需要考虑做第三方数据的缓存或者持久化，譬如实名认证、身份证认证等。</span></p>
+</li><li>
+<p style="line-height:1.75em;margin-top:.5em !important;margin-bottom:.5em !important;letter-spacing:1.5px;">
+<span style="color:rgb(85,85,85);font-size:14px;">监控。监控永远是必须的，能让你第一时间知道接口服务是否ok</span></p>
+</li></ol><h3 style="margin:1.3em 8px 1em;font-weight:bold;font-size:1.3em;white-space:normal;line-height:1.75em;letter-spacing:1.5px;">
+<span style="color:rgb(240,150,28);font-size:18px;">个人小分享</span></h3>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="color:rgb(240,150,28);"><strong>1）接口Restful，统一返回格式，约定业务层错误编码，每个编码可以携带可选的错误信息</strong></span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="font-size:15px;color:rgb(85,85,85);">在前司，客户端和服务之间是有统一的数据返回格式，约定各层的编码，可以通过编码位数以及编码就可以看出是那一层出问题。</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="font-size:15px;color:rgb(85,85,85);">我觉得这对我们定位问题以及维护来说具有莫大的意义，并对异常也进行捕捉，封装成对应的 code，我之前阅读一些人的代码发现其项目根本没有做这一层，因为简单而不做我觉得有失所望。</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="color:rgb(240,150,28);"><strong>2）采用 hybird 模式</strong></span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="font-size:15px;color:rgb(85,85,85);">采用 hybird 模式涉及到资源预加载的问题，在很多项目里面都大量使用，譬如前司的生活服务，就采用了 hybird 模式，</span><span style="color:rgb(85,85,85);font-size:15px;">先将资源文件（包含图片、前端页面）打包放到服务器并通过版本号进行管理，并通过一个总的配置文件来管理，如果是H5页面可以进行模板预先设计，down到本地。</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="font-size:15px;color:rgb(85,85,85);">配置文件格式：</span></p>
+<pre style="margin-top:1.2em;margin-bottom:1.2em;font-size:1em;font-family:Consolas, Inconsolata, Courier, monospace;line-height:1.2em;letter-spacing:1.5px;"></pre><p style="padding:.5em .7em;font-size:.85em;overflow:auto;border-width:1px;border-style:solid;border-color:rgb(204,204,204);line-height:1.75em;margin-left:8px;margin-right:8px;">  *文件1*
+        name：xxx
+        url：http:xxxx
+        md5：xxxx
+
+   *文件2*
+        name：zzz
+        url：http：zzzz
+        md5：zzz</p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="font-size:15px;color:rgb(85,85,85);">客户端每次启动应用或者定时请求总的配置文件，通过http code是否是304判断是否需要下载这个总的配置文件，如果code是200，那么下载这个配置，比较那个文件发生变化，并将其下载。这样的好处：</span></p>
+<ol class="list-paddingleft-2" style="margin-left:8px;margin-right:8px;"><li>
+<p style="line-height:1.75em;letter-spacing:1.5px;"><span style="font-size:15px;color:rgb(85,85,85);">减少接口的交互；</span></p>
+</li><li>
+<p style="line-height:1.75em;letter-spacing:1.5px;"><span style="font-size:15px;color:rgb(85,85,85);">资源预加载，节省流量，打开页面更加流畅，对于服务端来说字需要返回数据json串就行，而不需要其他，减少服务端压力；</span></p>
+</li><li>
+<p style="line-height:1.75em;letter-spacing:1.5px;"><span style="font-size:15px;color:rgb(85,85,85);">方便开发人员，资源管理更加简洁，比如做活动需要的h5页面，只需要前端上传对应的h5资源包到服务端，不需要通过后端开发人员就可以搞定。</span></p>
+</li></ol><p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="font-size:15px;color:rgb(85,85,85);">虽然这个原理很简单，但是现在很多app还是没有做这个，都是通过填写一个url，加载网页的方式去打开，体验性太不友好。</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="color:rgb(240,150,28);"><strong>3）客户端</strong></span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="font-size:15px;color:rgb(85,85,85);">客户端跟服务端就是接口请求的关系，很多时候需要要求客户端做一些数据缓存的工作以及一些检验工作。在前司已经好几次给客户端的同学坑过了，客户端同学接口乱调用，死循环调用。</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="font-size:15px;color:rgb(85,85,85);">一次是做一个关于事件提醒的功能，需要每天定时调用调用服务端一个接口，结果客户端的同学写了一个 bug 导致请求每隔一两秒就调用一次，导致服务器这边此接口 pv 翻了N倍，而且这个 bug 通过测试同学很难测试出来；</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="font-size:15px;color:rgb(85,85,85);">还有一次发现服务端一段时间以后 UV 不见涨，但是PV却涨的很猛，定位发现是客户端同学A图省事在一个方法里面调用了N个接口，也就是模板方法。</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="font-size:15px;color:rgb(85,85,85);">因为版本更新，同学B需要做一个新的功能，然后也调用了A同学的接口导致，从而导致PV上升，其实B同学完全不需要调用这么多接口。这些都是真实案例，所以这里需要有一个监控接口异常的机制。</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="color:rgb(240,150,28);"><strong>4）思辨大于执行</strong></span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="font-size:15px;color:rgb(85,85,85);">写到这里觉得这个非常重要，思辨大于执行，意味着我们不是一股脑就去干，也不是不去干，我们做事情需要思考、辨别；从而让事情更高效、更好、更有力的执行。接口设计也一样，需要我们去思辨。</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="color:rgb(240,150,28);"><strong>5）本地缓存、分布式缓存以及异步</strong></span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="font-size:15px;color:rgb(85,85,85);">缓存在前司主要分为客户端缓存、CDN缓存、本地缓存（guava）、Redis缓存。</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="font-size:15px;color:rgb(85,85,85);">在MZ早期是接口是采用 DB+本地缓存的方式提供数据，但这种模式DB压力大，接口吞吐量小，本地缓存多机难一致性、更新不及时问题。</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="font-size:15px;color:rgb(85,85,85);">为了解决这些问题，引入分布式缓存，并通过 Task 将业务数据刷到 Redis，接口只访问 redis，不会访问 DB，及时 DB 故障也不会影响功能。</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="font-size:15px;color:rgb(85,85,85);">不同的业务系统系统通过 MQ 来解耦，多机房不是通过 MQ 来实现数据的一直。</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="font-size:15px;color:rgb(85,85,85);">比如，评论，先通过写 Redis，写 MQ 来实现数据在多机房同步，再通过 task 将 Redis 中评论同步到 DB 中。</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="font-size:15px;color:rgb(85,85,85);">接口设计涉及方方面面，这边也只谈到一个大概，虽然有点泛泛而谈，希望此拙文对你有所启示。</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="color:rgb(240,150,28);"><strong>6）数据库</strong></span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="font-size:15px;color:rgb(85,85,85);">数据库分库分表，一般都是通过 userId 或者 imei 或者 mac 地址来分表，单表数据量控制在500w以内，这需要我们提前估算好数据量，尽量避免数据的迁移。</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="font-size:15px;color:rgb(85,85,85);">在前司，数据库一般都是采用 mysql+MongoDB 两种，MySQL存储用户的用户数据，MongoDB 存储业务数据，就像阅读和生活服务里面的业务数据就存储在 MongoDB 里面。</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="font-size:15px;color:rgb(85,85,85);">在数据库这层，我们主要也是通过主从模式、读写分离、分库、分表来实现数据的可用性。</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="color:rgb(240,150,28);"><strong>7）业务</strong></span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="font-size:15px;color:rgb(85,85,85);">业务尽可能拆分、独立部署、将项目按业务划分、按功能划分等。譬如生活服务，我们当时主要拆分成管理后台 admin、任务 task、活动、web、数据展示模块。</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="color:rgb(240,150,28);"><strong>8）数据中心</strong></span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="font-size:15px;color:rgb(85,85,85);">每个大一点的公司都有数据部门，我们这边可以通过数据中心的数据分析来达到我们需要的数据。</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="font-size:15px;color:rgb(85,85,85);">比如黑名单，推广效果、活动数据。我们可以通过这些完善我们的接口功能。之前在前司做了个数据处理后异步加载到 Redis 来实现数据利用的项目。</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="font-size:15px;color:rgb(85,85,85);">以上都是我个人的一些拙见，请大家思辨。</span></p>
+<p style="white-space:normal;line-height:1.75em;letter-spacing:1.5px;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="font-size:15px;color:rgb(85,85,85);"></span></p>
+<p style="white-space:normal;line-height:1.75em;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<strong style="color:rgb(240,150,28);font-size:18px;"> 近期热文</strong></p>
+<p style="font-size:16px;white-space:normal;min-height:1em;color:rgb(62,62,62);background-color:rgb(255,255,255);line-height:1.75em;margin-left:8px;margin-right:8px;margin-top:.5em !important;margin-bottom:.5em !important;">
+<span style="color:rgb(136,136,136);"><strong><span style="font-size:15px;letter-spacing:1px;"><strong><span><strong style="font-size:16px;"><span style="font-size:15px;"><strong><span>《</span></strong><a href="http://mp.weixin.qq.com/s?__biz=MzIwNjEwNTQ4Mw==&amp;mid=2651579739&amp;idx=1&amp;sn=4d13cb982421771404c6a2e2aef85285&amp;chksm=8cd9fbbfbbae72a92b6824d4739ccbda2abc69902f08ff71c7b45d5f39e3f7cfda3d8e28244a&amp;scene=21#wechat_redirect"><strong style="white-space:pre-wrap;"><span>【钓鱼】与【反钓鱼】的技术剖析</span></strong></a><strong><span>》</span></strong></span></strong></span></strong></span></strong></span></p>
+<p style="font-size:16px;white-space:normal;min-height:1em;color:rgb(62,62,62);background-color:rgb(255,255,255);line-height:1.75em;margin-left:8px;margin-right:8px;margin-top:.5em !important;margin-bottom:.5em !important;">
+<span style="color:rgb(136,136,136);"><strong><span style="font-size:15px;letter-spacing:1px;"><strong><span><strong style="font-size:16px;"><span style="font-size:15px;"><strong><span><strong style="font-size:16px;"><span style="font-size:15px;"><strong><span>《</span></strong><a href="http://mp.weixin.qq.com/s?__biz=MzIwNjEwNTQ4Mw==&amp;mid=2651579739&amp;idx=2&amp;sn=8ca0738cd147e8d3817a7905d63e64b1&amp;chksm=8cd9fbbfbbae72a9f68a8e67c55bd46da1f7f913472eb379afa5bdcf02db855a927e7a3bc147&amp;scene=21#wechat_redirect"><strong style="white-space:pre-wrap;"><span>快速了解
+ Java 9 平台模块系统</span></strong></a><strong><span>》</span></strong></span></strong></span></strong></span></strong></span></strong></span></strong></span></p>
+<p style="font-size:16px;white-space:normal;min-height:1em;color:rgb(62,62,62);background-color:rgb(255,255,255);line-height:1.75em;margin-left:8px;margin-right:8px;margin-top:.5em !important;margin-bottom:.5em !important;">
+<span style="color:rgb(136,136,136);"><strong><span style="font-size:15px;letter-spacing:1px;"><strong><span><strong style="font-size:16px;"><span style="font-size:15px;"><strong><span><strong style="font-size:16px;"><span style="font-size:15px;"><strong><span><strong style="font-size:16px;"><span style="font-size:15px;"><strong><span></span></strong><strong><span>《<a href="http://mp.weixin.qq.com/s?__biz=MzIwNjEwNTQ4Mw==&amp;mid=2651579673&amp;idx=1&amp;sn=83157d65ceff3f5db5ee5a7d1bc4c161&amp;chksm=8cd9fbfdbbae72ebd7c4f1b4bf73025c170a238d95afb1f4b60f60c3dda6593e43c42763f0a0&amp;scene=21#wechat_redirect">机器人的「语料」，如何获取？</a>》</span></strong><strong><span></span></strong></span></strong></span></strong></span></strong></span></strong></span></strong></span></strong></span></strong></span></p>
+<p style="font-size:16px;white-space:normal;min-height:1em;color:rgb(62,62,62);background-color:rgb(255,255,255);line-height:1.75em;margin-left:8px;margin-right:8px;margin-top:.5em !important;margin-bottom:.5em !important;">
+<span style="color:rgb(136,136,136);"><strong><span style="font-size:15px;letter-spacing:1px;"><strong><span>《</span></strong><a href="http://mp.weixin.qq.com/s?__biz=MzIwNjEwNTQ4Mw==&amp;mid=2651579673&amp;idx=2&amp;sn=5ef6d2f76a545dfb833e829d623f1cc5&amp;chksm=8cd9fbfdbbae72eb3375502d580f85d4fc23f312e6c28122521b2bb45bc5b6dfdf2b5d02f314&amp;scene=21#wechat_redirect"><strong style="white-space:pre-wrap;"><span>一页纸，梳理你的商业模式
+ ，奇妙的「精益画布」</span></strong></a><strong><span>》</span></strong></span></strong></span></p>
+<p style="font-size:16px;white-space:normal;min-height:1em;color:rgb(62,62,62);background-color:rgb(255,255,255);line-height:1.75em;margin-left:8px;margin-right:8px;margin-top:.5em !important;margin-bottom:.5em !important;">
+<span style="color:rgb(136,136,136);"><strong><span style="font-size:15px;letter-spacing:1px;"><strong><span>《<a href="https://mp.weixin.qq.com/s?__biz=MzIwNjEwNTQ4Mw==&amp;mid=2651579440&amp;idx=1&amp;sn=9aa0a858f374097c2cfb0e21b4579ed0&amp;chksm=8cd9fad4bbae73c25dc6a5cf125e99794f92cb33ffac8af7f837ed1359cda403b3b8d23ff656&amp;scene=21#wechat_redirect">沉迷前端，无法自拔的人，如何规划职业生涯？</a>》</span></strong></span></strong></span></p>
+<p style="white-space:normal;line-height:1.75em;text-align:center;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<strong><span style="color:rgb(240,150,28);">自动化构建</span></strong></p>
+<p style="white-space:normal;line-height:1.75em;text-align:center;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<strong><span style="color:rgb(240,150,28);">从 Gradle 开始</span></strong></p>
+<p style="white-space:normal;line-height:1.75em;text-align:center;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<strong><span style="font-size:16px;color:rgb(240,150,28);"></span></strong></p>
+<p style="white-space:normal;text-align:center;margin-left:8px;margin-right:8px;">
+<img class="img_loading" src="https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_jpg/0vU1ia3htaaOoKIbb10qloiaWRS80nKpuEHSdCC35Cicxo52okqibuZyMgKpnk3LXLPeayic0AqcicqNBmOXCzxzNXcw/0?wx_fmt=jpeg" alt="0?wx_fmt=jpeg" /></p>
+<p style="white-space:normal;line-height:1.75em;text-align:center;margin-left:8px;margin-right:8px;margin-top:1.2em !important;margin-bottom:1.2em !important;">
+<span style="color:rgb(240,150,28);"></span></p>
+<p style="white-space:normal;"><br /></p>
+<p style="white-space:normal;margin-left:8px;margin-right:8px;"><strong style="color:rgb(62,62,62);letter-spacing:1.5px;font-size:13px;"><span style="color:rgb(171,25,66);">「阅读原文」</span></strong><span style="letter-spacing:1.5px;font-size:13px;color:rgb(85,85,85);">看交流实录，你想知道的都在这里</span></p>
+</div>
+
+            </div>
+                </div>
+				<div class="hide-article-box text-center csdn-tracking-statistics tracking-click" data-mod="popu_376">
+			<a class="btn btn-red-hollow" id="btn-readmore">阅读更多</a>
+		</div>
+        	</article>
+	
+	
+	<!-- !empty($pre_next_article[0]) -->
+		</div>
+<script>
+    $(".MathJax").remove();
+</script>
+
+<script type="text/javascript" src="https://static-blog.csdn.net/mdeditor/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+			"HTML-CSS": {
+					linebreaks: { automatic: true, width: "94%container" },
+					imageFont: null
+			},
+			tex2jax: {
+				preview: "none"
+			},
+			mml2jax: {
+				preview: 'none'
+			}
+	});
+</script>
+<script>
+
+	var edu_ad_is_big_data = 0;
+	(function(){
+		var btnReadmore = $("#btn-readmore");
+		if(btnReadmore.length>0){
+			var winH = $(window).height();
+			var articleBox = $("div.article_content");
+			var artH = articleBox.height();
+			if(artH > winH*2){
+				articleBox.css({
+					'height':winH*2+'px',
+					'overflow':'hidden'
+				})
+				btnReadmore.click(function(){
+					articleBox.removeAttr("style");
+					$(this).parent().remove();
+				})
+			}else{
+				btnReadmore.parent().remove();
+			}
+		}
+	})()
+</script>        <div class="edu-promotion"></div>
+        <a id="commentBox"></a>
+<div class="comment-box">
+	  	<div class="unlogin-box text-center">
+		想对作者说点什么？
+		<!-- $curl 当前地址 -->
+		<a href="https://passport.csdn.net/account/login?from=https://blog.csdn.net/gitchat/article/details/78705978#commentBox" class="btn btn-sm btn-red">我来说一句</a>
+	</div>
+			<div class="comment-list-container">
+		<a id="comments"></a>
+		<div class="comment-list-box">
+		</div>
+		<div id="commentPage" class="pagination-box d-none"></div>
+		<div class="opt-box text-center">
+			<button class="btn btn-sm btn-link-blue" id="btnMoreComment"></button>
+		</div>
+	</div>
+</div>        <div class="recommend-box">
+            		<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/xottmeqg/article/details/53349070" target="_blank" strategy="BlogCommendFromBaidu_0">
+				程序<em>接口设计</em>六大<em>原则</em>			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/xottmeqg/article/details/53349070" target="_blank" >
+				一.单一职责<em>原则</em>
+
+Single Responsibility Principle, 简称SRP。
+
+定义：There should never be more than one reason...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/xottmeqg" title="xottmeqg" target="_blank">
+					<img src="https://avatar.csdn.net/F/C/3/3_xottmeqg.jpg" alt="xottmeqg" class="avatar-pic">
+					<span class="name">xottmeqg</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2016-11-26 10:44:19</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：1961</span>
+			</p>
+		</div>
+	</div>
+					<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/h8135/article/details/307205" target="_blank" strategy="BlogCommendFromBaidu_4">
+				一种通用的<em>接口设计</em>方案			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/h8135/article/details/307205" target="_blank" >
+				1.1       背景目前的XXXX扩展接口定义如下：class ProductProcesser{public:       virtual long process(const in_type&amp;...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/h8135" title="h8135" target="_blank">
+					<img src="https://avatar.csdn.net/2/F/9/3_h8135.jpg" alt="h8135" class="avatar-pic">
+					<span class="name">h8135</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2005-03-02 08:13:00</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：10723</span>
+			</p>
+		</div>
+	</div>
+								<div class="recommend-item-box recommend-ad-box" id="ad1"></div>
+				<script>
+				  var width = $("div.recommend-box").outerWidth() - 48;
+					NEWS_FEED({
+						w: width,
+						h : 90,
+						showid : 'GNKXx7',
+						placeholderId: "ad1",
+						inject : 'define',
+						define : {
+							imagePosition : 'right',
+							imageBorderRadius : 0,
+							imageWidth: 120,
+							imageHeight: 90,
+							imageFill : 'clip',
+							displayImage : true,
+							displayTitle : true,
+							titleFontSize: 20,
+							titleFontColor: '#333',
+							titleFontFamily : 'Microsoft Yahei',
+							titleFontWeight: 'bold',
+							titlePaddingTop : 0,
+							titlePaddingRight : 0,
+							titlePaddingBottom : 10,
+							titlePaddingLeft : 0,
+							displayDesc : true,
+							descFontSize: 14,
+							descFontColor: '#6b6b6b',
+							descFontFamily : 'Microsoft Yahei',
+							paddingTop : 0,
+							paddingRight : 0,
+							paddingBottom : 0,
+							paddingLeft : 0,
+							backgroundColor: '#fff',
+							hoverColor: '#ca0c16'
+						}
+					})
+				</script>
+
+			
+				<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/zghwaicsdn/article/details/53788535" target="_blank" strategy="BlogCommendFromBaidu_7">
+				REST<em>接口设计</em>规范			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/zghwaicsdn/article/details/53788535" target="_blank" >
+				REST<em>接口设计</em>规范
+10 NOVEMBER 2015
+
+URI格式规范
+
+URI(Uniform Resource Identifiers) 统一资源标示符URL(Uniform Reso...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/zghwaicsdn" title="zghwaicsdn" target="_blank">
+					<img src="https://avatar.csdn.net/4/8/B/3_zghwaicsdn.jpg" alt="zghwaicsdn" class="avatar-pic">
+					<span class="name">zghwaicsdn</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2016-12-21 18:03:45</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：12856</span>
+			</p>
+		</div>
+	</div>
+					<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/show3/article/details/51364720" target="_blank" strategy="BlogCommendFromBaidu_11">
+				App<em>接口设计</em><em>原则</em>			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/show3/article/details/51364720" target="_blank" >
+				近几年一直在做移动端的项目，每次制定标准都需要解释一遍，想想还是写一篇文章都记下来吧。1、记住密码不是真的让你记住密码，这里仅仅指的是一种自动登录的手段。不管在任何地方，明文存储的密码都是安全隐患，是...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/show3" title="show3" target="_blank">
+					<img src="https://avatar.csdn.net/5/B/7/3_show3.jpg" alt="show3" class="avatar-pic">
+					<span class="name">show3</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2016-05-10 17:02:33</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：2824</span>
+			</p>
+		</div>
+	</div>
+					<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/lingshaoxia/article/details/21097839" target="_blank" strategy="BlogCommendFromBaidu_12">
+				优秀的API<em>接口设计</em><em>原则</em>及方法			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/lingshaoxia/article/details/21097839" target="_blank" >
+				到目前为止，已经负责API接近两年了，这两年中发现现有的API存在的问题越来越多，但很多API一旦发布后就不再能修改了，即时升级和维护是必须的。一旦API发生变化，就可能对相关的调用者带来巨大的代价，...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/lingshaoxia" title="lingshaoxia" target="_blank">
+					<img src="https://avatar.csdn.net/3/4/E/3_lingshaoxia.jpg" alt="lingshaoxia" class="avatar-pic">
+					<span class="name">lingshaoxia</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2014-03-12 17:23:39</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：7351</span>
+			</p>
+		</div>
+	</div>
+					<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/xxssyyyyssxx/article/details/71746440" target="_blank" strategy="BlogCommendFromBaidu_16">
+				分布式架构学习之：020--服务<em>接口设计</em><em>原则</em>			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/xxssyyyyssxx/article/details/71746440" target="_blank" >
+				1 、设计方式
+
+action-&gt;facade-&gt;biz-&gt;dao
+
+好的Dubbo服务<em>接口设计</em>，并非只是纯粹的接口服务化
+
+2.接口类型
+
+简单的数据查询接口:action.faca...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/xxssyyyyssxx" title="xxssyyyyssxx" target="_blank">
+					<img src="https://avatar.csdn.net/5/C/1/3_xxssyyyyssxx.jpg" alt="xxssyyyyssxx" class="avatar-pic">
+					<span class="name">xxssyyyyssxx</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2017-05-12 16:21:46</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：931</span>
+			</p>
+		</div>
+	</div>
+					<div class="recommend-item-box recommend-ad-box" id="a_d_feed_0"></div>
+			<script>
+				var width = $("div.recommend-box").outerWidth() - 48;
+				NEWS_FEED({
+					w: width,
+					h: 90,
+					showid: 'Afihld',
+					placeholderId: 'a_d_feed_0',
+					inject: 'define',
+					define: {
+						imagePosition: 'right',
+						imageBorderRadius: 0,
+						imageWidth: 120,
+						imageHeight: 90,
+						imageFill: 'clip',
+						displayImage: true,
+						displayTitle: true,
+						titleFontSize: 20,
+						titleFontColor: '#333',
+						titleFontFamily: 'Microsoft Yahei',
+						titleFontWeight: 'bold',
+						titlePaddingTop: 0,
+						titlePaddingRight: 0,
+						titlePaddingBottom: 10,
+						titlePaddingLeft: 0,
+						displayDesc: true,
+						descFontSize: 14,
+						descFontColor: '#6b6b6b',
+						descFontFamily: 'Microsoft Yahei',
+						paddingTop: 0,
+						paddingRight: 0,
+						paddingBottom: 0,
+						paddingLeft: 0,
+						backgroundColor: '#fff',
+						hoverColor: '#ca0c16'
+					}
+				})
+			</script>
+			<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/u010820135/article/details/51628048" target="_blank" strategy="BlogCommendFromBaidu_20">
+				软件<em>接口设计</em>  六大<em>原则</em>			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/u010820135/article/details/51628048" target="_blank" >
+				转载自 http://www.cnblogs.com/zfc2201/p/3423370.html
+
+
+一.单一职责<em>原则</em>
+
+Single Responsibility Principle, ...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/u010820135" title="u010820135" target="_blank">
+					<img src="https://avatar.csdn.net/6/4/C/3_u010820135.jpg" alt="u010820135" class="avatar-pic">
+					<span class="name">u010820135</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2016-06-10 17:41:00</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：3766</span>
+			</p>
+		</div>
+	</div>
+					<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/yu870646595/article/details/51900478" target="_blank" strategy="BlogCommendFromBaidu_1">
+				关于<em>接口设计</em>的一些思考			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/yu870646595/article/details/51900478" target="_blank" >
+				引子
+
+做维护型工作，最大的收获也许就是知道什么叫做丑陋了。本文针对我遇到的一些<em>接口设计</em>问题，总结了如下一些经验分享给大家，希望我们能够吸取经验，对外提供最美的一面，即使我们的实现可能很丑，但是用...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/yu870646595" title="yu870646595" target="_blank">
+					<img src="https://avatar.csdn.net/B/6/F/3_yu870646595.jpg" alt="yu870646595" class="avatar-pic">
+					<span class="name">yu870646595</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2016-07-13 18:33:05</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：4004</span>
+			</p>
+		</div>
+	</div>
+					<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/haochen_net/article/details/78159949" target="_blank" strategy="BlogCommendFromBaidu_2">
+				聊聊RESTful - <em>接口设计</em>篇（一）			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/haochen_net/article/details/78159949" target="_blank" >
+				在我的上一篇文章科普篇中为大家介绍了REST的起源与REST成熟度模型。同时我也指出网上有大量介绍RESTful<em>接口设计</em>的文章，如果我们不理解真正的REST，那么单纯的<em>接口设计</em>的讨论会让我们对REST...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/haochen_net" title="haochen_net" target="_blank">
+					<img src="https://avatar.csdn.net/C/7/5/3_haochen_net.jpg" alt="haochen_net" class="avatar-pic">
+					<span class="name">haochen_net</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2017-10-04 23:42:54</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：1600</span>
+			</p>
+		</div>
+	</div>
+					<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/zengwh/article/details/4061711" target="_blank" strategy="BlogCommendFromBaidu_3">
+				如何设计接口？			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/zengwh/article/details/4061711" target="_blank" >
+				如何设计接口？    众所周知，接口是提供给其他模块或者系统使用的一种约定或者规范。因此接口必须要保证足够的稳定性和易用性。这是设计接口的基本要求。1.稳定性    接口必须相对稳定，否则将导致接口的...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/zengwh" title="zengwh" target="_blank">
+					<img src="https://avatar.csdn.net/C/5/3/3_zengwh.jpg" alt="zengwh" class="avatar-pic">
+					<span class="name">zengwh</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2009-04-10 11:00:00</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：21302</span>
+			</p>
+		</div>
+	</div>
+			            <div class="recommend-loading-box">
+                <img src='https://csdnimg.cn/release/phoenix/images/feedLoading.gif'>
+            </div>
+            <div class="recommend-end-box">
+                <p class="text-center">没有更多推荐了，<a href="https://blog.csdn.net/" class="c-blue c-blue-hover c-blue-focus">返回首页</a></p>
+            </div>
+        </div>
+    </main>
+    <aside>
+		    <div id="asideProfile" class="aside-box">
+    <h3 class="aside-title">个人资料</h3>
+    <div class="profile-intro d-flex">
+        <div class="avatar-box d-flex justify-content-center flex-column">
+            <a href="https://blog.csdn.net/gitchat">
+                <img src="https://avatar.csdn.net/2/8/D/3_gitchat.jpg" class="avatar_pic">
+            </a>
+        </div>
+        <div class="user-info d-flex justify-content-center flex-column">
+            <p class="name csdn-tracking-statistics tracking-click" data-mod="popu_379">
+                <a href="https://blog.csdn.net/gitchat" target="_blank" class="text-truncate" id="uid">gitchat</a>
+            </p>
+                        <p class="flag">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#csdnc-blogexpert"></use>
+                </svg>
+                博客专家
+            </p>
+                    </div>
+                <div class="opt-box d-flex justify-content-center flex-column">
+            <span  class="csdn-tracking-statistics tracking-click" data-mod="popu_379">
+                                <a class="btn btn-sm btn-red-hollow" href="https://passport.csdn.net/account/login?from=https://blog.csdn.net/gitchat/article/details/78705978" target="_self">关注</a>
+                            </span>
+            
+        </div>
+            </div>
+    <div class="data-info d-flex item-tiling">
+        <dl class="text-center" title="268">
+            <dt>原创</dt>
+            <dd><span class="count">268</span></dd>
+        </dl>
+        <dl class="text-center" title="1633">
+            <dt>粉丝</dt>
+            <dd><span class="count" id="fan">1633</span></dd>
+        </dl>
+        <dl class="text-center" title="873">
+            <dt>喜欢</dt>
+            <dd><span class="count">873</span></dd>
+        </dl>
+        <dl class="text-center" title="711">
+            <dt>评论</dt>
+            <dd><span class="count">711</span></dd>
+        </dl>
+    </div>
+    <div class="grade-box clearfix">
+        <dl>
+            <dt>等级：</dt>
+            <dd>
+                <a href="https://blog.csdn.net/home/help.html#level" title="7级,点击查看等级说明" target="_blank">
+                    <svg class="icon icon-level" aria-hidden="true">
+                        <use xlink:href="#csdnc-bloglevel-7"></use>
+                    </svg>
+                </a>
+            </dd>
+        </dl>
+        <dl>
+            <dt>访问：</dt>
+            <dd title="956291">
+                95万+            </dd>
+        </dl>
+        <dl>
+            <dt>积分：</dt>
+            <dd title="10288">
+                1万+            </dd>
+        </dl>
+        <dl title="2144">
+            <dt>排名：</dt>
+            <dd>2144</dd>
+        </dl>
+    </div>
+        <div class="badge-box d-flex">
+        <span>勋章：</span>
+                <a class="icon-badge" title="专栏达人">
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#csdnc-m-columns"></use>
+            </svg>
+            <div class="icon-arrow"></div>
+            <div class="grade-detail-box item1">
+                <div class="pos-box">
+                    <div class="left-box d-flex justify-content-center align-items-center flex-column">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#csdnc-m-columns"></use>
+                        </svg>
+                        <p>专栏达人</p>
+                    </div>
+                    <div class="right-box d-flex justify-content-center align-items-center">
+                        授予成功创建个人博客专栏的用户。专栏中添加五篇以上博文即可点亮！撰写博客专栏浓缩技术精华，专栏达人就是你！
+                    </div>
+                </div>
+            </div> 
+        </a>  
+                        <a class="icon-badge" title="持之以恒">
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#csdnc-m-lasting"></use>
+            </svg>
+            <div class="icon-arrow"></div>
+            <div class="grade-detail-box item2">
+                <div class="pos-box">
+                    <div class="left-box d-flex justify-content-center align-items-center flex-column">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#csdnc-m-lasting"></use>
+                        </svg>
+                        <p>持之以恒</p>
+                    </div>
+                    <div class="right-box d-flex justify-content-center align-items-center">
+                        授予每个自然月内发布4篇或4篇以上原创或翻译IT博文的用户。不积跬步无以至千里，不积小流无以成江海，程序人生的精彩需要坚持不懈地积累！
+                    </div>
+                </div>
+            </div>
+        </a>
+                            </div>
+    </div>		    <div class="csdn-tracking-statistics mb8 box-shadow" data-pid="blog" data-mod="popu_4" style="height:250px;">
+    <div class="aside-content text-center" id="cpro_u2734133">
+        <!-- 投放代码 -->
+        <script type="text/javascript" src="//cee1.iteye.com/lgyyovfyh.js"></script>
+    </div>
+</div>
+		    <div id="asideNewArticle" class="aside-box">
+    <h3 class="aside-title">最新文章</h3>
+    <div class="aside-content">
+        <ul class="inf_list clearfix csdn-tracking-statistics tracking-click" data-mod="popu_382">
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/GitChat/article/details/80416265" target="_blank">坑了程序员的政府项目是什么样的？</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/GitChat/article/details/80416260" target="_blank">从零开始用 Python 打造自己的区块链</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/GitChat/article/details/80416259" target="_blank">什么因素影响了数据库的性能？</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/GitChat/article/details/80416257" target="_blank">一场皆大欢喜的程序员跳槽事件</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/GitChat/article/details/80416254" target="_blank">Java 程序如何正确地打日志</a>
+            </li>
+                    </ul>
+    </div>
+</div>
+		    <div id="asideColumn" class="aside-box">
+    <h3 class="aside-title">博主专栏</h3>
+    <div class="aside-content">
+        <ul class="column-box csdn-tracking-statistics tracking-click" data-mod="popu_520" >
+                            <li class="clearfix">
+                    <div class="img-box float-left">
+                        <a class="d-flex align-items-center" href="https://blog.csdn.net/column/details/18040.html">
+                            <img src="https://img-blog.csdn.net/20171114184302113?imageView2/5/w/120/h/120" alt="">
+                        </a>
+                    </div>
+                    <div class="info">
+                        <p class="title"><a href="https://blog.csdn.net/column/details/18040.html">GitChat技术杂谈</a></p>
+                        <div class="data">阅读量：<span>65765</span><span class="count">11 篇</span></div>
+                    </div>
+                </li>
+                            <li class="clearfix">
+                    <div class="img-box float-left">
+                        <a class="d-flex align-items-center" href="https://blog.csdn.net/column/details/18151.html">
+                            <img src="https://img-blog.csdn.net/20171124163311340?imageView2/5/w/120/h/120" alt="">
+                        </a>
+                    </div>
+                    <div class="info">
+                        <p class="title"><a href="https://blog.csdn.net/column/details/18151.html">人工智能专栏</a></p>
+                        <div class="data">阅读量：<span>172934</span><span class="count">17 篇</span></div>
+                    </div>
+                </li>
+                            <li class="clearfix">
+                    <div class="img-box float-left">
+                        <a class="d-flex align-items-center" href="https://blog.csdn.net/column/details/18324.html">
+                            <img src="https://img-blog.csdn.net/column?imageView2/5/w/120/h/120" alt="">
+                        </a>
+                    </div>
+                    <div class="info">
+                        <p class="title"><a href="https://blog.csdn.net/column/details/18324.html">各路达人的技术教程</a></p>
+                        <div class="data">阅读量：<span>0</span><span class="count">0 篇</span></div>
+                    </div>
+                </li>
+                    </ul>
+    </div>
+    </div>
+		    <div id="asideCategory" class="aside-box flexible-box">
+    <h3 class="aside-title">个人分类</h3>
+    <div class="aside-content">
+        <ul>
+                        <li>
+                <a href="https://blog.csdn.net/gitchat/article/category/7102149">
+                    安全                    <span class="count float-right">10篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/gitchat/article/category/7103344">
+                    前端                    <span class="count float-right">14篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/gitchat/article/category/7108635">
+                    深度学习                    <span class="count float-right">4篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/gitchat/article/category/7109241">
+                    架构                    <span class="count float-right">12篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/gitchat/article/category/7122416">
+                    python                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/gitchat/article/category/7126134">
+                    人工智能                    <span class="count float-right">16篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/gitchat/article/category/7135914">
+                    管理                    <span class="count float-right">7篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/gitchat/article/category/7149004">
+                    运维开发                    <span class="count float-right">6篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/gitchat/article/category/7149494">
+                    大数据                    <span class="count float-right">5篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/gitchat/article/category/7149513">
+                    区块链                    <span class="count float-right">5篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/gitchat/article/category/7149594">
+                    测试                    <span class="count float-right">5篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/gitchat/article/category/7152058">
+                    小程序                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/gitchat/article/category/7157793">
+                    运维                    <span class="count float-right">4篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/gitchat/article/category/7163271">
+                    移动开发                    <span class="count float-right">6篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/gitchat/article/category/7178856">
+                    其他                    <span class="count float-right">8篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/gitchat/article/category/7293640">
+                    打包                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/gitchat/article/category/7293641">
+                    混合开发                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/gitchat/article/category/7300623">
+                    运营                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/gitchat/article/category/7300624">
+                    微博                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/gitchat/article/category/7300625">
+                    推广                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/gitchat/article/category/7307141">
+                    产品经理                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/gitchat/article/category/7307142">
+                    敏捷开发                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/gitchat/article/category/7312427">
+                    wordpress教程                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/gitchat/article/category/7314892">
+                    java                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/gitchat/article/category/7314893">
+                    spring-boot                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                    </ul>
+    </div>
+        <p class="text-center">
+        <a class="btn btn-link-blue flexible-btn" data-fbox="aside-archive">展开</a>
+    </p>
+    </div>
+		    <div id="asideArchive" class="aside-box flexible-box">
+    <h3 class="aside-title">归档</h3>
+    <div class="aside-content">
+        <ul class="archive-list">
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/gitchat/article/month/2018/05">
+                    2018年5月                    <span class="count float-right">20篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/gitchat/article/month/2018/04">
+                    2018年4月                    <span class="count float-right">27篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/gitchat/article/month/2018/03">
+                    2018年3月                    <span class="count float-right">28篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/gitchat/article/month/2018/02">
+                    2018年2月                    <span class="count float-right">25篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/gitchat/article/month/2018/01">
+                    2018年1月                    <span class="count float-right">56篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/gitchat/article/month/2017/12">
+                    2017年12月                    <span class="count float-right">70篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/gitchat/article/month/2017/11">
+                    2017年11月                    <span class="count float-right">91篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/gitchat/article/month/2017/10">
+                    2017年10月                    <span class="count float-right">43篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/gitchat/article/month/2017/09">
+                    2017年9月                    <span class="count float-right">51篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/gitchat/article/month/2017/08">
+                    2017年8月                    <span class="count float-right">11篇</span>
+                </a>
+            </li>
+                    </ul>
+    </div>
+        <p class="text-center">
+        <a class="btn btn-link-blue flexible-btn" data-fbox="aside-archive">展开</a>
+    </p>
+    </div>
+		    <div id="asideHotArticle" class="aside-box">
+	<h3 class="aside-title">热门文章</h3>
+	<div class="aside-content">
+		<ul class="hotArticle-list csdn-tracking-statistics tracking-click" data-mod="popu_521">
+							<li>
+					<a href="https://blog.csdn.net/gitchat/article/details/78546894">TensorFlow 人脸识别网络与对抗网络搭建</a>
+					<p class="read">阅读量：<span>42617</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/gitchat/article/details/78410095">想入行 AI，别让那些技术培训坑了你...</a>
+					<p class="read">阅读量：<span>39505</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/gitchat/article/details/78341484">当我说要做大数据工程师时他们都笑我，直到三个月后……</a>
+					<p class="read">阅读量：<span>35666</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/gitchat/article/details/78341401">技术学到多厉害，才能顺利进入BAT？</a>
+					<p class="read">阅读量：<span>29846</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/gitchat/article/details/78454120">聊聊 Spring Boot 2.x 那些事儿</a>
+					<p class="read">阅读量：<span>24876</span></p>
+				</li>
+					</ul>
+	</div>
+</div>
+		    <div id="asideNewComments" class="aside-box">
+    <h3 class="aside-title">最新评论</h3>
+    <div class="aside-content">
+        <ul class="newcomment-list">
+                        <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/gitchat/article/details/80236684#comments">非科班程序员如何逆袭？</a>
+                <p class="comment">
+                    <a href="https://my.csdn.net/qq_35865125" class="user-name" target="_blank">qq_35865125</a>：空洞无物,再接再厉                </p>
+            </li>
+                        <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/gitchat/article/details/79562793#comments">Java 架构师最关键三个思维转变...</a>
+                <p class="comment">
+                    <a href="https://my.csdn.net/Sugar_map" class="user-name" target="_blank">Sugar_map</a>：以前，自己就是在按照某种问题，采用某种解决方法的思路在学习。看来，我还停留在第一阶段，以后要努力加...                </p>
+            </li>
+                        <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/gitchat/article/details/80276245#comments">只有程序员了解的9个真相</a>
+                <p class="comment">
+                    <a href="https://my.csdn.net/qq_41438582" class="user-name" target="_blank">qq_41438582</a>：实验                </p>
+            </li>
+                        <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/gitchat/article/details/80276245#comments">只有程序员了解的9个真相</a>
+                <p class="comment">
+                    <a href="https://my.csdn.net/qq_41438582" class="user-name" target="_blank">qq_41438582</a>：哦                </p>
+            </li>
+                        <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/gitchat/article/details/80276245#comments">只有程序员了解的9个真相</a>
+                <p class="comment">
+                    <a href="https://my.csdn.net/sinat_29145035" class="user-name" target="_blank">sinat_29145035</a>：编程是一种思想                </p>
+            </li>
+                    </ul>
+    </div>
+</div>
+		<div id="asideFooter">
+			
+		<div class="aside-box">
+						<script type="text/javascript" src="//cee1.iteye.com/avneunkwb.js"></script>
+					</div>
+				<div class="aside-box">
+			<div class="persion_article">
+			</div>
+		</div>
+	</div>
+</aside>
+<script src="https://csdnimg.cn/pubfooter/js/publib_footer-1.0.3.js?20180309" data-isfootertrack="false" type="text/javascript"></script>
+<script>
+	$("a.flexible-btn").click(function(){
+		$(this).parents('div.aside-box').removeClass('flexible-box');
+		$(this).remove();
+	})
+</script>
+</div>
+<div class="mask-dark"></div>
+<div class="report-box">
+    <div class="pos-box">
+        <h2 class="title">不良信息举报</h2>
+        <a class="btn-close">
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#csdnc-times"></use>
+            </svg>
+        </a>
+        <form id="frmReport">
+            <div class="form-box">
+                <div class="txt-row-box">
+                    <label class="title" id="reptTit">举报内容：</label>
+                    <p class="rpt-title text-truncate">高可用、高性能？ 接口设计的 16 个原则</p>
+                </div>
+                <div class="txt-row-box">
+                    <label class="title">举报原因：</label>
+                    <div class="rdo-box">
+                        <label><input type="radio" class="rdo-chk report-type" id="report_sex" name="report_type" value="1">色情</label>
+                        <label><input type="radio" class="rdo-chk report-type" id="report_Politics" name="report_type" value="2">政治</label>
+                        <label><input type="radio" class="rdo-chk report-type" id="report_copy" name="report_type" value="3">抄袭</label>
+                        <label><input type="radio" class="rdo-chk report-type" id="report_ad" name="report_type" value="4">广告</label>
+                        <label><input type="radio" class="rdo-chk report-type" id="report_want" name="report_type" value="5">招聘</label>
+                        <label><input type="radio" class="rdo-chk report-type" id="report_call" name="report_type" value="6">骂人</label>
+                        <label><input type="radio" class="rdo-chk report-type" id="report_other" name="report_type" value="7">其他</label>
+                    </div>
+                </div>
+                <div class="txt-row-box" id="rptOriginalurl">
+                    <label class="title">原文地址：</label>
+                    <div class="txt-box">
+                        <input class="ipt" type="text" id="originalurl" name="originalurl">
+                    </div>
+                </div>
+                <div class="txt-row-box">
+                    <label class="title">原因补充：</label>
+                    <div class="txt-box">
+                        <textarea class="ipt ipt-textarea" name="description" maxlength="30"></textarea>
+                        <p class="remark">最多只允许输入30个字</p>
+                    </div>
+                </div>
+            </div>
+            <div class="opt-box text-right">
+                <input type="reset" class="btn btn-link-gray btn-close" value="取消">
+                <input type="submit" class="btn btn-red btn-submit" value="提交">
+            </div>
+        </form>
+    </div>
+</div>
+<div class="pulllog-box" style="display: block;">
+	<div class="pulllog clearfix">
+		<span class="text float-left">加入CSDN，享受更精准的内容推荐，与500万程序员共同成长！</span>
+		<div class="pulllog-btn float-right clearfix">
+            <button class="pulllog-login float-left csdn-tracking-statistics tracking-click" data-mod="popu_557">
+                登录
+            </button>
+            <div class="pulllog-sigin float-left csdn-tracking-statistics tracking-click" data-mod="popu_558">
+                <a href="https://passport.csdn.net/account/mobileregister" target="_blank">注册</a>
+            </div>
+            <button class="btn-close">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#csdnc-times"></use>
+                </svg>
+            </button>
+		</div>
+	</div>
+</div>
+<div id="loginWrap" style="display:none"></div>
+<div class="tool-box">
+	<ul class="meau-list">
+		<li>
+			<button class="btn-like " title="点赞">
+				<svg class="icon active" aria-hidden="true">
+					<use xlink:href="#csdnc-thumbsup-ok"></use>
+				</svg><svg class="icon no-active" aria-hidden="true">
+					<use xlink:href="#csdnc-thumbsup"></use>
+				</svg>
+				<p>3</p>
+			</button>
+		</li>
+		<li class="toc-container-box" id="liTocBox">
+			<button class="btn-toc" title="目录">
+				<svg class="icon" aria-hidden="true">
+					<use xlink:href="#csdnc-contents"></use>
+				</svg><br>目录
+			</button>
+			<div class="toc-container">
+				<div class="pos-box">
+					<div class="icon-arrow"></div>
+					<div class="scroll-box">
+						<div class="toc-box"></div>
+					</div>
+				</div>
+				<div class="opt-box">
+					<button class="btn-opt prev nomore" title="向上">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#csdnc-chevronup"></use>
+						</svg>
+					</button>
+					<button class="btn-opt next">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#csdnc-chevrondown"></use>
+						</svg>
+					</button>
+				</div>
+			</div>
+		</li>
+		<li>
+			<button class="btn-bookmark" title="收藏">
+				<svg class="icon active" aria-hidden="true">
+					<use xlink:href="#csdnc-bookmark-ok"></use>
+				</svg><svg class="icon no-active" aria-hidden="true">
+					<use xlink:href="#csdnc-bookmark"></use>
+				</svg><br>收藏
+			</button>
+		</li>
+		<li>
+			<a class="btn-comments" title="评论" href="#commentBox">
+				<svg class="icon" aria-hidden="true">
+					<use xlink:href="#csdnc-comments"></use>
+				</svg><br>评论
+			</a>
+		</li>
+				<li class="bdsharebuttonbox">
+			<a class="btn-comments bds_weixin" data-cmd="weixin" title="微信分享">
+				<svg class="icon" aria-hidden="true">
+					<use xlink:href="#csdnc-wechat"></use>
+				</svg><br>微信
+			</a>
+		</li>
+		<li class="bdsharebuttonbox">
+			<a class="btn-comments bds_tsina" data-cmd="tsina" title="微博分享">
+				<svg class="icon" aria-hidden="true">
+					<use xlink:href="#csdnc-weibo"></use>
+				</svg><br>微博
+			</a>
+		</li>
+		<li class="bdsharebuttonbox">
+			<a class="btn-comments bds_qzone" data-cmd="qzone" title="QQ分享">
+				<svg class="icon" aria-hidden="true">
+					<use xlink:href="#csdnc-qq"></use>
+				</svg><br>QQ
+			</a>
+		</li>
+	</ul>
+</div>
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'https://csdnimg.cn/static/api/js/share.js?v=89860594'];</script>
+<script>
+    var recommendCount = 10;
+    recommendCount = recommendCount > 1 ? (recommendCount + (recommendCount>6 ? 2 : 1)) : recommendCount;
+    var articleTit = '高可用、高性能？ 接口设计的 16 个原则';
+    var ChannelId = 0;
+    var articleId = '78705978';
+    var commentscount = 0;
+    var islock = false;
+    var curentUrl = "https://blog.csdn.net/gitchat/article/details/78705978";
+    var myUrl = "https://my.csdn.net/";
+    //1禁止评论，2正常
+    var commentAuth = 2;
+    //百度搜索
+    var baiduKey = "%E6%A8%A1%E5%9D%97%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1";
+    var needInsertBaidu = true;
+</script>
+<script src="https://csdnimg.cn/public/sandalstrap/1.3/js/sandalstrap.min.js"></script>
+<script src="https://csdnimg.cn/release/phoenix/vendor/pagination/paging.js"></script>
+<script src='https://csdnimg.cn/public/common/gotop/js/goTop-v1.0.min.js?v201803151422'></script>
+<script>
+    GoTop({
+        right: 8,
+        hasReport: true,
+        reportFun: function() {
+            showReport(false,'高可用、高性能？ 接口设计的 16 个原则');
+        }
+    })
+</script>
+<script src="https://csdnimg.cn/release/phoenix/template/js/common-bd54b21308.min.js"></script>
+<script src="https://csdnimg.cn/release/phoenix/template/js/detail-148c1d9f17.min.js"></script>
+<script src="https://csdnimg.cn/release/phoenix/themes/skin3-template/skin3-template-46c7bd3d86.min.js"></script>
+<script src="https://csdnimg.cn/search/baidu_search-1.1.2.js?v=201802071056&autorun=true&install=true&keyword=%E6%A8%A1%E5%9D%97%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1"  type="text/javascript"></script>
+</body>
+<div class="box-box-default">
+    <a class="btn-remove">
+        关闭
+    </a>
+    <script type="text/javascript" src="//cee1.iteye.com/mhzzjepzz.js"></script>
+</div>
+<div class="box-box-large">
+    <a class="btn-remove">
+        关闭
+    </a>
+    <script type="text/javascript" src="//cee1.iteye.com/idvveasfs.js"></script>
+</div>
+</html>

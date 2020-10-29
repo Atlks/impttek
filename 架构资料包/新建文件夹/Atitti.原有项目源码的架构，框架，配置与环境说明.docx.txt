@@ -1,0 +1,55 @@
+Atitti.原有项目源码的架构，框架，配置与环境说明 培训系统
+
+	1.1. 项目java体系	1
+	1.2. Jdk版本 jdk8	1
+	1.3. Eclipse版本，支持jdk8即可，目前我们使用的Eclipse mars	1
+	1.4. ----数据库	1
+	1.5. 推荐运行web服务器 resin4.0.22	1
+	1.6. 管理员后台地址	2
+	1.7. 用户（学生，会员，老师，商家）注册与登录地址	2
+
+项目java体系
+Mvc： 有struts也有自定义，目前准备慢慢抛弃struts，所以最新界面都使用h5+js ajax
+来完成，方便切换后台语言环境，以及提升通用性，方便测试，更加的view分离
+Ioc：旧的模块好像使用了spring，新模块都基本使用guice了。
+Orm框架：旧的模块使用了mybatis ，新的模块使用了自定义orm
+
+Jdk版本 jdk8
+D:\jdk1.8.0_71
+
+Eclipse版本，支持jdk8即可，目前我们使用的Eclipse mars
+----数据库
+ mysql  ： 5.5.20
+数据库管理gui工具，navicate
+
+数据库配置文件 src\jdbc.properties
+
+推荐运行web服务器 resin4.0.22
+
+项目启动需要的jvm参数   -Dapptype="jobus" 
+
+启动web服务器脚本bat文件范例resin run q2b_jobus.bat
+
+
+管理员后台地址
+http://localhost:8080/admin
+用户名以及密码（都是小写）
+admin   
+Admin
+
+
+
+用户（学生，会员，老师，商家）注册与登录地址
+http://localhost:8080/user/login
+
+
+
+
+
+
+
+
+
+
+
+

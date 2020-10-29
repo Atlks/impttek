@@ -1,0 +1,16 @@
+Atitit.提取文章大纲与摘要的正则表达式
+
+Txt,linenum
+Aaaa,15
+
+Select *　ｆｒｏｍ tab where  txt.contain(“capt...”) or txt.matchCustm()
+
+
+
+(^\s+\d{1,2}．\d{1,2}[^．]+$)|(第.*)
+
+以空白开头，数字开头，中间一个点，然后又是数字，后面不带点
+Or startwith(“capt”)
+
+/AtiPlatf_se/src_atibrow/com/attilax/text/ArticleTitleCapt.java
+

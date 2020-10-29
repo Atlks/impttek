@@ -1,0 +1,109 @@
+Atitit v3项目源码结构架构，框架，配置与环境说明模板  规范 标准化 
+
+
+版本3.0
+作者 艾龙 attilax
+
+
+	1. 概述：核心业务：	2
+	1.1. 功能文档路径 /palmWin/src/document	2
+	2. 架构 框架与类库说明与 开发环境工具	2
+	2.1. 开发环境工具	2
+	2.2. 源码svn git地址url	2
+	3. 源码结构概览 包说明 代码层次	2
+	3.1. 源码统计	3
+	3.2. 层次概览	3
+	3.3. java源文件路径	4
+	3.4. 页面路径 推荐主目录，不要放在web-inf下面	4
+	3.5. 类说明 功能service 类列表	4
+	3.6. 重要api说明（可以截图）	5
+	3.7. 数据库sql /palmWin/src/document/laundry.sql	5
+	4. 配置方面	5
+	4.1. 推荐的配置文件路径放在 /WEB-INF 下，不要放在src class目录下。	5
+	4.2. 数据库配置文件路径 xxx/config.properties	5
+	4.3. Spring配置路径	5
+	4.4. 数据库框架配置路径	5
+	4.5. 其他配置路径	6
+	5. 项目测试环境运行启动说明	6
+	5.1. 部署指向路径  /palmWin/src/main/webapp	6
+	5.2. 启动首页url	6
+	5.3. 其他的登录注册页等起始页url 与测试登陆用户名密码	6
+	5.4. 其他测试页url	6
+	6. 手机端h5接口	6
+	6.1. 接口路径	6
+	7. 手机端情况	6
+
+概述：核心业务：
+ 功能文档路径 /palmWin/src/document
+
+
+架构 框架与类库说明与 开发环境工具
+
+Jdk8
+Spring  ioc与mvc
+ Mybatis 数据库orm框架
+Httpclient  http restful等接口通讯
+ cxf  webservice等网络通讯
+poi  office系列读写
+qrcode二维码
+Ui类库：：h5
+
+开发环境工具
+Jdk8  eclipse4.5+
+推荐运行web服务器  tomcat+jrebel ， resin
+源码svn git地址url
+源码结构概览 包说明 代码层次
+
+源码统计
+代码行数：(总的，包括java html js css 配置txt等）
+class类：多少个     html页面数量：   js数量：：
+打包体积（zip，不包含.svn  .git等目录）：50M
+层次概览
+
+
+java源文件路径
+页面路径 推荐主目录，不要放在web-inf下面
+
+类说明 功能service 类列表
+
+
+
+重要api说明（可以截图）
+
+数据库sql /palmWin/src/document/laundry.sql
+
+
+页面路径  /palmWin/src/main/webapp/WEB-INF
+配置方面
+推荐的配置文件路径放在 /WEB-INF 下，不要放在src class目录下。
+因为存在同步问题。可能有时候ide不能把配置同步过去。放在 /WEB-INF 下，免除了同步问题，修改配置肯定生效。。
+其次 /WEB-INF 下，默认有安全性，防止配置文件被下载
+
+
+数据库配置文件路径 xxx/config.properties
+
+Spring配置路径
+   
+数据库框架配置路径
+
+其他配置路径
+项目测试环境运行启动说明
+部署指向路径  /palmWin/src/main/webapp
+启动首页url
+其他的登录注册页等起始页url 与测试登陆用户名密码
+http://laundry.vshoutao.com:8090/userController/toLogin.do
+  admin admin
+
+其他测试页url
+手机端h5接口
+接口路径  
+http://laundry.xxx.com:8090+接口路径
+
+具体接口路径详细参考接口文档
+
+手机端情况
+
+  
+  
+ 
+

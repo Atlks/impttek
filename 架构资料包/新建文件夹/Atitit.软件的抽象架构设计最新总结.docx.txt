@@ -1,0 +1,18 @@
+Atitit.软件的抽象架构设计最新总结
+
+界面生成的expression 表达式
+
+Service层解析ecpression，生成若干data op  dsl
+Insert，update，del，query，convert data type
+
+Query的子类
+convert data type
+Img2txt：： 验证码识别
+运行程序，得到handler
+生成 file
+
+常用的dsl 解析器
+Jql parser
+Other parser
+
+

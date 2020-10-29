@@ -1,0 +1,28 @@
+
+什么才是云计算的根本特征..
+
+
+
+    什么是“云计算”（ Cloud Computing ）？
+
+
+云计算的 5 个基本特征：
+
+     1 ） on-demand service （按需提供服务） ;
+
+     2 ） broad network access （宽带网络访问） ;
+
+     3 ） resource pooling （具有资源池） ;
+
+    4 ） rapid elasticity （具有快速伸缩性能） ;
+
+    5 ） measured service （可计量的服务）
+
+
+综上所述,我觉得云计算的根本特征在于.:
+1.按需提供服务
+2.可计量的服务
+
+
+
+参考:云计算的权威定义

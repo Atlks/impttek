@@ -1,0 +1,63 @@
+Atitit.微分销系统的平台提成设计原理与架构 
+
+提成的计算
+
+(jg-cb-fc)*kffctemp/100;
+价格-成本-分成===类润
+类润* （ 分成比例/100)===平台提成
+
+提成的流程
+
+
+_http://localhost:8080/wxb/cust/goods/add_
+*商品套餐：	(*)描述
+(*)成本
+(*)价格
+(*)分成
+(*)平台提成
+
+
+
+
+
+
+
+
+
+
+提成的计算
+/**
+ * 提成 
+ * @param obj
+ */
+function checkVal_tc(obj) {
+	obj.value = obj.value.replace(/[^\.\d]/g, "");
+	if (obj.value.split(".").length > 2) {
+		obj.value = obj.value.split(".")[0] + "." + obj.value.split(".")[1];
+	}
+	var flag = obj.id.substr(obj.id.length-1,1)
+	
+	var cb = document.getElementById("cb"+flag).value;
+	var jg = document.getElementById("jg"+flag).value;
+	var fc = document.getElementById("fc"+flag).value;
+	if(cb!="" && jg!="" && fc!="")
+		{
+		var curUser = '${SESSION_CUSER.login_name}';
+		if(tc=="")
+		{
+		 tc  = ServiceBreakSyn("com.sc.common.CurUserCLInfo","getCurUserPttc",[curUser]);
+         console.log(tc);
+		 }
+			var kffctemp = tc.split("%")[0];
+			document.getElementById('kffc'+flag).value=(jg-cb-fc)*kffctemp/100;
+		}
+}
+
+
+_http://localhost:8080/wxb/servlet/ServiceBreak_
+_c=com.sc.common.CurUserCLInfo&_m=getCurUserPttc&_p0=attilax8
+
+10%
+
+
+

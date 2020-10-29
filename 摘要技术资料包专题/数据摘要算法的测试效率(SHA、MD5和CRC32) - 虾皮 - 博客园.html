@@ -1,0 +1,219 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>数据摘要算法的测试效率(SHA、MD5和CRC32) - 虾皮 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=Rdf1BBttS5_qVaET1myrajVTd62BSCCoJA9fZxGv1ZM1"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/SimpleBlue/bundle-SimpleBlue.css?v=jJERBFSojhmgst84aaRDal9S3q1WoO-WcNudmMzGJS81"/>
+<link type="text/css" rel="stylesheet" href="/blog/customcss/98534.css?v=4ZA7MOet0EgJejn9HWtxYB9ew3Y%3d"/>
+<link id="mobile-style" media="only screen and (max-width: 768px)" type="text/css" rel="stylesheet" href="/skins/SimpleBlue/bundle-SimpleBlue-mobile.css?v=BlWRqh78YPBjZE2nsyndTVBgXau6g8pl0IYzREPAN_U1"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/xia520pi/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/xia520pi/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/xia520pi/wlwmanifest.xml"/>
+<script src="//common.cnblogs.com/script/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'xia520pi', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="/bundles/blog-common.js?v=hH1lCMV8WaIu271Nx7jPuv36TENW9-RsSxziLxUpjtc1" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+		
+<!--done-->
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/xia520pi/">虾皮工作室</a></div>
+<div class="subtitle">赠人玫瑰，手留余香。
+http://www.xiapistudio.com/</div>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+<li id="nav_myhome"><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/xia520pi/">首页</a></li>
+<li id="nav_newpost"><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li id="nav_contact"><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/%E8%99%BE%E7%9A%AE">联系</a></li>
+<li id="nav_rss"><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/xia520pi/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/xia520pi/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li id="nav_admin"><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<!--done-->
+随笔-104&nbsp;
+文章-0&nbsp;
+评论-654&nbsp;
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class = "post">
+		<h1 class = "postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/xia520pi/p/3910530.html">数据摘要算法的测试效率(SHA、MD5和CRC32)</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body"><h2>1、算法概述</h2>
+<p style="margin-left: 30px;"><span style="color: red;">数据摘要算法</span>是密码学算法中非常重要的一个分支，它通过对所有数据提取<span style="color: red;">指纹信息</span>以实现数据签名、数据完整性校验等功能，由于<span style="color: red;">其不可逆性</span>，有时候会被用做敏感信息的加密。数据摘要算法也被称为<span style="color: red;">哈希（Hash）算法</span>或<span style="color: red;">散列算法</span>。</p>
+<h3>1.1 CRC8、CRC16、CRC32</h3>
+<p style="margin-left: 30px;">CRC（Cyclic Redundancy Check，<span style="color: red;">循环冗余校验</span>）算法出现时间较长，应用也十分广泛，尤其是通讯领域，现在应用最多的就是 <span style="color: red;">CRC32 </span>算法，它产生一个4字节（32位）的校验值，一般是以8位十六进制数，如FA 12 CD 45等。CRC算法的优点在于<span style="color: red;">简便、速度快</span>，严格的来说，CRC更应该被称为数据校验算法，但其功能与数据摘要算法类似，因此也作为测试的可选算法。</p>
+<p>　　在 WinRAR、WinZIP 等软件中，也是以 CRC32 作为文件校验算法的。一般常见的简单文件校验（Simple File Verify &ndash; SFV）也是以 CRC32算法为基础，它通过生成一个后缀名为.SFV 的文本文件，这样可以任何时候可以将文件内容 CRC32运算的结果与 .SFV 文件中的值对比来确定此文件的完整性。与 SFV 相关工具软件有很多，如MagicSFV、MooSFV等。</p>
+<h3>1.2 MD2 、MD4、MD5</h3>
+<p>　　这是应用非常广泛的一个算法家族，尤其是 <a href="http://zh.wikipedia.org/wiki/MD5">MD5</a>（Message-Digest Algorithm 5，<span style="color: red;">消息摘要算法版本5</span>），它由MD2、MD3、MD4发展而来，由Ron Rivest（RSA公司）在1992年提出，目前被广泛应用于数据完整性校验、数据（消息）摘要、数据加密等。MD2、MD4、MD5 都产生16字节（128位）的校验值，一般用32位十六进制数表示。MD2的算法较慢但相对安全，MD4速度很快，但安全性下降，MD5比MD4更安全、速度更快。</p>
+<p>　　目前在互联网上进行大文件传输时，都要得用MD5算法产生一个与文件匹配的、存储MD5值的文本文件（后缀名为 .md5或.md5sum），这样接收者在接收到文件后，就可以利用与 SFV 类似的方法来检查文件完整性，目前绝大多数大型软件公司或开源组织都是以这种方式来校验数据完整性，而且部分操作系统也使用此算法来对用户密码进行加密，另外，它也是目前计算机犯罪中数据取证的最常用算法。与MD5 相关的工具有很多，如 WinMD5等。</p>
+<h3>1.3 SHA1、SHA256、SHA384、SHA512</h3>
+<p>　　<a href="http://zh.wikipedia.org/wiki/SHA%E5%AE%B6%E6%97%8F">SHA</a>（Secure Hash Algorithm）是由美国专门制定密码算法的标准机构&mdash;&mdash;美国国家标准技术研究院（NIST）制定的，SHA系列算法的摘要长度分别为：SHA为20字节（160位）、SHA256为32字节（256位）、 SHA384为48字节（384位）、SHA512为64字节（512位），由于它产生的数据摘要的长度更长，因此更难以发生碰撞，因此也更为安全，它是未来数据摘要算法的发展方向。由于SHA系列算法的数据摘要长度较长，因此其运算速度与MD5相比，也相对较慢。</p>
+<p>　　目前SHA1的应用较为广泛，主要应用于CA和数字证书中，另外在目前互联网中流行的BT软件中，也是使用SHA1来进行文件校验的。</p>
+<h3>1.4 RIPEMD、PANAMA、TIGER、ADLER32 等</h3>
+<p>　　<a href="http://en.wikipedia.org/wiki/RIPEMD">RIPEMD</a>是Hans Dobbertin等3人在对MD4，MD5缺陷分析基础上，于1996年提出来的，有4个标准128、160、256和320，其对应输出长度分别为16字节、20字节、32字节和40字节。TIGER由Ross在1995年提出。Tiger号称是最快的Hash算法，专门为64位机器做了优化。</p>
+<h2>2、算法测试</h2>
+<h3>2.1 测试方法</h3>
+<ul>
+<li>
+<div style="text-align: justify;"><span style="font-size: 10pt;">测试范围 ：常见的数据校验、摘要算法，主要有 CRC32、MD5、SHA1、SHA256、SHA384、SHA512 </span></div>
+</li>
+<li>
+<div style="text-align: justify;"><span style="font-size: 10pt;">样本数据 ：2G大小Vmware 虚拟机操作系统的磁盘文件，其中包含其中各种类型的文件，如二进制文件和文本文件等。 </span></div>
+</li>
+<li>
+<div style="text-align: justify;"><span style="font-size: 10pt;">软件平台 ：Windows、.NET Framework 2.0 </span></div>
+</li>
+<li>
+<div style="text-align: justify;"><span style="font-size: 10pt;">硬件平台 ： </span></div>
+<ul>
+<li>
+<div style="text-align: justify;"><span style="font-size: 10pt;">机器A（SCSI Disk）：软件配置 Windows 2000 + .Net Framework 2.0；硬件配置 CPU：4 （Xeon），2.8G，RAM：2G ，HD：70 GB SCSI </span></div>
+</li>
+<li>
+<div style="text-align: justify;"><span style="font-size: 10pt;">机器B（IDE Disk）：软件配置 Windows 2003 + .Net Framework 2.0；硬件配置 CPU：1 （P4），2.8G，RAM：1G，HD：40 GB IDE</span></div>
+</li>
+</ul>
+</li>
+</ul>
+<p>　　考虑到整个测试过程只是涉及到文件读取与哈希值的计算，并无过多的与操作系统、软件平台、开发语言相关的操作，因此可以认为上述测试方法的结果具有普遍性，即也适用于其它操作系统平台（如Linux/Unix）或应用语言/平台（C、Java）。</p>
+<h3>2.2 测试结果</h3>
+<p><span style="color: red;"><strong>　　1）不同配置机器间的对比 </strong></span></p>
+<p>　　在不同机器配置上的平均运算结果如下表所示：</p>
+<p style="text-align: center;"><img src="http://images.cnitblog.com/blog/202708/201408/131646496556487.jpg" alt="" /></p>
+<p><span style="color: red;">　　注1</span>：配有SCSI磁盘的机器运行时间反而比 IDE 磁盘时间长，可能是由于前者具有较多的应用负载造成的，如Oracle、WebSphere等，而且其OS为 Windows 2000，在之上运行 .NET 应用程序可能与 Windows 2003 的效率有所差别</p>
+<p><span style="color: red;">　　注2</span>：上述算法中，只有 CRC32 没有包含在.NET Framework 中，而是使用C#单独实现的，因此可能会对其测试结果带来一些影响。</p>
+<p><span style="color: red;"><strong>　　2）不同算法的CPU占用率比较 </strong></span></p>
+<p>　　在不同的算法运行时，在机器B上监控其对于 CPU 的平均使用时间，结果如下表所示：</p>
+<p style="text-align: center;"><img src="http://images.cnitblog.com/blog/202708/201408/131646500458774.jpg" alt="" /></p>
+<h2>3、实验结论</h2>
+<ul style="margin-left: 42pt;">
+<li>
+<div style="text-align: justify;"><span style="font-size: 10pt;">数据摘要算法的处理是很快的，在一般配置的PC机上使用MD5算法，处理1G的文件数据只需20-30秒（有些专用设备声称达 3GB/秒），不会对应用或机器带来过多负载 </span></div>
+</li>
+<li>
+<div style="text-align: justify;"><span style="font-size: 10pt;">MD5、SHA1虽然被发现存在缺陷（碰撞），但在近几年内，仍然可以大量使用 </span></div>
+</li>
+<li>
+<div style="text-align: justify;"><span style="font-size: 10pt;">SHA256/384/512 的速度较慢，可以用于少量数据摘要，目前不适合用于大文件校验</span></div>
+</li>
+</ul>
+<p>　　CRC32为32bit的简单hash，MD5为128bit较复杂的hash算法。直觉上貌似CRC32的计算速度要比MD5快的。今天用FlexHEX计算大文件的hash时发现CRC32相对MD5并没有明显优势。</p>
+<p>　　实验发现：Linux操作系统下用md5sum和cksum取文件哈希：MD5仅花费CRC32时间的72%左右。</p>
+<ul style="margin-left: 42pt;">
+<li>
+<div style="text-align: justify;"><span style="font-size: 10pt;"><span style="color: #ff0000;">MD5计算速度要明显优于CRC32</span>！</span></div>
+</li>
+</ul>
+<h2>4、文章来源</h2>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;1）<a href="http://dearymz.blog.163.com/blog/static/205657420116205415458/">http://dearymz.blog.163.com/blog/static/205657420116205415458/</a></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;2）<a href="http://www.getcn.net/index.php?mod=skill&amp;action=detail&amp;id=43881">http://www.getcn.net/index.php?mod=skill&amp;action=detail&amp;id=43881</a></p>
+<p>&nbsp;</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+		</div>
+		<div class = "postDesc">posted @ <span id="post-date">2014-08-13 16:47</span> <a href='http://www.cnblogs.com/xia520pi/'>虾皮</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>)  <a href ="https://i.cnblogs.com/EditPosts.aspx?postid=3910530" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(3910530);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=98534,cb_entryId=3910530,cb_blogApp=currentBlogApp,cb_blogUserGuid='aff597ab-3df2-df11-ac81-842b2b196315',cb_entryCreatedDate='2014/8/13 16:47:00';loadViewCount(cb_entryId);</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='ad_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<div id='ad_c2' class='c_ad_block'></div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="calendar"><div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script></div>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright &copy;2016 虾皮
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+</body>
+</html>

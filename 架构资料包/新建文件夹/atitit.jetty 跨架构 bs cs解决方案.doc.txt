@@ -1,0 +1,123 @@
+
+atitit.跨架构 bs cs解决方案. 自定义web服务器的实现方案 java .net jetty  HttpListener
+
+11
+11
+33
+33
+44
+55
+5
+自定义web服务器的实现方案，基于原始socket vs  基于tcpListener vs 基于HttpListener
+前面两篇文章分别介绍了基于原始socket的web服务器和基于tcpListener的web服务器，本篇文章将继续介绍另外一种基于HttpListener的。
+HttpListener进一步的简化了Http协议的监听，仅需通过字符串的方法提供监听的地址和端口号以及虚拟路径，就可以开始监听工作了。
+
+作者:: 绰号:老哇的爪子 （ 全名：：Attilax Akbar Al Rapanui 阿提拉克斯 阿克巴 阿尔 拉帕努伊 ） 汉字名：艾龙，  EMAIL:1466519819@qq.com
+转载请注明来源： http://blog.csdn.net/attilax
+
+download
+
+
+	
+Downloads
+stable-9:	_.zip_ _.tgz_ _(all)_	_apidocs_	_xref_	
+	
+	Stable (Java 8+) 9.3.7.v20160115
+9.3.7.v20160115:	_.zip_ _.tgz_ _(all)_	_apidocs_	_xref_	
+	
+	Release (Java 8+)
+9.3.6.v20151106:	_.zip_ _.tgz_ _(all)_	_apidocs_	_xref_	_P2_	
+	Release (Java 8+)
+9.2.15.v20160210:	_.zip_ _.tgz_ _(all)_	_apidocs_	_xref_	
+	
+	Release (Java 7+)
+9.2.14.v20151106:	_.zip_ _.tgz_ _(all)_	_apidocs_	_xref_	
+	
+	Release (Java 7+)
+8.1.17.v20150415:	_.zip_ _.tgz_ _(all)_	_apidocs_	_xref_	
+	
+	Release (EOL)
+7.6.17.v20150415:	_.zip_ _.tgz_ _(all)_	_apidocs_	_xref_	
+	
+	Release (EOL)
+
+Lib
+2016/02/27  20:05    <DIR>          .
+2016/02/27  20:05    <DIR>          ..
+2016/02/27  20:05                 0 d.txt
+2016/02/27  19:58            80,831 jetty-annotations-9.3.7.v20160115.jar
+2016/02/27  19:53           136,427 jetty-http-9.3.7.v20160115.jar
+2016/02/27  19:53           105,276 jetty-io-9.3.7.v20160115.jar
+2016/02/27  19:58           483,159 jetty-server-9.3.7.v20160115.jar
+2016/02/27  19:53           416,442 jetty-util-9.3.7.v20160115.jar
+2016/02/27  19:53           111,130 jetty-webapp-9.3.7.v20160115.jar
+
+Code
+
+package aaaCfg;
+ 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.ServletException;
+
+import java.io.IOException;
+
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.Request;
+import org.eclipse.jetty.server.handler.AbstractHandler;
+
+import com.attilax.io.filex;
+ 
+public class jetty extends AbstractHandler
+{
+    public void handle(String target,
+                       Request baseRequest,
+                       HttpServletRequest request,
+                       HttpServletResponse response) 
+        throws IOException, ServletException
+    {
+        response.setContentType("text/html;charset=utf-8");
+        response.setStatus(HttpServletResponse.SC_OK);
+        baseRequest.setHandled(true);
+        response.getWriter().println("<h1>Hello World</h1>"+filex.getUUidName());
+    }
+ 
+    public static void main(String[] args) throws Exception
+    {
+        Server server = new Server(8080);
+        server.setHandler(new jetty());
+  
+        server.start();
+        server.join();
+        System.out.println("--f");
+    }
+}
+
+HttpListener类
+HttpListener类依赖于IIS 6.0中的Http.sys功能，因此必须使用把http.sys作为系统级HTTP服务的操作系统。只有Windows Vista、Windows Server 2003和Windows XP SP2(以及未来版本的操作系统)包含了这个功能，因此我们应升级和安装服务包。未来的操作系统都会提供这个功能。
+HttpListener用http.sys注册一个或多个"前缀"。注册完成后，HTTP子系统会把请求传递给已注册的监听器，这个过程包括创建一个HttpListenerContext对象并把它发送给监听器。类似于ASP.NET中的Context对象，HttpListenerContext对象也包含了Request和Response对象所需要的各种属性。我们可以使用Request属性读取请求，把响应写入Response属性，然后关闭Response，把生成的页面发送到用户的浏览器。表31-10列出了HttpListener中最重要的成员。
+表31-10  HttpListener中最重要的成员
+成    员	描    述
+Abort	不处理完现存的请求就强行关闭服务器
+Close	在处理完现存的请求后关闭服务器
+Start	启动监听器，接收请求
+Stop	关闭监听器，停止接收请求
+IsListening	该属性判断监听器当前是否能接收请求
+Prefixes	监听器可以响应的请求类型的集合。这些类型指的是
+URL的左边部分，例如“http://localhost:8080/”或者
+“http://serverName:1234/vrootName/”。前缀必须以斜线结尾，
+否则就会产生运行时错误。即使同一个服务器上安装了IIS，
+只要没有定义与IIS一样的虚拟路径，仍可以使用端口80
+
+
+  //等待传入的请求，该方法将阻塞进程，直到收到请求
+                HttpListenerContext context = listener.GetContext();
+                //取得请求的对象
+                HttpListenerRequest request = context.Request;
+Reef
+JETTY9(9.2.1)入门学习 - 小灰灰的部落 - 博客频道 - CSDN.NET.htm
+用java实现的一个简单web服务器程序 - lubiaopan的专栏 - 博客频道 - CSDN.NET.htm
+自己动手写简单的web服务器--java实现-thomaslwq-ChinaUnix博客.htm
+31.2.3 使用HttpListener创建自己的Web服务器（1） - 51CTO.COM.htm
+基于HttpListener的web服务器 - wolfy - 博客园.htm
+

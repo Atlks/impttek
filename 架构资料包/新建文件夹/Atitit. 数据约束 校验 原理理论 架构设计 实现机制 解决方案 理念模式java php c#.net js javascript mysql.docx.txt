@@ -1,0 +1,177 @@
+Atitit. 数据约束 校验 原理理论与 架构设计 理念模式java php c#.net js javascript mysql oracle
+
+
+	1. 主键	1
+	2. uniq  index	2
+	3. 检查约束 (Check Counstraint) 对该列数据的范围、格式的限制（如：年龄、性别等）	2
+	4. 默认约束 (Default Counstraint) 该数据的默认值	2
+	5. trigger	2
+	6. 外键机制  参照完整性：	2
+	7. 断言约束：不必与特定的列绑定，可以理解为能应用于多个表的check约束，	2
+	8. NOT NULL约束	3
+	9. Lang	3
+	10. 验证事件	3
+	10.2. onBeforeValidate	3
+	10.3. none	3
+	10.4. Fires before validate on a field. Available since version 1.4.	3
+	10.5. onValidate	3
+	10.6. valid	3
+	10.7. Fires when validate on a field. Available since version 1.4.	3
+	11. 常用的验证	3
+	11.1. 日期，邮件，电话验证，年龄，长度验证，数字范围，格式验证，邮政编码验证   ，信用卡号码	3
+	11.2. 默认校验规则	3
+	12. 参考	6
+
+
+
+
+用户可以指明约束是启用的还是禁用的，当约束启用时，他增强了数据的完整性，否则，则反之，但约束始终存在于数据字典中。
+
+主键
+主键约束（Primay Key Coustraint） 唯一性，非空性
+
+uniq  index
+-唯一约束 （Unique Counstraint）唯一性，可以空，但只能有一个
+
+检查约束 (Check Counstraint) 对该列数据的范围、格式的限制（如：年龄、性别等）
+mysql在建表的时候不需要设定检查约束,只要把数据类型正确设定就可以了 约束是在程序里控制的,最好是在录入进进行检查,或在写入时进行 检查。只要你董得程序
+
+oracle检查列的类型和范围。语法：CONSTRAINT [constraint_name] CHECK (condition); 比如：check(Age >2)
+
+是指表中的列必须满足某种特定的数据类型约束，其中约束又包括取值范围、精度等规定。
+默认约束 (Default Counstraint) 该数据的默认值
+trigger
+外键机制  参照完整性：
+
+断言约束：不必与特定的列绑定，可以理解为能应用于多个表的check约束，
+因此必须在表定义之外独立创建断言。
+
+NOT NULL约束
+Lang 
+
+
+验证事件
+Events
+Name
+Parameters
+Description
+onBeforeValidate
+none
+Fires before validate on a field. Available since version 1.4.
+onValidate
+valid
+Fires when validate on a field. Available since version 1.4.
+
+
+常用的验证
+日期，邮件，电话验证，年龄，长度验证，数字范围，格式验证，邮政编码验证   ，信用卡号码
+
+
+默认校验规则
+序号
+规则
+描述
+1
+required:true
+必须输入的字段。
+2
+remote:"check.php"
+使用 ajax 方法调用 check.php 验证输入值。
+3
+email:true
+必须输入正确格式的电子邮件。
+4
+url:true
+必须输入正确格式的网址。
+5
+date:true
+必须输入正确格式的日期。日期校验 ie6 出错，慎用。
+6
+dateISO:true
+必须输入正确格式的日期（ISO），例如：2009-06-23，1998/01/22。只验证格式，不验证有效性。
+7
+number:true
+必须输入合法的数字（负数，小数）。
+8
+digits:true
+必须输入整数。
+9
+creditcard:
+必须输入合法的信用卡号。
+10
+equalTo:"#field"
+输入值必须和 #field 相同。
+11
+accept:
+输入拥有合法后缀名的字符串（上传文件的后缀）。
+12
+maxlength:5
+输入长度最多是 5 的字符串（汉字算一个字符）。
+13
+minlength:10
+输入长度最小是 10 的字符串（汉字算一个字符）。
+14
+rangelength:[5,10]
+输入长度必须介于 5 和 10 之间的字符串（汉字算一个字符）。
+15
+range:[5,10]
+输入值必须介于 5 和 10 之间。
+16
+max:5
+输入值不能大于 5。
+17
+min:10
+输入值不能小于 10。
+
+alpha
+returns false if the form element contains anything other than alphabetical characters.
+no
+
+alpha_numeric
+returns false if the form element contains anything other than alpha-numeric characters.
+no
+
+alpha_dash
+
+
+
+is_natural
+returns false if the form element contains anything other than a natural number: 0, 1, 2, 3, etc.
+no
+
+is_natural_no_zero
+returns false if the form element contains anything other than a natural number, but not zero: 1, 2, 3, etc.
+no
+
+valid_ip
+returns false if the supplied IP is not valid.
+no
+
+valid_base64
+returns false if the supplied string contains anything other than valid Base64 characters.
+no
+
+valid_credit_card
+returns false if the supplied string is not a valid credit card
+no
+
+valid_url
+returns false if the supplied string is not a valid url
+no
+
+is_file_type
+returns false if the supplied file is not part of the comma separated list in the paramter
+
+
+	
+
+
+参考
+
+数据库中的五种约束 - SQL Server(mssql)数据库栏目 - 红黑联盟.htm
+数据完整性约束_百度百科.htm
+http://rickharrison.github.io/validate.js/
+Documentation - jQuery EasyUI.htm
+jQuery Validate   菜鸟教程.htm
+jquery.validate.js表单验证 - SunRain117 - 博客园.htm
+

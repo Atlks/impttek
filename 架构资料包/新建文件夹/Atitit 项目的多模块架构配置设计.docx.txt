@@ -1,0 +1,6 @@
+Atitit 项目的多模块架构配置设计
+
+SET JAVA_HOME=d:\jdk1.8.0_51
+ "%JAVA_HOME%\bin\java" -Dapptype="jobus"  -Dprj="jobus" -Dsubprj="game"    -Dcfgfile="pay.ini"  
+cfg_game.properties
+

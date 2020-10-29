@@ -1,0 +1,22 @@
+Atitit 软件质量可靠性稳定性提升体系建设attilax总结
+
+可靠性稳定性指标
+Crash
+
+Spec建设
+
+Spec
+
+
+Bp best practice
+qa
+Check list
+重大bug管理委员会
+确保重大bug列入spec，执行checklist检查。。从设计上杜绝特定重大bug
+
+
+
+
+
+
+

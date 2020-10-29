@@ -1,0 +1,58 @@
+Atitit.软件开发概念说明--io系统区--特殊文件名称保存最佳实践文件名称编码...filenameEncode
+
+不个网页title保存成个个文件的时候儿有无效字符的问题...
+
+通常两个处理方式::: replace 成个空格或者使用转义(推荐)...
+
+windows的文件名称无效字符.../\:* <>\"| 斜杠,反斜杠,冒号,星号,问号,左右的
+尖括号,双引号,树杠...而且...“.” 一个点和 “..”双点分别用来表示“当前目录”和“父目录”， 因此它们也不能作为文件名
+
+
+Linux的基本上只有反斜杠...
+
+
+
+
+
+public static String fileNameEncode(String filenameOri) {
+		// /\:* <>\"|
+if(filenameOri.equals("."))
+			return "%2E";
+		if(filenameOri.equals(".."))
+			return "%2E%2E";
+		Map<String, String> mp = (Map<String, String>) new ClosureNoExcpt() {
+
+			@Override
+			public Object execute(final Object arg0) {
+				final Map<String, String> mp = new HashMap<String, String>() {
+					{
+						this.put("*", "%2A");
+
+					}
+				};
+				final String[] as = strUtil.SplitByNone("/\\:?<>\"|");
+
+				for (final String s : as) {
+					try {
+						mp.put(s, URLEncoder.encode(s, "utf-8"));
+
+					} catch (final UnsupportedEncodingException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				return mp;
+			}
+		}.execute(null);
+		String[] as = strUtil.SplitByNone(filenameOri);
+		String fname2 = "";
+		for (String s : as) {
+			fname2 += mp.get(s) == null ? s : mp.get(s);
+		}
+		return fname2;
+	}
+
+
+
+
+

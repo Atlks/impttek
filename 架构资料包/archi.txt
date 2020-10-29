@@ -1,0 +1,197 @@
+archi.txt
+Atiitt 企业文化部集团文化事业部的组织架构建设，10个重要下级部门.docx
+atiti api的组织架构attilax总结.docx
+Atitit  互联网 技术公司的组织架构 事业部 分公司.docx
+Atitit  未来技术趋势——serverless怎样改变未来架构  attilax总结.docx
+Atitit .分布式系统的架构设计.docx
+Atitit ARM、X86和MIPS主流架构优缺点分析.docx
+Atitit ARM、X86和MIPS主流架构优缺点分析.docx.1E9E2E6C06985C30E394676303A5DE4C.20180112184830606.wps
+Atitit ARM、X86和MIPS主流架构优缺点分析.docx.1E9E2E6C06985C30E394676303A5DE4C.20180112200753486.wps
+atitit attilax的软件 架构 理念 v2 q0c.docx
+atitit attilax的软件 架构 理念 v3 q0d.docx
+atitit attilax的软件 架构 理念 v4 q0e.docx
+atitit attilax的软件 架构 理念.docx
+atitit cto的知识体系架构.docx
+Atitit org.eclipse.jdt 的ast 架构 Eclipse JDT API spec.docx
+Atitit python2.7 类库架构attilax总结.docx
+Atitit RISC(精简指令集计算机)和CISC(复杂指令集计算机)架构.docx
+atitit uke组织架构规划 v2 r1d.xlsx
+atitit uke组织架构规划 v5 r616a.xlsx
+Atitit usrQBh1 软件架构规范.docx
+Atitit v3洗衣项目源码结构架构，框架，配置与环境说明 r311.docx
+Atitit v3项目源码结构架构，框架，配置与环境说明模板  规范 标准化 r311 4c.docx
+Atitit v4洗衣项目源码结构架构，框架，配置与环境说明 r311.docx
+Atitit v4项目源码结构架构，框架，配置与环境说明模板  规范 标准化 r317 4c.docx
+Atitit 一个完整的体系架构，知识图谱，路线图，科技树，思维导图 结构图.docx
+ATITIT 三种架构 集中，分布式，微服务架构.docx
+Atitit 中联用户与组织架构接口集成文档补充.docx
+Atitit 书籍大纲 目录  框架 文章结构 组织架构 v3 s22.docx
+Atitit 以分布式性能为目标的架构师目标为什么不可行.docx
+atitit 关于架构的一些问题与答案.docx
+atitit 后端云serverless 架构提供商 attilax总结.docx
+Atitit 基于scrapy的 爬虫 架构原理.docx
+Atitit 基于扩展 插件式的软件开发架构方法.docx
+Atitit 如何拓展扩张知识体系架构.docx
+Atitit 常用sdk 模块 组织架构切分 规范与范例attilax总结 v2 4c.docx
+Atitit 常用sdk 模块 组织架构切分 规范与范例attilax总结 v2 4c.docx.txt
+Atitit 常用sdk 模块 组织架构切分 规范与范例attilax总结 v2.docx
+Atitit 常用sdk 模块 组织架构切分 规范与范例attilax总结 v2.docx.txt
+Atitit 常用sdk 模块 组织架构切分 规范与范例attilax总结.docx
+Atitit 常用的软件架构 与 模式 attilax总结.docx
+Atitit 常见模块与功能sdk组织架构模板说明.docx
+Atitit 延迟绑定架构法attilax总结.docx
+Atitit 开发模式  架构模式”和“设计模式”的区别.docx
+Atitit 微信视频功能架构方案说明.docx
+Atitit 微前端的概念(micro frontends与架构.docx
+atitit 提升扩展性  ---domain对象  数据架构.docx
+atitit 提升扩展性的原理 架构 与思考.docx
+atitit 摄像头架构知识点体系.xlsx
+Atitit 架构之道  attilax著 v2 s11.docx
+Atitit 架构之道  attilax著.docx
+Atitit 架构之道  attilax著.docx.4A1816AB6E178C5B4655ECFAF050499C.20180203014608384.wps
+Atitit 架构之道  attilax著.docx.E498E9A99FAA49418BB582FA269076C1.20180113122514159.wps
+Atitit 架构之道  attilax著.docx.E498E9A99FAA49418BB582FA269076C1.20180113124813368.wps
+Atitit 架构原则 fix  MonolithFirst策略.docx
+Atitit 架构原则fix.docx
+Atitit 架构原则版本兼容 循序渐进.docx
+Atitit 架构师主要职责.docx
+Atitit 架构师之道 attilax著.docx
+Atitit 架构师具体要做哪些日常工作.docx
+Atitit 架构模式和设计模式的区别attilax总结.docx
+Atitit 架构的原则attilax总结 v2 r19.docx
+Atitit 架构的原则attilax总结 v3  r10 - 副本.docx
+Atitit 架构的原则attilax总结.docx
+atitit 架构知识图谱知识网络.xlsx
+atitit 架构设计趋势 ---微服务架构.docx
+Atitit 桌面软件架构与gui技术发展史attilax总结 v2 r120 - 副本.docx
+Atitit 桌面软件架构与gui技术发展史attilax总结 v2 r120.docx
+Atitit 桌面软件架构与gui技术发展史attilax总结.docx
+Atitit 知识图谱知识架构体系的构建---定向抓取法.docx
+Atitit 知识图谱解决方案：提供完整知识体系架构的搜索与知识结果.docx
+Atitit 知识管理 经济学架构体系.docx
+atitit 研发管理 要不要自己做引擎自己实现架构？.docx
+Atitit 离线优先（Offline-first）」的架构革命.docx
+Atitit 管理员与组织架构 物业维修 项目工程源码文档.docx
+Atitit 类似mybatis的orm解决方案，循序渐进的orm以及提升开发速度与架构简单性.docx
+Atitit 类加载器架构图.docx
+Atitit 类库框架 技术架构的选型原则.docx
+Atitit 组织架构 与 层次结构数据 表自连接 attilax总结.docx
+Atitit 组织架构的如何划分 划分方法attilax大总结Atitit 组织架构的如何划分 划分方法attilax大总结.docx
+Atitit 虚拟机的层次 架构与常见的虚拟机.docx
+atitit 语法检查的架构 模式 设计与原理.docx
+Atitit 超大型项目的金字塔架构法还是职能架构法.docx
+Atitit 跨bs cs hybrid架构解决方案,实现跨设备pc 手机，以及统一web与桌面客户端程序开发的解决方案.docx
+Atitit 跨架构 桌面程序 cs bs web的跨平台h5 gui解决方案.docx
+atitit 跨架构原理与jsbridge与rpc.docx
+atitit 软件架构高扩展性and兼容性原理与概论实践attilax总结 v2q0f.docx
+atitit 软件架构高扩展性and兼容性原理与概论实践attilax总结.docx
+Atitit 通过架构提升开发效率 v2 s22.docx
+Atitit 通过架构提升开发效率.docx
+Atitit 通过架构提升开发效率.docx.45AD5274B89BF66D89E31EFBA76196BD.20180210005349710.wps
+Atitit 通过架构提升开发效率.docx.45AD5274B89BF66D89E31EFBA76196BD.20180211000014179.wps
+Atitit 项目与产品模式架构与技术方案的区别与不同.docx
+Atitit 项目与产品模式架构的区别与不同.docx
+Atitit 项目源码的架构，框架，配置与环境说明.docx
+Atitit 项目源码结构架构，框架，配置与环境说明 v2 r33 4com.docx
+Atitit 项目源码结构架构，框架，配置与环境说明 v2 r33.docx
+Atitit 项目源码结构架构，框架，配置与环境说明模板   v3 r53 4vho.docx
+Atitit 项目源码结构架构，框架，配置与环境说明模板  规范 标准化 v2 r33 4com.docx
+Atitit 项目源码结构架构，框架，配置与环境说明模板  规范 标准化 v3 r53.docx
+Atitit 项目的多模块架构配置设计.docx
+atitit 项目组织架构之道 attilax著.docx
+Atitit.  PowerFulPOS pfpos 收银软件  架构设计   实现机制 解决方案 理念模式需要改进的地方.docx
+Atitit. OSGi 原理理论 架构设计   实现机制 解决方案 理念模式  attilax实践.docx
+Atitit. 数据约束 校验 原理理论 架构设计 实现机制 解决方案 理念模式java php c#.net js javascript mysql v2 q118.docx
+Atitit. 数据约束 校验 原理理论 架构设计 实现机制 解决方案 理念模式java php c#.net js javascript mysql.docx
+Atitit.ati orm的设计and架构总结.doc
+atitit.attilax LRT 语言运行时类库的架构.doc
+atitit.attilax的软件 架构 理念 v2 q0c.docx
+atitit.attilax的软件 架构 理念 v3 q0d.docx
+atitit.attilax的软件 架构 理念.docx
+Atitit.css体系架构.docx
+atitit.cto的知识体系架构.docx
+atitit.jetty 跨架构 bs cs解决方案.doc
+Atitit.uke组织架构.docx
+Atitit.uke组织架构体系规划 v2.docx
+Atitit.uke组织架构体系规划.docx
+Atitit.usrQc723网页爬虫的架构规范总结 v3 qc8.doc
+Atitit.vod 视频播放系统 影吧系统的架构图(1).docx
+Atitit.vod 视频播放系统 影吧系统的架构图.docx
+atitit.webapp的学习架构.doc
+Atitit.?servlet 与 IHttpHandler?的 原理理论 架构设计   实现机制 解决方案 理念模式  实践java php c#.net js javascript  c++ python.docx
+atitit.三层的架构与五层架构模式.docx
+Atitit.互联网 软件编程 数据库方面 架构 大牛 牛人 attilax总结.docx
+Atitit.使用引擎加脚本架构的设计 php,js来开发桌面程序。。.doc
+Atitit.印度宪法架构.docx
+Atitit.微内核提醒的设计与实现，与大内核的区别 架构图.doc
+Atitit.微分销系统的平台提成设计原理与架构.doc
+atitit.提升性能---架构方向.doc
+Atitit.提升扩展性  ---domain对象  数据架构.docx
+Atitit.提升扩展性的原理 架构 与思考.docx
+Atitit.收银系统模块架构attilax 总结.docx
+Atitit.数据库的体系结构与架构 attilax 总结.docx
+Atitit.数据挖掘的原理与理论架构attilax总结 v2 r818.docx
+Atitit.数据挖掘的原理与理论架构attilax总结.docx
+Atitit.数据验证  标准化api 架构设计   实现机制 解决方案 理念模式 java php c#.net js javascript.docx
+atitit.架构太差的解决方案.doc
+Atitit.架构沉思录--如何达到开箱即用.docx
+Atitit.架构解决什么问题，以及有哪些架构方案.docx
+Atitit.架构设计----全动态模式 ，不要静态类.docx
+Atitit.架构设计趋势 ---微服务架构.docx
+Atitit.样式体系架构.docx
+Atitit.框架类库架构文件夹生成器.docx
+Atitit.用户系统的架构图.docx
+atitit.系统架构图 的设计 与工具 attilax总结.doc
+atitit.系统架构图 的设计 与工具 v2 q45 attilax总结.doc
+Atitit.网页爬虫的架构总结 v2 qc8.doc
+Atitit.网页爬虫的架构总结.doc
+Atitit.语法检查的架构 模式 设计与原理.docx
+atitit.跑号器 accscanner的设计 ---架构设计.doc
+Atitit.跨架构原理与jsbridge与rpc .docx
+Atitit.软件架构的设计与功能  attilax总结.docx
+Atitit.软件架构的设计与功能原理  attilax总结.docx
+Atitit.软件的抽象架构设计最新总结.docx
+Atitit。dataService体系架构 v1 q44 attilax总结.docx
+Atitit。团队文化建设----文化典籍建设---目录架构图.doc
+atitit。电子商务系统架构方案.doc
+Atitit。系统项目整合方案---技术架构方案  v1.docx
+Atitit。软件架构原理与实践概论.docx
+Atitit。软件架构原理与实践概论.docx.txt
+Atitit数据库层次架构表attilax 总结.docx
+Atitit， 金字塔型直线型组织架构与职能业务组织架构对比.docx
+Atitti uke的分支机构qq群 组织架构总结 v2.docx
+Atitti uke的分支机构qq群 组织架构总结 v4 r616.docx
+Atitti 集团与联盟与各分部 分支机构qq群  微信群 通讯录 组织架构总结  v2 r98.xlsx
+Atitti.原有项目源码的架构，框架，配置与环境说明 v2 q56.docx
+Atitti.原有项目源码的架构，框架，配置与环境说明 v3 q511 (1).docx
+Atitti.原有项目源码的架构，框架，配置与环境说明 v3 q511 (2).docx
+Atitti.原有项目源码的架构，框架，配置与环境说明 v3 q511.docx
+Atitti.原有项目源码的架构，框架，配置与环境说明.docx
+Atittit.研发公司的组织架构与部门架构总结.docx
+db 数据库service体系与架构.xlsx
+linux目录架构.doc
+OSGi架构研究 - 南阳草庐 - JavaEye技术网站.txt
+WD_QP_6-03_QR_01产品架构设计说明书.doc
+三地区组织架构2010-8-31.doc
+中联重科组织架构表.xlsx
+公司的制度架构建设.xlsx
+分工架构.vsd
+分词架构.docx
+微服务实战（一）：微服务架构的优势与不足_知识库_博客园.html
+微服务实战（一）：微服务架构的优势与不足_知识库_博客园_files
+教育组织架构表.png
+新建文件夹
+最小架构 宗教文化 行政、经济、军事、.docx
+架构图mobe 2.doc
+架构师接龙：金山张宴VS.淘宝岑文初.html
+架构目标.docx
+架构设计文档.zip
+架构设计：系统存储（10）——MySQL简单主从方案及暴露的问题 - JAVA入门中 - 博客频道 - CSDN.NET.htm
+游戏引擎架构_百度百科.html
+游戏架构设计与策划基础_百度百科.html
+电子商务系统架构方案.doc
+系统架构设计说明书.doc
+词库组成架构图.docx
+输入法架构.xlsx
+进行软件架构设计的益处.htm
+采集架构图.ppt

@@ -1,0 +1,939 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+     
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    
+<head>   
+    
+     
+    <script type="text/javascript" src="http://c.csdnimg.cn/pubfooter/js/tracking.js" charset="utf-8"></script>  
+
+    <script type="text/javascript">
+        var protocol = window.location.protocol;
+        document.write('<script type="text/javascript" src="' + protocol + '//csdnimg.cn/pubfooter/js/repoAddr2.js?v=' + Math.random() + '"></' + 'script>');
+    </script>
+
+  
+ <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+
+    <title>云计算的三种服务模式：IaaS，PaaS和SaaS - Thinking的专栏
+        - 博客频道 - CSDN.NET</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="openssl verify&gt; 介绍openssl verify 命令对证书的有效性进行验证，verify 指令会沿着证书链一直向上验证，直到一个自签名的CA。环境根据openssl ca&gt;建立自签名的root CA，然后再用root CA签发另一个CA（我命名为alice），在用alice签发用户second的证书。最后我们对bob的证书进行验证。目录结构为├─ali" />
+    <script src="http://static.blog.csdn.net/scripts/jquery.js" type="text/javascript"></script>
+    <script type="text/javascript" src="http://static.blog.csdn.net/scripts/ad.js?v=1.1"></script>
+        <!--new top-->
+               <link rel="stylesheet" href="http://c.csdnimg.cn/public/common/toolbar/css/index.css">        <!--new top-->
+
+    <link rel="Stylesheet" type="text/css" href="http://static.blog.csdn.net/skin/default/css/style.css?v=1.1" />
+    <link id="RSSLink" title="RSS" type="application/rss+xml" rel="alternate" href="/hjxgood/rss/list" />
+    <link rel="shortcut icon" href="http://c.csdnimg.cn/public/favicon.ico" />
+    <link type="text/css" rel="stylesheet" href="http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/default.css" />
+ 
+
+
+</head>
+<body>
+    
+   
+      <!--new top-->
+    <script id="toolbar-tpl-scriptId" fixed="true" prod="blog" skin="black" src="http://c.csdnimg.cn/public/common/toolbar/js/html.js" type="text/javascript"></script>
+     <!--new top-->
+    <div id="container">
+        <div id="header">
+    <div class="header">
+        <div id="blog_title">
+            <h2>
+                <a href="http://blog.csdn.net/hjxgood">Thinking的专栏</a></h2>
+            <h3>金子总会发光的</h3>
+            <div class="clear">
+            </div>
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+</div>
+<div id="navigator">
+    <div class="navigator_bg">
+    </div>
+    <div class="navigator">
+        <ul>
+            
+                <li id="btnContents"><a href="http://blog.csdn.net/hjxgood?viewmode=contents"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_mulu'])">
+                    <img src="http://static.blog.csdn.net/images/ico_list.gif">目录视图</span></a></li>
+                <li id="btnView"><a href="http://blog.csdn.net/hjxgood?viewmode=list"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_zhaiyao'])">
+                    <img src="http://static.blog.csdn.net/images/ico_summary.gif">摘要视图</span></a></li>
+                <li id="btnRss"><a href="http://blog.csdn.net/hjxgood/rss/list"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_RSS'])">
+                    <img src="http://static.blog.csdn.net/images/ico_rss.gif">订阅</span></a></li>                
+
+            </ul>
+    </div>
+</div>
+<script type="text/javascript">
+    var username = "hjxgood";
+    var _blogger = username;
+    var blog_address = "http://blog.csdn.net/hjxgood";
+    var static_host = "http://static.blog.csdn.net";
+    var currentUserName = "attilax";  
+</script>
+
+        <div id="body">
+            <div id="main">
+                <div class="main">
+                        <div class="ad_class">
+<div class="notice tracking-ad" data-mod='popu_3' > 
+
+<a href="http://blog.csdn.net/lmj623565791/article/details/50709663">
+<font color=red>Android 6.0 运行时权限处理完全解析
+</font></a>
+&nbsp;&nbsp;&nbsp;
+
+<a href="http://blog.csdn.net/xingjiarong/article/details/50651235">
+<font color=blue>python编程常用模板总结
+</font></a>
+&nbsp;&nbsp;&nbsp;
+<a href="http://lib.csdn.net/base/15/structure">
+<font color=red>【知识库】一张大图看懂Android架构
+</font></a>
+
+</div>                        </div>
+                        
+
+<!--AdForward Begin:-->
+<script type="text/javascript" ads-src="http://csdnim.qtmojo.com/main/s?user=csdn|blog|fumeiti&db=csdnim&border=0&local=yes&js=ie" src="http://creatim.qtmojo.cn/td/AllyesDeliver.min.js" charset="gbk"></script>
+<!--AdForward End-->
+
+  
+<link href="http://static.blog.csdn.net/css/comment1.css" type="text/css" rel="stylesheet" />
+<link href="http://static.blog.csdn.net/css/style1.css" type="text/css" rel="stylesheet" />
+<script language='JavaScript' type='text/javascript' src='http://download.csdn.net/js/jquery.cookie.js'></script>
+<script type="text/javascript" src="http://c.csdnimg.cn/rabbit/search-service/main.js"></script>
+<link rel="stylesheet" href="http://static.blog.csdn.net/public/res-min/markdown_views.css?v=1.0" />
+<link rel="stylesheet" href="http://static.blog.csdn.net/css/category.css?v=1.0" />
+<script type="text/javascript" src="http://static.blog.csdn.net/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+
+  <script type="text/ecmascript">
+      window.quickReplyflag = true;
+           
+            var isBole = false;
+            
+          
+    </script>
+<div id="article_details" class="details">
+    <div class="article_title">   
+         <span class="ico ico_type_Repost"></span>
+
+
+    <h1>
+        <span class="link_title"><a href="/hjxgood/article/details/18363789">
+        云计算的三种服务模式：IaaS，PaaS和SaaS            
+        </a></span>
+    </h1>
+</div>
+
+   
+
+        <div class="article_manage clearfix">
+        <div class="article_r">
+            <span class="link_postdate">2014-01-16 17:31</span>
+            <span class="link_view" title="阅读次数">41848人阅读</span>
+            <span class="link_comments" title="评论次数"> <a href="#comments" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_pinglun'])">评论</a>(2)</span>
+            <span class="link_collect tracking-ad" data-mod="popu_171"> <a href="javascript:void(0);" onclick="javascript:collectArticle('云计算的三种服务模式：IaaS，PaaS和SaaS','18363789');return false;" title="收藏">收藏</a></span>
+             <span class="link_report"> <a href="#report" onclick="javascript:report(18363789,2);return false;" title="举报">举报</a></span>
+
+        </div>
+    </div>
+      <div class="category clearfix">
+        <div class="category_l">
+           <img src="http://static.blog.csdn.net/images/category_icon.jpg">
+            <span>分类：</span>
+        </div>
+        <div class="category_r">
+                    <label  onclick="GetCategoryArticles('477564','hjxgood','top','18363789');">
+                        <span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_fenlei']);">转<em>（46）</em></span>
+                      <img class="arrow-down" src="http://static.blog.csdn.net/images/arrow_triangle _down.jpg" style="display:inline;">
+                      <img class="arrow-up" src="http://static.blog.csdn.net/images/arrow_triangle_up.jpg" style="display:none;">
+                        <div class="subItem">
+                            <div class="subItem_t"><a  href="http://blog.csdn.net/hjxgood/article/category/477564"  target="_blank">作者同类文章</a><i class="J_close">X</i></div>
+                            <ul class="subItem_l" id="top_477564">                            
+                            </ul>
+                        </div>
+                    </label>                    
+        </div>
+    </div>
+    <script   type="text/javascript" src="http://static.blog.csdn.net/scripts/category.js"></script>  
+
+  
+
+  
+  
+     
+
+<div id="article_content" class="article_content">
+
+<h1 class="postTitle"><a target="_blank" id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/beanmoon/archive/2012/12/10/2811547.html">云计算的三种服务模式：IaaS，PaaS和SaaS</a>
+</h1>
+<div class="clear"></div>
+<div class="postBody">
+<div id="cnblogs_post_body">
+<p>　　云服务”现在已经快成了一个家喻户晓的词了。如果你不知道PaaS, IaaS 和SaaS的区别，那么也没啥，因为很多人确实不知道。<br>
+　　“云”其实是互联网的一个隐喻，“云计算”其实就是使用互联网来接入存储或者运行在远程服务器端的应用，数据，或者服务。<br>
+　　任何一个使用基于互联网的方法来计算，存储和开发的公司，都可以从技术上叫做从事云的公司。然而，不是所有的云公司都一样。不是所有人都是CTO，所以有时候看到云技术背后的一些词可能会比较头疼。</p>
+<p><strong>云也是分层的</strong></p>
+<p>　　任何一个在互联网上提供其服务的公司都可以叫做云计算公司。其实云计算分几层的，分别是Infrastructure（基础设施）-as-a-Service，Platform（平台）-as-a-Service，Software（软件）-as-a-Service。基础设施在最下端，平台在中间，软件在顶端。别的一些“软”的层可以在这些层上面添加。
+</p>
+<p><img alt="" src="http://pic002.cnblogs.com/images/2012/402771/2012121016091956.jpg"></p>
+<p>&nbsp;<strong>IaaS: Infrastructure-as-a-Service（基础设施即服务）</strong></p>
+<p>　　第一层叫做IaaS，有时候也叫做Hardware-as-a-Service，几年前如果你想在办公室或者公司的网站上运行一些企业应用，你需要去买服务器，或者别的高昂的硬件来控制本地应用，让你的业务运行起来。<br>
+　　但是现在有IaaS，你可以将硬件外包到别的地方去。IaaS公司会提供场外服务器，存储和网络硬件，你可以租用。节省了维护成本和办公场地，公司可以在任何时候利用这些硬件来运行其应用。<br>
+　　一些大的IaaS公司包括Amazon, Microsoft, VMWare, Rackspace和Red Hat.不过这些公司又都有自己的专长，比如Amazon和微软给你提供的不只是IaaS，他们还会将其计算能力出租给你来host你的网站。</p>
+<p><strong>PaaS: Platform-as-a-Service（平台即服务）</strong></p>
+<p>　　第二层就是所谓的PaaS，某些时候也叫做中间件。你公司所有的开发都可以在这一层进行，节省了时间和资源。<br>
+　　PaaS公司在网上提供各种开发和分发应用的解决方案，比如虚拟服务器和操作系统。这节省了你在硬件上的费用，也让分散的工作室之间的合作变得更加容易。网页应用管理，应用设计，应用虚拟主机，存储，安全以及应用开发协作工具等。<br>
+　　一些大的PaaS提供者有<a target="_blank" href="http://venturebeat.com/2011/11/14/cloud-iaas-paas-saas/">Google App Engine</a>,Microsoft Azure，Force.com,Heroku，<a target="_blank" href="http://venturebeat.com/2011/08/23/engine-yard-acquires-orchestra/" target="_blank">Engine
+ Yard</a>。最近兴起的公司有<a target="_blank" href="http://venturebeat.com/2011/08/11/appfog-raises-8m-to-host-powerful-web-apps-in-the-cloud/" target="_blank">AppFog</a>,&nbsp;<a target="_blank" href="http://venturebeat.com/2011/10/31/mendix-grabs-13m-to-fuel-fast-enterprise-app-development/" target="_blank">Mendix</a>&nbsp;和&nbsp;<a target="_blank" href="http://venturebeat.com/2011/11/10/standing-cloud-cloud-app-management/" target="_blank">Standing
+ Cloud</a></p>
+<p><strong>SaaS: Software-as-a-Service（软件即服务）</strong></p>
+<p>　　第三层也就是所谓SaaS。这一层是和你的生活每天接触的一层，大多是通过网页浏览器来接入。任何一个远程服务器上的应用都可以通过网络来运行，就是SaaS了。<br>
+　　你消费的服务完全是从网页如Netflix, MOG, Google Apps, Box.net, Dropbox或者苹果的iCloud那里进入这些分类。尽管这些网页服务是用作商务和娱乐或者两者都有，但这也算是云技术的一部分。<br>
+　　一些用作商务的SaaS应用包括Citrix的GoToMeeting，Cisco的WebEx，Salesforce的CRM，ADP，Workday和SuccessFactors。</p>
+<p style=""><strong><span style="font-size:14px">Iaas和Paas之间的比较</span></strong></p>
+<p style=""><span style="font-size:14px">&nbsp;&nbsp;&nbsp; PaaS的主要作用是将一个开发和运行平台作为服务提供给用户，而IaaS的主要作用是提供虚拟机或者其他资源作为服务提供给用户。接下来，将在七个方面对PaaS和IaaS进行比较：</span></p>
+<p style=""><span style="font-size:14px">&nbsp;&nbsp;&nbsp; 1) 开发环境：PaaS基本都会给开发者提供一整套包括IDE在内的开发和测试环境，而IaaS方面用户主要还是沿用之前比较熟悉那套开发环境，但是因为之前那套开发环境在和云的整合方面比较欠缺，所以使用起来不是很方便。<br>
+&nbsp;&nbsp;&nbsp; 2) 支持的应用：因为IaaS主要是提供虚拟机，而且普通的虚拟机能支持多种操作系统，所以IaaS支持的应用的范围是非常广泛的。但如果要让一个应用能跑在某个PaaS平台不是一件轻松的事，因为不仅需要确保这个应用是基于这个平台所支持的语言，而且也要确保这个应用只能调用这个平台所支持的API，如果这个应用调用了平台所不支持的API，那么就需要对这个应用进行修改。<br>
+　3) 开放标准：虽然很多IaaS平台都存在一定的私有功能，但是由于OVF等协议的存在，使得IaaS在跨平台和避免被供应商锁定这两面是稳步前进的。而PaaS平台的情况则不容乐观，因为不论是Google的App Engine，还是Salesforce的Force.com都存在一定的私有API。<br>
+&nbsp;&nbsp;&nbsp; 4) 可伸缩性：PaaS平台会自动调整资源来帮助运行于其上的应用更好地应对突发流量。而IaaS平台则需要开发人员手动对资源进行调整才能应对。<br>
+&nbsp;&nbsp;&nbsp; 5) 整合率和经济性： PaaS平台整合率是非常高，比如PaaS的代表Google App Engine能在一台服务器上承载成千上万的应用，而普通的IaaS平台的整合率最多也不会超过100，而且普遍在10左右，使得IaaS的经济性不如PaaS。<br>
+&nbsp;&nbsp;&nbsp; 6) 计费和监管：因为PaaS平台在计费和监管这两方面不仅达到了IaaS平台所能企及的操作系统层面，比如，CPU和内存的使用量等，而且还能做到应用层面，比如，应用的反应时间（Response Time）或者应用所消耗的事务多少等，这将提高计费和管理的精确性。<br>
+&nbsp;&nbsp;&nbsp; 7) 学习难度：因为在IaaS上面开发和管理应用和现有的方式比较接近，而PaaS上面开发则有可能需要学一门新的语言或者新的框架，所以IaaS学习难度更低。</span></p>
+<div align="center" style="">
+<table border="1" cellspacing="0" cellpadding="2" align="center" style="width:420px; border-collapse:collapse">
+<tbody style="border-top:#cccccc 1px solid">
+<tr>
+<td valign="top" width="140"><span style="font-size:14px">&nbsp;</span></td>
+<td valign="top" width="140"><span style="font-size:14px">PaaS</span></td>
+<td valign="top" width="140"><span style="font-size:14px">IaaS</span></td>
+</tr>
+<tr>
+<td valign="top" width="140"><span style="font-size:14px">开发环境</span></td>
+<td valign="top" width="140"><span style="font-size:14px">完善</span></td>
+<td valign="top" width="140"><span style="font-size:14px">普通</span></td>
+</tr>
+<tr>
+<td valign="top" width="140"><span style="font-size:14px">支持的应用</span></td>
+<td valign="top" width="140"><span style="font-size:14px">有限</span></td>
+<td valign="top" width="140"><span style="font-size:14px">广</span></td>
+</tr>
+<tr>
+<td valign="top" width="140"><span style="font-size:14px">通用性</span></td>
+<td valign="top" width="140"><span style="font-size:14px">欠缺</span></td>
+<td valign="top" width="140"><span style="font-size:14px">稍好</span></td>
+</tr>
+<tr>
+<td valign="top" width="140"><span style="font-size:14px">可伸缩性</span></td>
+<td valign="top" width="140"><span style="font-size:14px">自动伸缩</span></td>
+<td valign="top" width="140"><span style="font-size:14px">手动伸缩</span></td>
+</tr>
+<tr>
+<td valign="top" width="140"><span style="font-size:14px">整合率和经济性</span></td>
+<td valign="top" width="140"><span style="font-size:14px">高整合率，更经济</span></td>
+<td valign="top" width="140"><span style="font-size:14px">低整合率</span></td>
+</tr>
+<tr>
+<td valign="top" width="140"><span style="font-size:14px">计费和监管</span></td>
+<td valign="top" width="140"><span style="font-size:14px">精细</span></td>
+<td valign="top" width="140"><span style="font-size:14px">简单</span></td>
+</tr>
+<tr>
+<td valign="top" width="140"><span style="font-size:14px">学习难度</span></td>
+<td valign="top" width="140"><span style="font-size:14px">略难</span></td>
+<td valign="top" width="140"><span style="font-size:14px">低</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p align="center" style=""><span style="font-size:14px">表1. PaaS和IaaS之间的比较</span></p>
+<p align="left" style=""><span style="font-size:14px">未来的PK</span></p>
+<p style=""><span style="font-size:14px">&nbsp;&nbsp;&nbsp; 在当今云计算环境当中，IaaS是非常主流的，无论是Amazon EC2还是Linode或者Joyent等，都占有一席之地，但是随着Google的App Engine，Salesforce的Force.com还是微软的Windows Azure等PaaS平台的推出，使得PaaS也开始崭露头角。谈到这两者的未来，特别是这两者之间的竞争关系，我个人认为，短期而言，因为IaaS模式在支持的应用和学习难度这两方面的优势，使得IaaS将会在短期之内会成为开发者的首选，但是从长期而言，因为PaaS模式的高整合率所带来经济型使得如果PaaS能解决诸如通用性和支持的应用等方面的挑战，它将会替代IaaS成为开发者的“新宠”。</span></p>
+</div>
+</div>
+   
+</div>
+
+
+
+
+<!-- Baidu Button BEGIN -->
+
+
+
+
+<div class="bdsharebuttonbox tracking-ad" style="float: right;" data-mod="popu_172">
+<a href="#" class="bds_more" data-cmd="more" style="background-position:0 0 !important; background-image: url(http://bdimg.share.baidu.com/static/api/img/share/icons_0_16.png?v=d754dcc0.png) !important"></a>
+<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"  style="background-position:0 -52px !important"></a>
+<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"style="background-position:0 -104px !important"></a>
+<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"style="background-position:0 -260px !important"></a>
+<a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"style="background-position:0 -208px !important"></a>
+<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"style="background-position:0 -1612px !important" ></a>
+</div>
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+<!-- Baidu Button END -->
+
+   <link rel="stylesheet" href="http://static.blog.csdn.net/css/blog_detail.css" />
+
+    
+<!--172.16.140.12-->
+
+<!-- Baidu Button BEGIN -->
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=1536434" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+    document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+</script>
+<!-- Baidu Button END -->
+
+ 
+
+        <div id="digg" ArticleId="18363789">
+            <dl id="btnDigg" class="digg digg_enable">
+               
+                 <dt>顶</dt>
+                <dd>5</dd>
+            </dl>
+            <dl id="btnBury" class="digg digg_enable">
+              
+                  <dt>踩</dt>
+                <dd>0</dd>
+            </dl>
+        </div>
+
+   <ul class="article_next_prev">
+                <li class="prev_article"><span  onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_shangyipian']);location.href='/hjxgood/article/details/18316001';">上一篇</span><a href="/hjxgood/article/details/18316001" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_shangyipian'])">ResultSet</a></li>
+                <li class="next_article"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_xiayipian']);location.href='/hjxgood/article/details/18706759';">下一篇</span><a href="/hjxgood/article/details/18706759" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_xiayipian'])">ActiveMQ 远程监控JMX设置</a></li>
+    </ul>
+
+    <div style="clear:both; height:10px;"></div>
+
+
+        <div class="similar_article"  style="display:none">
+                <h4>我的同类文章</h4>
+                <div class="similar_c"style="margin:20px 0px 0px 0px">
+                    <div class="similar_c_t">
+                                <label class="similar_cur">
+                                    <span  style="cursor:pointer"  onclick="GetCategoryArticles('477564','hjxgood','foot','18363789');">转<em>（46）</em></span>
+                                </label>
+                    </div>
+                   
+                    <div class="similar_wrap tracking-ad" data-mod="popu_141"  style="max-height:195px;">
+                        <a href="http://blog.csdn.net" style="display:none">http://blog.csdn.net</a>
+                        <ul class="similar_list fl">                          
+                        </ul>
+
+                        <ul class="similar_list fr">                           
+                        </ul>
+                    </div>
+                </div>
+            </div>    
+    <script  type="text/javascript">
+        $(function () {
+            GetCategoryArticles('477564', 'hjxgood','foot','18363789');
+        });
+    </script>
+      
+</div>
+<div id="suggest"></div>
+         <script  language="javascript" type='text/javascript'>     
+             $(function(){
+                 $.get("/hjxgood/svc/GetSuggestContent/18363789",function(data){
+                     $("#suggest").html(data);
+                 });     
+             });             
+         </script>  
+
+
+<style>
+.blog-ass-articl dd {
+color: #369;
+width: 99%; /*修改行*/
+float: left;
+overflow: hidden;
+font: normal normal 12px/23px "SimSun";
+height: 23px;
+margin: 0;
+padding: 0 0 0 10px;
+margin-right: 30px;
+background: url(http://static.blog.csdn.net/skin/default/images/blog-dot-red3.gif) no-repeat 0 10px;
+}
+</style>
+
+<dl class="blog-ass-articl" id="res-relatived" > 
+     <dt><span>猜你在找</span></dt>    
+
+
+   
+
+
+    <div id="adCollege" style="width: 42%;float: left;"> 
+        <script src="http://csdnimg.cn/jobreco/job_reco.js" type="text/javascript"></script> 
+        <script type="text/javascript">
+            csdn.position.showEdu({
+                sourceType: "blog",
+                searchType: "detail",
+                searchKey: "18363789",
+                username: "attilax",
+                recordcount: "5",
+                containerId: "adCollege" //容器DIV的id。 
+            });
+        </script> 
+    </div>  
+
+    
+     <div id="res"  data-mod="popu_36"  class="tracking-ad" style="width: 42%;float: left;margin-right: 30px;"></div>
+   
+</dl>
+
+
+
+<script type="text/javascript">
+    $(function () {
+        setTimeout(function () {
+            var searchtitletags = '云计算的三种服务模式：IaaS，PaaS和SaaS' + ',' + $("#tags").html();
+            searchService({
+                index: 'blog',
+                query: searchtitletags,
+                from: 5,
+                size: 5,
+                appendTo: '#res',
+                url: 'recommend',
+                his: 2,
+                client: "blog_cf_enhance",
+                tmpl: '<dd style="background:url(http://static.blog.csdn.net/skin/default/images/blog-dot-red3.gif) no-repeat 0 10px;"><a href="#{ url }" title="#{ title }" strategy="#{ strategy }">#{ title }</a></dd>'
+            });
+        }, 500);
+    });    
+
+ </script>   
+
+    <div id="ad_cen">        
+<!--AdForward Begin:-->
+<script type="text/javascript" src="http://csdnim.qtmojo.com/main/s?user=csdn|blog|banner2&db=csdnim&border=0&local=yes&js=ie" charset="gbk"></script>
+<!--AdForward End-->    </div>  
+
+<div class="comment_class">
+    <div id="comment_title" class="panel_head">
+        <span class="see_comment">查看评论</span><a name="comments"></a></div>
+    <div id="comment_list">
+    </div>
+    <div id="comment_bar">
+    </div>
+    <div id="comment_form">
+    </div>
+    <div class="announce">
+        * 以上用户言论只代表其个人观点，不代表CSDN网站的观点或立场<a name="reply"></a><a name="quote"></a></div>
+</div>
+
+<script type="text/javascript">
+    var fileName = '18363789';
+    var commentscount = 2;
+    var islock = false
+</script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/comment.js"></script>
+    <div id="ad_bot">
+    </div>
+<div id="report_dialog">
+</div>
+
+<div id="d-top"  style="bottom:60px;">
+        <a id="quick-reply" class="btn btn-top q-reply" title="快速回复" style="display:none;">
+            <img src="http://static.blog.csdn.net/images/blog-icon-reply.png" alt="快速回复">
+        </a>    
+
+    <a id="d-top-a" class="btn btn-top backtop"  style="display: none;" title="返回顶部" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_huidaodingbu'])" style="">         
+         <img src="http://static.blog.csdn.net/images/top.png" alt="TOP">
+    </a>
+</div>
+<script type="text/javascript">
+    $(function ()
+    {
+        $("#ad_frm_0").height("90px");
+        
+        setTimeout(function(){
+            $("#ad_frm_2").height("200px");
+        },1000);    
+    });
+  
+</script>
+<style type="text/css">
+    .tag_list
+    {
+        background: none repeat scroll 0 0 #FFFFFF;
+        border: 1px solid #D7CBC1;
+        color: #000000;
+        font-size: 12px;
+        line-height: 20px;
+        list-style: none outside none;
+        margin: 10px 2% 0 1%;
+        padding: 1px;
+    }
+    .tag_list h5
+    {
+        background: none repeat scroll 0 0 #E0DBD3;
+        color: #47381C;
+        font-size: 12px;
+        height: 24px;
+        line-height: 24px;
+        padding: 0 5px;
+        margin: 0;
+    }
+    .tag_list h5 a
+    {
+        color: #47381C;
+    }
+    .classify
+    {
+        margin: 10px 0;
+        padding: 4px 12px 8px;
+    }
+    .classify a
+    {
+        margin-right: 20px;
+        white-space: nowrap;
+    }
+</style>
+
+
+<div class="tag_list" style="display:none"></div>
+  <script  language="javascript" type='text/javascript'>     
+      $(function(){
+              setTimeout(function(){
+                  $.get("/hjxgood/svc/GetTagContent",function(data){
+                      $(".tag_list").html(data).show();
+                  });     
+              });
+          },500);                       
+ </script> 
+
+
+<div id="pop_win" style="display:none ;position: absolute; z-index: 10000; border: 1px solid rgb(220, 220, 220); top: 222.5px; left: 630px; opacity: 1; background: none 0px 0px repeat scroll rgb(255, 255, 255);">
+    
+</div>
+<div id="popup_mask"></div>
+<style>
+    #popup_mask
+    {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        z-index: 9999;
+        left: 0px;
+        top: 0px;
+        opacity: 0.3;
+        filter: alpha(opacity=30);
+        display: none;
+    }
+
+</style>
+
+
+
+
+<script type="text/javascript">
+    $(function(){
+        setTimeout(function(){
+            $(".comment_body:contains('回复')").each(function(index,item){
+                var u=$(this).text().split('：')[0].toString().replace("回复","")
+                var thisComment=$(this);
+                if(u)
+                {
+                    $.getJSON("https://passport.csdn.net/get/nick?callback=?", {users: u}, function(a) {
+                        if(a!=null&&a.data!=null&&a.data.length>0)
+                        {
+                            nick=a.data[0].n; 
+                            if(u!=nick)
+                            {
+                                thisComment.text(thisComment.text().replace(u,nick));  
+                            }
+                        }       
+                    });  
+                }
+            });
+        },200);  
+        
+        setTimeout(function(){
+            $("a img[src='http://js.tongji.linezing.com/stats.gif']").parent().css({"position":"absolute","left":"50%"});
+        },300);
+    });
+
+    function loginbox(){
+        var $logpop=$("#pop_win");
+        $logpop.html('<iframe src="https://passport.csdn.net/account/loginbox?service=http://static.blog.csdn.net/callback.htm" frameborder="0" height="600" width="400" scrolling="no"></iframe>');
+
+        $('#popup_mask').css({
+            opacity: 0.5,
+            width: $( document ).width() + 'px',
+            height:  $( document ).height() + 'px'
+        });
+        $('#popup_mask').css("display","block");
+ 
+        $logpop.css( {
+            top: ($( window ).height() - $logpop.height())/ 2  + $( window 
+       ).scrollTop() + 'px',
+            left:($( window ).width() - $logpop.width())/ 2
+        } );
+ 
+        setTimeout( function () {
+            $logpop.show();
+            $logpop.css( {
+                opacity: 1
+            } );
+        }, 200 );
+ 
+        $('#popup_mask').unbind("click");
+        $('#popup_mask').bind("click", function(){
+            $('#popup_mask').hide();
+            var $clopop = $("#pop_win");
+            $("#common_ask_div_sc").css("display","none");
+            $clopop.css( {
+                opacity: 0
+            } );
+            setTimeout( function () {
+                $clopop.hide();
+            }, 350 );
+            return false;
+        });
+    }    
+
+</script>
+                        <div class="clear">
+                        </div>
+                    </div>                   
+                
+            </div>
+                   
+           <div id="side">
+    <div class="side">
+<div id="panel_Profile" class="panel">
+<ul class="panel_head"><span>个人资料</span></ul>
+<ul class="panel_body profile">
+<div id="blog_userface">
+    <a href="http://my.csdn.net/hjxgood" target="_blank">
+    <img src="http://avatar.csdn.net/4/5/F/1_hjxgood.jpg" title="访问我的空间" style="max-width:90%"/>
+    </a>
+    <br />
+    <span><a href="http://my.csdn.net/hjxgood" class="user_name" target="_blank">hjxgood</a></span>
+</div>
+<div class="interact">
+
+    <a href="javascript:void(0);" class="attent" id="span_add_follow" title="[加关注]"></a>
+
+ <a href="javascript:void(0);" class="letter"  title="[发私信]" onclick="window.open('http://msg.csdn.net/letters/model?receiver=hjxgood','_blank','height=350,width=700');_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_sixin'])"></a>  
+</div>
+<div id="blog_medal">
+                <div id="bms_box">
+                                            <a  target="_blank">
+                                                    <img src="http://c.csdnimg.cn/jifen/images/xunzhang/xunzhang/chizhiyiheng.png" onmouseover="m_over_m(this,4)" onmouseout="m_out_m()" alt="1" >
+                                            </a>
+               </div>
+</div>
+<ul id="blog_rank">
+    <li>访问：<span>96265次</span></li>
+    <li>积分：<span>1206</span> </li>    
+    <li >等级： <span style="position:relative;display:inline-block;z-index:1" >
+            <img src="http://c.csdnimg.cn/jifen/images/xunzhang/jianzhang/blog4.png" alt="" style="vertical-align: middle;" id="leveImg">
+            <div id="smallTittle" style=" position: absolute;  left: -24px;  top: 25px;  text-align: center;  width: 101px;  height: 32px;  background-color: #fff;  line-height: 32px;  border: 2px #DDDDDD solid;  box-shadow: 0px 2px 2px rgba (0,0,0,0.1);  display: none;   z-index: 999;">
+            <div style="left: 42%;  top: -8px;  position: absolute;  width: 0;  height: 0;  border-left: 10px solid transparent;  border-right: 10px solid transparent;  border-bottom: 8px solid #EAEAEA;"></div>
+            积分：1206 </div>
+        </span>  </li>
+    <li>排名：<span>千里之外</span></li>
+</ul>
+<ul id="blog_statistics">
+    <li>原创：<span>48篇</span></li>
+    <li>转载：<span>47篇</span></li>
+    <li>译文：<span>0篇</span></li>
+    <li>评论：<span>10条</span></li>
+</ul>
+</ul>
+</div>
+
+
+<div class="panel" id="panel_Search">
+    <ul class="panel_head"><span>文章搜索</span></ul>
+    <ul class="panel_body">
+        <form id="frmSearch" action="http://so.csdn.net/search" class="form_search" target="_blank">
+        <span><input id="inputSearch" type="text" class="blogsearch" title="请输入关键字" /></span>
+        <input id="btnSubmit" type="button" value="搜索" title="search in blog" />
+        <input type="hidden" name="q" id="inputQ" />
+        <input type="hidden" name="t" value="blog" />
+        <a id="btnSearchBlog" target="_blank"></a>
+        </form>
+    </ul>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $("#btnSubmit").click(function () {           
+            search();
+        });
+
+        $("#frmSearch").submit(function () {
+            search();
+            return false;
+        });
+
+        function search()
+        {
+            var url = "http://so.csdn.net/so/search/s.do?q=" + encodeURIComponent($("#inputSearch").val()) + "&u=" + username + "&t=blog";
+            window.location.href = url;
+        }   
+    });
+</script><div id="panel_Category" class="panel">
+<ul class="panel_head"><span>文章分类</span></ul>
+<ul class="panel_body">    
+                 <li>
+                    <a href="/hjxgood/article/category/477564" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">转</a><span>(47)</span>
+                </li>
+</ul>
+</div><div id="panel_Archive" class="panel">
+<ul class="panel_head"><span>文章存档</span></ul>
+<ul class="panel_body">
+<div id="archive_list">
+<!--归档统计-->
+<li><a href="/hjxgood/article/month/2015/11">2015年11月</a><span>(2)</span></li><li><a href="/hjxgood/article/month/2015/10">2015年10月</a><span>(1)</span></li><li><a href="/hjxgood/article/month/2015/09">2015年09月</a><span>(1)</span></li><li><a href="/hjxgood/article/month/2015/08">2015年08月</a><span>(2)</span></li><li><a href="/hjxgood/article/month/2015/07">2015年07月</a><span>(6)</span></li><li><a href="/hjxgood/article/month/2015/05">2015年05月</a><span>(7)</span></li><li><a href="/hjxgood/article/month/2015/04">2015年04月</a><span>(11)</span></li><li><a href="/hjxgood/article/month/2015/03">2015年03月</a><span>(2)</span></li><li><a href="/hjxgood/article/month/2015/01">2015年01月</a><span>(2)</span></li><li><a href="/hjxgood/article/month/2014/12">2014年12月</a><span>(3)</span></li><li><a href="/hjxgood/article/month/2014/07">2014年07月</a><span>(6)</span></li><li><a href="/hjxgood/article/month/2014/06">2014年06月</a><span>(10)</span></li><li><a href="/hjxgood/article/month/2014/05">2014年05月</a><span>(4)</span></li><li><a href="/hjxgood/article/month/2014/04">2014年04月</a><span>(6)</span></li><li><a href="/hjxgood/article/month/2014/03">2014年03月</a><span>(4)</span></li><li><a href="/hjxgood/article/month/2014/02">2014年02月</a><span>(10)</span></li><li><a href="/hjxgood/article/month/2014/01">2014年01月</a><span>(5)</span></li><li><a href="/hjxgood/article/month/2012/04">2012年04月</a><span>(1)</span></li><li><a href="/hjxgood/article/month/2012/03">2012年03月</a><span>(2)</span></li><li><a href="/hjxgood/article/month/2010/12">2010年12月</a><span>(1)</span></li><li><a href="/hjxgood/article/month/2009/06">2009年06月</a><span>(2)</span></li><li><a href="/hjxgood/article/month/2009/02">2009年02月</a><span>(2)</span></li><li><a href="/hjxgood/article/month/2008/10">2008年10月</a><span>(8)</span></li>
+</div>
+</ul>
+</div>
+<div id="hotarticls" class="panel">
+<ul class="panel_head">
+    <span>       
+阅读排行    </span>
+</ul>
+
+<ul class="panel_body itemlist">
+<li>
+<a href="/hjxgood/article/details/18363789" title="云计算的三种服务模式：IaaS，PaaS和SaaS">云计算的三种服务模式：IaaS，PaaS和SaaS</a><span>(41638)</span>
+</li>
+<li>
+<a href="/hjxgood/article/details/7497813" title="Struts2 格式化日期、时间和数字">Struts2 格式化日期、时间和数字</a><span>(4444)</span>
+</li>
+<li>
+<a href="/hjxgood/article/details/19692959" title="用定时器发送消息，activemq总是报WARN报错">用定时器发送消息，activemq总是报WARN报错</a><span>(4097)</span>
+</li>
+<li>
+<a href="/hjxgood/article/details/18706759" title="ActiveMQ 远程监控JMX设置">ActiveMQ 远程监控JMX设置</a><span>(3840)</span>
+</li>
+<li>
+<a href="/hjxgood/article/details/45170349" title="基于hibernate的BaseDAO接口">基于hibernate的BaseDAO接口</a><span>(2635)</span>
+</li>
+<li>
+<a href="/hjxgood/article/details/20057989" title="网络传输时，Java中byte[]转String问题">网络传输时，Java中byte[]转String问题</a><span>(2539)</span>
+</li>
+<li>
+<a href="/hjxgood/article/details/23353061" title="easyui tree异步树菜单联动">easyui tree异步树菜单联动</a><span>(2170)</span>
+</li>
+<li>
+<a href="/hjxgood/article/details/20525281" title="XMemcached与Spring3.2缓存框架集成">XMemcached与Spring3.2缓存框架集成</a><span>(1934)</span>
+</li>
+<li>
+<a href="/hjxgood/article/details/20058243" title="oracle和mysql的Blob字段的读取和插入">oracle和mysql的Blob字段的读取和插入</a><span>(1682)</span>
+</li>
+<li>
+<a href="/hjxgood/article/details/45170657" title="Base64Utils">Base64Utils</a><span>(1264)</span>
+</li>
+</ul>
+</div>
+<div id="hotarticls2" class="panel">
+<ul class="panel_head"><span>评论排行</span></ul>
+<ul class="panel_body itemlist">
+<li>
+<a href="/hjxgood/article/details/7497813" title="Struts2 格式化日期、时间和数字">Struts2 格式化日期、时间和数字</a><span>(3)</span>
+</li>
+<li>
+<a href="/hjxgood/article/details/18087981" title="软件公司面试的几种类型总结">软件公司面试的几种类型总结</a><span>(2)</span>
+</li>
+<li>
+<a href="/hjxgood/article/details/47036857" title="KindEditor 4.1.10 IE11复制粘贴总是到文章末尾的BUG">KindEditor 4.1.10 IE11复制粘贴总是到文章末尾的BUG</a><span>(2)</span>
+</li>
+<li>
+<a href="/hjxgood/article/details/18363789" title="云计算的三种服务模式：IaaS，PaaS和SaaS">云计算的三种服务模式：IaaS，PaaS和SaaS</a><span>(2)</span>
+</li>
+<li>
+<a href="/hjxgood/article/details/4266304" title="小程序员的大梦想:唐骏在微软总部的日子">小程序员的大梦想:唐骏在微软总部的日子</a><span>(1)</span>
+</li>
+<li>
+<a href="/hjxgood/article/details/3152031" title="网页制作之CSS常用网站布局实例">网页制作之CSS常用网站布局实例</a><span>(0)</span>
+</li>
+<li>
+<a href="/hjxgood/article/details/3152601" title="所有的苦难都会过去-----一个程序员的失业史">所有的苦难都会过去-----一个程序员的失业史</a><span>(0)</span>
+</li>
+<li>
+<a href="/hjxgood/article/details/3151899" title="微软招聘程序 ">微软招聘程序 </a><span>(0)</span>
+</li>
+<li>
+<a href="/hjxgood/article/details/49997867" title="FileUtil">FileUtil</a><span>(0)</span>
+</li>
+<li>
+<a href="/hjxgood/article/details/3928512" title="不用Flash8照样能制作阴影效果的小技巧-Flash教程">不用Flash8照样能制作阴影效果的小技巧-Flash教程</a><span>(0)</span>
+</li>
+</ul>
+</div>
+<div id="homepageArticles" class="panel tracking-ad" data-mod="popu_4">
+<ul class="panel_head"><span>推荐文章</span></ul>
+<ul class="panel_body" id="ad_commend">
+<ul>
+<li><a href="http://blog.csdn.net/nugongahou110/article/details/50698382" 
+
+target="_blank">*Android自定义ViewGroup打造各种风格的SlidingMenu</a></li>
+<li><a href="http://blog.csdn.net/lmj623565791/article/details/50709663" 
+
+target="_blank">* Android 6.0 运行时权限处理完全解析</a></li>
+<li><a href="http://blog.csdn.net/u011225629/article/details/50492403" 
+
+target="_blank">* 数据库性能优化之SQL语句优化</a></li>
+<li><a 
+
+href="http://blog.csdn.net/harvic880925/article/details/50598322"target="_blank">*Animation动画详解(七)——ObjectAnimator基本使用</a></li>
+<li><a href="http://blog.csdn.net/luoshengyang/article/details/50527574" 
+
+target="_blank">* Chromium网页URL加载过程分析</a></li>
+<li><a href="http://jiezhu2007.iteye.com/blog/2277613"  
+
+target="_blank">* 大数据三种典型云服务模式</a></li>
+
+</ul></ul>
+</div>
+
+
+<div id="newcomments" class="panel">
+<ul class="panel_head"><span>最新评论</span></ul>
+<ul class="panel_body itemlist">
+    <li>
+   
+         <a href="/hjxgood/article/details/18363789#comments">云计算的三种服务模式：IaaS，PaaS和SaaS</a>
+    <p style="margin:0px;"><a href="/chengtg" class="user_name">chengtg</a>:
+怎么都是从开发角度比较的？而且，很显然，saas被作者遗忘了！！
+    </p>
+    </li>
+    <li>
+   
+         <a href="/hjxgood/article/details/4266304#comments">小程序员的大梦想:唐骏在微软总部的日子</a>
+    <p style="margin:0px;"><a href="/hm860926" class="user_name">hm860926</a>:
+挺好，能够产生共鸣的回忆！
+    </p>
+    </li>
+    <li>
+   
+         <a href="/hjxgood/article/details/4266304#comments">云计算的三种服务模式：IaaS，PaaS和SaaS</a>
+    <p style="margin:0px;"><a href="/jetable" class="user_name">jetable</a>:
+博主写的蛮好，但是还不是很明白，将的有点粗，iaas可以理解为提供硬件环境，paas是带有软件框架的...
+    </p>
+    </li>
+    <li>
+   
+         <a href="/hjxgood/article/details/47036857#comments">KindEditor 4.1.10 IE11复制粘贴总是到文章末尾的BUG</a>
+    <p style="margin:0px;"><a href="/wenhaojun" class="user_name">wenhaojun</a>:
+423423423434
+    </p>
+    </li>
+    <li>
+   
+         <a href="/hjxgood/article/details/47036857#comments">KindEditor 4.1.10 IE11复制粘贴总是到文章末尾的BUG</a>
+    <p style="margin:0px;"><a href="/yeyiming" class="user_name">yeyiming</a>:
+你好，按照你说的加了||Yb，仍然存在该问题，能否告知详细情况？
+    </p>
+    </li>
+    <li>
+   
+         <a href="/hjxgood/article/details/18087981#comments">软件公司面试的几种类型总结</a>
+    <p style="margin:0px;"><a href="/u012045597" class="user_name">u012045597</a>:
+写得很细 , 赞一个
+    </p>
+    </li>
+    <li>
+   
+         <a href="/hjxgood/article/details/18087981#comments">软件公司面试的几种类型总结</a>
+    <p style="margin:0px;"><a href="/u012045597" class="user_name">u012045597</a>:
+写得很细 , 赞一个
+    </p>
+    </li>
+    <li>
+   
+         <a href="/hjxgood/article/details/7497813#comments">Struts2 格式化日期、时间和数字</a>
+    <p style="margin:0px;"><a href="/qqzhijun" class="user_name">qqzhijun</a>:
+@zzznnn:thank you，感谢指点。
+    </p>
+    </li>
+    <li>
+   
+         <a href="/hjxgood/article/details/7497813#comments">Struts2 格式化日期、时间和数字</a>
+    <p style="margin:0px;"><a href="/zzznnn" class="user_name">zzznnn</a>:
+要么别写,要写就写全了struts.xml 要有这句 怎么不写上?
+    </p>
+    </li>
+    <li>
+   
+         <a href="/hjxgood/article/details/7497813#comments">Struts2 格式化日期、时间和数字</a>
+    <p style="margin:0px;"><a href="/cr135810" class="user_name">cr135810</a>:
+我用你的方法弄得怎么不行呢，我在页面输出的时候，老是显示时间，我只要年月日就行了，fmt、s：dat...
+    </p>
+    </li>
+</ul>
+</div>
+    </div>
+    <div class="clear">
+    </div>
+ </div>   
+            <div class="clear">
+            </div>
+        </div>
+        
+
+<script type="text/javascript" src="http://c.csdnimg.cn/rabbit/cnick/cnick.js"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/newblog.min.js"></script>
+
+
+<script type="text/javascript" src="http://medal.blog.csdn.net/showblogmedal.ashx?blogid=450165"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/JavaScript1.js"></script>
+
+<script type="text/javascript">document.write("<img src=http://counter.csdn.net/pv.aspx?id=24 border=0 width=0 height=0>");</script>
+<script type="text/javascript" src="http://www.csdn.net/ui/scripts/Csdn/counter.js"></script>
+<script type="text/javascript" src="http://ad.csdn.net/scripts/ad-blog.js"></script>
+<script type="text/javascript">
+    $(function () {
+        function __get_code_toolbar(snippet_id) {
+            return $("<span class='tracking-ad' data-mod='popu_167'><a href='https://code.csdn.net/snippets/"
+                    + snippet_id
+                    + "' target='_blank' title='在CODE上查看代码片'  style='text-indent:0;'><img src='https://code.csdn.net/assets/CODE_ico.png' width=12 height=12 alt='在CODE上查看代码片' style='position:relative;top:1px;left:2px;'/></a></span>"
+                    + "<span class='tracking-ad' data-mod='popu_170'><a href='https://code.csdn.net/snippets/"
+                    + snippet_id
+                    + "/fork' target='_blank' title='派生到我的代码片' style='text-indent:0;'><img src='https://code.csdn.net/assets/ico_fork.svg' width=12 height=12 alt='派生到我的代码片' style='position:relative;top:2px;left:2px;'/></a></span>");
+        }
+        
+        $("[code_snippet_id]").each(function () {
+            __s_id = $(this).attr("code_snippet_id");
+            if (__s_id != null && __s_id != "" && __s_id != 0 && parseInt(__s_id) > 70020) {
+                __code_tool = __get_code_toolbar(__s_id);
+                $(this).prev().find(".tools").append(__code_tool);
+            }
+        });
+
+        $(".bar").show();
+    });
+</script>
+
+
+
+
+    </div>
+      <!--new top-->
+    
+    <script id="csdn-toolbar-id" btnId="header_notice_num" wrapId="note1" count="5" subCount="5" type="text/javascript" src="http://c.csdnimg.cn/public/common/toolbar/js/toolbar.js"></script>     <!--new top-->
+   
+    <link href="http://c.csdnimg.cn/comm_ask/css/ask_float_block.css" type="text/css" rel="stylesheet" />
+    <script language='JavaScript' type='text/javascript' src='http://c.csdnimg.cn/comm_ask/js/libs/wmd.js'></script>
+    <script language='JavaScript' type='text/javascript' src='http://c.csdnimg.cn/comm_ask/js/libs/showdown.js'></script>
+    <script language='JavaScript' type='text/javascript' src='http://c.csdnimg.cn/comm_ask/js/libs/prettify.js'></script>
+    <script language='JavaScript' type='text/javascript' src='http://c.csdnimg.cn/comm_ask/js/apps/ask_float_block.js'></script>
+   
+</body>
+</html>   
+ 

@@ -1,0 +1,32 @@
+Atitit.软件开发概念(11)--网络子系统--url编码 空格问题URLEncoder java js php 
+
+RFC2396标准
+ including HTML 4.01 
+section 17.13.4, and also RFC 1866 (which is superceded
+by the W3C HTML recommendations).
+在form的ContextType是[x-www-form-urlencoded]的时候会对form中的键/值对进行编码，空格被转义成+，其他字符按照_[RFC1738]_标准处理成%HH的形式。
+作者::老哇的爪子Attilax艾龙，EMAIL:1466519819@qq.com
+转载请注明来源： _http://blog.csdn.net/attilax_
+
+Js urlencode
+js对文字进行编码涉及3个函数：escape,encodeURI,encodeURIComponent，相应3个解码函数：unescape,decodeURI,decodeURIComponent
+escape不编码字符有69个：*，+，-，.，/，@，_，0-9，a-z，A-Z
+
+encodeURI不编码字符有82个：!，#，$，&，'，(，)，*，+，,，-，.，/，:，;，=，?，@，_，~，0-9，a-z，A-Z
+
+encodeURIComponent不编码字符有71个：!， '，(，)，*，-，.，_，~，0-9，a-z，A-Z
+
+解决之道：：
+ s = org.tuckey.web.filters.urlrewrite.utils.URLEncoder.encodePathParam("a  b", "utf-8");//a%20%20b
+手动replace space to %20
+或者
+收到url解析时使用
+URLDecoder.decode("a++b%20c"));   //a  b c 
+参考
+URL编码中的空格问题 - 来老师的专栏 - 博客频道 - CSDN.NET.htm
+js解码函数 escape,encodeURI,encodeURIComponent比较 - xuchanghao的专栏 - 博客频道 - CSDN.NET.htm
+
+
+
+
+

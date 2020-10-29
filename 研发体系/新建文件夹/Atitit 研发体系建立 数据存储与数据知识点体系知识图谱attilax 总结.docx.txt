@@ -1,0 +1,347 @@
+Atitit 研发体系建立 数据存储与数据知识点体系知识图谱attilax 总结
+
+分类	具体知识点	原理规范	具体实现(oracle,mysql,mssql	是否可以自己实现	说明		
+数据库理论	数据库的类型						
+数据库理论	，网状，层次，						
+数据库理论	树形数据库		注册表，hashtable				
+数据库理论	，kv数据库。		hashtable				
+数据库理论	Oodb						
+数据库理论	nosql db						
+数据库理论	隔离级别						
+数据库理论							
+数据库理论	Er模型						
+数据库理论	Acid数据库完整性						
+数据库理论	关系模型						
+数据库理论	   sql   						
+数据库理论							
+数据库理论	存储过程						
+数据库理论	 触发器						
+数据库理论	 视图 约束						
+数据库理论							
+数据库理论							
+数据库理论							
+数据库理论	1NF、2NF、3NF 						
+数据库理论	和BCNF 数据库范式						
+数据库设计模式							
+							
+							
+sql	oql	jqa jpql	hql				
+sql	普通sql						
+sql	连接表						
+sql	聚合分组						
+sql	子查询						
+sql	explain						
+sql	计划任务						
+sql	DQL:Data Query Language						
+sql	DML：Data Manipulation Language						
+sql	事务处理语言（TPL						
+sql	数据控制语言（DCL）						
+sql	数据定义语言（DDL）						
+sql	指针控制语言（CCL）：						
+sql	子查询						
+事务引擎	2PC(两阶段提交)  跨越多个数据库实例的ACID保证						
+事务引擎	redo undo						
+事务引擎	Shadow copies/pages(影像拷贝/影像页面)						
+事务引擎	Transaction log （事务日志）						
+事务引擎	事务api		db api，编程语言事务api				
+事务引擎	事务的安全监测				ddl语句不允许出现在事务中		
+事务引擎	事务回滚机制						
+事务引擎	事务存储点机制						
+事务引擎	事务日志						
+事务引擎	 WAL协议				（Write Ahead logging		协议压实标准化操作流程可以作为协议
+事务引擎	ARIES				增强版的WAL		
+事务引擎	并发控制						
+事务引擎	事务恢复						
+事务引擎							
+事务恢复日志	恢复日志						
+事务恢复日志							
+事务恢复日志							
+事务恢复日志							
+事务恢复日志							
+事务恢复日志							
+事务恢复日志							
+事务恢复日志							
+事务恢复日志							
+事务恢复日志							
+事务恢复日志							
+事务恢复日志							
+事务恢复日志							
+事务恢复日志							
+数据恢复							
+数据转储	数据转储基本概念						
+数据转储	静态转储						
+数据转储	和动态转储						
+数据转储	海量转储						
+数据转储	增量转储						
+sql api设计	翻页						
+sql api设计	lime翻页						
+sql api设计	page翻页						
+sql api设计	Top-N和页码						
+sql api设计	函数式表达式						
+sql api设计	dsl						
+sql api设计	.跨语言数据库db api兼容性 jdbc odbc ado oledb 						
+索引引擎	索引						
+索引引擎	btee						
+索引引擎	hash						
+索引引擎	全文索引						
+索引引擎	聚集索引						
+索引引擎	分块索引 						
+索引引擎	vs编号索引						
+索引引擎	与倒排索引						
+索引引擎	1.1. 正排						
+索引引擎	单列索引						
+索引引擎	与多列索引						
+索引引擎	分区索引						
+索引引擎	和全局索引  						
+索引引擎	ISAM						
+索引引擎	Trie树						
+索引引擎	索引文件的合并						
+索引引擎	增量合并						
+索引引擎	索引的更新策略						
+索引引擎	建立索引api						
+索引引擎	unique所以						
+触发器							
+视图							
+存储过程	流程控制						
+存储过程	模块调用						
+存储过程	事务api						
+存储过程	异常处理						
+数据库恢复技术	日志点						
+数据库恢复技术	保存点						
+数据库恢复技术	手动恢复日志						
+数据库恢复技术							
+数据库恢复技术							
+锁机制并发控制	 并发控制与lock						
+锁机制并发控制	隔离级别						
+锁机制并发控制	行锁定						
+锁机制并发控制	表锁定						
+锁机制并发控制							
+锁机制并发控制							
+锁机制并发控制							
+锁机制并发控制							
+锁机制并发控制							
+数据库连接池							
+gc资源释放	数据库链接gc防止死锁						
+gc资源释放	分代						
+gc资源释放	基于时间						
+gc资源释放	引用计数						
+gc资源释放	amr						
+数据库调试技术	log调试						
+数据库调试技术	手动与自动断点						
+数据库调试技术	变量输出调试						
+数据库调试技术	集合输出调试						
+数据库调试技术	输出调试						
+数据库调试技术	ide调试						
+数据库调试技术	监测工具						
+数据库调试技术	sdk调试支持api						
+							
+异常处理	存储过程异常处理						
+异常处理	sql语句触发的sqlexption						
+异常处理	sql返回码转sql异常						
+异常处理	拦截数据库异常的处理						
+异常处理	异常转换						
+异常处理	DuplicateEntryEx   						
+异常处理	数据处理异常标准化						
+异常处理	NonUniqueResultException						
+异常处理	NoResultException						
+异常处理	TransactionRequiredException						
+异常处理	EntityExistsException						
+异常处理	NonUniqueObjectException						
+异常处理	TooManyRowsAffectedException						
+							
+							
+							
+							
+							
+							
+序列化	xml序列化						
+序列化	php hash序列化						
+序列化	json序列化						
+序列化	二进制序列化						
+序列化	循环引用解决						
+序列化	base64						
+序列化	bin2txt						
+							
+orm	base	orm	hbnt mybatis				
+orm	oql	jpa	jpql hql	linq			
+orm	meta						
+orm	linq						
+orm	映射文件						
+orm	关联维护						
+orm	CRUD操作的API						
+orm	类和类属性相关的查询						
+orm	行DIRTYCHECKING, LAZY ASSOCIATION FETCHING						
+orm	cache						
+orm	1. hbm2ddl						
+orm	代码生成器						
+orm	编程语言查询api						
+orm	oql api hql						
+orm	hql调试环境				eclps plg		
+orm	回调与拦截机						
+orm	lifecyle与validatable						
+orm	interceptor						
+orm	orm查询日志						
+orm	缓存，默认是SESSION						
+orm	二级缓存						
+orm	事务管理						
+orm	ide plg						
+orm	持久化注解　						
+orm	映射主键						
+orm	关系映射						
+orm	集合映射						
+orm	分离和合并						
+orm	级联操作						
+orm	持久化查询语言						
+orm	批量更新和删除						
+orm	条件api查询						
+orm	强类型查询						
+orm	复合主键						
+orm	派生标识符　						
+orm	继承模型						
+orm	ntaive查询						
+orm	生命周期回调						
+orm	验证与约束						
+orm	锁定						
+orm	单元测试						
+orm	解决方案迁移						
+							
+							
+							
+Linq查询引擎							
+性能提升	索引机制						
+	Performance Schema2						
+	慢查询日志						
+	慢查询监测						
+	语句执行时间						
+	语句执行日志						
+cache	缓存预取						
+	缓存替换策略						
+	写缓存						
+							
+							
+							
+							
+							
+ide			单步调试				
+			多种断点				
+			远程调试				
+			不能编译的解决				
+			不能输出class的解决				
+			导入类库冲突解决				
+			编译慢的解决				
+							
+							
+常用协议			tcp				
+常用协议			udp				
+常用协议			socket				
+常用协议			web				
+常用协议			cgi				
+							
+							
+常用web服务器			虚拟主机配置				
+			多域名配置				
+			绿色化				
+							
+							
+数据同步	结构同步		脱机同步				
+数据同步	数据同步		git				
+数据同步	数据导入		svn				
+数据同步	数据导出		程序备份(fix，full src				
+数据同步	数据格式csv excel		baseline				
+							
+数据库脚本的工程管理	备份						
+	zip打包						
+							
+							
+安全与加密							
+							
+							
+							
+							
+架构知识							
+							
+							
+							
+exop互操作			cli接口				
+exop互操作			gui接口				
+exop互操作			api接口				
+exop互操作			rest接口				
+exop互操作			获取输入输出				
+exop互操作			异常捕获				
+exop互操作			异常转换				
+队列							
+							
+事件驱动			事件队列				
+			事件循环				
+			事件注册				
+			事件调用				
+			事件对象模型				
+							
+api设计	统一标准在文件，内存数据结构，cache，网络数据，与数据库，需要统一的访问模式		方法连				
+	linq		jquery				
+			guava				
+			option				
+							
+							
+							
+容器			hash				
+容器			list				
+容器			集合				
+容器			array				
+							
+流程控制			基于语句				
+			基于表格				
+			基于图形				
+			工作流				
+							
+							
+sql解析	词法分析						
+sql解析	fsm状态机						
+sql解析	正则表达式						
+sql解析	词性标注						
+sql解析	语法分析						
+sql解析	ast						
+sql解析	语义分析						
+sql解析							
+存储过程							
+							
+							
+数据分割	分区						
+分布式数据处理							
+							
+DatabaseMetaData							
+							
+							
+							
+							
+							
+							
+							
+sql安全	sql注入						
+	注入原理						
+	防范方法						
+							
+sql标准化	标准数据类型						
+sql标准化	case表达式						
+sql标准化	动态cast						
+sql标准化	MERGE statement						
+sql标准化	partitioned						
+sql标准化	INFORMATION_SCHEMA						
+sql标准化	sql99						
+sql标准化	sql2008						
+sql标准化	sql2011						
+							
+数据存储	多媒体大数据存储						
+	oo数据存储						
+数据复制	读写分类						
+	slave master结构						
+	二进制日志						
+							
+otehr	自定义jdbc驱动						
+执行计划							
+作者:: 绰号:老哇的爪子 （ 全名：：Attilax Akbar Al Rapanui 阿提拉克斯 阿克巴 阿尔 拉帕努伊 ） 
+汉字名：艾提拉（艾龙），   EMAIL:1466519819@qq.com
+转载请注明来源： http://blog.csdn.net/attilax
+Atiend
+
+

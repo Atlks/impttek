@@ -1,0 +1,11 @@
+Atitit.用户系统的架构图
+
+User (commonUser    adminUser)
+
+
+commonUser  :Member  merchant  guest
+ 
+adminUser:    admin branch-admin  oprator
+
+
+

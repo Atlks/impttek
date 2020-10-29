@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<!-- saved from url=(0120)http://baike.baidu.com/link?url=SZR61MLNymE82vYj6avjM1vnIeNQQ6RhyqzofrTPZRB6GHFeXXpq50LU65XvcH2madkr20JXNd9JBjz7DRMfyq#2 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script async="" src="./游戏架构设计与策划基础_百度百科_files/element.min.js"></script><script async="" src="./游戏架构设计与策划基础_百度百科_files/monkey.min.js"></script><script async="" src="./游戏架构设计与策划基础_百度百科_files/dp.min.js"></script><script async="" src="./游戏架构设计与策划基础_百度百科_files/c.js"></script><script async="" src="./游戏架构设计与策划基础_百度百科_files/m.js"></script><script async="" src="./游戏架构设计与策划基础_百度百科_files/ls.js"></script>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="description" content="《游戏架构设计与策划基础》是2010年清华大学出版社出版的图书，作者是黄石，李志远，陈洪。...">
+<title>游戏架构设计与策划基础_百度百科</title>
+<link rel="shortcut icon" href="http://baike.baidu.com/favicon.ico" type="image/x-icon">
+<link rel="icon" sizes="any" mask="" href="http://www.baidu.com/img/baidu.svg">
+
+<meta name="keywords" content="游戏架构设计与策划基础 游戏构架设计与策划基础 游戏架构设计与策划基础内容简介 游戏架构设计与策划基础图书目录">
+<meta name="image" content="http://baike.bdimg.com/cms/static/baike.png">
+<script async="" src="./游戏架构设计与策划基础_百度百科_files/alog.min.js"></script><script type="text/javascript">
+  void function(g,f,j,c,h,d,b){g.alogObjectName=h,g[h]=g[h]||function(){(g[h].q=g[h].q||[]).push(arguments)},g[h].l=g[h].l||+new Date,d=f.createElement(j),d.async=!0,d.src=c,b=f.getElementsByTagName(j)[0],b.parentNode.insertBefore(d,b)}(window,document,"script","https://gss0.baidu.com/70cFsjip0QIZ8tyhnq/hunter/alog/alog.min.js","alog");void function(){function c(){return;}window.PDC={mark:function(a,b){alog("speed.set",a,b||+new Date);alog.fire&&alog.fire("mark")},init:function(a){alog("speed.set","options",a)},view_start:c,tti:c,page_ready:c}}();void function(n){var o=!1;n.onerror=function(n,e,t,c){var i=!0;return!e&&/^script error/i.test(n)&&(o?i=!1:o=!0),i&&alog("exception.send","exception",{msg:n,js:e,ln:t,col:c}),!1},alog("exception.on","catch",function(n){alog("exception.send","exception",{msg:n.msg,js:n.path,ln:n.ln,method:n.method,flag:"catch"})})}(window);
+</script>
+<meta name="csrf-token" content="">
+
+<!--[if lte IE 9]>
+<script>
+    (function() {
+      var e = "abbr,article,aside,audio,canvas,datalist,details,dialog,eventsource,figure,footer,header,hgroup,mark,menu,meter,nav,output,progress,section,time,video".split(","),
+        i = e.length;
+      while (i--) {
+        document.createElement(e[i]);
+      }
+    })();
+  </script>
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="./游戏架构设计与策划基础_百度百科_files/wiki-lemma_74e1370.css"><link rel="stylesheet" type="text/css" href="./游戏架构设计与策划基础_百度百科_files/wiki-common-base_fd3f72e.css"><link rel="stylesheet" type="text/css" href="./游戏架构设计与策划基础_百度百科_files/announcement_b0d7681.css"><link rel="stylesheet" type="text/css" href="./游戏架构设计与策划基础_百度百科_files/label_461cbe0.css"><link rel="stylesheet" type="text/css" href="./游戏架构设计与策划基础_百度百科_files/sideShare_ebee986.css"><link rel="stylesheet" type="text/css" href="./游戏架构设计与策划基础_百度百科_files/praise_2120cd2.css"><link rel="stylesheet" type="text/css" href="./游戏架构设计与策划基础_百度百科_files/toolButtons_a2c470f.css"><link rel="stylesheet" type="text/css" href="./游戏架构设计与策划基础_百度百科_files/userInfo_9ba20c1.css"><link rel="stylesheet" type="text/css" href="./游戏架构设计与策划基础_百度百科_files/pageMask_ff9a193.css"><link rel="stylesheet" type="text/css" href="./游戏架构设计与策划基础_百度百科_files/wiki-lemma-module_cc5433c.css"><link rel="stylesheet" type="text/css" href="./游戏架构设计与策划基础_百度百科_files/mainContent_1a67233.css"><link rel="stylesheet" type="text/css" href="./游戏架构设计与策划基础_百度百科_files/lemmaRelation_9f629f5.css"><link rel="stylesheet" type="text/css" href="./游戏架构设计与策划基础_百度百科_files/zhixin_1c34583.css"><link rel="stylesheet" type="text/css" href="./游戏架构设计与策划基础_百度百科_files/creditModule_83cd8e5.css"><link rel="stylesheet" type="text/css" href="./游戏架构设计与策划基础_百度百科_files/searchHeader_e786bfb.css"><script type="text/javascript">
+    alog('speed.set', 'ht', +new Date);
+</script><style type="text/css"></style><style type="text/css"></style><script src="./游戏架构设计与策划基础_百度百科_files/share.js"></script><script type="text/javascript" charset="UTF-8" async="" src="./游戏架构设计与策划基础_百度百科_files/juzi.js"></script><style>#wsggg-alert-9424 .blocked{display:inline !important;text-decoration:line-through !important}#wsggg-alert-9424 br{display:block !important}#wsggg-alert-9424{border:solid 2px #fff !important;color:#fff !important;font:13px Arial,Helvetica !important;opacity:0.9 !important;padding:7px 10px !important;position:fixed !important;text-align:left !important;text-shadow:none !important;text-transform:none !important;width:auto !important;z-index:2147483647 !important;-webkit-border-radius:5px !important;-webkit-box-shadow:0px 0px 20px #000 !important}#wsggg-alert-9424 a{color: #fff !important;}</style><link rel="stylesheet" href="./游戏架构设计与策划基础_百度百科_files/share_style0_16.css"><link rel="stylesheet" href="./游戏架构设计与策划基础_百度百科_files/share_style0_32.css"><script src="./游戏架构设计与策划基础_百度百科_files/qc.php" type="text/javascript" charset="utf-8"></script></head>
+
+<style type="text/css" id="52573788000"></style><style type="text/css">embed[type*="application/x-shockwave-flash"],embed[src*=".swf"],object[type*="application/x-shockwave-flash"],object[codetype*="application/x-shockwave-flash"],object[src*=".swf"],object[codebase*="swflash.cab"],object[classid*="D27CDB6E-AE6D-11cf-96B8-444553540000"],object[classid*="d27cdb6e-ae6d-11cf-96b8-444553540000"],object[classid*="D27CDB6E-AE6D-11cf-96B8-444553540000"]{	display: none !important;}</style>
+
+<body class="wiki-lemma normal">
+
+
+<div class="header-wrapper">
+<ul class="wgt-userbar"><li class="userbar_user" data-action="showUserMenu">
+<a href="javascript:;"><span>amy04133</span><em class="cmn-inline-block cmn-icon cmn-icons cmn-icons_userbar-up"></em></a>
+</li>
+<li class="userbar_mall">
+<a href="http://baike.baidu.com/mall/" target="_blank"><em class="cmn-inline-block cmn-icon cmn-icons cmn-icons_userbar-shop"></em>商城</a>
+</li>
+<li class="userbar_message" data-action="showUserMsg">
+<a href="javascript:;"><em class="cmn-inline-block cmn-icon cmn-icons cmn-icons_userbar-message"></em><em class="cmn-icon cmn-icons cmn-icons_userbar-new userbar_message_new"></em>消息</a>
+</li>
+<li class="split">|</li>
+<li>
+<a href="http://www.baidu.com/">百度首页</a>
+</li></ul>
+<div class="header">
+<div class="layout">
+<div class="wgt-searchbar wgt-searchbar-main cmn-clearfix">
+<div class="logo-container">
+<a class="logo cmn-inline-block" title="到百科首页" href="http://baike.baidu.com/">
+<span class="cmn-baike-logo">
+<em class="cmn-icon cmn-icons cmn-icons_logo-bai"></em>
+<em class="cmn-icon cmn-icons cmn-icons_logo-du"></em>
+<em class="cmn-icon cmn-icons cmn-icons_logo-baike"></em>
+</span>
+</a>
+</div>
+<div class="search">
+<div class="nav">
+<a href="http://news.baidu.com/" data-href="http://news.baidu.com/ns?tn=news&amp;cl=2&amp;rn=20&amp;ct=1&amp;fr=bks0000&amp;ie=utf-8&amp;word=">新闻</a><a href="http://www.baidu.com/" data-href="http://www.baidu.com/s?ie=utf-8&amp;fr=bks0000&amp;wd=">网页</a><a href="http://tieba.baidu.com/" data-href="http://tieba.baidu.com/f?ie=utf-8&amp;fr=bks0000&amp;kw=">贴吧</a><a href="http://zhidao.baidu.com/" data-href="http://zhidao.baidu.com/search?pn=0&amp;&amp;rn=10&amp;lm=0&amp;fr=bks0000&amp;word=">知道</a><a href="http://music.baidu.com/" data-href="http://music.baidu.com/search?f=ms&amp;ct=134217728&amp;ie=utf-8&amp;rn=&amp;lm=-1&amp;pn=30fr=bks0000&amp;key=">音乐</a><a href="http://image.baidu.com/" data-href="http://image.baidu.com/search/index?tn=baiduimage&amp;ct=201326592&amp;lm=-1&amp;cl=2&amp;nc=1&amp;ie=utf-8&amp;word=">图片</a><a href="http://v.baidu.com/" data-href="http://v.baidu.com/v?ct=301989888&amp;rn=20&amp;pn=0&amp;db=0&amp;s=22&amp;ie=utf-8&amp;fr=bks0000&amp;word=">视频</a><a href="http://map.baidu.com/" data-href="http://map.baidu.com/m?ie=utf-8&amp;fr=bks0000&amp;word=">地图</a><a class="baike">百科</a><a href="http://wenku.baidu.com/" data-href="http://wenku.baidu.com/search?lm=0&amp;od=0&amp;ie=utf-8&amp;fr=bks0000&amp;word=">文库</a>
+</div>
+<div class="form">
+<form id="searchForm" action="http://baike.baidu.com/search/word" method="GET" target="_self">
+<input id="query" name="word" type="text" autocomplete="off" autocorrect="off" value="游戏架构设计与策划基础"><button id="search" type="button">进入词条</button><button id="searchLemma" type="button">搜索词条</button><a class="help" href="http://baike.baidu.com/help" target="_blank">帮助</a>
+</form>
+<form id="searchLemmaForm" action="http://baike.baidu.com/search" method="GET" target="_self">
+<input id="searchLemmaQuery" name="word" type="hidden">
+<input name="pn" type="hidden" value="0">
+<input name="rn" type="hidden" value="0">
+<input name="enc" type="hidden" value="utf8">
+</form>
+<ul id="suggestion" class="suggestion" style="display: none;">
+<div></div>
+<li class="extra">
+<span id="close">关闭</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="navbar-wrapper">
+<div class="wgt-navbar">
+<div class="navbar-bg">
+<div class="navbar-bg-top">
+<div class="navbar-content layout">
+<div class="navbar-content-box">
+<dl class="index ">
+<dt><a href="http://baike.baidu.com/">首页</a></dt>
+</dl>
+<dl class="cat ">
+<dt><a>分类</a></dt>
+<dd>
+<div><a href="http://baike.baidu.com/art" target="_blank" class="art">艺术</a></div>
+<div><a href="http://baike.baidu.com/science" target="_blank" class="technology">科学</a></div>
+<div><a href="http://baike.baidu.com/ziran" target="_blank">自然</a></div>
+<div><a href="http://baike.baidu.com/wenhua" target="_blank">文化</a></div>
+<div><a href="http://baike.baidu.com/dili" target="_blank">地理</a></div>
+<div><a href="http://baike.baidu.com/shenghuo" target="_blank">生活</a></div>
+<div><a href="http://baike.baidu.com/shehui" target="_blank">社会</a></div>
+<div><a href="http://baike.baidu.com/renwu" target="_blank">人物</a></div>
+<div><a href="http://baike.baidu.com/jingji" target="_blank">经济</a></div>
+<div><a href="http://baike.baidu.com/tiyu" target="_blank">体育</a></div>
+<div><a href="http://baike.baidu.com/lishi" target="_blank">历史</a></div>
+</dd>
+</dl>
+<dl class="special ">
+<dt><a>特色百科</a></dt>
+<dd>
+<div><a href="http://baike.baidu.com/calendar/" target="_blank">历史上的今天</a></div>
+<div><a href="http://baike.baidu.com/museum/" target="_blank">数字博物馆</a></div>
+<div><a href="http://baike.baidu.com/shiji/2015?fr=navbar" target="_blank">史记·2015</a></div>
+<div><a href="http://baike.baidu.com/city/" target="_blank">城市百科</a></div>
+<div><a href="http://baike.baidu.com/operation/worldwar2" target="_blank">二战百科</a></div>
+<div><a href="http://baike.baidu.com/feiyi?fr=dhlfeiyi" target="_blank">非遗百科</a></div>
+</dd>
+</dl>
+<dl class="user">
+<dt><a>用户</a></dt>
+<dd>
+<div><a href="http://baike.baidu.com/kedou/" target="_blank">蝌蚪团</a></div>
+<div><a href="http://baike.baidu.com/event/ranmeng/" target="_blank">燃梦计划</a></div>
+<div><a href="http://baike.baidu.com/task/" target="_blank">百科任务</a></div>
+<div><a href="http://baike.baidu.com/mall/" target="_blank">百科商城</a></div>
+</dd>
+</dl>
+<dl class="cooperation">
+<dt><a>权威合作</a></dt>
+<dd>
+<div><a href="http://baike.baidu.com/operation/cooperation#joint" target="_blank">合作模式</a></div>
+<div><a href="http://baike.baidu.com/operation/cooperation#issue" target="_blank">常见问题</a></div>
+<div><a href="http://baike.baidu.com/operation/cooperation#connection" target="_blank">联系方式</a></div>
+</dd>
+</dl>
+<dl class="mobile">
+<dt><a>手机百科</a></dt>
+<dd>
+<div><a href="http://baike.baidu.com/m#wap" target="_blank">网页版</a></div>
+</dd>
+</dl>
+<div class="usercenter">
+<div><a href="http://baike.baidu.com/usercenter" target="_blank"><em class="cmn-icon cmn-icons cmn-icons_navbar-usercenter"></em>个人中心</a></div>
+</div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<div class="body-wrapper">
+<div class="before-content">
+</div>
+<div class="content-wrapper">
+<div class="content">
+<div class="main-content">
+<div class="top-tool">
+<a class="add-sub-icon" href="javascript:;" title="添加义项" nslog-type="50000101" style="display: inline-block;"></a>
+<a href="http://baike.baidu.com/divideload/%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AD%96%E5%88%92%E5%9F%BA%E7%A1%80" title="拆分词条" target="_blank" class="split-icon" style="display:none;" nslog-type="50000104"></a>
+<div class="top-collect" nslog="area" nslog-type="50000102">
+<span class="collect-text">收藏</span>
+<div class="collect-tip">查看<a href="http://baike.baidu.com/uc/favolemma" target="_blank">我的收藏</a></div>
+</div>
+<a href="javascript:void(0);" class="top-vote" nslog-type="50000103">
+<span class="vote-count">8</span>
+<span class="vote-tip">有用+1</span>
+<span class="voted-tip">已投票</span>
+</a>
+<div class="bdsharebuttonbox top-share bdshare-button-style0-32" data-tag="top-share" data-bd-bind="1474956722832">
+<a class="bds_more top-share-icon" data-cmd="more" nslog-type="9067">
+<span class="bds_count share-count" id="j-topShareCount" data-cmd="count" title="累计分享0次">0</span>
+</a>
+</div>
+</div>
+<div style="width:0;height:0;clear:both"></div><dl class="lemmaWgt-lemmaTitle lemmaWgt-lemmaTitle-">
+<dd class="lemmaWgt-lemmaTitle-title">
+<h1>游戏架构设计与策划基础</h1>
+<a href="javascript:;" class="edit-lemma cmn-btn-hover-blue cmn-btn-28 j-edit-link" style="display: inline-block;"><em class="cmn-icon wiki-lemma-icons wiki-lemma-icons_edit-lemma"></em>编辑</a>
+<a class="lock-lemma" target="_blank" href="http://baike.baidu.com/view/10812319.htm" title="锁定"><em class="cmn-icon wiki-lemma-icons wiki-lemma-icons_lock-lemma"></em>锁定</a>
+</dd>
+</dl><div class="lemma-summary" label-module="lemmaSummary">
+<div class="para" label-module="para">《游戏架构设计与策划基础》是2010年清华大学出版社出版的图书，作者是黄石，李志远，陈洪。</div>
+</div>
+<div class="basic-info cmn-clearfix">
+<dl class="basicInfo-block basicInfo-left">
+<dt class="basicInfo-item name">书&nbsp;&nbsp;&nbsp;&nbsp;名</dt>
+<dd class="basicInfo-item value">
+游戏架构设计与策划基础
+</dd>
+<dt class="basicInfo-item name">作&nbsp;&nbsp;&nbsp;&nbsp;者</dt>
+<dd class="basicInfo-item value">
+黄石，李志远，陈洪
+</dd>
+<dt class="basicInfo-item name">ISBN</dt>
+<dd class="basicInfo-item value">
+9787302216902
+</dd>
+<dt class="basicInfo-item name">定&nbsp;&nbsp;&nbsp;&nbsp;价</dt>
+<dd class="basicInfo-item value">
+39.00元
+</dd>
+</dl><dl class="basicInfo-block basicInfo-right">
+<dt class="basicInfo-item name">出版社</dt>
+<dd class="basicInfo-item value">
+清华大学出版社
+</dd>
+<dt class="basicInfo-item name">出版时间</dt>
+<dd class="basicInfo-item value">
+2010-1-1
+</dd>
+<dt class="basicInfo-item name">装&nbsp;&nbsp;&nbsp;&nbsp;帧</dt>
+<dd class="basicInfo-item value">
+平装
+</dd>
+<dt class="basicInfo-item name">开&nbsp;&nbsp;&nbsp;&nbsp;本</dt>
+<dd class="basicInfo-item value">
+16开
+</dd>
+</dl></div>
+<div class="lemmaWgt-lemmaCatalog">
+<div class="lemma-catalog">
+<h2 class="block-title">目录</h2>
+<div class="catalog-list column-1">
+<ol>
+<li class="level1">
+<span class="index">1</span>
+<span class="text"><a href="http://baike.baidu.com/link?url=SZR61MLNymE82vYj6avjM1vnIeNQQ6RhyqzofrTPZRB6GHFeXXpq50LU65XvcH2madkr20JXNd9JBjz7DRMfyq#1">内容简介</a></span>
+</li>
+<li class="level1">
+<span class="index">2</span>
+<span class="text"><a href="./游戏架构设计与策划基础_百度百科_files/游戏架构设计与策划基础_百度百科.html">图书目录</a></span>
+</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="anchor-list">
+<a name="1" class="lemma-anchor para-title"></a>
+<a name="sub3181773_1" class="lemma-anchor "></a>
+<a name="内容简介" class="lemma-anchor "></a>
+</div><div class="para-title level-2" label-module="para-title">
+<h2 class="title-text"><span class="title-prefix">游戏架构设计与策划基础</span>内容简介</h2>
+<a class="edit-icon j-edit-link" data-edit-dl="1" href="javascript:;" style="display: block;"><em class="cmn-icon wiki-lemma-icons wiki-lemma-icons_edit-lemma"></em>编辑</a>
+</div>
+<div class="para" label-module="para">本书以当前游戏公司实际游戏策划设计方案为教学实例，介绍游戏策划设计的基本理论。把重点放在提高学员各种游戏的设计能力上。通过对游戏开发中的概念设计、原型设计、规则设计、情节设计、关卡设计原则的介绍，兼顾具体的关卡设计实践与游戏编辑厂具使用实践，使读者全面了解游戏设计的原理，掌握基本的设计技能。</div>
+<div class="para" label-module="para">本课程蕴含了作者丰富的实际游戏策划经验和教材编写经验：例题、习题丰富：结构新颖、紧凑：讲解通俗、易懂。能使学员更快地跨进游戏设计之门。</div>
+<div class="para" label-module="para">本书可以作为游戏开发人员的参考用书，游戏开发爱好者的自学教材，也可以作为大专院校游戏专业的游戏开发教程。</div><div class="anchor-list">
+<a name="2" class="lemma-anchor para-title"></a>
+<a name="sub3181773_2" class="lemma-anchor "></a>
+<a name="图书目录" class="lemma-anchor "></a>
+</div><div class="para-title level-2" label-module="para-title">
+<h2 class="title-text"><span class="title-prefix">游戏架构设计与策划基础</span>图书目录</h2>
+<a class="edit-icon j-edit-link" data-edit-dl="2" href="javascript:;" style="display: block;"><em class="cmn-icon wiki-lemma-icons wiki-lemma-icons_edit-lemma"></em>编辑</a>
+</div>
+<div class="para" label-module="para">第1章　游戏策划概述</div>
+<div class="para" label-module="para">第2章　玩家心理分析与游戏性</div>
+<div class="para" label-module="para">第3章　游戏概念及原型设计</div>
+<div class="para" label-module="para">第4章　游戏背景设计</div>
+<div class="para" label-module="para">第5章　游戏地图与场景设计</div>
+<div class="para" label-module="para">第6章　游戏元素设计</div>
+<div class="para" label-module="para">第7章　任务与关卡设计</div>
+<div class="para" label-module="para">第8章　游戏规则设计</div>
+<div class="para" label-module="para">第9章　界面与用户控制</div>
+<div class="para" label-module="para">第10章　游戏编辑工具</div>
+<div class="para" label-module="para">第11章　游戏设计文档</div>
+<div class="para" label-module="para">附录A　动作休闲网络游戏策划实例</div>
+<div class="para" label-module="para">附录B　棋牌类网络游戏策划大纲</div>
+<div class="para" label-module="para">附录C　游戏策划案——《炎龙战记》系统策划案</div>
+<div class="para" label-module="para">附录D　策划设计文档</div>
+<div id="open-tag">
+<div class="open-tag-title">词条标签：</div>
+<dd id="open-tag-item">
+<span class="taglist">
+教育书籍
+</span>
+，<span class="taglist">
+出版物
+</span>
+，<span class="taglist">
+书籍
+</span>
+</dd>
+<div class="open-tag-collapse" id="open-tag-collapse" style="display: none;"></div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="side-content">
+<div class="summary-pic">
+<a href="http://baike.baidu.com/pic/%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AD%96%E5%88%92%E5%9F%BA%E7%A1%80/7078411/0/adaf2edda3cc7cd944ccaaaf3c01213fb90e91e7?fr=lemma&ct=single" target="_blank" nslog-type="10002401">
+<img src="./游戏架构设计与策划基础_百度百科_files/adaf2edda3cc7cd944ccaaaf3c01213fb90e91e7.jpg">
+<button class="picAlbumBtn"><em></em><span>图集</span></button>
+<div>游戏架构设计与策划基础图册</div>
+</a>
+</div>
+<div class="lemmaWgt-promotion-vbaike">
+<div class="promotion_title">V百科<a href="http://baike.baidu.com/vbaike#gallary" target="_blank">往期回顾</a></div>
+<div class="promotion_viewport">
+<dl>
+</dl>
+<div class="promotion_viewport_pager"></div>
+</div>
+</div><div class="lemmaWgt-promotion-rightPreciseAd" data-lemmaid="7078411" data-lemmatitle="游戏架构设计与策划基础"></div><div class="lemmaWgt-sideRecommend" style="display: block;">
+<a name="zhixinWrap" class="qnAnchor"></a>
+<div class="zhixin-box" id="zhixinWrap" data-source="aladdin" data-newlemmaid="7078411"><div class="zhixin-group js-group" data-datatype="async">
+<h6 class="js-cardTitle">
+<span>程序设计类书籍</span>
+</h6>
+<div class="zhixin-fixBtn js-fixBtn">
+<div class="openFix" title="若推荐内容有误，请点击纠错进行反馈">纠错</div>
+<div class="closeFix">关闭纠错</div>
+</div>
+<div class="zhixin-list">
+<div class="zhixin-item" nslog="area" nslog-type="10000101" nslog-params="{&quot;source&quot;:&quot;aladdin&quot;,&quot;url&quot;:&quot;http://baike.baidu.com/view/1956973.htm&quot;,&quot;targetId&quot;:&quot;7196077&quot;}">
+<div class="portraitbox">
+<a href="http://baike.baidu.com/view/1956973.htm" target="_blank">
+<img src="./游戏架构设计与策划基础_百度百科_files/0df3d7ca7bcb0a46def1ac4b6e63f6246a60aff4.jpg" alt="游戏设计完全教程">
+</a>
+</div>
+<p class="item-title js-name"><a href="http://baike.baidu.com/view/1956973.htm" target="_blank" title="游戏设计完全教程">游戏设计完全教程</a></p>
+<div class="zhixinErrorBox js-fixBox hidden" data-lemma-id="7196077">
+<a class="submit-trigger" href="javascript:;">有错误</a>
+<span class="js-text hidden">已反馈</span>
+</div>
+</div>
+<div class="zhixin-item" nslog="area" nslog-type="10000101" nslog-params="{&quot;source&quot;:&quot;aladdin&quot;,&quot;url&quot;:&quot;http://baike.baidu.com/view/11130122.htm&quot;,&quot;targetId&quot;:&quot;12157198&quot;}">
+<div class="portraitbox">
+<a href="http://baike.baidu.com/view/11130122.htm" target="_blank">
+<img src="./游戏架构设计与策划基础_百度百科_files/cb8065380cd79123bc569c60af345982b2b7806b.jpg" alt="顶级游戏设计">
+</a>
+</div>
+<p class="item-title js-name"><a href="http://baike.baidu.com/view/11130122.htm" target="_blank" title="顶级游戏设计">顶级游戏设计</a></p>
+<div class="zhixinErrorBox js-fixBox hidden" data-lemma-id="12157198">
+<a class="submit-trigger" href="javascript:;">有错误</a>
+<span class="js-text hidden">已反馈</span>
+</div>
+</div>
+<div class="zhixin-item" nslog="area" nslog-type="10000101" nslog-params="{&quot;source&quot;:&quot;aladdin&quot;,&quot;url&quot;:&quot;http://baike.baidu.com/view/6250991.htm&quot;,&quot;targetId&quot;:&quot;556158&quot;}">
+<div class="portraitbox">
+<a href="http://baike.baidu.com/view/6250991.htm" target="_blank">
+<img src="./游戏架构设计与策划基础_百度百科_files/4afbfbedab64034f03ea8267aac379310a551daf.jpg" alt="游戏策划教程">
+</a>
+</div>
+<p class="item-title js-name"><a href="http://baike.baidu.com/view/6250991.htm" target="_blank" title="游戏策划教程">游戏策划教程</a></p>
+<div class="zhixinErrorBox js-fixBox hidden" data-lemma-id="556158">
+<a class="submit-trigger" href="javascript:;">有错误</a>
+<span class="js-text hidden">已反馈</span>
+</div>
+</div>
+<div class="zhixin-item" nslog="area" nslog-type="10000101" nslog-params="{&quot;source&quot;:&quot;aladdin&quot;,&quot;url&quot;:&quot;http://baike.baidu.com/view/3245928.htm&quot;,&quot;targetId&quot;:&quot;8274992&quot;}">
+<div class="portraitbox">
+<a href="http://baike.baidu.com/view/3245928.htm" target="_blank">
+<img src="./游戏架构设计与策划基础_百度百科_files/a8014c086e061d95266eec687df40ad162d9cab2.jpg" alt="游戏专业概论">
+</a>
+</div>
+<p class="item-title js-name"><a href="http://baike.baidu.com/view/3245928.htm" target="_blank" title="游戏专业概论">游戏专业概论</a></p>
+<div class="zhixinErrorBox js-fixBox hidden" data-lemma-id="8274992">
+<a class="submit-trigger" href="javascript:;">有错误</a>
+<span class="js-text hidden">已反馈</span>
+</div>
+</div>
+<div class="zhixin-item" nslog="area" nslog-type="10000101" nslog-params="{&quot;source&quot;:&quot;aladdin&quot;,&quot;url&quot;:&quot;http://baike.baidu.com/view/1997225.htm&quot;,&quot;targetId&quot;:&quot;7713258&quot;}">
+<div class="portraitbox">
+<a href="http://baike.baidu.com/view/1997225.htm" target="_blank">
+<img src="./游戏架构设计与策划基础_百度百科_files/d058ccbf6c81800a276cd122b13533fa828b4714.jpg" alt="游戏架构与设计">
+</a>
+</div>
+<p class="item-title js-name"><a href="http://baike.baidu.com/view/1997225.htm" target="_blank" title="游戏架构与设计">游戏架构与设计</a></p>
+<div class="zhixinErrorBox js-fixBox hidden" data-lemma-id="7713258">
+<a class="submit-trigger" href="javascript:;">有错误</a>
+<span class="js-text hidden">已反馈</span>
+</div>
+</div>
+<div class="zhixin-item" nslog="area" nslog-type="10000101" nslog-params="{&quot;source&quot;:&quot;aladdin&quot;,&quot;url&quot;:&quot;http://baike.baidu.com/view/11259128.htm&quot;,&quot;targetId&quot;:&quot;12270181&quot;}">
+<div class="portraitbox">
+<a href="http://baike.baidu.com/view/11259128.htm" target="_blank">
+<img src="./游戏架构设计与策划基础_百度百科_files/71cf3bc79f3df8dc7651a387cf11728b471028b3.jpg" alt="游戏开发核心技术">
+</a>
+</div>
+<p class="item-title js-name"><a href="http://baike.baidu.com/view/11259128.htm" target="_blank" title="游戏开发核心技术">游戏开发核心技术</a></p>
+<div class="zhixinErrorBox js-fixBox hidden" data-lemma-id="12270181">
+<a class="submit-trigger" href="javascript:;">有错误</a>
+<span class="js-text hidden">已反馈</span>
+</div>
+</div>
+<div class="zhixin-item" nslog="area" nslog-type="10000101" nslog-params="{&quot;source&quot;:&quot;aladdin&quot;,&quot;url&quot;:&quot;http://baike.baidu.com/view/2402407.htm&quot;,&quot;targetId&quot;:&quot;4638540&quot;}">
+<div class="portraitbox">
+<a href="http://baike.baidu.com/view/2402407.htm" target="_blank">
+<img src="./游戏架构设计与策划基础_百度百科_files/241f95cad1c8a786e7f6f56e6509c93d71cf50f5.jpg" alt="游戏设计基础">
+</a>
+</div>
+<p class="item-title js-name"><a href="http://baike.baidu.com/view/2402407.htm" target="_blank" title="游戏设计基础">游戏设计基础</a></p>
+<div class="zhixinErrorBox js-fixBox hidden" data-lemma-id="4638540">
+<a class="submit-trigger" href="javascript:;">有错误</a>
+<span class="js-text hidden">已反馈</span>
+</div>
+</div>
+<div class="zhixin-item" nslog="area" nslog-type="10000101" nslog-params="{&quot;source&quot;:&quot;aladdin&quot;,&quot;url&quot;:&quot;http://baike.baidu.com/view/9827523.htm&quot;,&quot;targetId&quot;:&quot;1852104&quot;}">
+<div class="portraitbox">
+<a href="http://baike.baidu.com/view/9827523.htm" target="_blank">
+<img src="./游戏架构设计与策划基础_百度百科_files/30adcbef76094b36fb8f3035a3cc7cd98c109dcc.jpg" alt="unity 3d游戏开发技术详解与典型案例">
+</a>
+</div>
+<p class="item-title js-name"><a href="http://baike.baidu.com/view/9827523.htm" target="_blank" title="unity 3d游戏开发技术详解与典型案例">unity 3d游戏开发技术详解与典型案例</a></p>
+<div class="zhixinErrorBox js-fixBox hidden" data-lemma-id="1852104">
+<a class="submit-trigger" href="javascript:;">有错误</a>
+<span class="js-text hidden">已反馈</span>
+</div>
+</div>
+<div class="zhixin-item" nslog="area" nslog-type="10000101" nslog-params="{&quot;source&quot;:&quot;aladdin&quot;,&quot;url&quot;:&quot;http://baike.baidu.com/view/691925.htm&quot;,&quot;targetId&quot;:&quot;11040196&quot;}">
+<div class="portraitbox">
+<a href="http://baike.baidu.com/view/691925.htm" target="_blank">
+<img src="./游戏架构设计与策划基础_百度百科_files/b90e7bec54e736d133f8dc789b504fc2d46269d2.jpg" alt="游戏情感设计">
+</a>
+</div>
+<p class="item-title js-name"><a href="http://baike.baidu.com/view/691925.htm" target="_blank" title="游戏情感设计">游戏情感设计</a></p>
+<div class="zhixinErrorBox js-fixBox hidden" data-lemma-id="11040196">
+<a class="submit-trigger" href="javascript:;">有错误</a>
+<span class="js-text hidden">已反馈</span>
+</div>
+</div>
+</div>
+</div>
+<div class="zhixin-group js-group" data-datatype="async">
+<h6 class="js-cardTitle">
+<span>计算机类书籍</span>
+</h6>
+<div class="zhixin-fixBtn js-fixBtn">
+<div class="openFix" title="若推荐内容有误，请点击纠错进行反馈">纠错</div>
+<div class="closeFix">关闭纠错</div>
+</div>
+<div class="zhixin-list">
+<div class="zhixin-item" nslog="area" nslog-type="10000101" nslog-params="{&quot;source&quot;:&quot;aladdin&quot;,&quot;url&quot;:&quot;http://baike.baidu.com/view/4717053.htm&quot;,&quot;targetId&quot;:&quot;8563193&quot;}">
+<div class="portraitbox">
+<a href="http://baike.baidu.com/view/4717053.htm" target="_blank">
+<img src="./游戏架构设计与策划基础_百度百科_files/77c6a7efce1b9d1691a08d1af3deb48f8c546461.jpg" alt="游戏设计入门">
+</a>
+</div>
+<p class="item-title js-name"><a href="http://baike.baidu.com/view/4717053.htm" target="_blank" title="游戏设计入门">游戏设计入门</a></p>
+<div class="zhixinErrorBox js-fixBox hidden" data-lemma-id="8563193">
+<a class="submit-trigger" href="javascript:;">有错误</a>
+<span class="js-text hidden">已反馈</span>
+</div>
+</div>
+<div class="zhixin-item" nslog="area" nslog-type="10000101" nslog-params="{&quot;source&quot;:&quot;aladdin&quot;,&quot;url&quot;:&quot;http://baike.baidu.com/view/7806745.htm&quot;,&quot;targetId&quot;:&quot;10573113&quot;}">
+<div class="portraitbox">
+<a href="http://baike.baidu.com/view/7806745.htm" target="_blank">
+<img src="./游戏架构设计与策划基础_百度百科_files/9358d109b3de9c824e7ccaef6e81800a19d843b0.jpg" alt="visual c++游戏开发经典案例详解">
+</a>
+</div>
+<p class="item-title js-name"><a href="http://baike.baidu.com/view/7806745.htm" target="_blank" title="visual c++游戏开发经典案例详解">visual c++游戏开发经典案例详解</a></p>
+<div class="zhixinErrorBox js-fixBox hidden" data-lemma-id="10573113">
+<a class="submit-trigger" href="javascript:;">有错误</a>
+<span class="js-text hidden">已反馈</span>
+</div>
+</div>
+<div class="zhixin-item" nslog="area" nslog-type="10000101" nslog-params="{&quot;source&quot;:&quot;aladdin&quot;,&quot;url&quot;:&quot;http://baike.baidu.com/view/2631722.htm&quot;,&quot;targetId&quot;:&quot;8156473&quot;}">
+<div class="portraitbox">
+<a href="http://baike.baidu.com/view/2631722.htm" target="_blank">
+<img src="./游戏架构设计与策划基础_百度百科_files/faf2b2119313b07e7d63ca1f0cd7912396dd8ccf.jpg" alt="游戏开发与制作">
+</a>
+</div>
+<p class="item-title js-name"><a href="http://baike.baidu.com/view/2631722.htm" target="_blank" title="游戏开发与制作">游戏开发与制作</a></p>
+<div class="zhixinErrorBox js-fixBox hidden" data-lemma-id="8156473">
+<a class="submit-trigger" href="javascript:;">有错误</a>
+<span class="js-text hidden">已反馈</span>
+</div>
+</div>
+<div class="zhixin-item" nslog="area" nslog-type="10000101" nslog-params="{&quot;source&quot;:&quot;aladdin&quot;,&quot;url&quot;:&quot;http://baike.baidu.com/view/12054333.htm&quot;,&quot;targetId&quot;:&quot;12982475&quot;}">
+<div class="portraitbox">
+<a href="http://baike.baidu.com/view/12054333.htm" target="_blank">
+<img src="./游戏架构设计与策划基础_百度百科_files/2cf5e0fe9925bc3122742eca5cdf8db1cb1370b2.jpg" alt="游戏引擎架构">
+</a>
+</div>
+<p class="item-title js-name"><a href="http://baike.baidu.com/view/12054333.htm" target="_blank" title="游戏引擎架构">游戏引擎架构</a></p>
+<div class="zhixinErrorBox js-fixBox hidden" data-lemma-id="12982475">
+<a class="submit-trigger" href="javascript:;">有错误</a>
+<span class="js-text hidden">已反馈</span>
+</div>
+</div>
+<div class="zhixin-item" nslog="area" nslog-type="10000101" nslog-params="{&quot;source&quot;:&quot;aladdin&quot;,&quot;url&quot;:&quot;http://baike.baidu.com/view/7781004.htm&quot;,&quot;targetId&quot;:&quot;10281841&quot;}">
+<div class="portraitbox">
+<a href="http://baike.baidu.com/view/7781004.htm" target="_blank">
+<img src="./游戏架构设计与策划基础_百度百科_files/e850352ac65c103895a96da0b7119313b17e89f9.jpg" alt="游戏开发中的人工智能">
+</a>
+</div>
+<p class="item-title js-name"><a href="http://baike.baidu.com/view/7781004.htm" target="_blank" title="游戏开发中的人工智能">游戏开发中的人工智能</a></p>
+<div class="zhixinErrorBox js-fixBox hidden" data-lemma-id="10281841">
+<a class="submit-trigger" href="javascript:;">有错误</a>
+<span class="js-text hidden">已反馈</span>
+</div>
+</div>
+<div class="zhixin-item" nslog="area" nslog-type="10000101" nslog-params="{&quot;source&quot;:&quot;aladdin&quot;,&quot;url&quot;:&quot;http://baike.baidu.com/view/7739361.htm&quot;,&quot;targetId&quot;:&quot;9755009&quot;}">
+<div class="portraitbox">
+<a href="http://baike.baidu.com/view/7739361.htm" target="_blank">
+<img src="./游戏架构设计与策划基础_百度百科_files/b8389b504fc2d56297038baee11190ef76c66c6d.jpg" alt="3d游戏美术基础">
+</a>
+</div>
+<p class="item-title js-name"><a href="http://baike.baidu.com/view/7739361.htm" target="_blank" title="3d游戏美术基础">3d游戏美术基础</a></p>
+<div class="zhixinErrorBox js-fixBox hidden" data-lemma-id="9755009">
+<a class="submit-trigger" href="javascript:;">有错误</a>
+<span class="js-text hidden">已反馈</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<form id="zhixinErrorForm" class="hidden" action="http://f3.baidu.com/index.php/feedback/zx/baikeJC" target="zhixinSubErr" method="post">
+<input class="js-url" name="fb_html_url" type="hidden">
+<input class="js-query" name="fb_query" type="hidden">
+<input class="js-title" name="fb_card_title" type="hidden">
+<input class="js-content" name="fb_content" type="hidden">
+<input class="js-souceId" name="fb_source_id" type="hidden">
+</form>
+<iframe id="zhixinSubErr" name="zhixinSubErr" style="display:none" frameborder="0"></iframe>
+</div><div class="lemmaWgt-promotion-slide">
+<div class="promotion_viewport">
+<dl>
+</dl>
+<div class="promotion_viewport_pager"></div>
+</div>
+</div><div class="lemmaWgt-promotion-rightBigAd">
+</div><dl class="side-box lemma-statistics">
+<dt class="title">词条统计</dt>
+<dd class="description">
+<ul>
+<li>浏览次数：<span id="j-lemmaStatistics-pv">7640</span>次</li>
+<li>编辑次数：6次<a href="http://baike.baidu.com/historylist/%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AD%96%E5%88%92%E5%9F%BA%E7%A1%80/7078411" class="nslog:1021" target="_blank">历史版本</a></li>
+<li>最近更新：<span class="j-modified-time" style="">2015-11-30</span></li>
+<li>创建者：<a class="show-userCard" data-uid="124993994" title="查看此用户资料" target="_blank" href="http://www.baidu.com/p/%E8%AF%BB%E4%B9%A6%E7%99%BE%E7%A7%91" nslog-type="1022">读书百科</a></li>
+</ul>
+</dd>
+</dl>
+<div class="enterprise-creditModule" id="enterprise_creditModule">
+<div class="credit-title"><i></i>企业信用信息</div>
+</div>
+<div class="side-catalog" style="visibility: hidden; bottom: 136px;">
+<div class="side-bar">
+<em class="circle start"></em>
+<em class="circle end"></em>
+</div>
+<div class="catalog-scroller">
+<dl class="catalog-list">
+<dt class="catalog-title level1">
+<em class="pointer"></em>
+<a href="http://baike.baidu.com/link?url=SZR61MLNymE82vYj6avjM1vnIeNQQ6RhyqzofrTPZRB6GHFeXXpq50LU65XvcH2madkr20JXNd9JBjz7DRMfyq#1" class="title-link">
+<span class="text">
+<span class="title-index">1</span>
+<span class="title-link" nslog-type="1026">内容简介</span>
+</span>
+</a>
+</dt>
+<dt class="catalog-title level1">
+<em class="pointer"></em>
+<a href="./游戏架构设计与策划基础_百度百科_files/游戏架构设计与策划基础_百度百科.html" class="title-link">
+<span class="text">
+<span class="title-index">2</span>
+<span class="title-link" nslog-type="1026">图书目录</span>
+</span>
+</a>
+</dt>
+<a class="arrow" href="javascript:void(0);" style="top: 31px;"></a>
+</dl>
+</div>
+<div class="right-wrap" style="display: none;">
+<a class="go-up disable" href="javascript:void(0);"></a>
+<a class="go-down disable" href="javascript:void(0);"></a>
+</div>
+<div class="bottom-wrap">
+<a class="toggle-button" href="javascript:void(0);"></a>
+<a class="gotop-button" href="javascript:void(0);"></a>
+</div>
+</div>
+<div class="unionAd_fromPs side-box" id="unionAd_fromPs">
+<script type="BAIDU_HH">
+    {
+        type : 'pageembed',
+        di   : 'u2140330',
+        rsi0 : 270,
+        rsi1 : 175
+    }
+    </script>
+</div>
+
+<div id="side_box_unionAd" class="unionAd side-box union">
+<div class="union-content" id="cpro_u1997633"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="after-content">
+<div class="fc-guess-like new" id="fc_guess_like_new">
+<span class="logo-du">
+<em class="cmn-icon cmn-icons cmn-icons_logo-du"></em>
+</span>
+<h6>猜你喜欢</h6>
+<ul class="cmn-clearfix">
+</ul>
+</div>
+<div class="bottom-promotion" id="bottom-promotion" style="display: block;">
+<div id="BOTTOM_PRO_AD"></div>
+</div></div>
+</div>
+
+<div class="wgt-footer-main">
+<div class="content">
+<dl class="fresh">
+<dt><em class="cmn-icon cmn-icons cmn-icons_footer-fresh"></em>新手上路</dt>
+<dd>
+<div><a target="_blank" href="http://baike.baidu.com/usercenter/tasks#guide">成长任务</a></div>
+<div><a target="_blank" href="http://baike.baidu.com/help#main01">编辑入门</a></div>
+<div><a target="_blank" href="http://baike.baidu.com/help#main06">编辑规则</a></div>
+<div><a target="_blank" href="http://baike.baidu.com/help#main05">百科术语</a></div>
+</dd>
+</dl>
+<dl class="question">
+<dt><em class="cmn-icon cmn-icons cmn-icons_footer-question"></em>我有疑问</dt>
+<dd>
+<div><a target="_blank" href="http://baike.baidu.com/wikiui/doubt?lemmaId=7078411&fr=lemma" nslog-type="10070001">我要质疑</a></div>
+<div><a target="_blank" href="http://ikefu.baidu.com/baidubaike/chat.html" nslog-type="10000003">我要提问</a></div>
+<div><a target="_blank" href="http://tieba.baidu.com/f?ie=utf-8&fr=bks0000&kw=%E7%99%BE%E5%BA%A6%E7%99%BE%E7%A7%91">参加讨论</a></div>
+<div><a target="_blank" href="http://baike.baidu.com/feedback">意见反馈</a></div>
+</dd>
+</dl>
+<dl class="suggestion">
+<dt><em class="cmn-icon cmn-icons cmn-icons_footer-suggestion"></em>投诉建议</dt>
+<dd>
+<div><a target="_blank" href="http://tousu.baidu.com/baike/add?word=%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AD%96%E5%88%92%E5%9F%BA%E7%A1%80&&submit_link=http%3A%2F%2Fbaike.baidu.com%2Flink%3Furl%3DSZR61MLNymE82vYj6avjM1vnIeNQQ6RhyqzofrTPZRB6GHFeXXpq50LU65XvcH2madkr20JXNd9JBjz7DRMfyq%232#1">举报不良信息</a></div>
+<div><a target="_blank" href="http://tousu.baidu.com/baike/add?word=%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AD%96%E5%88%92%E5%9F%BA%E7%A1%80&&submit_link=http%3A%2F%2Fbaike.baidu.com%2Flink%3Furl%3DSZR61MLNymE82vYj6avjM1vnIeNQQ6RhyqzofrTPZRB6GHFeXXpq50LU65XvcH2madkr20JXNd9JBjz7DRMfyq%232#2">未通过词条申诉</a></div>
+<div><a target="_blank" href="http://tousu.baidu.com/baike/add?word=%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AD%96%E5%88%92%E5%9F%BA%E7%A1%80&&submit_link=http%3A%2F%2Fbaike.baidu.com%2Flink%3Furl%3DSZR61MLNymE82vYj6avjM1vnIeNQQ6RhyqzofrTPZRB6GHFeXXpq50LU65XvcH2madkr20JXNd9JBjz7DRMfyq%232#4">投诉侵权信息</a></div>
+<div><a target="_blank" href="http://tousu.baidu.com/baike/add?word=%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AD%96%E5%88%92%E5%9F%BA%E7%A1%80&&submit_link=http%3A%2F%2Fbaike.baidu.com%2Flink%3Furl%3DSZR61MLNymE82vYj6avjM1vnIeNQQ6RhyqzofrTPZRB6GHFeXXpq50LU65XvcH2madkr20JXNd9JBjz7DRMfyq%232#3">封禁查询与解封</a></div>
+</dd>
+</dl>
+</div>
+<div class="copyright">©2016Baidu&nbsp;<a href="http://www.baidu.com/duty/" target="_blank">使用百度前必读</a>&nbsp;|&nbsp;<a href="http://help.baidu.com/question?prod_en=baike&class=159&id=1047" target="_blank">百科协议</a>&nbsp;|&nbsp;<a href="http://baike.baidu.com/operation/cooperation" target="_blank">百度百科合作平台</a></div>
+</div>
+
+<div class="lemmaWgt-searchHeader" style="display: block; opacity: 1;">
+<div class="layout">
+<div class="logo-container">
+<a class="logo cmn-inline-block" title="到百科首页" href="http://baike.baidu.com/">
+<span class="cmn-baike-logo">
+<em class="cmn-icon cmn-icons cmn-icons_logo-bai"></em>
+<em class="cmn-icon cmn-icons cmn-icons_logo-du"></em>
+<em class="cmn-icon cmn-icons cmn-icons_logo-baike"></em>
+</span>
+</a>
+</div>
+<div class="search">
+<div class="form">
+<form id="searchForm" action="http://baike.baidu.com/search/word" method="GET" target="_self">
+<input id="query" name="word" type="text" autocomplete="off" autocorrect="off" value="游戏架构设计与策划基础"><a id="search" href="javascript:;"><em class="cmn-icon wiki-lemma-icons wiki-lemma-icons_search"></em></a>
+</form>
+<ul id="suggestion" class="suggestion" style="display: none;">
+<div></div>
+<li class="extra">
+<span id="close">关闭</span>
+</li>
+</ul>
+</div>
+</div>
+<div class="tool-buttons">
+<a class="toolButtons-edit button j-edit-link" href="javascript:;" nslog-type="10010001"></a>
+<a class="toolButtons-collect button" href="javascript:;" nslog-type="10010002"></a>
+<a class="toolButtons-vote button" href="javascript:;" nslog-type="10010003"></a>
+</div>
+<div class="user-info">
+<a class="user-link unlogin" href="http://baike.baidu.com/usercenter" target="_blank">amy04133</a>
+</div>
+</div></div>
+<div class="new-bdsharebuttonbox new-side-share" id="side-share">
+<span class="title">分享</span>
+<div class="side-border">
+<div class="triangle"></div>
+<a class="bds_qzone" href="javascript:void(0);" nslog-type="10060101">
+<em class="cmn-icon cmn-icons cmn-icons_logo-qzone"></em>
+</a>
+<a class="bds_tsina" href="javascript:void(0);" nslog-type="10060301">
+<em class="cmn-icon cmn-icons cmn-icons_logo-sina-weibo"></em>
+</a>
+<a class="bds_wechat" href="javascript:void(0);" nslog-type="10060001">
+<em class="cmn-icon cmn-icons cmn-icons_logo-wechat"></em>
+</a>
+<a class="bds_tqq" href="javascript:void(0);" nslog-type="10060201">
+<em class="cmn-icon cmn-icons cmn-icons_logo-qq"></em>
+</a>
+</div>
+</div>
+<div class="qrcode-wrapper" id="layer" style="display: none">
+<div class="bd_weixin_popup_header">
+<em class="cmn-icon cmn-icons cmn-icons_close"></em>
+<span>分享到微信朋友圈</span>
+</div>
+<div id="wechat-qrcode-img"></div>
+<div class="bd_weixin_popup_footer">打开微信“扫一扫”即可将网页分享至朋友圈</div>
+</div>
+<script src="./游戏架构设计与策划基础_百度百科_files/qzopensl.js" charset="utf-8"></script>
+
+<script type="text/javascript" src="./游戏架构设计与策划基础_百度百科_files/mod_e56bbba.js"></script>
+<script type="text/javascript">require.resourceMap({"res":{"wiki-lemma:widget/lemma_content/mainContent/lemmaRelation/lemmaInsert.js":{"url":"http://baike.bdimg.com/static/wiki-lemma/widget/lemma_content/mainContent/lemmaRelation/lemmaInsert_17d225d.js","pkg":"wiki-lemma:p5","deps":["wiki-common:widget/component/nslog/nslog.js"]},"wiki-lemma:widget/lemma_content/mainContent/lemmaRelation/tangram.js":{"url":"http://baike.bdimg.com/static/wiki-lemma/widget/lemma_content/mainContent/lemmaRelation/tangram_28a97a6.js","pkg":"wiki-lemma:p5"},"wiki-lemma:widget/feature/enterprise/creditModule/creditModule.js":{"url":"http://baike.bdimg.com/static/wiki-lemma/widget/feature/enterprise/creditModule/creditModule_096df98.js","deps":["wiki-common:widget/lib/jquery/jquery.js","wiki-common:widget/lib/jsmart/jsmart.js","wiki-common:widget/component/nslog/nslog.js"]}},"pkg":{"wiki-lemma:p5":{"url":"http://baike.bdimg.com/static/wiki-lemma/pkg/wiki-lemma-module-lemmaRelation_775a749.js"}}});</script><script type="text/javascript" src="./游戏架构设计与策划基础_百度百科_files/jquery_1.11.1_2201cf8.js"></script>
+<script type="text/javascript" src="./游戏架构设计与策划基础_百度百科_files/jquery.mousewheel_d2bbdbc.js"></script>
+<script type="text/javascript" src="./游戏架构设计与策划基础_百度百科_files/jquery_c7b1275.js"></script>
+<script type="text/javascript" src="./游戏架构设计与策划基础_百度百科_files/userLogin_41417f1.js"></script>
+<script type="text/javascript" src="./游戏架构设计与策划基础_百度百科_files/userMsg_7c74269.js"></script>
+<script type="text/javascript" src="./游戏架构设计与策划基础_百度百科_files/PHPJS_3347e0a.js"></script>
+<script type="text/javascript" src="./游戏架构设计与策划基础_百度百科_files/jsmart_b2bbc7a.js"></script>
+<script type="text/javascript" src="./游戏架构设计与策划基础_百度百科_files/browser_d54a084.js"></script>
+<script type="text/javascript" src="./游戏架构设计与策划基础_百度百科_files/safeCall_bcd4430.js"></script>
+<script type="text/javascript" src="./游戏架构设计与策划基础_百度百科_files/bubble_1451044.js"></script>
+<script type="text/javascript" src="./游戏架构设计与策划基础_百度百科_files/userbar_c22054f.js"></script>
+<script type="text/javascript" src="./游戏架构设计与策划基础_百度百科_files/searchbar_83936b0.js"></script>
+<script type="text/javascript" src="./游戏架构设计与策划基础_百度百科_files/cookie_2c9e1a8.js"></script>
+<script type="text/javascript" src="./游戏架构设计与策划基础_百度百科_files/tween_c96638b.js"></script>
+<script type="text/javascript" src="./游戏架构设计与策划基础_百度百科_files/animation_96cdc43.js"></script>
+<script type="text/javascript" src="./游戏架构设计与策划基础_百度百科_files/overlay_417e6de.js"></script>
+<script type="text/javascript" src="./游戏架构设计与策划基础_百度百科_files/checkCSS_010f6ad.js"></script>
+<script type="text/javascript" src="./游戏架构设计与策划基础_百度百科_files/dialog_7e68287.js"></script>
+<script type="text/javascript" src="./游戏架构设计与策划基础_百度百科_files/nslog_f060910.js"></script>
+<script type="text/javascript" src="./游戏架构设计与策划基础_百度百科_files/swfObject_221d2fe.js"></script>
+<script type="text/javascript" src="./游戏架构设计与策划基础_百度百科_files/unameFiller_0bbd803.js"></script>
+<script type="text/javascript" src="./游戏架构设计与策划基础_百度百科_files/userCard_62d9343.js"></script>
+<script type="text/javascript" src="./游戏架构设计与策划基础_百度百科_files/number_c1ddd8a.js"></script>
+<script type="text/javascript" src="./游戏架构设计与策划基础_百度百科_files/timeFormater_3cafcfb.js"></script>
+<script type="text/javascript" src="./游戏架构设计与策划基础_百度百科_files/string_83f115f.js"></script>
+<script type="text/javascript" src="./游戏架构设计与策划基础_百度百科_files/testElem_5c30a99.js"></script>
+<script type="text/javascript" src="./游戏架构设计与策划基础_百度百科_files/pagerBase_a0bf5ba.js"></script>
+<script type="text/javascript" src="./游戏架构设计与策划基础_百度百科_files/horPager_4d1e0e5.js"></script>
+<script type="text/javascript" src="./游戏架构设计与策划基础_百度百科_files/aniType_slide_9a6aa8a.js"></script>
+<script type="text/javascript" src="./游戏架构设计与策划基础_百度百科_files/carousel_5aa4c55.js"></script>
+<script type="text/javascript" src="./游戏架构设计与策划基础_百度百科_files/wiki-lemma_4dba2eb.js"></script>
+<script type="text/javascript" src="./游戏架构设计与策划基础_百度百科_files/zhixin_d2befc8.js"></script>
+<script type="text/javascript" src="./游戏架构设计与策划基础_百度百科_files/creditModule_096df98.js"></script>
+<script type="text/javascript" src="./游戏架构设计与策划基础_百度百科_files/cmsModuleLoader_d979ff2.js"></script>
+<script type="text/javascript" src="./游戏架构设计与策划基础_百度百科_files/psLink_3517b83.js"></script>
+<script type="text/javascript">!function(){  var $ = require('wiki-common:widget/lib/jquery/jquery.js'),
+    userbar = require('wiki-common:widget/component/userbar/userbar.js');
+    
+  $(function() {
+    userbar.buildUserbar($('.wgt-userbar'), null);
+  });
+}();
+!function(){    var $ = require('wiki-common:widget/lib/jquery/jquery.js'),
+      initSearchbar = require('wiki-common:widget/component/searchbar/searchbar.js');  
+    initSearchbar($('.wgt-searchbar-main'));
+  }();
+!function(){  var $ = require('wiki-common:widget/lib/jquery/jquery.js');
+
+  var timer = '';
+
+  $('.wgt-navbar').on('mouseenter', 'dl', function() {
+  clearTimeout(timer);
+  timer = setTimeout(function() {
+  $('.wgt-navbar').addClass('wgt-navbar-hover');
+}, 300);
+}).on('mouseleave', function() {
+clearTimeout(timer);
+$('.wgt-navbar').removeClass('wgt-navbar-hover');
+}).on('click', 'a', function() {
+clearTimeout(timer);
+$('.wgt-navbar').removeClass('wgt-navbar-hover');
+});
+}();
+!function(){            var $ = require('wiki-common:widget/lib/jquery/jquery.js');
+            var rightCheck = require('wiki-lemma:widget/tools/rightCheck/rightCheck.js');
+
+            // 展现策略
+            rightCheck.editView('7078411', function(res) {
+                if (!res.errno) {
+                    if (res.data.edit) {
+                        $('.lemmaWgt-lemmaTitle .add-subLemma').css('display', 'inline-block');
+                        $('.top-tool .add-sub-icon').css('display', 'inline-block');
+                    }
+                } else {
+                    if ('1') {
+                        $('.lemmaWgt-lemmaTitle .add-subLemma').css('display', 'inline-block');
+                        $('.top-tool .add-sub-icon').css('display', 'inline-block');
+                    }
+                }
+            }); 
+
+            require('wiki-lemma:widget/basicElement/addSub/addSub.js')({
+                lemmaId: '7078411',
+                lemmaTitle: '游戏架构设计与策划基础',
+                lemmaDesc: '',
+                versionId: '95190265',
+                subLemmaId: '3181773'
+            });
+        }();
+!function(){        var $ = require('wiki-common:widget/lib/jquery/jquery.js');
+        var rightCheck = require('wiki-lemma:widget/tools/rightCheck/rightCheck.js');
+
+        // 展现策略
+        rightCheck.editView('7078411', function(res) {
+            if (!res.errno) {
+                if (res.data.divide) {
+                    $('.top-tool .split-icon').css('display', 'block');
+                }
+            }
+        });
+    }();
+!function(){    var nslog = require('wiki-common:widget/component/nslog/nslog.js');
+	require.async("wiki-lemma:widget/basicElement/collect/collect.js",function(collect){
+		collect({
+            newLemmaId:"7078411",
+			lemmaId:"3181773",
+			subLemmaId:"3181773"
+		});
+	});
+}();
+!function(){    var nslog = require('wiki-common:widget/component/nslog/nslog.js');
+	require.async("wiki-lemma:widget/basicElement/vote/vote.js",function(vote){
+		vote({
+			lemmaId:"3181773",
+            subLemmaId:"3181773",
+            newLemmaId:"7078411"
+		});
+	});
+}();
+!function(){    var nslog = require('wiki-common:widget/component/nslog/nslog.js');
+	!!window.BKShare && window.BKShare.regist({
+		"tag" : "top-share",
+		"bdSize" : 32,
+		"bdMini":1
+	});
+}();
+!function(){    var $ = require('wiki-common:widget/lib/jquery/jquery.js');
+    var rightCheck = require('wiki-lemma:widget/tools/rightCheck/rightCheck.js');
+
+    // 展现策略
+    rightCheck.editView('7078411', function(res) {
+        if (!res.errno) {
+            if (res.data.edit) {
+                $('.lemmaWgt-lemmaTitle .edit-lemma').css('display', 'inline-block');
+            } else {
+                $('.lemmaWgt-lemmaTitle .lock-lemma').show();
+            }
+        } else {
+            if ('1') {
+                $('.lemmaWgt-lemmaTitle .edit-lemma').css('display', 'inline-block');
+            } else {
+                $('.lemmaWgt-lemmaTitle .lock-lemma').show();
+            }
+        }
+    });
+}();
+!function(){	require('wiki-lemma:widget/lemma_content/mainContent/basicInfo/basicInfo.js')();
+}();
+!function(){    var $ = require('wiki-common:widget/lib/jquery/jquery.js');
+    var rightCheck = require('wiki-lemma:widget/tools/rightCheck/rightCheck.js');
+
+    // 展现策略
+    rightCheck.editView('7078411', function(res) {
+        if (!res.errno) {
+            if (res.data.edit) {
+                $('.para-title .edit-icon').css('display', 'block');
+            }
+        } else {
+            if ('1') {
+                $('.para-title .edit-icon').css('display', 'block');
+            }
+        }
+    });
+}();
+!function(){    var $ = require('wiki-common:widget/lib/jquery/jquery.js');
+    var rightCheck = require('wiki-lemma:widget/tools/rightCheck/rightCheck.js');
+
+    // 展现策略
+    rightCheck.editView('7078411', function(res) {
+        if (!res.errno) {
+            if (res.data.edit) {
+                $('.para-title .edit-icon').css('display', 'block');
+            }
+        } else {
+            if ('1') {
+                $('.para-title .edit-icon').css('display', 'block');
+            }
+        }
+    });
+}();
+!function(){        require.async("wiki-common:widget/lib/jquery/jquery.js",function($){
+            function openTagToggle(node) {
+                if ($(node).hasClass("collapse")) {
+                    $(node).removeClass("collapse");
+                    $("#open-tag").css("height", '22px');
+                } else {
+                    $(node).addClass("collapse");
+                    $("#open-tag").css("height", $("#open-tag-item").css("height"));
+                }
+            }
+            if (parseInt($("#open-tag-item").css("height")) <= 30) {
+                $('#open-tag-collapse').hide();
+            }
+            $("#open-tag-collapse").on("click", function () {
+                openTagToggle($("#open-tag")[0]);
+            });
+        });
+    }();
+!function(){        require('wiki-lemma:widget/lemma_content/configModule/zhixin/zhixin.js')(
+            7078411,
+            '游戏架构设计与策划基础'
+        );
+    }();
+!function(){    require.async("wiki-lemma:widget/lemma_content/mainContent/lemmaStatistics/lemmaStatistics.js",function(init){
+        init({
+            newLemmaIdEnc:"9e811c146f8df7312b92e527"
+        });
+    });
+}();
+!function(){    require.async('wiki-lemma:widget/feature/enterprise/creditModule/creditModule.js', function (app) {
+        app.init({
+            lemmaTitle: '游戏架构设计与策划基础',
+            adManager: null
+        });
+    });
+}();
+!function(){	require.async("wiki-lemma:widget/lemma_content/mainContent/sideCatalog/sideCatalog.js",function(SideCatalog){
+		new SideCatalog();
+	});
+}();
+!function(){        require.async(['wiki-lemma:widget/promotion/unionAdFromPs/unionAdFromPs.js'], function (init) {
+            init({
+                adManager: null
+            });
+        });
+    }();
+!function(){    require.async(["wiki-lemma:widget/promotion/fengchao/fengchao.js", "wiki-lemma:widget/promotion/unionAd/unionAd.js"], function (init, unionAd) {
+        init({
+            newLemmaId: "7078411",
+            lemmaTitle: "游戏架构设计与策划基础",
+            encodeLemmaTitle: "%D3%CE%CF%B7%BC%DC%B9%B9%C9%E8%BC%C6%D3%EB%B2%DF%BB%AE%BB%F9%B4%A1",
+            adManager: null
+        }, {
+            errFn: unionAd,
+            dom: $('#side_box_unionAd')
+        });
+    });
+}();
+!function(){    require.async('wiki-lemma:widget/promotion/guessLike/guessLike.js', function (app) {
+        app.init({
+            lemmaTitle: '游戏架构设计与策划基础',
+            adManager: null
+        });
+    });
+}();
+!function(){        require.async('wiki-lemma:widget/promotion/bottomAd/bottomAd.js', function (init) {
+            init({
+                sId: 'BOTTOM_PRO_AD',
+                adManager: null
+            });
+        });
+    }();
+!function(){    var $ = require('wiki-common:widget/lib/jquery/jquery.js');
+    var Dialog = require("wiki-common:widget/ui/dialog/dialog.js");
+    var userLogin = require('wiki-common:widget/component/userLogin/userLogin.js');
+    var unameFiller = require('wiki-common:widget/component/unameFiller/unameFiller.js');
+    var rightCheck = require('wiki-lemma:widget/tools/rightCheck/rightCheck.js');
+
+            var isEnterprise = false;
+        var enterpriseOwnerUserId = 0;
+    
+    var userId = 0;
+    var editUrl = '/edit/' + encodeURIComponent('游戏架构设计与策划基础') + '/' + '7078411';
+    var pgcUrl = '/enterprise/editpgc?lemmaId=7078411';
+
+    userLogin.regist({
+        onLogin: function(user) {
+            userId = user ? user.uid : 0;
+        }
+    });
+
+    function gotoEdit(url, isMidNight) {
+        if (isMidNight) {
+            Dialog.alert({
+                title: '编辑提示',
+                subMsg: '晚23:00至次日8:00，因审核系统例行维护，您提交的版本可能需要较长时间才能通过，望您谅解。',
+                onConfirm: function() {
+                    window.location.href = url;
+                }
+            });
+        } else {
+            window.location.href = url;
+        }    
+    }
+
+    function showChoseEditDialog(pgcCallback, ugcCallback) {
+        new Dialog({
+            title: '编辑提示',
+            subMsg: '<p>您已开通企业百科服务，推荐您直接编辑“官方资料”，官方资料仅限企业百科绑定的百科账号修改，其他用户账号不可修改。</p><p>如果您想修改其他网友编辑的普通词条内容，请注意遵守百科百科编辑规则。<p>',
+            btns: [{
+            key: 'pgc',
+            text: '编辑官方资料'
+            }, {
+            style: 'white',
+            text: '修改普通词条',
+            key: 'ugc'
+            }],
+            onBtnClick: function(btnKey){
+                if (btnKey === 'pgc') {
+                    pgcCallback && pgcCallback();
+                } else if (btnKey === 'ugc') {
+                    ugcCallback && ugcCallback();
+                }
+            }
+        }).show();
+    }
+
+    function checkUserLegal(res) {
+        var legal = false;
+        switch (res.errno) {
+            case 100001:
+                userLogin.showLoginPop();
+                break;
+            case 100006:
+                unameFiller.show();
+                break;
+            default:
+                legal = true;
+        }
+        return true;
+    }
+
+    function checkUgc(res, url) {
+        if (res.errno) {
+            switch (res.errno) {
+                case 100005:
+                    alert('对不起，您目前被封禁');
+                    break;
+                case 110001:
+                    alert('对不起，该词条被锁定');
+                    break;
+                case 110007:
+                    alert('对不起，消歧页无法编辑');
+                    break;
+                case 110005:
+                    Dialog.alert({
+                    title: '编辑提示',
+                    mainMsg: '对不起，您暂时没有权限编辑该词条。',
+                    subMsg: '<p>您好，该词条内容已较丰富，现仅对百科等级达到<b>四级</b>且通过率达到<b>85%</b>的科友开放编辑。</p><p>当您通过努力达到以上要求，就可以参与编辑该词条了。</p><p><img src="http://img.baidu.com/img/baike/usercenter/growuptask/star.gif" class="star" />参加<a target="_blank" href="/usercenter#guide">成长任务</a>，更快掌握百科编辑技巧，加速升级！</p>'
+                    });
+                    break;
+                case 110008:
+                    Dialog.alert({
+                    title: '编辑提示',
+                    mainMsg: '对不起，您暂时没有权限编辑该词条。',
+                    subMsg: '<p>您好，该词条内容已较丰富，现仅对百科等级达到<b>六级</b>且通过率达到<b>85%</b>的科友开放编辑。</p><p>当您通过努力达到以上要求，就可以参与编辑该词条了。</p><p><img src="http://img.baidu.com/img/baike/usercenter/growuptask/star.gif" class="star" />参加<a target="_blank" href="/usercenter#guide">成长任务</a>，更快掌握百科编辑技巧，加速升级！</p>'
+                    });
+                    break;
+                case 470001:
+                    alert('系统错误，请刷新重试');
+                    break;
+            }
+        } else {
+            if (!res.data.right.noAudit) {
+                Dialog.alert({
+                    title: '编辑提示',
+                    subMsg: '很抱歉，该词条有其他用户编辑的版本正在提交，您暂时无法编辑。<br/>百科建议您晚些时候再编辑该词条，或者尝试编辑其他的词条。'
+                });
+                return;
+            }
+            gotoEdit(url, res.data.notice.isMidNight);
+        }
+    }
+
+    $(document.body).on('click', '.j-edit-link', function() {
+        var dl = $(this).attr('data-edit-dl');
+        if (dl) {
+            var url = editUrl + '?dl=' + dl;
+        } else {
+            var url = editUrl;
+        }
+
+        rightCheck.preeditCheck('7078411', '游戏架构设计与策划基础', '游戏架构设计与策划基础', '95190265', function(res) {
+            if (!checkUserLegal(res)) {
+                return;
+            }
+            if (isEnterprise && enterpriseOwnerUserId === userId) {
+                showChoseEditDialog(function() {
+                    location.href = pgcUrl;
+                }, function() {
+                    checkUgc(res, url);
+                });
+            } else {
+                checkUgc(res, url);
+            }
+        });
+    });
+}();
+!function(){    require.async("wiki-lemma:widget/tools/searchHeader/toolButtons/toolButtons.js",function(init){
+        init({
+            lemmaId:"3181773",
+            subLemmaId:"3181773",
+            newLemmaId:"7078411"
+        });
+    });
+}();
+!function(){    require('wiki-lemma:widget/tools/searchHeader/toolButtons/userInfo.js')();
+}();
+!function(){    var $ = require('wiki-common:widget/lib/jquery/jquery.js'),
+      animation = require('wiki-common:widget/util/animation.js'),
+      initSearchbar = require('wiki-common:widget/component/searchbar/searchbar.js');
+
+    var isFadeIn = false,
+        isFadeOut = false;
+
+    var fadeInAni, fadeOutAni;
+
+    $(window).on('scroll', function(e) {
+        var scrollTop = $(this).scrollTop();
+
+        if (scrollTop > 200 && !isFadeIn && $('.lemmaWgt-searchHeader').css('display') == 'none') {
+            fadeOutAni && fadeOutAni.stop();
+            fadeInAni = animation({
+                duration: 200,
+                easing: 'linear',
+                onStart: function() {
+                    isFadeOut = false;
+                    isFadeIn = true;
+                    $('.lemmaWgt-searchHeader').css('display', 'block');
+                },
+                onStep: function(progress) {
+                    $('.lemmaWgt-searchHeader').css('opacity', progress)
+                },
+                onComplete: function(progress) {
+                    isFadeIn = false;
+                }
+            });
+        } else if (scrollTop <= 200 && !isFadeOut && $('.lemmaWgt-searchHeader').css('display') == 'block') {
+            fadeInAni && fadeInAni.stop();
+            fadeOutAni = animation({
+                duration: 300,
+                easing: 'linear',
+                onStart: function() {
+                    $('.lemmaWgt-searchHeader #suggestion').hide();
+                    isFadeIn = false;
+                    isFadeOut = true;
+                },
+                onStep: function(progress) {
+                    $('.lemmaWgt-searchHeader').css('opacity', 1 - progress);
+                },
+                onComplete: function(progress) {
+                    isFadeOut = false;
+                    $('.lemmaWgt-searchHeader').css('display', 'none');
+                }
+            });
+        }
+    });
+
+    initSearchbar($('.lemmaWgt-searchHeader'));
+}();
+!function(){    require.async("wiki-lemma:widget/tools/newSideShare/taskSideShare.js",function(taskShare){
+        taskShare.init({
+            title: '游戏架构设计与策划基础',
+            desc: "\u300a\u6e38\u620f\u67b6\u6784\u8bbe\u8ba1\u4e0e\u7b56\u5212\u57fa\u7840\u300b\u662f2010\u5e74\u6e05\u534e\u5927\u5b66\u51fa\u7248\u793e\u51fa\u7248\u7684\u56fe\u4e66\uff0c\u4f5c\u8005\u662f\u9ec4\u77f3\uff0c\u674e\u5fd7\u8fdc\uff0c\u9648\u6d2a\u3002",
+            pic: 'http:\/\/b.hiphotos.baidu.com\/baike\/w%3D268\/sign=e1e89fdd063b5bb5bed727f80ed2d523\/adaf2edda3cc7cd944ccaaaf3c01213fb90e91e7.jpg',
+            url: '',
+            qqPic: 'http:\/\/b.hiphotos.baidu.com\/baike\/whfpf%3D800%2C800%2C50\/sign=04cdd9cd4210b912bf94a5bea5c0c433\/adaf2edda3cc7cd944ccaaaf3c01213fb90e91e7.jpg'
+        });
+    });
+}();
+!function(){    var $ = require('wiki-common:widget/lib/jquery/jquery.js');
+    var nslog = require("wiki-common:widget/component/nslog/nslog.js");
+    var testElem = require('wiki-common:widget/component/testElem/testElem.js');
+    var cmsModuleLoader = require('wiki-common:widget/component/cmsModuleLoader/cmsModuleLoader.js');
+
+    function requireAsync() {
+        require.async('wiki-lemma:widget/tools/announcement/announcement.js');
+    }
+
+    cmsModuleLoader('/cms/global/lemma_config.json', [{
+        name: 'announcement',
+        script: 'wiki-lemma:widget/tools/announcement/announcement.js'
+    }]);
+
+    require.async("wiki-lemma:widget/tools/lazyLoad/lazyLoad.js", function(LazyLoad) {
+        new LazyLoad();
+    });
+
+    require.async(['wiki-common:widget/component/nslog/nslog.js', 'wiki-common:widget/lib/jquery/jquery.js'], function(nslog, $) {
+        nslog().setGlobal({
+            lemmaId: "3181773",
+            newLemmaId: "7078411",
+            subLemmaId: "3181773",
+            lemmaTitle: "游戏架构设计与策划基础"
+        });
+
+        // 词条页 pv
+        nslog(9322);
+
+        // 链接点击 pv
+        var lemmaPageRegExp = new RegExp(/\/subview\/\d+|\/view\/\d+|\/item\//i);
+        $('body').on('mousedown', 'a', function() {
+            var href = $(this).attr('href');
+            if (href && href.indexOf('/') >= 0 && href.indexOf('#') !== 0) {
+                // 链接点击 pv
+                nslog(10000001);
+                if (lemmaPageRegExp.test(href)) {
+                    // 词条页链接点击 pv
+                    nslog(10000002);
+                }
+            }
+        });
+
+        /****** 词条页站内流转需求统计 start ******/
+        (function () {
+            // 各种统计配置
+            var circulationLinkCfg = {
+                innerLink: [ // 内链
+                    '.para',
+                    '.lemmaWgt-baseInfo-simple-largeMovie',
+                    '.lemmaWgt-baseInfo-simple-largeStar',
+                    '.basic-info .basicInfo-block',
+                    '.lemma-summary',
+                    '.lemmaWgt-lemmaSummary',
+                    '.view-tip-panel',
+                    '.horizontal-module',
+                    '.lemmaWgt-roleIntroduction',
+                    '.dramaSeries .dramaSerialList',
+                    '.module-music',
+                    '.table-view',
+                    '[log-set-param="table_view"]',
+                    '.list-module',
+                    '.cell-module',
+                    '.baseBox .dl-baseinfo', // 配置后台字段
+                    '.pvBtn-box .leadPVBtnWrapper',
+                    '.drama-actor',
+                    '#staffList',
+                    '.starMovieAndTvplay',
+                    '.main_tab:not(.main_tab-defaultTab)' // 除去词条tab外的tab
+                ],
+                relationTable: '.rs-container-foot', // 关系表
+                peopleRelation: '.star-info-block.relations, .lemmaWgt-focusAndRelation', // 人物关系（明星+普通）
+                moduleActors: '.featureBaseInfo .actors, .lemmaWgt-majorActors', // 主要演员、嘉宾、主持人
+                moduleWorks: '.featureBaseInfo .works, .large-feature .works', // 代表作品
+                moduleQuarterly: '.featureBaseInfo .po_quarterly, .mian_quarterly', // 分季介绍
+                rankStar: '.rank-list.stars-rank', // 明星榜
+                rankDrama: '.drama-rank-list', // 电视剧榜
+                specialTopic: '.special-topic', // 专题模块
+                modDetailTable: '#modDetailTable', // 关系表出图
+                chuizhitu: '.chuizhitu', // 垂直化模块
+                polysemantList: '.polysemantList-wrapper' // 义项切换
+            };
+            /****** 连接统计 ******/
+            function clickNslogFn() {
+                for (var k in circulationLinkCfg) {
+                    if (k === 'innerLink') {
+                        // 词条内链到词条页
+                        var tempArr = circulationLinkCfg[k];
+                        for (var i = 0, l = tempArr.length; i < l; i++) {
+                            tempArr[i] += ' a';
+                        }
+                        var sSelector = tempArr.join(', ');
+
+                        $('body').on('mousedown', sSelector, {key: k},function(e) {
+                            var key = e.data.key;
+                            var href = $(this).attr('href');
+                            var tar = $(this).attr('target') || '';
+                            if (href && href.indexOf('/') >= 0 && href.indexOf('#') !== 0
+                            && tar === '_blank' && lemmaPageRegExp.test(href)) {
+                                // 词条页普通内链点击 pv
+                                nslog(10000004, null ,{division: key});
+                            }
+                        });
+                    } else {
+                        // 模块到词条页链接
+                        $(circulationLinkCfg[k]).on('mousedown', 'a', {key: k}, function (e) {
+                            var key = e.data.key;
+                            var href = $(this).attr('href');
+                            if (href && href.indexOf('#') !== 0 && lemmaPageRegExp.test(href)) {
+                                // 词条页配置模块链接点击 pv
+                                nslog(10000004, null, {division: key});
+                            }
+                        });
+                    }
+                }
+            }
+            // 发起统计请求
+            clickNslogFn();
+
+            /****** 各模块展现量pv ******/
+            function checkModuleIsShow() {
+                var result = [];
+                for (var k in circulationLinkCfg) {
+                    if (k !== 'innerLink' && k !== 'relationTable') {
+                        !!$(circulationLinkCfg[k]).html() && result.push(k);
+                    }
+                }
+                if (result.length > 0) {
+                    nslog(10000005, null, {showModules: result.join(',')});
+                }
+            }
+            checkModuleIsShow();
+
+        })();
+        /****** 词条页站内流转需求统计 end ******/
+
+    });
+
+    // 广告接入 wikiad 统一加载
+    // log 词条页广告被拦截情况（此处 log 请求行为）
+    nslog(70000101, window.location.href, {
+        api: 'lemma-ad',
+        action: 'request'
+    });
+    $.ajax({
+        type: 'GET',
+        url: '/api/wikiad/getsquirrels',
+        data: {
+            lemmaId: 7078411
+        },
+        cache: false,
+        dataType: 'JSON',
+        success: function (res) {
+            // log 词条页广告被拦截情况（此处 log 请求成功）
+            nslog(70000101, window.location.href, {
+                api: 'lemma-ad',
+                action: 'success'
+            });
+
+            if (!res.errno) {
+                if (res.data[5]) {
+                    require.async(['wiki-lemma:widget/promotion/rightPreciseAd/rightPreciseAd.js'], function(rightPreciseAd) {
+                        rightPreciseAd(res.data[5]);
+                        nslog(10002201, location.href, {
+                            adId: res.data[5][0].adId,
+                            adTitle: res.data[5][0].name,
+                            adPos: 5
+                        });
+                    });
+                } else if (res.data[1]) {
+                    require.async(['wiki-lemma:widget/promotion/vbaike/vbaike.js'], function(vbaike) {
+                        vbaike(res.data[1]);
+                        for(var i in res.data[1]) {
+                            nslog(10002201, location.href, {
+                                adId: res.data[1][i].adId,
+                                adTitle: res.data[1][i].name,
+                                adPos: 1
+                            });
+                        }
+                    });
+                }
+                if (res.data[9]) {
+                    require.async(['wiki-lemma:widget/promotion/rightBigAd/rightBigAd.js'], function(rightBigAd) {
+                        rightBigAd(res.data[9]);
+                            nslog(10002201, location.href, {
+                                adId: res.data[9][0].adId,
+                                adTitle: res.data[9][0].name,
+                                adPos: 9
+                            });
+                    });
+                } else if(res.data[2]) {
+                    require.async(['wiki-lemma:widget/promotion/slide/slide.js'], function(slide) {
+                        slide(res.data[2]);
+                        for(var i in res.data[2]) {
+                            nslog(10002201, location.href, {
+                                adId: res.data[2][i].adId,
+                                adTitle: res.data[2][i].name,
+                                adPos: 2
+                            });
+                        }
+                    });
+                }
+                if (res.data[3]) {
+                    require.async(['wiki-lemma:widget/promotion/topAd/topAd.js'], function(topAd) {
+                        topAd(res.data[3]);
+                        nslog(10002201, location.href, {
+                            adId: res.data[3][0].adId,
+                            adTitle: res.data[3][0].name,
+                            adPos: 3
+                        });
+                    });
+                }
+                if (res.data[4]) {
+                    require.async(['wiki-lemma:widget/promotion/rightAd/rightAd.js'], function(rightAd) {
+                        rightAd(res.data[4]);
+                        nslog(10002201, location.href, {
+                            adId: res.data[4][0].adId,
+                            adTitle: res.data[4][0].name,
+                            adPos: 4
+                        });
+                    });
+                }
+            } else {
+                return;
+            }
+
+            setTimeout(function () {
+                var elemArr = {};
+                res.data[1] && res.data[1].length > 0 && (elemArr['lemma-vbaike-ad'] = $('.lemmaWgt-promotion-vbaike .promotion_viewport a:eq(0) img').get(0));
+                res.data[2] && res.data[2].length > 0 && (elemArr['lemma-slide-ad'] = $('.lemmaWgt-promotion-slide .promotion_viewport a:eq(0) img').get(0));
+                res.data[3] && res.data[3].length > 0 && (elemArr['lemma-navbar-ad'] = {
+                    node: $('.header [nslog-type="10002202"]').get(0),
+                    validations: {
+                        'noBackgroundImage': function() {
+                            return $('.header [nslog-type="10002202"]').css('background-image').indexOf(res.data[3][0].picUrl) < 0
+                        }
+                    }
+                });
+                res.data[4] && res.data[4].length > 0 && (elemArr['lemma-side-ad'] = {
+                    node: $('.right-ad img').get(0),
+                    validations: {
+                        'noBackgroundImage': function() {
+                            return $('.right-ad img').attr('src').indexOf(res.data[4][0].picUrl) < 0
+                        }
+                    }
+                });
+
+                testElem.log(elemArr, 70000102);
+            }, 1000);
+        },
+        error: function () {
+            // log 词条页广告被拦截情况（此处 log 请求失败）
+            nslog(70000101, window.location.href, {
+                api: 'lemma-ad',
+                action: 'error'
+            });
+        }
+    });
+
+    // 设置分享内容
+    window.BKShare.setCommon({
+        bdText: "\u3010\u6e38\u620f\u67b6\u6784\u8bbe\u8ba1\u4e0e\u7b56\u5212\u57fa\u7840_\u767e\u5ea6\u767e\u79d1\u3011\u300a\u6e38\u620f\u67b6\u6784\u8bbe\u8ba1\u4e0e\u7b56\u5212\u57fa\u7840\u300b\u662f2010\u5e74\u6e05\u534e\u5927\u5b66\u51fa\u7248\u793e\u51fa\u7248\u7684\u56fe\u4e66\uff0c\u4f5c\u8005\u662f\u9ec4\u77f3\uff0c\u674e\u5fd7\u8fdc\uff0c\u9648\u6d2a\u3002.....\uff08\u5206\u4eab\u81ea@\u767e\u5ea6\u767e\u79d1\uff09",
+        bdDesc: '',
+        bdUrl: 'http:\/\/baike.baidu.com\/subview\/3181773\/3181773.htm',
+        bdPic: '',
+        onBeforeClick: function (){
+            $('.bdshare_dialog_box').hide();
+        }
+    });
+
+    // 底部投诉带入当前页面 url
+    var map = [1, 2, 4, 3];
+    $('.wgt-footer-main .suggestion').find('a').each(function(i) {
+        $(this).attr('href', 'http://tousu.baidu.com/baike/add?word=%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AD%96%E5%88%92%E5%9F%BA%E7%A1%80' + '&&submit_link=' + encodeURIComponent(window.location.href) + '#' + map[i]);
+    });
+}();
+!function(){      require('wiki-common:widget/component/psLink/psLink.js');
+    }();</script><div class="wgt_overlay" style="opacity: 0; position: fixed;"></div><dl class="wgt_dialog modal add-sub-dialog" style="display: none;">
+<dt>添加义项描述<a href="http://baike.baidu.com/view/10811633.htm" target="_blank">义项命名规则</a></dt>
+<dd class="close dialog-btn" title="关闭" btn-key="close"><em class="cmn-icon cmn-icons cmn-icons_close"></em></dd>
+<dd class="con no-icon no-sub-msg">
+<div class="add-sub">                        <div class="content-inner">                            <div class="tip">您需要给原有的义项和新增加的义项都写一个“义项描述”，让读者能分清楚同名的两个事物。</div>                            <div class="example">                                <div class="example-tit">示例</div>                                <div class="example-show">                                    <ul>                                        <li class="show-li clearfix"><div class="tit">词条名</div><div class="content">环太平洋</div></li>                                        <li class="show-li clearfix"><div class="tit">原有义项描述</div><div class="content">地理区域</div></li>                                        <li class="show-li clearfix"><div class="tit">新增义项描述</div><div class="content">2013年美国科幻电影</div></li>                                    </ul>                                </div>                            </div>                            <form action="http://baike.baidu.com/createsub/%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AD%96%E5%88%92%E5%9F%BA%E7%A1%80" method="get">                                <div class="form-item name-lemma clearfix"><label for="">词条名</label><input type="text" value="游戏架构设计与策划基础" disabled="disabled"></div>                                <div class="form-item clearfix"><label for="">原有义项描述(不大于20字)</label><input type="text" value="" name="ori_desc"></div>                                <div class="form-item clearfix"><label for="">新增义项描述(不大于20字)</label><input type="text" value="" name="desc"></div>                                <div class="form-item form-notice"><strong>[注意]</strong>如果原义项中已经罗列了多个义项的内容，那么建议您不要直接添加义项，而是<a href="http://tieba.baidu.com/p/4152042379" target="_blank">报告未拆分多义词。</a></div>                                <div class="add-sub-main-footer"><input type="submit" class="add-sub-main-button add-sub-main-accept" value="确定"><span class="add-sub-main-button add-sub-main-cancel">取消</span></div>                            </form>                        </div>                    </div>
+</dd>
+</dl>
+<script type="text/javascript">
+  var Hunter = window.Hunter || {};
+  Hunter.userConfig = Hunter.userConfig || [];
+  </script>
+<script type="text/javascript" src="./游戏架构设计与策划基础_百度百科_files/baike.js" defer=""></script><script type="text/javascript">
+  // DOM Ready时，统计用户可操作时间。
+  alog('speed.set', 'drt', +new Date);
+
+  // 配置 PD 监控。
+  window.alogObjectConfig = {
+    product: '103',
+    page: '103_1',
+    monkey_page: '',
+    speed_page: '',
+    speed: {
+      sample: '0.008'
+    },
+    monkey: {
+      sample: '1',
+      hid: '1533'
+    },
+    exception: { 
+      sample: '0.004'
+    },
+    feature: {
+      sample: '0.004'
+    },
+    csp: {
+      sample: '0.008',
+      'default-src': [
+        {match: '*.baidu.com,*.bdimg.com,localhost', target: 'Accept'},
+        {match: '*', target: 'Accept,Warn'}
+      ]
+    }
+  };
+
+  void function(a,b,c,d,e,f){function g(b){a.attachEvent?a.attachEvent("onload",b,!1):a.addEventListener&&a.addEventListener("load",b)}function h(a,c,d){d=d||15;var e=new Date;e.setTime((new Date).getTime()+1e3*d),b.cookie=a+"="+escape(c)+";path=/;expires="+e.toGMTString()}function i(a){var c=b.cookie.match(new RegExp("(^| )"+a+"=([^;]*)(;|$)"));return null!=c?unescape(c[2]):null}function j(){var a=i("PMS_JT");if(a){h("PMS_JT","",-1);try{a=a.match(/{["']s["']:(\d+),["']r["']:["']([\s\S]+)["']}/),a=a&&a[1]&&a[2]?{s:parseInt(a[1]),r:a[2]}:{}}catch(c){a={}}a.r&&b.referrer.replace(/#.*/,"")!=a.r||alog("speed.set","wt",a.s)}}if(a.alogObjectConfig){var k=a.alogObjectConfig.sample,l=a.alogObjectConfig.rand;if("https:"===a.location.protocol){if(d="https://gss2.bdstatic.com/70cFsjip0QIZ8tyhnq"+d,!k||!l)return}else d="http://img.baidu.com"+d;k&&l&&l>k||(g(function(){alog("speed.set","lt",+new Date),e=b.createElement(c),e.async=!0,e.src=d+"?v="+~(new Date/864e5),f=b.getElementsByTagName(c)[0],f.parentNode.insertBefore(e,f)}),j())}}(window,document,"script","/hunter/alog/dp.min.js");
+</script>
+
+<audio controls="controls" style="display: none;"></audio><div style="position: static; width: 0px; height: 0px; border: none; padding: 0px; margin: 0px;"><div id="trans-tooltip"><div id="tip-left-top" style="background: url(chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-left-top.png);"></div><div id="tip-top" style="background: url(chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-top.png) repeat-x;"></div><div id="tip-right-top" style="background: url(chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-right-top.png);"></div><div id="tip-right" style="background: url(chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-right.png) repeat-y;"></div><div id="tip-right-bottom" style="background: url(chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-right-bottom.png);"></div><div id="tip-bottom" style="background: url(chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-bottom.png) repeat-x;"></div><div id="tip-left-bottom" style="background: url(chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-left-bottom.png);"></div><div id="tip-left" style="background: url(chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-left.png);"></div><div id="trans-content"></div></div><div id="tip-arrow-bottom" style="background: url(chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-arrow-bottom.png);"></div><div id="tip-arrow-top" style="background: url(chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-arrow-top.png);"></div></div><div class="wgt_bubble wgt-bubble-userMenu" style="display: none;"><ul>
+<li class="top"><a href="http://baike.baidu.com/usercenter" target="_blank">我的百科</a></li>
+<li><a href="http://baike.baidu.com/usercenter/tasks#mine" target="_blank">我的任务</a></li>
+<li><a href="http://baike.baidu.com/usercenter/lemmas" target="_blank">我的词条</a></li>
+<li><a href="http://passport.baidu.com/center" target="_blank">账号设置</a></li>
+<li class="bottom logout"><a data-action="logout" href="javascript:;">退出</a></li>
+</ul><em class="tail"></em></div><div class="wgt_bubble wgt-bubble-userMsg" style="display: none;"><ul>
+<li class="top"><a href="http://baike.baidu.com/messages" target="_blank"><span class="userMsgType">通知</span></a></li><li class="bottom"><a href="https://gsp0.baidu.com/8_UFsjip0QIZ8tyhnq/" target="_blank"><span class="userMsgType">私信</span></a></li>
+</ul><em class="tail"></em></div><div id="wsggg-alert-9424" style="right: 20px !important; bottom: 15px !important; cursor: pointer; background: rgb(119, 119, 119) !important;">百度网盟<br>百度分享<br>百度广告管家<br>腾讯分析<br></div></body><style type="text/css">#yddContainer{display:block;font-family:Microsoft YaHei;position:relative;width:100%;height:100%;top:-4px;left:-4px;font-size:12px;border:1px solid}#yddTop{display:block;height:22px}#yddTopBorderlr{display:block;position:static;height:17px;padding:2px 28px;line-height:17px;font-size:12px;color:#5079bb;font-weight:bold;border-style:none solid;border-width:1px}#yddTopBorderlr .ydd-sp{position:absolute;top:2px;height:0;overflow:hidden}.ydd-icon{left:5px;width:17px;padding:0px 0px 0px 0px;padding-top:17px;background-position:-16px -44px}.ydd-close{right:5px;width:16px;padding-top:16px;background-position:left -44px}#yddKeyTitle{float:left;text-decoration:none}#yddMiddle{display:block;margin-bottom:10px}.ydd-tabs{display:block;margin:5px 0;padding:0 5px;height:18px;border-bottom:1px solid}.ydd-tab{display:block;float:left;height:18px;margin:0 5px -1px 0;padding:0 4px;line-height:18px;border:1px solid;border-bottom:none}.ydd-trans-container{display:block;line-height:160%}.ydd-trans-container a{text-decoration:none;}#yddBottom{position:absolute;bottom:0;left:0;width:100%;height:22px;line-height:22px;overflow:hidden;background-position:left -22px}.ydd-padding010{padding:0 10px}#yddWrapper{color:#252525;z-index:10001;background:url(chrome-extension://eopjamdnofihpioajgfdikhhbobonhbb/ab20.png);}#yddContainer{background:#fff;border-color:#4b7598}#yddTopBorderlr{border-color:#f0f8fc}#yddWrapper .ydd-sp{background-image:url(chrome-extension://eopjamdnofihpioajgfdikhhbobonhbb/ydd-sprite.png)}#yddWrapper a,#yddWrapper a:hover,#yddWrapper a:visited{color:#50799b}#yddWrapper .ydd-tabs{color:#959595}.ydd-tabs,.ydd-tab{background:#fff;border-color:#d5e7f3}#yddBottom{color:#363636}#yddWrapper{min-width:250px;max-width:400px;}</style></html>

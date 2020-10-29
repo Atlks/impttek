@@ -1,0 +1,264 @@
+Date: Tue, 21 May 2019 14:49:43 +0800 (GMT+08:00)
+Message-ID: <620676019.9503.1558421383734@[192.168.1.104]>
+Subject: =?GBK?Q?sum_doc_all_txtver_n_all_txt_doc_notbek/sum_doc_all_txtver_no?=
+ =?GBK?Q?tbek/Atitit_=B4=F3js?=
+ =?GBK?Q?on=CE=C4=BC=FE=B5=C4=BD=E1=B9=B9=BB=AF?=
+ =?GBK?Q?=B2=E9=BF=B4=BD=E2=BE=F6=B7=BD=B0=B8,=B8=DF?=
+ =?GBK?Q?=D0=D4=C4=DC=B5=C4jsonview__attilax=D7=DC=BD=E1.docx.txt?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=GBK
+Content-Transfer-Encoding: quoted-printable
+
+Atitit =E5=A4=A7json=E6=96=87=E4=BB=B6=E7=9A=84=E7=BB=93=E6=9E=84=E5=8C=96=
+=E6=9F=A5=E7=9C=8B=E8=A7=A3=E5=86=B3=E6=96=B9=E6=A1=88,=E9=AB=98=E6=841=A47=
+=A7=E8=83=BD=E7=9A=84jsonview  attilax=E6=80=BB=E7=BB=93.docx
+
+
+
+=091.1. =E5=AE=9E=E7=8E=B0=E7=9B=AE=E6=A0=87=EF=BC=841=A47=091
+=091.2. =E5=AE=9E=E7=8E=B0key=E4=B8=8Evalue=E7=B1=BB=E5=9E=8B=E7=9A=84=E3=
+=841=A47=82=E3=841=A47=82=E4=B8=80=E7=9B=B4=E5=88=86=E6=9E=90=E5=88=B0=E9=
+=9D=841=A47 jsonobject jsonarray=E4=BD=8D=E7=BD=AE=E3=80=82=E3=841=A47=841=
+=A47=091
+=091.3. =E7=8E=B0=E5=AD=98=E9=97=AE=E9=A2=98  fastjson=E4=BD=BF=E7=94=A8str=
+ing=E6=A0=BC=E5=BC=8F=E7=9A=84=E5=86=85=E5=AE=B9=EF=BC=8C=E5=AF=BC=E8=87=B4=
+=E6=96=87=E4=BB=B6=E5=86=85=E5=AE=B9=E5=A4=A7=E5=B0=8F=E4=BE=9D=E7=84=B6=E5=
+=AD=98=E5=9C=A8=E4=B8=8A=E9=99=90=E3=80=82=E3=841=A47=841=A47=091
+=091.4. =E6=95=88=E6=9E=9C=092
+=091.5. =E5=8F=82=E8=841=A47=83=E8=B5=84=E6=96=841=A47=094
+
+
+
+
+=E9=80=89=E5=9E=8B=E4=BA=86=E5=BE=88=E5=A4=9Ajsonviewer=EF=BC=8C=E5=8F=AA=
+=E8=83=BD=E5=AF=B9=E5=B0=8F=E6=95=B0=E6=8D=AE=E9=87=8F=E7=9A=84=E6=96=87=E4=
+=BB=B6=E7=94=9F=E6=95=88=E3=841=A47=82=E3=841=A47=82=E4=B8=80=E6=97=A6=E6=
+=B6=89=E5=8F=8A=E5=88=B09M=E5=B7=A6=E5=8F=B3=E7=9A=84json=E6=96=87=E4=BB=B6=
+=EF=BC=8C=E5=B0=B1=E9=83=BD=E7=BB=9F=E7=BB=9F=E6=AD=87=E8=8F=9C=E4=BA=86=E3=
+=80=82=E3=841=A47=841=A47
+
+=E5=8F=AA=E5=A5=BD=E8=87=AA=E5=B7=B1=E5=8A=A8=E6=89=8B=E5=86=99jsonview =E5=
+=B7=A5=E5=85=B7=E3=80=82=E3=841=A47=841=A47
+D:\0workspace\atiplat_restapi\src\com\attilax\json\JsonViewBigFile.java
+=E5=AE=9E=E7=8E=B0=E7=9B=AE=E6=A0=87=EF=BC=841=A47
+=E8=BF=87=E5=A4=9A=E7=9A=841=A47 array =E5=8F=AA=E8=B1=A1=E5=BE=81=E6=841=
+=A47=A7=E7=9A=84=E6=88=AA=E5=8F=962=E4=B8=AA=E5=88=86=E6=9E=90=E5=8D=B3=E5=
+=8F=AF=E3=841=A47=82=E3=841=A47=841=A47
+=E6=8A=BD=E5=8F=96json=E9=AA=A8=E6=9E=B6=E3=80=82=E3=841=A47=841=A47
+=E5=AE=9E=E7=8E=B0key=E4=B8=8Evalue=E7=B1=BB=E5=9E=8B=E7=9A=84=E3=841=A47=
+=82=E3=841=A47=82=E4=B8=80=E7=9B=B4=E5=88=86=E6=9E=90=E5=88=B0=E9=9D=841=A4=
+7 jsonobject jsonarray=E4=BD=8D=E7=BD=AE=E3=80=82=E3=841=A47=841=A47
+
+
+=E7=8E=B0=E5=AD=98=E9=97=AE=E9=A2=98  fastjson=E4=BD=BF=E7=94=A8string=E6=
+=A0=BC=E5=BC=8F=E7=9A=84=E5=86=85=E5=AE=B9=EF=BC=8C=E5=AF=BC=E8=87=B4=E6=96=
+=87=E4=BB=B6=E5=86=85=E5=AE=B9=E5=A4=A7=E5=B0=8F=E4=BE=9D=E7=84=B6=E5=AD=98=
+=E5=9C=A8=E4=B8=8A=E9=99=90=E3=80=82=E3=841=A47=841=A47
+=E4=B8=8D=E8=BF=87=E4=B8=8A=E9=99=90=E5=BA=94=E8=AF=A5=E5=9C=841=A47 50M=E5=
+=B7=A6=E5=8F=B3=E4=BA=86=E3=841=A47=82=E3=841=A47=841=A47
+
+=E6=95=88=E6=9E=9C
+
+
+{
+=09"code": "java.lang.String",
+=09"msg": "java.lang.String",
+=09"result": {
+=09=09"deptMembers": [{
+=09=09=09=09"deptId": "java.lang.String",
+=09=09=09=09"displayName": "java.lang.String",
+=09=09=09=09"duty": {
+=09=09=09=09=09"dutyName": "java.lang.String"
+=09=09=09=09},
+=09=09=09=09"managerId": "java.lang.Integer",
+=09=09=09=09"status": "java.lang.String",
+=09=09=09=09"timestamp": "java.lang.Long",
+=09=09=09=09"useId": "java.lang.String",
+=09=09=09=09"user": {
+=09=09=09=09=09"birthday": "java.lang.String",
+=09=09=09=09=09"email": "java.lang.String",
+=09=09=09=09=09"gesch": "java.lang.String",
+=09=09=09=09=09"icnum": "java.lang.String",
+=09=09=09=09=09"id": "java.lang.String",
+=09=09=09=09=09"isOaUser": "java.lang.Integer",
+=09=09=09=09=09"joinDate": "java.lang.String",
+=09=09=09=09=09"nickname": "java.lang.String",
+=09=09=09=09=09"orgeh": "java.lang.String",
+=09=09=09=09=09"persk": "java.lang.String",
+=09=09=09=09=09"perskTxt": "java.lang.String",
+=09=09=09=09=09"phone": "java.lang.String",
+=09=09=09=09=09"plans": "java.lang.String",
+=09=09=09=09=09"plansTxt": "java.lang.String",
+=09=09=09=09=09"portraitUri": "java.lang.String",
+=09=09=09=09=09"region": "java.lang.String",
+=09=09=09=09=09"tel": "java.lang.String",
+=09=09=09=09=09"werks": "java.lang.String",
+=09=09=09=09=09"workaddress": "java.lang.String",
+=09=09=09=09=09"zhrjg": "java.lang.String",
+=09=09=09=09=09"zwtype": "java.lang.String",
+=09=09=09=09=09"zwtypeTxt": "java.lang.String"
+=09=09=09=09}
+=09=09=09}, {
+=09=09=09=09"deptId": "java.lang.String",
+=09=09=09=09"displayName": "java.lang.String",
+=09=09=09=09"duty": {
+=09=09=09=09=09"dutyName": "java.lang.String"
+=09=09=09=09},
+=09=09=09=09"managerId": "java.lang.Integer",
+=09=09=09=09"status": "java.lang.String",
+=09=09=09=09"timestamp": "java.lang.Long",
+=09=09=09=09"useId": "java.lang.String",
+=09=09=09=09"user": {
+=09=09=09=09=09"birthday": "java.lang.String",
+=09=09=09=09=09"email": "java.lang.String",
+=09=09=09=09=09"gesch": "java.lang.String",
+=09=09=09=09=09"icnum": "java.lang.String",
+=09=09=09=09=09"id": "java.lang.String",
+=09=09=09=09=09"isOaUser": "java.lang.Integer",
+=09=09=09=09=09"joinDate": "java.lang.String",
+=09=09=09=09=09"nickname": "java.lang.String",
+=09=09=09=09=09"orgeh": "java.lang.String",
+=09=09=09=09=09"persk": "java.lang.String",
+=09=09=09=09=09"perskTxt": "java.lang.String",
+=09=09=09=09=09"phone": "java.lang.String",
+=09=09=09=09=09"plans": "java.lang.String",
+=09=09=09=09=09"plansTxt": "java.lang.String",
+=09=09=09=09=09"portraitUri": "java.lang.String",
+=09=09=09=09=09"region": "java.lang.String",
+=09=09=09=09=09"tel": "java.lang.String",
+=09=09=09=09=09"werks": "java.lang.String",
+=09=09=09=09=09"workaddress": "java.lang.String",
+=09=09=09=09=09"zhrjg": "java.lang.String",
+=09=09=09=09=09"zwtype": "java.lang.String",
+=09=09=09=09=09"zwtypeTxt": "java.lang.String"
+=09=09=09=09}
+=09=09=09}
+=09=09],
+=09=09"depts": [{
+=09=09=09=09"deptName": "java.lang.String",
+=09=09=09=09"id": "java.lang.String",
+=09=09=09=09"parentId": "java.lang.String",
+=09=09=09=09"sort": "java.lang.Integer",
+=09=09=09=09"status": "java.lang.String",
+=09=09=09=09"timestamp": "java.lang.Long"
+=09=09=09}, {
+=09=09=09=09"deptName": "java.lang.String",
+=09=09=09=09"id": "java.lang.String",
+=09=09=09=09"parentId": "java.lang.String",
+=09=09=09=09"sort": "java.lang.Integer",
+=09=09=09=09"status": "java.lang.String",
+=09=09=09=09"timestamp": "java.lang.Long"
+=09=09=09}
+=09=09],
+=09=09"timestamp": "java.lang.Long"
+=09}
+}
+
+=E5=8F=82=E8=841=A47=83=E8=B5=84=E6=96=841=A47
+
+Atitit =E8=BD=BB=E9=87=8F=E7=BA=A7json=E6=9F=A5=E7=9C=8B=E5=99=841=A47
+
+Sublime3=E5=A5=BD=E5=83=8F=E6=B2=A1=E6=9C=89
+Scite2.3 =E5=A5=BD=E4=BA=9B=E4=B9=9F=E6=B2=A1=E3=80=841=A47
+Notepad++ =E9=BB=98=E8=AE=A4=E4=B9=9F=E6=B2=A1=E3=80=82=E6=8F=92=E4=BB=B6=
+=E9=83=BD=E6=89=BE=E4=B8=8D=E5=88=B0=E4=BA=86  "JSON Viewer"=E9=80=89=EF=BC=
+=8C=EF=BC=8C=E5=B0=B1=E5=9C=A8jstool=E9=87=8C=E9=9D=A2=E4=BA=86=E3=841=A47=
+=82=E3=841=A47=841=A479M=E6=96=87=E4=BB=B6=E6=9F=A5=E7=9C=8B=E5=8D=A1=E6=AD=
+=BB=E3=80=82=E3=841=A47=841=A47
+
+Jsonview=E7=8B=AC=E7=AB=8B=E7=9A=84exe=E3=80=82=E3=841=A47=82=E4=B8=8D=E8=
+=A1=8C=E3=841=A47=841=A479M=E6=9F=A5=E7=9C=8B=E4=BC=9A=E5=A4=B1=E8=B4=A5=E3=
+=841=A47=82=E3=841=A47=82=E3=841=A47=82=E5=B0=8F=E6=96=87=E4=BB=B6=E5=8F=AF=
+=E4=BB=A5=E3=80=82=E3=841=A47=841=A47
+
+Ff d Jsonview=E6=8F=92=E4=BB=B6=E4=B8=8D=E8=A1=8C=E5=95=8A=E3=841=A47=82=E5=
+=8D=A1=E7=9A=84=E8=A6=81=E6=AD=BB=E3=841=A47=82=E3=841=A47=82=E5=A4=A7=E6=
+=96=87=E4=BB=B6=E4=B8=8D=E8=A1=8C=E3=80=841=A47
+=E4=B8=89=E6=AC=BEJson=E6=9F=A5=E7=9C=8B=E5=B0=8F=E5=B7=A5=E5=85=841=A47 - =
+preftest - =E5=8D=9A=E5=AE=A2=E5=9B=841=A47.html
+
+
+
+=E4=BD=9C=E8=841=A47=841=A47::=C2=A0=E7=BB=B0=E5=8F=B7:=E8=80=81=E5=93=87=
+=E7=9A=84=E7=88=AA=E5=AD=90claw of Eagle=C2=A0=E5=81=B6=E5=83=8F=E7=A0=B4=
+=E5=9D=8F=E8=80=85Iconoclast image-smasher
+=E6=8D=95=E9=B8=9F=E7=8E=841=A47"Bird Catcher =C2=A0kok=C2=A0=C2=A0=E8=99=
+=94=E8=AF=9A=E8=80=85Pious=C2=A0=E5=AE=97=E6=95=99=E4=BF=A1=E4=BB=B0=E6=8D=
+=8D=E5=8D=AB=E8=80=85=C2=A0Defender Of the Faith.=C2=A0=E5=8D=A1=E6=8B=89=
+=E5=8D=A1=E6=8B=89=E7=BA=A2=E6=96=97=E7=AF=B7=C2=A0Caracalla red cloak=C2=
+=A0=E4=B8=87=E5=85=BD=E4=B9=8B=E7=8E=8B
+=E7=AE=841=A47=E7=A7=B0=EF=BC=9A=EF=BC=9A=C2=A0Emir Attilax Akbar=C2=A0=E5=
+=9F=83=E7=B1=B3=E5=B0=841=A47 =E9=98=BF=E6=8F=90=E6=8B=89=E5=85=8B=E6=96=84=
+1=A47 =E9=98=BF=E5=85=8B=E5=B7=841=A47
+=E5=85=A8=E5=90=8D=EF=BC=9A=EF=BC=9AEmir Attilax Akbar bin Mahmud bin =C2=
+=A0attila bin Solomon bin adam Al Rapanui=C2=A0=E5=9F=83=E7=B1=B3=E5=B0=841=
+=A47 =E9=98=BF=E6=8F=90=E6=8B=89=E5=85=8B=E6=96=841=A47 =E9=98=BF=E5=85=8B=
+=E5=B7=841=A47 =E6=9C=841=A47 =E9=A9=AC=E5=93=88=E8=8C=82=E5=BE=B7 =E6=9C=
+=841=A47 =E9=98=BF=E6=8F=90=E6=8B=841=A47 =E6=9C=841=A47 =E6=89=841=A47=E7=
+=BD=97=E9=97=A8 =E6=9C=AC=E4=BA=9A=E5=BD=841=A47 =C2=A0=E9=98=BF=E5=B0=94 =
+=E6=8B=89=E5=B8=95=E5=8A=AA=E4=BC=8A
+=E5=B8=B8=E7=94=A8=E5=90=8D=EF=BC=9A=E8=89=BE=E6=8F=90=E6=8B=89=EF=BC=88=E8=
+=89=BE=E9=BE=99=EF=BC=89=EF=BC=8C=C2=A0=C2=A0EMAIL:1466519819@qq.com
+=C2=A0
+=C2=A0
+=E5=A4=B4=E8=A1=94=EF=BC=9Auke=E6=80=BB=E9=83=A8o2o=E8=B4=9F=E8=B4=A3=E4=BA=
+=BA=EF=BC=8C=E5=85=A8=E7=90=83=E7=BD=91=E6=A0=BC=E5=8C=96=E9=A1=B9=E7=9B=AE=
+=E5=88=9B=E5=A7=8B=E4=BA=BA=EF=BC=841=A47
+uke=E4=BA=A4=E5=8F=8B=E5=8D=8F=E4=BC=9A=E4=BC=9A=E9=95=BF=C2=A0=C2=A0uke=E6=
+=8D=95=E7=8C=8E=E5=8D=8F=E4=BC=9A=E4=BC=9A=E9=95=BF=C2=A0Emir=C2=A0Uke=E9=
+=83=A8=E8=90=BD=E9=A6=96=E5=B8=AD=E5=A4=A7=E9=85=8B=E9=95=BF=EF=BC=8C
+=C2=A0
+uke=E5=AE=97=E6=95=99=E4=B8=8E=E6=96=87=E5=8C=96=E8=9E=8D=E5=90=88=E4=BA=8B=
+=E5=8A=A1=E9=83=A8=E9=83=A8=E9=95=BF=EF=BC=8C=C2=A0uke=E5=AE=97=E6=95=99=E6=
+=94=B9=E9=9D=A9=E5=A7=94=E5=91=98=E4=BC=9A=E5=89=AF=E4=B8=BB=E5=B8=AD
+uke=E5=88=B6=E5=BA=A6=E4=B8=8E=E9=87=8D=E5=A4=A7=E4=BC=9A=E8=AE=AE=E5=A7=94=
+=E5=91=98=E4=BC=9A=E5=A7=94=E5=91=98=E9=95=BF=EF=BC=8Cuke=E4=BF=9D=E5=AE=89=
+=E9=83=A8=E9=A6=96=E5=B8=AD=E5=A4=A7=E9=98=9F=E9=95=BF,uke=E5=88=B6=E5=BA=
+=A6=E6=A3=841=A47=E6=9F=A5=E5=A7=94=E5=91=98=E4=BC=9A=E5=89=AF=E4=BC=9A=E9=
+=95=BF=EF=BC=8C
+=C2=A0
+uke=C2=A0=E9=A6=96=E5=B8=ADcto =C2=A0=C2=A0=E8=BD=AF=E4=BB=B6=E9=83=A8=E9=
+=97=A8=E6=80=BB=E7=9B=91 =E6=8A=841=A47=E6=9C=AF=E9=83=A8=E5=89=AF=E6=841=
+=A47=BB=E7=9B=91 =C2=A0=E7=A0=94=E5=8F=91=E9=83=A8=E9=97=A8=E6=80=BB=E7=9B=
+=91=E4=B8=BB=E7=AE=A1 =C2=A0=E4=BA=A7=E5=93=81=E9=83=A8=E5=89=AF=E7=BB=8F=
+=E7=90=86 =E9=A1=B9=E7=9B=AE=E9=83=A8=E5=89=AF=E7=BB=8F=E7=90=86=C2=A0=C2=
+=A0=C2=A0uke=E7=A7=91=E6=8A=80=E7=A0=94=E7=A9=B6=E9=99=A2=E9=99=A2=E9=95=BF=
+uke=E8=BD=AF=E4=BB=B6=E5=9F=B9=E8=AE=AD=E5=A4=A7=E5=B8=88
+=C2=A0
+uke=E6=B3=A2=E5=88=A9=E5=B0=BC=E8=A5=BF=E4=BA=9A=E5=8C=BA=E5=A4=A7=E5=8C=BA=
+=E8=BF=9E=E9=94=81=E8=B4=9F=E8=B4=A3=E4=BA=841=A47 =E6=B1=A4=E5=8A=A0=E7=8E=
+=8B=E5=9B=BD=E5=8C=BA=E5=9F=9F=E8=B4=9F=E8=B4=A3=E4=BA=BA=C2=A0uke=E5=85=8B=
+=E5=B0=94=E6=A0=BC=E4=BC=A6=E7=BE=A4=E5=B2=9B=E5=8C=BA=E8=BF=9E=E9=94=81=E8=
+=B4=9F=E8=B4=A3=E4=BA=BA=EF=BC=8C=E8=8E=B1=E6=81=A9=E7=BE=A4=E5=B2=9B=E5=8C=
+=BA=E8=BF=9E=E9=94=81=E8=B4=9F=E8=B4=A3=E4=BA=BA=EF=BC=8Cuke=E5=B8=83=E7=BB=
+=B4=E5=B2=9B=E5=92=8C=E5=8D=97=E4=B9=94=E6=B2=BB=E4=BA=9A=E5=92=8C=E5=8D=97=
+=E6=A1=91=E5=A8=81=E5=A5=87=E7=BE=A4=E5=B2=9B=E5=A4=A7=E5=8C=BA=E8=BF=9E=E9=
+=94=81=E8=B4=9F=E8=B4=A3=E4=BA=BA
+=C2=A0Uke=E8=BD=AF=E4=BB=B6=E6=A0=87=E5=87=86=E5=8C=96=E5=8D=8F=E4=BC=9A=E7=
+=90=86=E4=BA=8B=E9=95=BF=E7=90=86=E4=BA=8B=E9=95=BF=C2=A0Uke=C2=A0=E6=95=B0=
+=E6=8D=AE=E5=BA=93=E4=B8=8E=E5=AD=98=E5=82=A8=E6=A0=87=E5=87=86=E5=8C=96=E5=
+=8D=8F=E4=BC=9A=E5=89=AF=E4=BC=9A=E9=95=BF
+=C2=A0
+uke=E7=BB=88=E8=BA=AB=E6=95=99=E8=82=B2=E5=AD=A6=E6=A0=A1=E5=89=AF=E6=A0=A1=
+=E9=95=841=A47 =C2=A0=C2=A0Uke=E5=8C=BB=E9=99=A2 =E4=B8=8E=E5=8C=BB=E5=AD=
+=A6=E9=99=A2=E6=96=B9=E9=9D=A2=E7=9A=84=E5=88=9B=E5=A7=8B=E4=BA=BA
+=C2=A0uec=E5=AD=A6=E9=99=A2=E6=A0=A1=E9=95=BF=EF=BC=8C=C2=A0uecip=E5=9B=BE=
+=E5=83=8F=E5=A4=84=E7=90=86=E6=9C=BA=E5=99=A8=E8=A7=86=E8=A7=89=E4=B8=93=E4=
+=B8=9A=E7=B3=BB=E4=B8=BB=E4=BB=841=A47 =C2=A0=C2=A0uke=E6=96=87=E6=A1=A3=E6=
+=A3=841=A47=E7=B4=A2=E4=B8=93=E4=B8=9A=E7=B3=BB=E4=B8=BB=E4=BB=BB
+Uke=E5=9B=BE=E5=83=8F=E5=A4=84=E7=90=86=E4=B8=8E=E6=9C=BA=E5=99=A8=E8=A7=86=
+=E8=A7=89=E5=AD=A6=E9=99=A2=E9=A6=96=E5=B8=AD=E9=99=A2=E9=95=841=A47
+Uke=C2=A0=E6=88=B7=E5=A4=96=E8=BF=90=E5=8A=A8=E5=8D=8F=E4=BC=9A=E7=90=86=E4=
+=BA=8B=E9=95=841=A47 =C2=A0=E5=BA=A6=E5=81=87=E6=9D=91=E9=A6=96=E5=B8=AD=E5=
+=A4=A7=E6=9D=91=E9=95=BF =C2=A0=C2=A0uke=E5=87=BA=E7=89=88=E7=A4=BE=E7=BC=
+=96=E8=BE=91=E6=841=A47=BB=E7=BC=96
+=C2=A0
+=E8=BD=AC=E8=BD=BD=E8=AF=B7=E6=B3=A8=E6=98=8E=E6=9D=A5=E6=BA=90=EF=BC=9Aatt=
+ilax=E7=9A=84=E4=B8=93=E6=A0=841=A47 =C2=A0?http://blog.csdn.net/attilax
+--Atiend=C2=A0=C2=A0v8
+
+
+
+sum doc all txtver n all txt doc notbek/sum doc all txtver notbek/Atitit =
+=B4=F3json=CE=C4=BC=FE=B5=C4=BD=E1=B9=B9=BB=AF=B2=E9=BF=B4=BD=E2=BE=F6=B7=
+=BD=B0=B8,=B8=DF=D0=D4=C4=DC=B5=C4jsonview  attilax=D7=DC=BD=E1.docx.txt
