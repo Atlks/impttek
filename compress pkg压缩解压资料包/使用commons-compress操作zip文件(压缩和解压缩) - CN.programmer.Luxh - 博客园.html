@@ -1,0 +1,354 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>使用commons-compress操作zip文件(压缩和解压缩) - CN.programmer.Luxh - 博客园</title>
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=-hy83QNg62d4qYibixJzxMJkbf1P9fTBlqv7SK5zVL01"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/HabaHaba/bundle-HabaHaba.css?v=UPtVEp5c5COz7ailJedUlYBaufBzZ-ATkRtra5Su1jc1"/>
+<link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/HabaHaba/bundle-HabaHaba-mobile.css?v=d9LctKHRIQp9rreugMcQ1-UJuq_j1fo0GZXTXj8Bqrk1"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/luxh/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/luxh/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/luxh/wlwmanifest.xml"/>
+<script src="//common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+<script type="text/javascript">var currentBlogApp = 'luxh', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="/bundles/blog-common.js?v=d16NGD79qD3qnJt25hXDZ2sGoojamz2W5Rl4vT0CGVg1" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<table width="100%" class="Framework" cellspacing="0" cellpadding="0">
+	<tr>
+		<td colspan="2">
+			
+<div id="top">
+<table width="100%" cellpadding="8" cellspacing="0">
+	<tr>
+		<td nowrap>
+			<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/luxh/">北在北方</a></h1>
+			    太白枝头看，花开不计年，杯中浮日月，楼外是青天。
+
+		</td>
+	</tr>
+</table>
+</div>
+<div id="sub"><div id="blog_stats">
+<div class="BlogStats">posts - 191, comments - 234, trackbacks - 0, articles - 0</div></div></div>
+
+
+</td>
+	</tr>
+	<tr>
+		<td class="LeftCell">
+			<div id="leftmenu">
+                
+                    
+<h3>导航</h3>
+<ul>
+	<li>
+		<a id="blog_nav_sitehome" href="http://www.cnblogs.com/">博客园</a>
+	<li>
+		<a id="blog_nav_myhome" href="http://www.cnblogs.com/luxh/">首页</a>
+	<li>
+		<a id="blog_nav_newpost" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a>
+	<li>
+		<a id="blog_nav_contact" accesskey="9" rel="nofollow" href="https://msg.cnblogs.com/send/CN.programmer.Luxh">联系</a>
+	<li>
+		<a id="blog_nav_rss_image" href="http://www.cnblogs.com/luxh/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a><a id="blog_nav_rss" href="http://www.cnblogs.com/luxh/rss">订阅</a>
+	<li>
+		<a id="blog_nav_admin" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+
+                    
+<h3>公告</h3>
+<div id="news">
+	<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+                    <div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script>
+                    <div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+                	        
+			</div>
+		</td>
+		<td class="MainCell" width="100%">
+			<div id="main">
+				
+<div id="post_detail">
+	<div class="post">
+		<div class="posthead">
+			<h2>
+				<a id="cb_post_title_url" class="singleposttitle" href="http://www.cnblogs.com/luxh/archive/2012/06/28/2568758.html">使用commons-compress操作zip文件(压缩和解压缩)</a>
+			</h2>
+ 			Posted on <span id="post-date">2012-06-28 21:46</span> <a href='http://www.cnblogs.com/luxh/'>CN.programmer.Luxh</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>)  <a href ="https://i.cnblogs.com/EditPosts.aspx?postid=2568758" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(2568758);return false;">收藏</a>
+			<script type="text/javascript">var allowComments=true,cb_blogId=117509,cb_entryId=2568758,cb_blogApp=currentBlogApp,cb_blogUserGuid='1ffb8df5-769d-e111-aa3f-842b2b196315',cb_entryCreatedDate='2012/6/28 21:46:00';loadViewCount(cb_entryId);var cb_postType=1;</script>
+			
+		</div>
+		<div class="postbody"><div id="cnblogs_post_body" class="blogpost-body"><p>　<span style="font-family: verdana,geneva; font-size: 13px;">　Apache Commons Compress是一个压缩、解压缩文件的类库。</span></p>
+<p><span style="font-family: verdana,geneva; font-size: 13px;">　　可以操作ar, cpio, Unix dump, tar, zip, gzip, XZ, Pack200 and bzip2格式的文件，功能比较强大。</span></p>
+<p><span style="font-family: verdana,geneva; font-size: 13px;">　　在这里写两个用Commons Compress把文件压缩成zip和从zip解压缩的方法。</span></p>
+<p><span style="font-family: verdana,geneva; font-size: 13px;">　　直接贴上工具类代码：</span></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:java;gutter:true;">package cn.luxh.utils;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+import org.apache.commons.compress.archivers.ArchiveEntry;
+import org.apache.commons.compress.archivers.zip.Zip64Mode;
+import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
+import org.apache.commons.compress.archivers.zip.ZipArchiveInputStream;
+import org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream;
+
+
+/**
+ * Zip文件工具类
+ * @author Luxh
+ */
+public class ZipFileUtil {
+	
+	/**
+	 * 把文件压缩成zip格式
+	 * @param files			需要压缩的文件
+	 * @param zipFilePath 压缩后的zip文件路径	,如"D:/test/aa.zip";
+	 */
+	public static void compressFiles2Zip(File[] files,String zipFilePath) {
+		if(files != null &amp;&amp; files.length &gt;0) {
+			if(isEndsWithZip(zipFilePath)) {
+				ZipArchiveOutputStream zaos = null;
+				try {
+					File zipFile = new File(zipFilePath);
+					zaos = new ZipArchiveOutputStream(zipFile);
+					//Use Zip64 extensions for all entries where they are required
+					zaos.setUseZip64(Zip64Mode.AsNeeded);
+					
+					//将每个文件用ZipArchiveEntry封装
+					//再用ZipArchiveOutputStream写到压缩文件中
+					for(File file : files) {
+						if(file != null) {
+							ZipArchiveEntry zipArchiveEntry  = new ZipArchiveEntry(file,file.getName());
+							zaos.putArchiveEntry(zipArchiveEntry);
+							InputStream is = null;
+							try {
+								is = new BufferedInputStream(new FileInputStream(file));
+								byte[] buffer = new byte[1024 * 5];  
+								int len = -1;
+								while((len = is.read(buffer)) != -1) {
+									//把缓冲区的字节写入到ZipArchiveEntry
+									zaos.write(buffer, 0, len);
+								}
+								//Writes all necessary data for this entry.
+								zaos.closeArchiveEntry();  
+							}catch(Exception e) {
+								throw new RuntimeException(e);
+							}finally {
+								if(is != null) 
+									is.close();
+							}
+							
+						}
+					}
+					zaos.finish();
+				}catch(Exception e){
+					throw new RuntimeException(e);
+				}finally {
+						try {
+							if(zaos != null) {
+								zaos.close();
+							}
+						} catch (IOException e) {
+							throw new RuntimeException(e);
+						}
+				}
+				
+			}
+			
+		}
+		
+	}
+	
+	/**
+	 * 把zip文件解压到指定的文件夹
+	 * @param zipFilePath   zip文件路径, 如 "D:/test/aa.zip"
+	 * @param saveFileDir   解压后的文件存放路径, 如"D:/test/"
+	 */
+	public static void decompressZip(String zipFilePath,String saveFileDir) {
+		if(isEndsWithZip(zipFilePath)) {
+			File file = new File(zipFilePath);
+			if(file.exists()) {
+				InputStream is = null;
+				//can read Zip archives
+				ZipArchiveInputStream zais = null;
+				try {
+					is = new FileInputStream(file);
+					zais = new ZipArchiveInputStream(is);
+					ArchiveEntry  archiveEntry = null;
+					//把zip包中的每个文件读取出来
+					//然后把文件写到指定的文件夹
+					while((archiveEntry = zais.getNextEntry()) != null) {
+						//获取文件名
+						String entryFileName = archiveEntry.getName();
+						//构造解压出来的文件存放路径
+						String entryFilePath = saveFileDir + entryFileName;
+						byte[] content = new byte[(int) archiveEntry.getSize()];
+						zais.read(content);
+						OutputStream os = null;
+						try {
+							//把解压出来的文件写到指定路径
+							File entryFile = new File(entryFilePath);
+							os = new BufferedOutputStream(new FileOutputStream(entryFile));
+							os.write(content);
+						}catch(IOException e) {
+							throw new IOException(e);
+						}finally {
+							if(os != null) {
+								os.flush();
+								os.close();
+							}
+						}
+						
+					}
+				}catch(Exception e) {
+					throw new RuntimeException(e);
+				}finally {
+						try {
+							if(zais != null) {
+								zais.close();
+							}
+							if(is != null) {
+								is.close();
+							}
+						} catch (IOException e) {
+							throw new RuntimeException(e);
+						}
+				}
+			}
+		}
+	}
+	
+	/**
+	 * 判断文件名是否以.zip为后缀
+	 * @param fileName        需要判断的文件名
+	 * @return 是zip文件返回true,否则返回false
+	 */
+	public static boolean isEndsWithZip(String fileName) {
+		boolean flag = false;
+		if(fileName != null &amp;&amp; !"".equals(fileName.trim())) {
+			if(fileName.endsWith(".ZIP")||fileName.endsWith(".zip")){
+				flag = true;
+			}
+		}
+		return flag;
+	}
+	
+}
+</pre>
+</div>
+<p><span style="font-family: verdana,geneva; font-size: 13px;">　　再来测试一下：</span></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:java;gutter:true;">package cn.luxh.test;
+
+import java.io.File;
+
+import org.junit.Test;
+
+import cn.luxh.utils.ZipFileUtil;
+
+/**
+ * 测试ZipFileUtil的压缩和解压缩方法
+ * @author Luxh
+ */
+public class ZipFileUtilTest {
+	
+	@Test
+	public void testCompressFiles2Zip() {
+		//存放待压缩文件的目录
+		File srcFile = new File("D:/test");
+		//压缩后的zip文件路径
+		String zipFilePath = "d:/test2/test.zip";
+		if(srcFile.exists()) {
+			File[] files = srcFile.listFiles();
+			ZipFileUtil.compressFiles2Zip(files, zipFilePath);
+		}
+	}
+	
+	@Test
+	public void testDecompressZip()  {
+		//压缩包所在路径
+		String zipFilePath = "d:/test2/test.zip";
+		//解压后的文件存放目录
+		String saveFileDir = "d:/test2/";
+		//调用解压方法
+		ZipFileUtil.decompressZip(zipFilePath, saveFileDir);
+	}
+}
+</pre>
+</div>
+<p>　　</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+</div>
+	</div></div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='cnblogs_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<div id='cnblogs_c2' class='c_ad_block'></div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" class="FooterCell">
+			
+<p id="footer">
+	Powered by: 
+	<br />
+	
+	<a id="Footer1_Hyperlink3" NAME="Hyperlink1" href="http://www.cnblogs.com/" style="font-family:Verdana;font-size:12px;">博客园</a>
+	<br />
+	Copyright &copy; CN.programmer.Luxh
+</p>
+		</td>
+	</tr>
+</table>
+
+
+</body>
+</html>

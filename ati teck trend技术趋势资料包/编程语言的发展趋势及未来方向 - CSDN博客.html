@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <link rel="canonical" href="https://blog.csdn.net/u010178308/article/details/79001888"/> 
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="referrer" content="always">
+    <meta name="description" content="声明：转载自：http://www.csdn.net/article/2010-08-31/278848
+
+感谢作者的整理，可以让语言使用者对语言的特性有更进一步的了解。
+
+程序设计离不开编程语言，但是编程语言在国内的大环境中似乎一直是个二等公民。国内的计算机教育和工程培训，似乎一直在宣传“语言不重要，重要的是思想”，“语言一通百通”等观点，甚至在许多人眼中“语言的讨论”完全是不入流的，但" />
+    <meta name="keywords" content="" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+    <meta name="shenma-site-verification" content="5a59773ab8077d4a62bf469ab966a63b_1497598848">
+    <script src="https://csdnimg.cn/release/phoenix/vendor/tingyun/tingyun-rum-blog.js"></script>
+
+    <link href="https://csdnimg.cn/public/favicon.ico" rel="SHORTCUT ICON">
+    <title>编程语言的发展趋势及未来方向 - CSDN博客</title>
+    
+            <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/detail-801161715c.min.css">
+        <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/themes/skin3-template/skin3-template-02ffddfbf5.min.css">
+
+    <script type="text/javascript">
+        var username = "u010178308";
+        var blog_address = "https://blog.csdn.net/u010178308";
+        var static_host = "https://csdnimg.cn/release/phoenix/";
+        var currentUserName = "attilax"; 
+        var isShowAds = true;
+        var isOwner = false;
+        var loginUrl = "https://passport.csdn.net/account/login?from=https://blog.csdn.net/u010178308/article/details/79001888"
+        var blogUrl = "https://blog.csdn.net/";
+        var curSkin = "skin3-template";
+    </script>
+    <script type="text/javascript">
+        // Traffic Stats of the entire Web site By baidu
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?6bcd52f51e9b3dce32bec4a3997715ac";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+        // Traffic Stats of the entire Web site By baidu end
+    </script>
+    <script src="https://csdnimg.cn/public/common/libs/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script src="https://csdnimg.cn/rabbit/exposure-click/main-1.0.6.js"></script>
+        <script type="text/javascript" src="https://csdnimg.cn/pubfooter/js/tracking-1.0.2.js" charset="utf-8"></script>
+        <link rel="stylesheet" href="https://csdnimg.cn/public/sandalstrap/1.3/css/sandalstrap.min.css"> 
+    <style>
+        .MathJax, .MathJax_Message, .MathJax_Preview{
+            display: none
+        }
+    </style>
+</head>
+<body>    
+    <link rel="stylesheet" href="https://csdnimg.cn/public/common/toolbar/content_toolbar_css/content_toolbar.css">
+    <script id="toolbar-tpl-scriptId" src="https://csdnimg.cn/public/common/toolbar/js/content_toolbar.js" type="text/javascript" domain="https://blog.csdn.net/"></script>
+    <script src="https://csdnimg.cn/public/sandalstrap/1.3/fonts/csdnc/csdnc.js"></script><link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/blog_code-c3a0c33d5c.css">
+<link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/vendor/pagination/paging.css">
+<script type="text/javascript" src="//static.mediav.com/js/mvf_news_feed.js"></script>
+
+<header>
+	<div class="container d-flex clearfix">
+		<div class="title-box">
+			<h2 class="title-blog">
+				<a href="https://blog.csdn.net/u010178308">Acettest's Blogs</a>
+			</h2>
+			<p class="description">Think Different</p>
+		</div>
+		<div class="opt-box d-flex justify-content-end">
+			<a class="btn btn-sm" href="https://blog.csdn.net/u010178308/rss/list">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#csdnc-rss"></use>
+					</svg>RSS订阅</a>
+					</div>
+	</div>
+</header><script src="https://dup.baidustatic.com/js/ds.js"></script>
+<div class="container clearfix pt0" id="mainBox">
+    <main>
+        <div class="blog-content-box">
+	<div class="article-title-box">
+			<span class="article-type type-2 float-left">转</span>		<h1 class="title-article">编程语言的发展趋势及未来方向</h1>
+	</div>
+	<div class="article-info-box">
+		<div class="article-bar-top d-flex">
+												<span class="time">2018年01月08日 13:35:44</span>
+			<div class="float-right">
+				<span class="read-count">阅读数：856</span>
+											</div>
+		</div>
+	</div>
+	<article>
+		<div id="article_content" class="article_content clearfix csdn-tracking-statistics" data-pid="blog"  data-mod=popu_307  data-dsm = "post" >
+                    <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/htmledit_views-0a60691e80.css" />
+            <div class="htmledit_views">
+                
+<p style="margin-bottom:1.5em;padding-top:0px;padding-bottom:0px;list-style:none;color:rgb(51,51,51);font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;text-align:left;">
+<strong>声明：转载自：http://www.csdn.net/article/2010-08-31/278848</strong></p>
+<p style="margin-bottom:1.5em;padding-top:0px;padding-bottom:0px;list-style:none;color:rgb(51,51,51);font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;text-align:left;">
+<strong>感谢作者的整理，可以让语言使用者对语言的特性有更进一步的了解。</strong></p>
+<p style="margin-bottom:1.5em;padding-top:0px;padding-bottom:0px;list-style:none;color:rgb(51,51,51);font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;text-align:left;">
+程序设计离不开编程语言，但是编程语言在国内的大环境中似乎一直是个二等公民。国内的计算机教育和工程培训，似乎一直在宣传“语言不重要，重要的是思想”，“语言一通百通”等观点，甚至在许多人眼中“语言的讨论”完全是不入流的，但其实“编程语言”与“工具”、“框架”或是“开发方法”等事物一样，都对生产力有着重要的影响。事实上，语言的发展历史比其他方面更为悠久，并且在过去十几年，甚至最近几年中都依然在不断的碰撞，演变。期间一些新的语言诞生了，而另一些在当时看来阳春白雪的语言和编程范式也重新获得了人们的重视。</p>
+<p style="margin-bottom:1.5em;padding-top:0px;padding-bottom:0px;list-style:none;color:rgb(51,51,51);font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;text-align:left;">
+<a href="http://en.wikipedia.org/wiki/Anders_Hejlsberg" style="color:rgb(0,102,204);"><span style="color:#3d81ee;">Anders Hejlsberg</span></a>是微软的<a href="http://www.microsoft.com/presspass/exec/techfellow/default.mspx" style="color:rgb(0,102,204);"><span style="color:#3d81ee;">Technical
+ Fellow</span></a>，担任C#编程语言的首席架构师，也参与了.NET Framework，以及VB.NET和F#等语言的设计与开发。几个月前，Anders在<a href="http://channel9.msdn.com/posts/adebruyn/TechDays-2010-Developer-Keynote-by-Anders-Hejlsberg/" style="color:rgb(0,102,204);"><span style="color:#3d81ee;">比利时的TechDays
+ 2010</span></a>及<a href="http://channel9.msdn.com/posts/matthijs/Anders-Hejlsberg-Trends-and-Future-Directions-in-Programming-Languages-DevDays-2010-Keynote/" style="color:rgb(0,102,204);"><span style="color:#3d81ee;">荷兰DevDays 2010</span></a>分别进行了一场演讲，阐述了他眼中对于编程语言的发展趋势及未来方向，本文便对他的观点进行了总结。</p>
+<p style="margin-bottom:1.5em;padding-top:0px;padding-bottom:0px;list-style:none;color:rgb(51,51,51);font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;text-align:left;">
+大约25到30年前，Anders开发了著名的<a href="http://en.wikipedia.org/wiki/Turbo_Pascal" style="color:rgb(0,102,204);"><span style="color:#3d81ee;">Turbo Pascal</span></a>，这是一套集语言、编译器及开发工具于一体的产品，这也是Anders进入编程语言这一领域的起点。Anders谈到，如今的计算机和当年他开发的Turbo Pascal所用的<a href="http://en.wikipedia.org/wiki/Zilog_Z80" style="color:rgb(0,102,204);"><span style="color:#3d81ee;">Z-80</span></a>已经不可同日而语。从那时算起，如今的机器已经有大约10万倍的外部存储容量，1万倍的内存大小，CPU速度也有大约1000倍的提高。但是，如果我们比较如今的Java代码及当年Pascal代码，会发现它们的差别其实并不大。Anders认为编程语言的发展非常缓慢，期间当然出现了一些东西，例如面向对象等等，但是远没有好上1000倍。事实上，近几十年来的努力主要体现在框架及工具等方面（如下图）。例如.NET
+ Framework里有超过一万个类及十万个方法，与Turbo Pascal相比的确有了超过1000倍的增长。同样类似，现在的IDE包含了无数强大的功能，例如语法提示，重构，调试器等等。与此相比，编程语言的改进的确很不明显。</p>
+<p style="margin-bottom:1.5em;padding-top:0px;padding-bottom:0px;list-style:none;color:rgb(51,51,51);font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;text-align:center;">
+<img border="0" alt="" width="400" height="300" src="http://cms.csdnimg.cn/articlev1/uploads/allimg/100831/28_100831094615_1.png" style="vertical-align:middle;border:none;" /></p>
+<p style="margin-bottom:1.5em;padding-top:0px;padding-bottom:0px;list-style:none;color:rgb(51,51,51);font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;text-align:left;">
+在过去5、60年的编程历史中，编程语言的抽象级别不断提高，人们都在努力让编程语言更有表现力，这样我们可以用更少的代码完成更多的工作。我们一开始使用汇编，然后使用面向过程的语言（如Pascal和C），然后是面向对象语言（如C++），随后便进入了托管时代，语言运行于受托管的执行环境上（如C#，Java），它们的主要特性有自动的垃圾收集，类型安全等等。Anders认为这样的趋势还会继续保持下去，我们还会看到抽象级别越来越高的语言，而语言的设计者则必须理解并预测下一个抽象级别是什么样子的。另一方面，如.NET，Java等框架的重要性提高了许多，编程语言往往都倾向于构建于现有的工具上，而不会从头写起。现在出现的编程语言，例如F#，以及Java领域的<a href="http://www.scala-lang.org/" style="color:rgb(0,102,204);"><span style="color:#3d81ee;">Scala</span></a>，<a href="http://www.scala-lang.org/" style="color:rgb(0,102,204);"><span style="color:#3d81ee;">Clojure</span></a>等等，它们都是基于现有框架构建的，每次从头开始的代价实在太高。</p>
+<p style="margin-bottom:1.5em;padding-top:0px;padding-bottom:0px;list-style:none;color:rgb(51,51,51);font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;text-align:left;">
+在Anders眼中，如今影响力较大的趋势主要有三种（如下图），它们分别是“<a href="http://en.wikipedia.org/wiki/Declarative_programming" style="color:rgb(0,102,204);"><span style="color:#3d81ee;">声明式的编程风格</span></a>”（包括“<a href="http://en.wikipedia.org/wiki/Domain-specific_language" style="color:rgb(0,102,204);"><span style="color:#3d81ee;">领域特定语言</span></a>”及“<a href="http://en.wikipedia.org/wiki/Functional_programming" style="color:rgb(0,102,204);"><span style="color:#3d81ee;">函数式编程</span></a>”）、过去的五年非常火热的“<a href="http://en.wikipedia.org/wiki/Dynamic_programming_language" style="color:rgb(0,102,204);"><span style="color:#3d81ee;">动态语言</span></a>”（其最重要的方面便是“元编程”能力）以及多核环境下的“并发编程。此外随着语言的发展，原本常用的“面向对象”语言，“动态语言”或是“函数式”等边界也变得越来越模糊，例如各种主要的编程语言都受到函数式语言的影响。因此，“多范式”程序设计语言也是一个愈发明显的趋势。</p>
+<p style="margin-bottom:1.5em;padding-top:0px;padding-bottom:0px;list-style:none;color:rgb(51,51,51);font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;text-align:center;">
+<img border="0" alt="" width="400" height="300" src="http://cms.csdnimg.cn/articlev1/uploads/allimg/100831/28_100831094646_1.png" style="vertical-align:middle;border:none;" /></p>
+<p style="margin-bottom:1.5em;padding-top:0px;padding-bottom:0px;list-style:none;color:rgb(51,51,51);font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;text-align:left;">
+<strong>声明式编程与DSL</strong></p>
+<p style="margin-bottom:1.5em;padding-top:0px;padding-bottom:0px;list-style:none;color:rgb(51,51,51);font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;text-align:left;">
+目前常见的编程语言大都是命令式（Imperative）的，例如C#，Java或是C++等等。这些语言的特征在于，代码里不仅表现了“做什么（What）”，而更多表现出“如何（How）完成工作”这样的实现细节，例如for循环，i += 1等等，甚至这部分细节会掩盖了我们的“最终目标”。在Anders看来，命令式编程通常会让代码变得十分冗余，更重要的是由于它提供了过于具体的指令，这样执行代码的基础设施（如CLR或JVM）没有太多发挥空间，只能老老实实地根据指令一步步的向目标前进。例如，并行执行程序会变得十分困难，因为像“执行目的”这样更高层次的信息已经丢失了。因此，编程语言的趋势之一，便是能让代码包含更多的“What”，而不是“How”，这样执行环境便可以更加聪明地去适应当前的执行要求。</p>
+<p style="margin-bottom:1.5em;padding-top:0px;padding-bottom:0px;list-style:none;color:rgb(51,51,51);font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;text-align:left;">
+关于声明式的编程风格，Anders主要提出了两个方面，第一个方面是DSL（Domain Specific Language，领域特定语言）。DSL不是什么新鲜的玩意儿，我们平时经常接触的SQL，CSS，正则表达式等等都属于DSL。有的DSL可能更加专注于一个方面，例如<a href="http://en.wikipedia.org/wiki/Mathematica" style="color:rgb(0,102,204);"><span style="color:#3d81ee;">Mathematica</span></a>，<a href="http://en.wikipedia.org/wiki/Logo_%28programming_language%29" style="color:rgb(0,102,204);"><span style="color:#3d81ee;">LOGO</span></a>等等。这些语言的目标都是特定的领域，与之相对的则是<a href="http://en.wikipedia.org/wiki/General-purpose_programming_language" style="color:rgb(0,102,204);"><span style="color:#3d81ee;">GPPL</span></a>（General
+ Purpose Programming Language，通用目的编程语言）。<a href="http://martinfowler.com/" style="color:rgb(0,102,204);"><span style="color:#3d81ee;">Martin Fowler</span></a>将DSL分为外部DSL及内部DSL两种。外部DSL有自己的特定语法、解析器和词法分析器等等，它们往往是一种小型的编程语言，甚至不会像GPPL那样需要源文件。与之相对的则是内部DSL。内部DSL其实更像是种别称，它代表一类特别API及使用模式。</p>
+<p style="margin-bottom:1.5em;padding-top:0px;padding-bottom:0px;list-style:none;color:rgb(51,51,51);font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;text-align:left;">
+XSLT，SQL等等都可以算作是外部DSL。外部DSL一般会直接针对特定的领域设计，而不考虑其他方面。<a href="http://en.wikipedia.org/wiki/James_Gosling" style="color:rgb(0,102,204);"><span style="color:#3d81ee;">James Gosling</span></a>曾经说过：每个配置文件最终都会变成一门编程语言。一开始您可能只会用它表示一点点东西，慢慢地您便会想要一些规则，而这些规则则变成了表达式，后来您可能还会定义变量，进行条件判断等等，而最终它就变成了一种奇怪的编程语言，这样的情况屡见不鲜。现在有一些公司也在关注DSL的开发。例如以前在微软工作的<a href="http://en.wikipedia.org/wiki/Charles_Simonyi" style="color:rgb(0,102,204);"><span style="color:#3d81ee;">Charles
+ Simonyi</span></a>提出了<a href="http://en.wikipedia.org/wiki/Intentional_programming" style="color:rgb(0,102,204);"><span style="color:#3d81ee;">Intentional Programming</span></a>的概念，还有<a href="http://en.wikipedia.org/wiki/JetBrains" style="color:rgb(0,102,204);"><span style="color:#3d81ee;">JetBrains</span></a>公司提供的一个叫做<a href="http://en.wikipedia.org/wiki/JetBrains_MPS" style="color:rgb(0,102,204);"><span style="color:#3d81ee;">MPS（Meta
+ Programming System）</span></a>的产品。最近微软也提出了自己的<a href="http://en.wikipedia.org/wiki/Oslo_%28Microsoft%29" style="color:rgb(0,102,204);"><span style="color:#3d81ee;">Oslo</span></a>项目，而在Eclipse世界里也有<a href="http://www.eclipse.org/Xtext/" style="color:rgb(0,102,204);"><span style="color:#3d81ee;">Xtext</span></a>，所以其实如今在这方面也有不少人在尝试。由于外部DSL的独立性，在某些情况下也会出现特定的工具，辅助领域专家或是开发人员本身编写DSL代码。还有一些DSL会以XML方言的形式提出，利用XML方言的好处在于有不少现成的工具可用，这样可以更快地定义自己的语法。</p>
+<p style="margin-bottom:1.5em;padding-top:0px;padding-bottom:0px;list-style:none;color:rgb(51,51,51);font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;text-align:left;">
+而内部DSL，正像之前提到的那样，它往往只是代表了一系列特别的API及使用模式，例如LINQ查询语句及Ruby on Rails中的Active Record声明代码等等。内部DSL可以使用一系列API来“伪装”成一种DSL，它往往会利用一些“流畅化”的技巧，例如像jQuery那样把一些方法通过“点”连接起来，而另一些也会利用元编程的方式。内部DSL还有一些优势，例如可以访问语言中的代码或变量，以及利用代码补全，重构等母语言的所有特性。</p>
+<p style="margin-bottom:1.5em;padding-top:0px;padding-bottom:0px;list-style:none;color:rgb(51,51,51);font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;text-align:left;">
+DSL的可读性往往很高。例如，要筛选出单价大于20的产品，并对所属种类进行分组，并降序地列出每组的分类名称及产品数量。如果是用命令式的编程方式，则可能是这样的：</p>
+<pre style="margin-right:0px;margin-bottom:1em;margin-left:0px;padding:10px;list-style:none;overflow:hidden;background:rgb(247,247,247);border-width:1px;border-style:solid;border-color:rgb(221,221,221);color:rgb(51,51,51);"></pre><ol class="dp-j" style="margin-bottom:1px;margin-left:3em;padding-top:5px;padding-bottom:5px;padding-left:0px;border-left:3px solid rgb(20,107,0);"><li class="alt" style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:inherit;"><span><span>Dictionary&lt;string, Grouping&gt; groups = </span><span class="keyword">new</span><span> Dictionary&lt;string, Grouping&gt;();  </span></span></li><li style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:rgb(92,92,92);"><span>foreach (Product p in products)  </span></li><li class="alt" style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:inherit;"><span>{  </span></li><li style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:rgb(92,92,92);"><span>    </span><span class="keyword">if</span><span> (p.UnitPrice &gt;= </span><span class="number" style="color:rgb(192,0,0);">20</span><span>)  </span></li><li class="alt" style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:inherit;"><span>    {  </span></li><li style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:rgb(92,92,92);"><span>        </span><span class="keyword">if</span><span> (!groups.ContainsKey(p.CategoryName))  </span></li><li class="alt" style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:inherit;"><span>        {  </span></li><li style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:rgb(92,92,92);"><span>            Grouping r = </span><span class="keyword">new</span><span> Grouping();  </span></li><li class="alt" style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:inherit;"><span>            r.CategoryName = p.CategoryName;  </span></li><li style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:rgb(92,92,92);"><span>            r.ProductCount = </span><span class="number" style="color:rgb(192,0,0);">0</span><span>;  </span></li><li class="alt" style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:inherit;"><span>            groups[p.CategoryName] = r;  </span></li><li style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:rgb(92,92,92);"><span>        }  </span></li><li class="alt" style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:inherit;"><span>        groups[p.CategoryName].ProductCount++;  </span></li><li style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:rgb(92,92,92);"><span>    }  </span></li><li class="alt" style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:inherit;"><span>}  </span></li><li style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:rgb(92,92,92);"><span> </span></li><li class="alt" style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:inherit;"><span>List&lt;Grouping&gt; result = </span><span class="keyword">new</span><span> List&lt;Grouping&gt;(groups.Values);  </span></li><li style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:rgb(92,92,92);"><span>result.Sort(delegate(Grouping x, Grouping y)  </span></li><li class="alt" style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:inherit;"><span>{  </span></li><li style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:rgb(92,92,92);"><span>    </span><span class="keyword">return</span><span> </span></li><li class="alt" style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:inherit;"><span>        x.ProductCount &gt; y.ProductCount ? -</span><span class="number" style="color:rgb(192,0,0);">1</span><span> :  </span></li><li style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:rgb(92,92,92);"><span>        x.ProductCount &lt; y.ProductCount ? </span><span class="number" style="color:rgb(192,0,0);">1</span><span> :  </span></li><li class="alt" style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:inherit;"><span>        </span><span class="number" style="color:rgb(192,0,0);">0</span><span>;  </span></li><li style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:rgb(92,92,92);"><span>}); </span></li></ol>
+<p style="margin-bottom:1.5em;padding-top:0px;padding-bottom:0px;list-style:none;color:rgb(51,51,51);font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;text-align:left;">
+显然这些代码编写起来需要一点时间，且很难直接看出它的真实目的，换言之“What”几乎完全被“How”所代替了。这样，一个新的程序员必须花费一定时间才能理解这段代码的目的。但如果使用LINQ，代码便可以改写成：</p>
+<pre style="margin-right:0px;margin-bottom:1em;margin-left:0px;padding:10px;list-style:none;overflow:hidden;background:rgb(247,247,247);border-width:1px;border-style:solid;border-color:rgb(221,221,221);color:rgb(51,51,51);"></pre><ol class="dp-j" style="margin-bottom:1px;margin-left:3em;padding-top:5px;padding-bottom:5px;padding-left:0px;border-left:3px solid rgb(20,107,0);"><li class="alt" style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:inherit;"><span><span>var result = products  </span></span></li><li style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:rgb(92,92,92);"><span>    .Where(p =&gt; p.UnitPrice &gt;= </span><span class="number" style="color:rgb(192,0,0);">20</span><span>)  </span></li><li class="alt" style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:inherit;"><span>    .GroupBy(p =&gt; p.CategoryName)  </span></li><li style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:rgb(92,92,92);"><span>    .OrderByDescending(g =&gt; g.Count())  </span></li><li class="alt" style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:inherit;"><span>    .Select(g =&gt; </span><span class="keyword">new</span><span> { CategoryName = g.Key, ProductCount = g.Count() }); </span></li></ol>
+<p style="margin-bottom:1.5em;padding-top:0px;padding-bottom:0px;list-style:none;color:rgb(51,51,51);font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;text-align:left;">
+这段代码更加关注的是“What”而不是“How”，它不会明确地给出过滤的“操作方式”，也没有涉及到创建字典这样的细节。这段代码还可以利用C# 3.0中内置的DSL，即LINQ查询语句来改写：</p>
+<pre style="margin-right:0px;margin-bottom:1em;margin-left:0px;padding:10px;list-style:none;overflow:hidden;background:rgb(247,247,247);border-width:1px;border-style:solid;border-color:rgb(221,221,221);color:rgb(51,51,51);"></pre><ol class="dp-j" style="margin-bottom:1px;margin-left:3em;padding-top:5px;padding-bottom:5px;padding-left:0px;border-left:3px solid rgb(20,107,0);"><li class="alt" style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:inherit;"><span><span>var result =  </span></span></li><li style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:rgb(92,92,92);"><span>    from p in products  </span></li><li class="alt" style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:inherit;"><span>    where p.UnitPrice &gt;= </span><span class="number" style="color:rgb(192,0,0);">20</span><span> </span></li><li style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:rgb(92,92,92);"><span>    group p by p.CategoryName into g  </span></li><li class="alt" style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:inherit;"><span>    orderby g.Count() descending  </span></li><li style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:rgb(92,92,92);"><span>    select </span><span class="keyword">new</span><span> { CategoryName = g.Key, ProductCount = g.Count() }; </span></li></ol>
+<p style="margin-bottom:1.5em;padding-top:0px;padding-bottom:0px;list-style:none;color:rgb(51,51,51);font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;text-align:left;">
+编译器会简单地将LINQ差距语句转化为前一种形式。这段代码只是表现出最终的目的，而不是明确指定做事的方式，这样便可以很容易地并行执行这段代码，如使用PINQ则几乎不需要做出任何修改。</p>
+<p style="margin-bottom:1.5em;padding-top:0px;padding-bottom:0px;list-style:none;color:rgb(51,51,51);font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;text-align:left;">
+<strong>函数式编程</strong></p>
+<p style="margin-bottom:1.5em;padding-top:0px;padding-bottom:0px;list-style:none;color:rgb(51,51,51);font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;text-align:left;">
+Anders提出的另一个重要的声明式编程方式便是函数式编程。函数式编程历史悠久，它几乎和编程语言本身同时诞生，如当年的<a href="http://en.wikipedia.org/wiki/Lisp_programming_language" style="color:rgb(0,102,204);"><span style="color:#3d81ee;">LISP</span></a>便是个函数式编程语言。除了LISP以外还有其他许多函数式编程语言，如<a href="http://en.wikipedia.org/wiki/APL_programming_language" style="color:rgb(0,102,204);"><span style="color:#3d81ee;">APL</span></a>、<a href="http://en.wikipedia.org/wiki/Haskell_(programming_language)" style="color:rgb(0,102,204);"><span style="color:#3d81ee;">Haskell</span></a>、<a href="http://en.wikipedia.org/wiki/ML_programming_language" style="color:rgb(0,102,204);"><span style="color:#3d81ee;">ML</span></a>等等。关于函数式编程在学术界已经有过许多研究了，大约在5到10年前许多人开始吸收和整理这些研究内容，想要把它们融入更为通用的编程语言。现在的编程语言，如C#、Python、Ruby、<a href="http://www.scala-lang.org/" style="color:rgb(0,102,204);"><span style="color:#3d81ee;">Scala</span></a>等等，它们都受到了函数式编程语言的影响。</p>
+<p style="margin-bottom:1.5em;padding-top:0px;padding-bottom:0px;list-style:none;color:rgb(51,51,51);font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;text-align:left;">
+使用命令式编程语言写程序时，我们经常会编写如x = x + 1这样的语句，此时我们大量依赖的是可变状态，或者说是“变量”，它们的值可以随程序运行而改变。可变状态非常强大，但随之而来的便是被称为“副作用”的问题，例如一个无需参数的void方法，它会根据调用次数或是在哪个线程上进行调用对程序产生影响，它会改变程序内部的状态，从而影响之后的运行效果。而在函数式编程中则不会出现这个情况，因为所有的状态都是不可变的。事实上对函数式编程的讨论更像是数学、公式，而不是程序语句，如x = x + 1对于数学家来说，似乎只是个永不为真的表达式而已。</p>
+<p style="margin-bottom:1.5em;padding-top:0px;padding-bottom:0px;list-style:none;color:rgb(51,51,51);font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;text-align:left;">
+函数式编程十分容易并行，因为它在运行时不会修改任何状态，因此无论多少线程在运行时都可以观察到正确的结果。假如两个函数完全无关，那么它们是并行还是顺序地执行便没有什么区别了。当然，现实中的程序一定是有副作用的，例如向屏幕输出内容，向Socket传输数据等等，因此真实世界中的函数式编程往往都会考虑如何将有副作用的代码分离出来。函数式编程默认是不可变的，开发人员必须做些额外的事情才能使用可变状态或是危险的副作用，与之相反，如C#或Java必须使用readonly或是final来做到这一点。此时，使用函数式编程语言时的思维观念便会有所不同了。</p>
+<p style="margin-bottom:1.5em;padding-top:0px;padding-bottom:0px;list-style:none;color:rgb(51,51,51);font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;text-align:left;">
+F#是微软随VS 2010推出的一门函数式编程语言，它基于<a href="http://caml.inria.fr/" style="color:rgb(0,102,204);"><span style="color:#3d81ee;">OCaml</span></a>的核心部分，因此是一门强类型编程语言，并支持一些如模式匹配，类型推断等现代函数式编程语言的特性。在此之上，F#又增加了异步工作流，度量单位等较为前沿的语言功能。在F#中如果要计算一个列表所有元素之和，也可以使用命令式的风格来编写代码：</p>
+<pre style="margin-right:0px;margin-bottom:1em;margin-left:0px;padding:10px;list-style:none;overflow:hidden;background:rgb(247,247,247);border-width:1px;border-style:solid;border-color:rgb(221,221,221);color:rgb(51,51,51);"></pre><ol class="dp-j" style="margin-bottom:1px;margin-left:3em;padding-top:5px;padding-bottom:5px;padding-left:0px;border-left:3px solid rgb(20,107,0);"><li class="alt" style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:inherit;"><span><span>let sumSquaresI l =   </span></span></li><li style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:rgb(92,92,92);"><span>    let mutable acc = </span><span class="number" style="color:rgb(192,0,0);">0</span><span> </span></li><li class="alt" style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:inherit;"><span>    </span><span class="keyword">for</span><span> x in l </span><span class="keyword">do</span><span> </span></li><li style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:rgb(92,92,92);"><span>        acc &lt;- acc + sqr x  </span></li><li class="alt" style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:inherit;"><span>    acc </span></li></ol>
+<p style="margin-bottom:1.5em;padding-top:0px;padding-bottom:0px;list-style:none;color:rgb(51,51,51);font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;text-align:left;">
+acc只不过，F#中的一切默认都是不可变的，开发人员需要使用mutable关键字来声明一个可变的状态。事实上，在F#中更典型做法是：</p>
+<pre style="margin-right:0px;margin-bottom:1em;margin-left:0px;padding:10px;list-style:none;overflow:hidden;background:rgb(247,247,247);border-width:1px;border-style:solid;border-color:rgb(221,221,221);color:rgb(51,51,51);"></pre><ol class="dp-j" style="margin-bottom:1px;margin-left:3em;padding-top:5px;padding-bottom:5px;padding-left:0px;border-left:3px solid rgb(20,107,0);"><li class="alt" style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:inherit;"><span><span>let rec sumSquaresF l =   </span></span></li><li style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:rgb(92,92,92);"><span>    match l with  </span></li><li class="alt" style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:inherit;"><span>    | [] -&gt; </span><span class="number" style="color:rgb(192,0,0);">0</span><span> </span></li><li style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:rgb(92,92,92);"><span>    | head :: tail -&gt; sqr head + sumSquaresF tail </span></li></ol>
+<p style="margin-bottom:1.5em;padding-top:0px;padding-bottom:0px;list-style:none;color:rgb(51,51,51);font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;text-align:left;">
+在数学里我们经常使用递归，把一个公式分解成几个变化的形式，以此进行递归的定义。纯函数式的代码其“数学性”较强，如果您分析上面这段代码，会发现它几乎就是标准的数学定义。在编程时我们也使用递归的做法，编译器会设法帮我们转化成尾调用或是循环语句。</p>
+<p style="margin-bottom:1.5em;padding-top:0px;padding-bottom:0px;list-style:none;color:rgb(51,51,51);font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;text-align:left;">
+<strong>动态语言与元编程</strong></p>
+<p style="margin-bottom:1.5em;padding-top:0px;padding-bottom:0px;list-style:none;color:rgb(51,51,51);font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;text-align:left;">
+动态语言不会严格区分“编译时”和“运行时”。对于一些静态编程语言（如C#），往往是先进行编译，此时可能会得到一些编译期错误，而对于动态语言来说这两个阶段便混合在一起了。常见的动态语言有JavaScript，Python，Ruby，LISP等等。动态语言和静态语言各有一些优势，这也是两个阵营争论多年的内容。不过Anders认为它们各自都有十分重要的优点，而未来不属于其中任何一方。他表示，从编程语言发展过程中可以观察到两种特点正在合并的趋势，未来应该属于两者的杂交产物。</p>
+<p style="margin-bottom:1.5em;padding-top:0px;padding-bottom:0px;list-style:none;color:rgb(51,51,51);font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;text-align:left;">
+许多人认定动态语言执行起来很慢，也没有类型安全等等。例如有这样一段代码：</p>
+<pre style="margin-right:0px;margin-bottom:1em;margin-left:0px;padding:10px;list-style:none;overflow:hidden;background:rgb(247,247,247);border-width:1px;border-style:solid;border-color:rgb(221,221,221);color:rgb(51,51,51);"></pre><ol class="dp-j" style="margin-bottom:1px;margin-left:3em;padding-top:5px;padding-bottom:5px;padding-left:0px;border-left:3px solid rgb(20,107,0);"><li class="alt" style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:inherit;"><span><span>var a = </span><span class="number" style="color:rgb(192,0,0);">0</span><span>, n = </span><span class="number" style="color:rgb(192,0,0);">10</span><span>;  </span></span></li><li style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:rgb(92,92,92);"><span class="keyword">for</span><span> (var i = </span><span class="number" style="color:rgb(192,0,0);">0</span><span>; i &lt; n; i++) {  </span></li><li class="alt" style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:inherit;"><span>    a += i;  </span></li><li style="margin:0px;padding:0px 3px 0px 10px;list-style:decimal;background:rgb(255,255,255);color:rgb(92,92,92);"><span>} </span></li></ol>
+<p style="margin-bottom:1.5em;padding-top:0px;padding-bottom:0px;list-style:none;color:rgb(51,51,51);font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;text-align:left;">
+这段代码在C#和JavaScript中都是合法的，但是它们的处理方式大相径庭。在C#中，编译器可以推断出a和n都是32位整数，则for循环和相加操作都只是简单的CPU指令，自然效率很高。但是对于JavaScript等动态类型语言来说，var只代表了“一个值”，它可以是任意类型，因此这里其实还会包含一个“类型标记”，表明它在运行时是什么类型的对象。所以两者的区别之一便是，表示同样的值在动态语言中会有一些额外的开销，在如今的CPU中，“空间”也意味着“速度”，所以较大的值便需要较长时间进行处理，这里便损失了一部分效率。此外JavaScript在计算a加i时，那么必须先查看两个变量中的类型标记，根据类型选择出合适的相加操作，然后加载两个值，最后再进行加法操作，一旦越界了还要利用double。很明显在这里也会带来许多开销。一般来说，动态语言是使用解释器来执行的，因此还有一些解释器需要的二进制码，把这些性能损失全部加起来以后，便会发现执行代码时需要10倍到100倍的性能开销。</p>
+<p style="margin-bottom:1.5em;padding-top:0px;padding-bottom:0px;list-style:none;color:rgb(51,51,51);font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;text-align:left;">
+不过近几年出现的一些动态虚拟机或引擎将此类情况改善了许多。如今大部分的JavaScript引擎使用了JIT编译器，于是便省下了解释器的开销，这样性能损失便会减小至3到10倍。而在过去的两三年间，JIT编译器也变得越来越高效，浏览器中新一代的适应性JIT编译器，如<a href="https://wiki.mozilla.org/JavaScript:TraceMonkey" style="color:rgb(0,102,204);">TraceMonkey</a>，<a href="http://code.google.com/p/v8/" style="color:rgb(0,102,204);">V8</a>，还有微软在IE
+ 9中使用的<a href="http://blogs.msdn.com/ie/archive/2010/03/18/the-new-javascript-engine-in-internet-explorer-9.aspx" style="color:rgb(0,102,204);">Chakra</a>引擎。这种适应性的JIT编译器使用了一部分有趣的技术，如Inline Caching、Type Specialization、Hidden Classes、Tracing等等，它们可以将开销降低至2到3倍的范围内，这种效率的提升可谓十分神奇。在Anders看来，JavaScript引擎可能已经接近了性能优化的极限，我们在效率上可以提升的空间已经不多。不过他同样认为，如今JavaScript语言的性能已经足够快了，完全有能力作为Web客户端的统治性语言。</p>
+<p style="margin-bottom:1.5em;padding-top:0px;padding-bottom:0px;list-style:none;color:rgb(51,51,51);font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;text-align:left;">
+动态语言的关键之一便是“元编程”，“元编程”实际上是“代码生成”的一种别称，在日常应用中开发人员其实经常依赖这种做法了。在某些场景下使用动态语言会比静态语言更加自然一些。例如在C#或Java里使用ORM时，一种传统做法是让代码生成器去观察数据库，并生成一大堆代码，然后再编译。而动态语言并没有编译期和执行期的区别，例如在Ruby on Rails中使用ActiveRecord便无须定义各式字段。</p>
+<p style="margin-bottom:1.5em;padding-top:0px;padding-bottom:0px;list-style:none;color:rgb(51,51,51);font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;text-align:left;">
+Anders谈到，他和他的团队也在努力改进静态语言的元编程能力，如他们正在实现的“编译器即服务（Compiler as a Service）”。传统的编译器是一个黑盒，一端输入代码，而另一端便会生成.NET程序集等数据，开发人员很难参与或理解它的工作。但是在很多时候，开发人员并不一定需要编译器来生成程序集，他们需要的是一些树状的表现形式，然后对它进行识别和重写。因此，开发人员可能会越来越需要一些开放编译器功能的API。这么做可以让静态类型语言获得许多有用的功能，包括元编程以及可操作的完整对象模型等等。</p>
+<p style="margin-bottom:1.5em;padding-top:0px;padding-bottom:0px;list-style:none;color:rgb(51,51,51);font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;text-align:left;">
+<strong>并发</strong></p>
+<p style="margin-bottom:1.5em;padding-top:0px;padding-bottom:0px;list-style:none;color:rgb(51,51,51);font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;text-align:left;">
+Anders看来，多核革命的一个有趣之处在于，它会要求并发的思维方式有所改变。传统的并发思维，是在单个CPU上执行多个逻辑任务，使用旧有的分时方式或是时间片模型来执行多个任务。但是如今的并发场景则正好相反，是要将一个逻辑上的任务放在多个CPU上执行。这改变了我们编写程序的方式，这意味着对于语言或是API来说，我们需要有办法来分解任务，把它拆分成多个小任务后独立的执行，而传统的编程语言中并不关注这点。</p>
+<p style="margin-bottom:1.5em;padding-top:0px;padding-bottom:0px;list-style:none;color:rgb(51,51,51);font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;text-align:left;">
+使用目前的并发API来完成工作并不容易，比如Thread，ThreadPool，Monitor等等，开发人员很难走的太远。不过在.NET 4.0中提供了一套强大的框架，即.NET并行扩展（Parallel Extensions），这是一种现代的并发模型，将逻辑上的任务并发与实际使用的的物理模型分离开来。以前的API都是直接处理线程等基础元素，不过利用.NET并行扩展中的任务并行库（Task Parallel Library），并行LINQ（Parallel LINQ）以及协调数据结构（Coordination
+ Data Structures）让开发人员可以直接关注逻辑上的任务，而不必关心它们是如何运行的，或是使用了多少个线程和CPU等等。利用LINQ这样的DSL也有助于写出并行的代码，如果使用普通的for循环配合线程池来实现并行，则开发人员很容易在各种API里失去方向。</p>
+<p style="margin-bottom:1.5em;padding-top:0px;padding-bottom:0px;list-style:none;color:rgb(51,51,51);font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;text-align:left;">
+不过事实上，编写并行的代码依然很困难，尤其是要识别出可以并行的地方。Anders认为很多时候还是需要编程语言来关注这方面的事情（如下图）。比如“隔离性（Isolation）”，即编译器如何发现这段代码是独立的，便可以将其安全地并发执行。某段代码创建了一个对象，在分享给其他人之前，我们对它的改变是安全的，但是一旦将其共享出去以后便完全不同了。因此理想中的类型系统应该可以跟踪到这样的共享，如<a href="http://en.wikipedia.org/wiki/Linear_type_system" style="color:rgb(0,102,204);"><span style="color:#3d81ee;">Linear
+ Types</span></a>——这在学术界也有一些研究。编程语言也可以在函数的纯洁性（Purity）方面下功夫，如关注某个函数是否有副作用，有些时候编译器可以做这方面的检查，它可以禁止某些操作，以此保证我们写出无副作用的纯函数。另外便是不可变性（Immutability），目前的语言，如C#或VB，我们需要额外的工作才能写出不可变的代码。Anders认为合适的做法应该是在语言层面上更好的支持不可变性。这些都是在并发方面需要考虑的问题。</p>
+<p style="margin-bottom:1.5em;padding-top:0px;padding-bottom:0px;list-style:none;color:rgb(51,51,51);font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;text-align:center;">
+<img border="0" alt="" width="400" height="300" src="http://cms.csdnimg.cn/articlev1/uploads/allimg/100831/28_100831094725_1.png" style="vertical-align:middle;border:none;" /></p>
+<p style="margin-bottom:1.5em;padding-top:0px;padding-bottom:0px;list-style:none;color:rgb(51,51,51);font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;text-align:left;">
+ Anders还提到了他在思考并发语言特性时所遵循的原则：一个语言特性不应该针对某个特定的并发模型，而应该是一种通用的，可用于各种不同的并发场景的特性，就像隔离性、纯洁性及不可变性那样。语言拥有这样的特性之后，就可以用于构建各种不同的API，各种并发方式都可以利用到核心的语言特性。</p>
+<p style="margin-bottom:1.5em;padding-top:0px;padding-bottom:0px;list-style:none;color:rgb(51,51,51);font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;text-align:left;">
+<strong>总结</strong></p>
+<p style="margin-bottom:1.5em;padding-top:0px;padding-bottom:0px;list-style:none;color:rgb(51,51,51);font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;text-align:left;">
+Anders认为，对于编程语言来说，现在出现了许多有趣的东西，也是个令人激动的时刻。在过去，大约是1995到2005年，的确可以说是一个编程语言的黄金时期。当Java出现的时候，编程语言的门槛变得平坦了，一切都是Java，似乎其他编程语言都完蛋了，程序设计者也没什么可做的。不过大家又逐渐发现，其实这远没有结束。现在回顾起来，会发现这段时间又出现了许多有趣的编程语言，这其实也代表了我们在编程领域上的进步。</p>
+<p style="margin-bottom:1.5em;padding-top:0px;padding-bottom:0px;list-style:none;color:rgb(51,51,51);font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;text-align:left;">
+（本文来自《程序员》杂志2010年08期）</p>
+<p style="margin-bottom:1.5em;padding-top:0px;padding-bottom:0px;list-style:none;color:rgb(51,51,51);font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;text-align:left;">
+<strong>注：</strong></p>
+<p style="margin-bottom:1.5em;padding-top:0px;padding-bottom:0px;list-style:none;color:rgb(51,51,51);font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;text-align:left;">
+这是一篇发表在《程序员》杂志8月刊的文章，是赵劼根据Anders Hejlsberg演讲内容的翻译进行了缩写。原本的完整演讲内容有数万字，为了在杂志上发表因此简化成了五千字，因此如果您对完整内容感兴趣，不妨根据下面链接来访问完整内容，其中也包含大量分解的幻灯片以及代码。</p>
+<blockquote style="margin-right:0px;margin-bottom:1.5em;margin-left:0px;padding:0px;list-style:none;color:rgb(51,51,51);font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;background-color:rgb(255,255,255);">
+<ul style="margin:0px 0px 1em 20px;padding:0px;list-style:none;"><li style="margin:0px;padding:0px;list-style:disc;"><a href="http://blog.zhaojie.me/2010/04/trends-and-future-directions-in-programming-languages-by-anders-1-history-and-trends.html" style="color:rgb(0,102,204);">编程语言的发展趋势及未来方向（1）：历史回顾及趋势概述</a></li><li style="margin:0px;padding:0px;list-style:disc;"><a href="http://blog.zhaojie.me/2010/04/trends-and-future-directions-in-programming-languages-by-anders-2-declarative-programming-and-dsl.html" style="color:rgb(0,102,204);">编程语言的发展趋势及未来方向（2）：声明式编程与DSL</a></li><li style="margin:0px;padding:0px;list-style:disc;"><a href="http://blog.zhaojie.me/2010/05/trends-and-future-directions-in-programming-languages-by-anders-3-functional-programming-and-fsharp.html" style="color:rgb(0,102,204);">编程语言的发展趋势及未来方向（3）：函数式编程</a></li><li style="margin:0px;padding:0px;list-style:disc;"><a href="http://blog.zhaojie.me/2010/05/trends-and-future-directions-in-programming-languages-by-anders-4-dynamic-languages.html" style="color:rgb(0,102,204);">编程语言的发展趋势及未来方向（4）：动态语言</a></li><li style="margin:0px;padding:0px;list-style:disc;"><a href="http://blog.zhaojie.me/2010/05/trends-and-future-directions-in-programming-languages-by-anders-5-meta-programming.html" style="color:rgb(0,102,204);">编程语言的发展趋势及未来方向（5）：元编程</a></li><li style="margin:0px;padding:0px;list-style:disc;"><a href="http://blog.zhaojie.me/2010/05/trends-and-future-directions-in-programming-languages-by-anders-6-concurrency.html" style="color:rgb(0,102,204);">编程语言的发展趋势及未来方向（6）：并发</a></li><li style="margin:0px;padding:0px;list-style:disc;"><a href="http://blog.zhaojie.me/2010/06/trends-and-future-directions-in-programming-languages-by-anders-7-conclusion.html" style="color:rgb(0,102,204);">编程语言的发展趋势及未来方向（7）：总结</a></li></ul></blockquote>
+            </div>
+                </div>
+			</article>
+	
+		<div class="article-bar-bottom">
+								<div class="tags-box">
+			<span class="label">个人分类：</span>
+						<a class="tag-link" href="https://blog.csdn.net/u010178308/article/category/6882109"  target="_blank">C#						</a>
+		</div>
+					</div>
+	
+	<!-- !empty($pre_next_article[0]) -->
+		</div>
+<script>
+    $(".MathJax").remove();
+</script>
+
+<script type="text/javascript" src="https://static-blog.csdn.net/mdeditor/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+			"HTML-CSS": {
+					linebreaks: { automatic: true, width: "94%container" },
+					imageFont: null
+			},
+			tex2jax: {
+				preview: "none"
+			},
+			mml2jax: {
+				preview: 'none'
+			}
+	});
+</script>
+<script>
+	(function(){
+		var btnReadmore = $("#btn-readmore");
+		if(btnReadmore.length>0){
+			var winH = $(window).height();
+			var articleBox = $("div.article_content");
+			var artH = articleBox.height();
+			if(artH > winH*2){
+				articleBox.css({
+					'height':winH*2+'px',
+					'overflow':'hidden'
+				})
+				btnReadmore.click(function(){
+					articleBox.removeAttr("style");
+					$(this).parent().remove();
+				})
+			}else{
+				btnReadmore.parent().remove();
+			}
+		}
+	})()
+</script>        <div class="edu-promotion"></div>
+<script type="text/javascript">
+	var edu_ad_is_big_data = 0;
+	var edu_ad_id_mapping = {"0":["https:\/\/edu.csdn.net\/sp\/blog.php?type=ai1","https:\/\/edu.csdn.net\/sp\/blog.php?type=python1"],"1":["https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1","https:\/\/edu.csdn.net\/sp\/blog.php?type=web1"],"8":["https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1"],"2":["https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1","https:\/\/edu.csdn.net\/sp\/blog.php?type=python1"],"3":["https:\/\/edu.csdn.net\/sp\/blog.php?type=ai1","https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1"],"6":["https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1","https:\/\/edu.csdn.net\/sp\/blog.php?type=ai1"],"12":["https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1","https:\/\/edu.csdn.net\/sp\/blog.php?type=ai1"],"14":["https:\/\/edu.csdn.net\/sp\/blog.php?type=web1","https:\/\/edu.csdn.net\/sp\/blog.php?type=python1"],"15":["https:\/\/edu.csdn.net\/sp\/blog.php?type=ai1","https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1"],"16":["https:\/\/edu.csdn.net\/sp\/blog.php?type=web1","https:\/\/edu.csdn.net\/sp\/blog.php?type=python1"],"28":["https:\/\/edu.csdn.net\/sp\/blog.php?type=ai1","https:\/\/edu.csdn.net\/sp\/blog.php?type=python1"],"29":["https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1","https:\/\/edu.csdn.net\/sp\/blog.php?type=ai1"],"30":["https:\/\/edu.csdn.net\/sp\/blog.php?type=python1","https:\/\/edu.csdn.net\/sp\/blog.php?type=ai1"],"32":["https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1","https:\/\/edu.csdn.net\/sp\/blog.php?type=python1"],"33":["https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1","https:\/\/edu.csdn.net\/sp\/blog.php?type=ai1"],"35":["https:\/\/edu.csdn.net\/sp\/blog.php?type=ai1","https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1"],"37":["https:\/\/edu.csdn.net\/sp\/blog.php?type=web1","https:\/\/edu.csdn.net\/sp\/blog.php?type=python1"],"7":["https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1","https:\/\/edu.csdn.net\/sp\/blog.php?type=ai1"],"17":["https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1","https:\/\/edu.csdn.net\/sp\/blog.php?type=ai1"],"34":["https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1","https:\/\/edu.csdn.net\/sp\/blog.php?type=python1"],"36":["https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1","https:\/\/edu.csdn.net\/sp\/blog.php?type=ai1"],"31":["https:\/\/edu.csdn.net\/sp\/blog.php?type=python1","https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1"],"19":["https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1"],"20":["https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1"]};
+</script>        <a id="commentBox"></a>
+<div class="comment-box">
+	  	<div class="comment-edit-box d-flex">
+		<a id="commentsedit"></a>
+		<div class="user-img">
+			<img src="https://avatar.csdn.net/3/9/1/3_attilax.jpg">
+		</div>
+		<form id="commentform">
+			<input type="hidden" id="comment_replyId">
+			<textarea class="comment-content" name="comment_content" id="comment_content" placeholder="想对作者说点什么"></textarea>
+			<div class="opt-box"> <!-- d-flex -->
+				<div id="ubbtools" class="add_code">
+					<a href="#insertcode" code="code" target="_self"><i class="icon iconfont icon-daima"></i></a>
+				</div>
+				<input type="hidden" id="comment_replyId" name="comment_replyId">
+				<input type="hidden" id="comment_userId" name="comment_userId" value="">
+				<input type="hidden" id="commentId" name="commentId" value="">
+				<div style="display: none;" class="csdn-tracking-statistics tracking-click" data-mod="popu_384"><a href="#" target="_blank" class="comment_area_btn">发表评论</a></div>
+				<div class="dropdown" id="myDrap">
+					<a class="dropdown-face d-flex align-items-center" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+					<div class="txt-selected text-truncate">添加代码片</div>
+					<svg class="icon d-block" aria-hidden="true">
+						<use xlink:href="#csdnc-triangledown"></use>
+					</svg>
+					</a>
+					<ul class="dropdown-menu" id="commentCode" aria-labelledby="drop4">
+						<li><a data-code="html">HTML/XML</a></li>
+						<li><a data-code="objc">objective-c</a></li>
+						<li><a data-code="ruby">Ruby</a></li>
+						<li><a data-code="php">PHP</a></li>
+						<li><a data-code="csharp">C</a></li>
+						<li><a data-code="cpp">C++</a></li>
+						<li><a data-code="javascript">JavaScript</a></li>
+						<li><a data-code="python">Python</a></li>
+						<li><a data-code="java">Java</a></li>
+						<li><a data-code="css">CSS</a></li>
+						<li><a data-code="sql">SQL</a></li>
+						<li><a data-code="plain">其它</a></li>
+					</ul>
+				</div>  
+				<div class="right-box">
+					<span id="tip_comment" class="tip">还能输入<em>1000</em>个字符</span>
+					<input type="submit" class="btn btn-sm btn-red btn-comment" value="发表评论">
+				</div>
+			</div>
+		</form>
+	</div>
+			<div class="comment-list-container">
+		<a id="comments"></a>
+		<div class="comment-list-box">
+		</div>
+		<div id="commentPage" class="pagination-box d-none"></div>
+		<div class="opt-box text-center">
+			<button class="btn btn-sm btn-link-blue" id="btnMoreComment"></button>
+		</div>
+	</div>
+</div>        <div class="recommend-box">
+            		<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/po86BHac10C4/article/details/78130446" target="_blank" strategy="BlogCommendFromGuangxin_0">
+				<em>未来</em>五年最具前景的一门<em>编程语言</em>是什么？			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/po86BHac10C4/article/details/78130446" target="_blank" >
+				阅读文本大概需要 2.8 分钟。
+
+之前我的知识星球内有人问过这么一个问题，当时做了一个回答，今天在知乎上也看到一个类似的问题，看到很多人的答案都模棱两可，给你说一大堆套话，新手如果可以理解的话就...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/po86BHac10C4" title="po86BHac10C4" target="_blank">
+					<img src="https://avatar.csdn.net/D/4/C/3_po86bhac10c4.jpg" alt="po86BHac10C4" class="avatar-pic">
+					<span class="name">po86BHac10C4</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2017-09-26 00:00:00</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：2182</span>
+			</p>
+		</div>
+	</div>
+					<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/googdev/article/details/52575079" target="_blank" strategy="BlogCommendFromGuangxin_1">
+				2016 年最受欢迎的<em>编程语言</em>是什么？			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/googdev/article/details/52575079" target="_blank" >
+				这两天 GitHub 对其官网进行了改版，紧接着又发布了一年一度的开源报告，我们程序员比较关心之后的趋势是什么，而 GitHub 毫无疑问代表了全世界编程领域的趋势，我们不妨先来解读下这份报告，然后再...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/googdev" title="googdev" target="_blank">
+					<img src="https://avatar.csdn.net/6/0/E/3_googdev.jpg" alt="googdev" class="avatar-pic">
+					<span class="name">googdev</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2016-09-18 15:45:53</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：94012</span>
+			</p>
+		</div>
+	</div>
+								<div class="recommend-item-box recommend-ad-box" id="ad1"></div>
+				<script>
+				  var width = $("div.recommend-box").outerWidth() - 48;
+					NEWS_FEED({
+						w: width,
+						h : 90,
+						showid : 'GNKXx7',
+						placeholderId: "ad1",
+						inject : 'define',
+						define : {
+							imagePosition : 'right',
+							imageBorderRadius : 0,
+							imageWidth: 120,
+							imageHeight: 90,
+							imageFill : 'clip',
+							displayImage : true,
+							displayTitle : true,
+							titleFontSize: 20,
+							titleFontColor: '#333',
+							titleFontFamily : 'Microsoft Yahei',
+							titleFontWeight: 'bold',
+							titlePaddingTop : 0,
+							titlePaddingRight : 0,
+							titlePaddingBottom : 10,
+							titlePaddingLeft : 0,
+							displayDesc : true,
+							descFontSize: 14,
+							descFontColor: '#6b6b6b',
+							descFontFamily : 'Microsoft Yahei',
+							paddingTop : 0,
+							paddingRight : 0,
+							paddingBottom : 0,
+							paddingLeft : 0,
+							backgroundColor: '#fff',
+							hoverColor: '#ca0c16'
+						}
+					})
+				</script>
+
+			
+				<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/jiangmeiling9921/article/details/5917025" target="_blank" strategy="BlogCommendFromGuangxin_2">
+				程序员的发展<em>方向</em>			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/jiangmeiling9921/article/details/5917025" target="_blank" >
+				师范数学毕业转行做软件开发已两年，从事.net，做过一些电子商务网站和软件，自已是个女生，2010年24岁，是该考虑下自已的发展<em>方向</em>了。下面摘一些程序员发展<em>方向</em>的相关文章给自已也给同样迷茫的战友们，希...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/jiangmeiling9921" title="jiangmeiling9921" target="_blank">
+					<img src="https://avatar.csdn.net/5/4/3/3_jiangmeiling9921.jpg" alt="jiangmeiling9921" class="avatar-pic">
+					<span class="name">jiangmeiling9921</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2010-09-30 19:01:00</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：14602</span>
+			</p>
+		</div>
+	</div>
+					<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/Px01Ih8/article/details/79395036" target="_blank" strategy="BlogCommendFromGuangxin_3">
+				2018java发展前景详细分析！			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/Px01Ih8/article/details/79395036" target="_blank" >
+				点击上方“程序员大咖”，选择“置顶公众号”关键时刻，第一时间送达！过完春节马上就要返程上班了，新的一年程序员是不是特别关注2018java前景如何呢，下面就借助一些数据来简单分析一下。01.Java开...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/Px01Ih8" title="Px01Ih8" target="_blank">
+					<img src="https://avatar.csdn.net/7/E/D/3_px01ih8.jpg" alt="Px01Ih8" class="avatar-pic">
+					<span class="name">Px01Ih8</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2018-02-28 00:00:00</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：1622</span>
+			</p>
+		</div>
+	</div>
+					<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/u012017783/article/details/53708586" target="_blank" strategy="BlogCommendFromGuangxin_4">
+				2017 年建议学习的<em>编程语言</em>、框架和工具			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/u012017783/article/details/53708586" target="_blank" >
+				大趋势
+
+渐进式 Web Apps
+
+在 2016 年里，我们见证了 Progressive
+ Web App 概念的蓬勃兴起。它意味着 Web 应用程序可以离线工作，并能提供原生移动应用的...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/u012017783" title="u012017783" target="_blank">
+					<img src="https://avatar.csdn.net/5/D/4/3_u012017783.jpg" alt="u012017783" class="avatar-pic">
+					<span class="name">u012017783</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2016-12-17 16:07:36</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：2686</span>
+			</p>
+		</div>
+	</div>
+					<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/hxp1991/article/details/52328574" target="_blank" strategy="BlogCommendFromGuangxin_5">
+				讲述做程序员的发展前景和发展<em>方向</em>			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/hxp1991/article/details/52328574" target="_blank" >
+				如果你还不是一名程序员,你是否在为是否从事程序员工作而挣扎呢?  
+   如果你已经是一名程序员,你是否在为程序员的前途而感到迷茫呢?   
+  如果是,我可以告诉你,做程序员是有前途的!    ...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/hxp1991" title="hxp1991" target="_blank">
+					<img src="https://avatar.csdn.net/2/8/C/3_hxp1991.jpg" alt="hxp1991" class="avatar-pic">
+					<span class="name">hxp1991</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2016-08-26 15:02:22</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：2877</span>
+			</p>
+		</div>
+	</div>
+					<div class="recommend-item-box recommend-ad-box" id="a_d_feed_0"></div>
+			<script>
+				var width = $("div.recommend-box").outerWidth() - 48;
+				NEWS_FEED({
+					w: width,
+					h: 90,
+					showid: 'Afihld',
+					placeholderId: 'a_d_feed_0',
+					inject: 'define',
+					define: {
+						imagePosition: 'right',
+						imageBorderRadius: 0,
+						imageWidth: 120,
+						imageHeight: 90,
+						imageFill: 'clip',
+						displayImage: true,
+						displayTitle: true,
+						titleFontSize: 20,
+						titleFontColor: '#333',
+						titleFontFamily: 'Microsoft Yahei',
+						titleFontWeight: 'bold',
+						titlePaddingTop: 0,
+						titlePaddingRight: 0,
+						titlePaddingBottom: 10,
+						titlePaddingLeft: 0,
+						displayDesc: true,
+						descFontSize: 14,
+						descFontColor: '#6b6b6b',
+						descFontFamily: 'Microsoft Yahei',
+						paddingTop: 0,
+						paddingRight: 0,
+						paddingBottom: 0,
+						paddingLeft: 0,
+						backgroundColor: '#fff',
+						hoverColor: '#ca0c16'
+					}
+				})
+			</script>
+			<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/sinat_32582203/article/details/52259772" target="_blank" strategy="BlogCommendFromGuangxin_6">
+				5种最有前途的<em>编程语言</em>			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/sinat_32582203/article/details/52259772" target="_blank" >
+				在编程领域保持流行就像《爱丽丝镜中奇遇记》中的红棋王后所说，“如果保持在原地用尽了你所有的速度，那么到达另一处最起码需要两倍于此的速度”。
+
+也许你精通Ruby on Rails，很好，但用于数据分析...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/sinat_32582203" title="sinat_32582203" target="_blank">
+					<img src="https://avatar.csdn.net/2/3/C/3_sinat_32582203.jpg" alt="sinat_32582203" class="avatar-pic">
+					<span class="name">sinat_32582203</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2016-08-20 10:12:31</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：5600</span>
+			</p>
+		</div>
+	</div>
+					<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/u010297957/article/details/51289544" target="_blank" strategy="BlogCommendFromGuangxin_7">
+				C语言、<em>编程语言</em>发展史			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/u010297957/article/details/51289544" target="_blank" >
+				以铜为鉴，可正衣冠；以古为鉴，可知兴替；以人为鉴，可明得失。
+了解和学习一门语言、一个系统乃至方方面面的任何东西时，如果不知道其历史和现状而只是一上来就一味地闷头苦学，你就很容易“一叶障目不见泰山”。...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/u010297957" title="u010297957" target="_blank">
+					<img src="https://avatar.csdn.net/7/B/A/3_u010297957.jpg" alt="u010297957" class="avatar-pic">
+					<span class="name">u010297957</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2016-05-01 12:07:27</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：14847</span>
+			</p>
+		</div>
+	</div>
+					<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/csdnshenzhen/article/details/61416462" target="_blank" strategy="BlogCommendFromGuangxin_8">
+				简述计算机语言的发展史			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/csdnshenzhen/article/details/61416462" target="_blank" >
+				在我们如今的生活中，信息技术几乎触及了我们生活的每一个方面，与当下社会的每个人都息息相关。而信息技术的发展，也是现代文明生活不可分割的组成部分。作为技术发展的核心部分，计算机技术的日新月异，无疑成为了...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/csdnshenzhen" title="csdnshenzhen" target="_blank">
+					<img src="https://avatar.csdn.net/1/0/2/3_csdnshenzhen.jpg" alt="csdnshenzhen" class="avatar-pic">
+					<span class="name">csdnshenzhen</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2017-03-11 14:11:25</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：3016</span>
+			</p>
+		</div>
+	</div>
+					<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/qq_21842349/article/details/48971141" target="_blank" strategy="BlogCommendFromGuangxin_9">
+				深入浅出谈计算机语言的发展			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/qq_21842349/article/details/48971141" target="_blank" >
+				通常我们在生活中提到电脑时，往往会将多么神奇、多么酷炫（PS的功劳,可以将丑图ps成美图，你懂得！），当然这是小部分人的理解了。真正懂得计算机的高手在进行交谈之前一定且肯定会问的一句话就是------...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/qq_21842349" title="qq_21842349" target="_blank">
+					<img src="https://avatar.csdn.net/2/0/D/3_qq_21842349.jpg" alt="qq_21842349" class="avatar-pic">
+					<span class="name">qq_21842349</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2015-10-08 13:03:44</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：61</span>
+			</p>
+		</div>
+	</div>
+			            <div class="recommend-loading-box">
+                <img src='https://csdnimg.cn/release/phoenix/images/feedLoading.gif'>
+            </div>
+            <div class="recommend-end-box">
+                <p class="text-center">没有更多推荐了，<a href="https://blog.csdn.net/" class="c-blue c-blue-hover c-blue-focus">返回首页</a></p>
+            </div>
+        </div>
+    </main>
+    <aside>
+		    <div id="asideProfile" class="aside-box">
+    <h3 class="aside-title">个人资料</h3>
+    <div class="profile-intro d-flex">
+        <div class="avatar-box d-flex justify-content-center flex-column">
+            <a href="https://blog.csdn.net/u010178308">
+                <img src="https://avatar.csdn.net/A/3/7/3_u010178308.jpg" class="avatar_pic">
+            </a>
+        </div>
+        <div class="user-info d-flex justify-content-center flex-column">
+            <p class="name csdn-tracking-statistics tracking-click" data-mod="popu_379">
+                <a href="https://blog.csdn.net/u010178308" target="_blank" class="text-truncate" id="uid">u010178308</a>
+            </p>
+                    </div>
+                <div class="opt-box d-flex justify-content-center flex-column">
+            <span  class="csdn-tracking-statistics tracking-click" data-mod="popu_379">
+                                <a class="btn btn-sm btn-red-hollow" id="btnAttent">关注</a>
+                            </span>
+                    </div>
+            </div>
+    <div class="data-info d-flex item-tiling">
+                <dl class="text-center" title="114">
+                        <dt><a href="https://blog.csdn.net/u010178308?t=1">原创</a></dt>
+            <dd><a href="https://blog.csdn.net/u010178308?t=1"><span class="count">114</span></a></dd>
+                    </dl>
+        <dl class="text-center" title="9">
+            <dt>粉丝</dt>
+            <dd><span class="count" id="fan">9</span></dd>
+        </dl>
+        <dl class="text-center" title="10">
+            <dt>喜欢</dt>
+            <dd><span class="count">10</span></dd>
+        </dl>
+        <dl class="text-center" title="7">
+            <dt>评论</dt>
+            <dd><span class="count">7</span></dd>
+        </dl>
+    </div>
+    <div class="grade-box clearfix">
+        <dl>
+            <dt>等级：</dt>
+            <dd>
+                <a href="https://blog.csdn.net/home/help.html#level" title="4级,点击查看等级说明" target="_blank">
+                    <svg class="icon icon-level" aria-hidden="true">
+                        <use xlink:href="#csdnc-bloglevel-4"></use>
+                    </svg>
+                </a>
+            </dd>
+        </dl>
+        <dl>
+            <dt>访问：</dt>
+            <dd title="42929">
+                4万+            </dd>
+        </dl>
+        <dl>
+            <dt>积分：</dt>
+            <dd title="1774">
+                1774            </dd>
+        </dl>
+        <dl title="28994">
+            <dt>排名：</dt>
+            <dd>2万+</dd>
+        </dl>
+    </div>
+        <div class="badge-box d-flex">
+        <span>勋章：</span>
+                        <a class="icon-badge" title="持之以恒">
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#csdnc-m-lasting"></use>
+            </svg>
+            <div class="icon-arrow"></div>
+            <div class="grade-detail-box item2">
+                <div class="pos-box">
+                    <div class="left-box d-flex justify-content-center align-items-center flex-column">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#csdnc-m-lasting"></use>
+                        </svg>
+                        <p>持之以恒</p>
+                    </div>
+                    <div class="right-box d-flex justify-content-center align-items-center">
+                        授予每个自然月内发布4篇或4篇以上原创或翻译IT博文的用户。不积跬步无以至千里，不积小流无以成江海，程序人生的精彩需要坚持不懈地积累！
+                    </div>
+                </div>
+            </div>
+        </a>
+                            </div>
+    </div>		    <div class="csdn-tracking-statistics mb8 box-shadow" data-pid="blog" data-mod="popu_4" style="height:250px;">
+    <div class="aside-content text-center" id="cpro_u2734133">
+        <!-- 投放代码 -->
+        <script type="text/javascript" src="//cee1.iteye.com/lgyyovfyh.js"></script>
+    </div>
+</div>
+		    <div id="asideNewArticle" class="aside-box">
+    <h3 class="aside-title">最新文章</h3>
+    <div class="aside-content">
+        <ul class="inf_list clearfix csdn-tracking-statistics tracking-click" data-mod="popu_382">
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/u010178308/article/details/80595099" target="_blank">C#中字符串删除转义字符</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/u010178308/article/details/80573608" target="_blank">session和cookie区别与联系</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/u010178308/article/details/80573303" target="_blank">H5 本地存储</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/u010178308/article/details/80553421" target="_blank">Wireshark使用总结</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/u010178308/article/details/80543381" target="_blank">协作式取消和超时</a>
+            </li>
+                    </ul>
+    </div>
+</div>
+		    		    <div id="asideCategory" class="aside-box flexible-box">
+    <h3 class="aside-title">个人分类</h3>
+    <div class="aside-content">
+        <ul>
+                        <li>
+                <a href="https://blog.csdn.net/u010178308/article/category/6882109">
+                    C#                    <span class="count float-right">91篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/u010178308/article/category/7102687">
+                    Linux                    <span class="count float-right">27篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/u010178308/article/category/6969621">
+                    MYSQL                    <span class="count float-right">19篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/u010178308/article/category/6671300">
+                    C++                    <span class="count float-right">17篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/u010178308/article/category/6838241">
+                    Asp.NET                    <span class="count float-right">6篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/u010178308/article/category/6881897">
+                    WPF                    <span class="count float-right">4篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/u010178308/article/category/7017928">
+                    虚拟机                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/u010178308/article/category/7019070">
+                    SQLServer                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/u010178308/article/category/7032475">
+                    代码管理                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/u010178308/article/category/7054037">
+                    C# Xml                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/u010178308/article/category/7063500">
+                    网络编程                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/u010178308/article/category/7122754">
+                    Visual Studio工具研究                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/u010178308/article/category/7123432">
+                    数据结构与算法                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/u010178308/article/category/7132882">
+                    服务器                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/u010178308/article/category/7154747">
+                    STSDB4                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/u010178308/article/category/7214586">
+                    SIP                    <span class="count float-right">4篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/u010178308/article/category/7245438">
+                    通信基础知识                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/u010178308/article/category/7333743">
+                    C# 垃圾回收                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/u010178308/article/category/7430263">
+                    HTTPS                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/u010178308/article/category/7574920">
+                    js                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/u010178308/article/category/7584233">
+                    Mac 技巧                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/u010178308/article/category/7584388">
+                    golang                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/u010178308/article/category/7592422">
+                    CSS                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/u010178308/article/category/7597911">
+                    jQuery                    <span class="count float-right">4篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/u010178308/article/category/7599515">
+                    AJAX                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/u010178308/article/category/7602764">
+                    Razor                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/u010178308/article/category/7604115">
+                    MVC                    <span class="count float-right">8篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/u010178308/article/category/7604676">
+                    维护                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/u010178308/article/category/7660393">
+                    框架                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/u010178308/article/category/7698406">
+                    webapi                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/u010178308/article/category/7699087">
+                    算法                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/u010178308/article/category/7705846">
+                    git                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/u010178308/article/category/7707331">
+                    多线程                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/u010178308/article/category/7709103">
+                    抓包工具                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/u010178308/article/category/7713021">
+                    web存储                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                    </ul>
+    </div>
+        <p class="text-center">
+        <a class="btn btn-link-blue flexible-btn" data-fbox="aside-archive">展开</a>
+    </p>
+    </div>
+		    <div id="asideArchive" class="aside-box flexible-box">
+    <h3 class="aside-title">归档</h3>
+    <div class="aside-content">
+        <ul class="archive-list">
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/u010178308/article/month/2018/06">
+                    2018年6月                    <span class="count float-right">9篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/u010178308/article/month/2018/05">
+                    2018年5月                    <span class="count float-right">35篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/u010178308/article/month/2018/04">
+                    2018年4月                    <span class="count float-right">19篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/u010178308/article/month/2018/03">
+                    2018年3月                    <span class="count float-right">4篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/u010178308/article/month/2018/02">
+                    2018年2月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/u010178308/article/month/2018/01">
+                    2018年1月                    <span class="count float-right">19篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/u010178308/article/month/2017/12">
+                    2017年12月                    <span class="count float-right">6篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/u010178308/article/month/2017/11">
+                    2017年11月                    <span class="count float-right">5篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/u010178308/article/month/2017/10">
+                    2017年10月                    <span class="count float-right">13篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/u010178308/article/month/2017/09">
+                    2017年9月                    <span class="count float-right">18篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/u010178308/article/month/2017/08">
+                    2017年8月                    <span class="count float-right">48篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/u010178308/article/month/2017/07">
+                    2017年7月                    <span class="count float-right">11篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/u010178308/article/month/2017/06">
+                    2017年6月                    <span class="count float-right">19篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/u010178308/article/month/2017/05">
+                    2017年5月                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/u010178308/article/month/2017/04">
+                    2017年4月                    <span class="count float-right">17篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/u010178308/article/month/2017/03">
+                    2017年3月                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/u010178308/article/month/2017/01">
+                    2017年1月                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/u010178308/article/month/2016/12">
+                    2016年12月                    <span class="count float-right">4篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/u010178308/article/month/2016/11">
+                    2016年11月                    <span class="count float-right">7篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/u010178308/article/month/2016/10">
+                    2016年10月                    <span class="count float-right">5篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/u010178308/article/month/2016/09">
+                    2016年9月                    <span class="count float-right">8篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/u010178308/article/month/2016/08">
+                    2016年8月                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                    </ul>
+    </div>
+        <p class="text-center">
+        <a class="btn btn-link-blue flexible-btn" data-fbox="aside-archive">展开</a>
+    </p>
+    </div>
+		    <div id="asideHotArticle" class="aside-box">
+	<h3 class="aside-title">热门文章</h3>
+	<div class="aside-content">
+		<ul class="hotArticle-list csdn-tracking-statistics tracking-click" data-mod="popu_521">
+							<li>
+					<a href="https://blog.csdn.net/u010178308/article/details/67623201">获取socket的本地ip端口和远程ip端口的方法 c++</a>
+					<p class="read">阅读量：<span>2324</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/u010178308/article/details/52085444">关于文件路径的反斜杠正斜杠和双斜杠问题</a>
+					<p class="read">阅读量：<span>2068</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/u010178308/article/details/77941040">linux 端口号更改及远程登录</a>
+					<p class="read">阅读量：<span>1207</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/u010178308/article/details/77650919">IPAddress.Any</a>
+					<p class="read">阅读量：<span>1154</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/u010178308/article/details/70568317">c++ socket 异步编程</a>
+					<p class="read">阅读量：<span>1093</span></p>
+				</li>
+					</ul>
+	</div>
+</div>
+		    <div id="asideNewComments" class="aside-box">
+    <h3 class="aside-title">最新评论</h3>
+    <div class="aside-content">
+        <ul class="newcomment-list">
+                        <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/u010178308/article/details/79860851#comments">一次壮烈牺牲的阿里巴巴面试</a>
+                <p class="comment">
+                    <a href="https://my.csdn.net/yalishadaa" class="user-name" target="_blank">yalishadaa</a>：难道工厂模式不能用反射？感觉像实习生的面试题啊，                </p>
+            </li>
+                        <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/u010178308/article/details/79860851#comments">一次壮烈牺牲的阿里巴巴面试</a>
+                <p class="comment">
+                    <a href="https://my.csdn.net/penkee" class="user-name" target="_blank">penkee</a>：赞，还没问你jvm的历史，设计原理，如何应用调优。jdk源码部分设计。spring算是基础了估计问...                </p>
+            </li>
+                        <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/u010178308/article/details/53392306#comments">twincat</a>
+                <p class="comment">
+                    <a href="https://my.csdn.net/sunnyrainflower" class="user-name" target="_blank">sunnyrainflower</a>：赞赞赞，爱死你了                </p>
+            </li>
+                        <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/u010178308/article/details/52586905#comments">WPF UNITY双向通信</a>
+                <p class="comment">
+                    <a href="https://my.csdn.net/m0_37914937" class="user-name" target="_blank">m0_37914937</a>：哥们demo能发我邮箱吗，感激不敬！我也在学习中！498941915@qq.com                </p>
+            </li>
+                        <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/u010178308/article/details/67623201#comments">获取socket的本地ip端口和远...</a>
+                <p class="comment">
+                    <a href="https://my.csdn.net/u010178308" class="user-name" target="_blank">u010178308</a>：[reply]weixin_39580192[/reply]
+就是要返回0才可以进去啊                </p>
+            </li>
+                    </ul>
+    </div>
+</div>
+		<div id="asideFooter">
+			
+		<div class="aside-box">
+						<script type="text/javascript" src="//cee1.iteye.com/avneunkwb.js"></script>
+					</div>
+				<div class="aside-box">
+			<div class="persion_article">
+			</div>
+		</div>
+	</div>
+</aside>
+<script src="https://csdnimg.cn/pubfooter/js/publib_footer-1.0.3.js?20180309" data-isfootertrack="false" type="text/javascript"></script>
+<script>
+	$("a.flexible-btn").click(function(){
+		$(this).parents('div.aside-box').removeClass('flexible-box');
+		$(this).remove();
+	})
+</script>
+</div>
+<div class="mask-dark"></div>
+<div class="tool-box">
+	<ul class="meau-list">
+		<li>
+			<button class="btn-like " title="点赞">
+				<svg class="icon active" aria-hidden="true">
+					<use xlink:href="#csdnc-thumbsup-ok"></use>
+				</svg><svg class="icon no-active" aria-hidden="true">
+					<use xlink:href="#csdnc-thumbsup"></use>
+				</svg>
+				<p>0</p>
+			</button>
+		</li>
+		<li class="toc-container-box" id="liTocBox">
+			<button class="btn-toc" title="目录">
+				<svg class="icon" aria-hidden="true">
+					<use xlink:href="#csdnc-contents"></use>
+				</svg><br>目录
+			</button>
+			<div class="toc-container">
+				<div class="pos-box">
+					<div class="icon-arrow"></div>
+					<div class="scroll-box">
+						<div class="toc-box"></div>
+					</div>
+				</div>
+				<div class="opt-box">
+					<button class="btn-opt prev nomore" title="向上">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#csdnc-chevronup"></use>
+						</svg>
+					</button>
+					<button class="btn-opt next">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#csdnc-chevrondown"></use>
+						</svg>
+					</button>
+				</div>
+			</div>
+		</li>
+		<li>
+			<button class="btn-bookmark" title="收藏">
+				<svg class="icon active" aria-hidden="true">
+					<use xlink:href="#csdnc-bookmark-ok"></use>
+				</svg><svg class="icon no-active" aria-hidden="true">
+					<use xlink:href="#csdnc-bookmark"></use>
+				</svg><br>收藏
+			</button>
+		</li>
+		<li>
+			<a class="btn-comments" title="评论" href="#commentBox">
+				<svg class="icon" aria-hidden="true">
+					<use xlink:href="#csdnc-comments"></use>
+				</svg><br>评论
+			</a>
+		</li>
+				<li class="bdsharebuttonbox">
+			<a class="btn-comments bds_weixin" data-cmd="weixin" title="微信分享">
+				<svg class="icon" aria-hidden="true">
+					<use xlink:href="#csdnc-wechat"></use>
+				</svg><br>微信
+			</a>
+		</li>
+		<li class="bdsharebuttonbox">
+			<a class="btn-comments bds_tsina" data-cmd="tsina" title="微博分享">
+				<svg class="icon" aria-hidden="true">
+					<use xlink:href="#csdnc-weibo"></use>
+				</svg><br>微博
+			</a>
+		</li>
+		<li class="bdsharebuttonbox">
+			<a class="btn-comments bds_qzone" data-cmd="qzone" title="QQ分享">
+				<svg class="icon" aria-hidden="true">
+					<use xlink:href="#csdnc-qq"></use>
+				</svg><br>QQ
+			</a>
+		</li>
+	</ul>
+</div>
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'https://csdnimg.cn/static/api/js/share.js?v=89860594'];</script>
+<script>
+    var recommendCount = 10;
+    recommendCount = recommendCount > 1 ? (recommendCount + (recommendCount>6 ? 2 : 1)) : recommendCount;
+    var articleTit = '编程语言的发展趋势及未来方向';
+    var ChannelId = 16;
+    var articleId = '79001888';
+    var commentscount = 0;
+    var islock = false;
+    var curentUrl = "https://blog.csdn.net/u010178308/article/details/79001888";
+    var myUrl = "https://my.csdn.net/";
+    //1禁止评论，2正常
+    var commentAuth = 2;
+    //百度搜索
+    var baiduKey = "c%23%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E7%9A%84%E5%8F%91%E5%B1%95%E8%B6%8B%E5%8A%BF";
+    var needInsertBaidu = false;
+</script>
+<script src="https://csdnimg.cn/public/sandalstrap/1.3/js/sandalstrap.min.js"></script>
+<script src="https://csdnimg.cn/release/phoenix/vendor/pagination/paging.js"></script>
+<script src='https://csdnimg.cn/public/common/gotop/js/goTop-v1.0.min.js?v201803151422'></script>
+<script>
+    GoTop({
+        right: 8,
+        hasReport: true,
+        reportFun: function() {
+            showReport(false,'编程语言的发展趋势及未来方向');
+        }
+    })
+</script>
+<script src="https://csdnimg.cn/release/phoenix/template/js/common-bd54b21308.min.js"></script>
+<script src="https://csdnimg.cn/release/phoenix/template/js/detail-444d167241.min.js"></script>
+<script src="https://csdnimg.cn/release/phoenix/themes/skin3-template/skin3-template-46c7bd3d86.min.js"></script>
+<script src="https://csdnimg.cn/search/baidu_search-1.1.2.js?v=201802071056&autorun=true&install=true&keyword=c%23%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E7%9A%84%E5%8F%91%E5%B1%95%E8%B6%8B%E5%8A%BF"  type="text/javascript"></script>
+</body>
+<div class="box-box-default">
+    <a class="btn-remove">
+        关闭
+    </a>
+    <script type="text/javascript" src="//cee1.iteye.com/mhzzjepzz.js"></script>
+</div>
+<div class="box-box-large">
+    <a class="btn-remove">
+        关闭
+    </a>
+    <script type="text/javascript" src="//cee1.iteye.com/idvveasfs.js"></script>
+</div>
+</html>

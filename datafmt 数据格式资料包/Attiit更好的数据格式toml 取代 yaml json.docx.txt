@@ -1,0 +1,42 @@
+Attiit更好的数据格式toml 取代 yaml json
+
+因为我们需要一个像样的人类可读的格式，同时能无歧义地映射到哈希表。然后　YAML 的规范有 80 页那么长，真是发指！不，不考虑　JSON 。你知道为什么。
+同样地，GitHub　也觉得 YAML 不够简洁优雅，因此捣鼓出了一个　TOML。
+TOML　的全称是　Tom's Obvious, Minimal Language，因为它的作者是 GitHub　联合创始人　Tom Preston-Werner 。
+
+TOML的由来
+配置文件的使用由来已久，从.ini、XML、JSON、YAML再到TOML，语言的表达能力越来越强，同时书写便捷性也在不断提升。 TOML是前GitHub CEO， Tom Preston-Werner，于2013年创建的语言，其目标是成为一个小规模的易于使用的语义化配置文件格式。TOML被设计为可以无二义性的转换为一个哈希表(Hash table)。
+
+TOML 的目标
+TOML 的目标是成为一个极简的配置文件格式。TOML 被设计成可以无歧义地被映射为哈希表，从而被多种语言解析。
+
+
+数组
+数组使用方括号包裹。空格会被忽略。元素使用逗号分隔。注意，不允许混用数据类型
+
+表格 表格（也叫哈希表或字典）是键值对的集合。
+[table]key = "value"
+
+
+嵌套表格的表格名称中使用.。你可以任意命名你的表格，只是不要用点，点是保留的。
+[dog.tater]type = "pug"
+以上等价于如下的 JSON 结构：
+{ "dog": { "tater": { "type": "pug" } } }
+表格数组
+最后要介绍的类型是表格数组。表格数组可以通过包裹在双方括号内的表格名来表达。使用相同的双方括号名称的表格是同一个数组的元素。表格按照书写的顺序插入。双方括号表格如果没有键值对，会被当成空表。
+[[products]]name = "Hammer"sku = 738594937
+
+[[products]]
+
+[[products]]name = "Nail"sku = 284758393color = "gray"
+等价于以下的　JSON 结构：
+{
+  "products": [
+    { "name": "Hammer", "sku": 738594937 },
+    { },
+    { "name": "Nail", "sku": 284758393, "color": "gray" }
+  ]}
+
+TOML： GitHub 这是要革 YAML 的命呀！ - 新闻 - SegmentFault.html
+TOML 简介 _ Ryan Zhao.html
+

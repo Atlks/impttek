@@ -1,0 +1,455 @@
+
+atitit.api接口说明---详细数据格式v5.doc  
+
+
+
+
+
+
+
+作者：attilax  (1466519819@qq.com)
+日期：2015.1
+版本： 
+
+
+
+
+33
+33
+33
+33
+44
+55
+66
+66
+77
+88
+99
+99
+1111
+1212
+1212
+1313
+1313
+1313
+1313
+13
+
+
+
+change histroty
+1m  v3  接口定义 
+1r   v4  新特性
+异常的识别与转化（客户端处理流程）
+接口的原理说明
+新增DSL风格接口。
+增加接口调用范例
+增加接口调用过程的伪码说明
+1u   v5
+新特性
+调整了账户充值，查看余额，提现等操作。。
+
+
+
+Api接口概览（请参考api接口概览文档,必看）
+
+ 
+ 
+ 远程接口方法
+ 
+ 
+SendLogin    商家登录接口方法	参数：
+SELECT * FROM `mall_users` where user_name='attilax' and user_passwd=MD5('111111');
+
+返回：：商家用户信息
+{
+  "emailCheck": true,
+  "emailCheckCode": "bf7a40bb96cdcf5aa7cc11614262bd47",
+  "forgotCheckCode": "",
+  "lastIp": "",
+  "lastLoginTime": null,
+  "locked": false,
+  "rankId": 1,
+  "regTime":   {
+    "date": 26,
+    "day": 1,
+    "hours": 14,
+    "minutes": 47,
+    "month": 0,
+    "nanos": 0,
+    "seconds": 22,
+    "time": 1422254842000,
+    "timezoneOffset": -480,
+    "year": 115
+  },
+  "userAnswer": "",
+  "userEmail": "attilax2@qq.com",
+  "userIco": "",
+  "userId": 8,    
+  "userName": "attilax",
+  "userPasswd": "670b14728ad9902aecba32e22fa4f6bd",
+  "userQuestion": ""
+}
+
+Queryuserinfo 查询商家信息（电话等）
+参数
+SELECT * FROM  mall_user_info   where  user_id=8 
+
+
+返回
+[{
+  "user_zipcode": "",
+  "user_country": 1,
+  "user_gender": false,
+  "user_marry": false,
+  "user_telphone": "",
+  "user_city": 0,
+  "user_address": "地址信息",
+  "user_district": 0,
+  "user_skype": "",
+  "user_msn": "",
+  "user_ico": null,
+  "id": 8,
+  "user_qq": "",
+  "user_truename": "名字",
+  "user_province": 0,
+  "user_mobile": "1358891563",
+  "user_id": 8,
+  "user_birthday": null
+}]
+
+
+
+
+
+getShopInfo 获取店铺信息
+参数：SELECT * FROM `mall_shop_info` where user_id=8
+返回
+[{
+  "shop_city": 234,
+  "shop_template_img": null,
+  "map_zoom": "11",
+  "shop_notice": null,
+  "user_id": 8,
+  "open_flg": false,
+  "shop_id": 8,
+  "shop_images": null,
+  "goods_num": 1,
+  "shop_country": 1,
+  "count_imgsize": 0,
+  "shop_domain": null,
+  "shop_commend": 1,
+  "shop_address": "adddd",
+  "shop_logo": null,
+  "shop_categories": 12,
+  "shop_name": "attilax shop",
+  "shop_creat_time":   {
+    "date": 26,
+    "day": 1,
+    "hours": 14,
+    "minutes": 48,
+    "month": 0,
+    "nanos": 0,
+    "seconds": 48,
+    "time": 1422254928000,
+    "timezoneOffset": -480,
+    "year": 115
+  },
+  "shop_template": "default",
+  "shop_district": 1971,
+  "shop_management": "经营范围:经营范围:经营范围:",
+  "map_x": "0",
+  "map_y": "0",
+  "shop_intro": "店铺简介店铺简介店铺简介",
+  "lock_flg": false,
+  "shop_province": 17
+}]
+
+addGoods   添加商品
+参数：
+{
+   "shop_id": 8,       商店id
+  "goods_name": "prod111",  产品标题
+  "goods_intro": "商品介绍：商品介绍：商品介绍：",  详细信息
+  "goods_price": 100,  总价
+   "goods_thumb": ""   图片（base64编码字符串）
+ }
+
+返回空。。如果错误异常，返回异常对象
+
+
+modifyInfo商家信息修改
+参数
+update  mall_user_info set user_truename='名字' ,user_mobile='1358891563' ,user_address='地址信息' where user_id=8
+
+返回空，。如果错误异常，返回异常对象
+
+showGoodsList  查询显示商品列表
+
+参数：
+SELECT * FROM `mall_goods` where shop_id=8 limit 0,100
+
+返回
+
+[{
+  "goods_id": 26,
+  "shop_id": 8,
+  "goods_name": "prod111",
+  "cat_id": 6,
+  "ucat_id": 37,
+  "brand_id": 0,
+  "type_id": 1,
+  "goods_intro": "商品介绍：商品介绍：商品介绍：",
+  "goods_wholesale": "",
+  "goods_number": 99,
+  "goods_price": 100,
+  "transport_price": 0,
+  "keyword": "",
+  "is_delete": true,
+  "is_best": false,
+  "is_new": false,
+  "is_hot": false,
+  "is_promote": false,
+  "is_admin_promote": false,
+  "is_on_sale": true,
+  "is_set_image": false,
+  "goods_thumb": "",
+  "pv": 0,
+  "favpv": 0,
+  "sort_order": false,
+  "add_time":   {
+    "date": 26,
+    "day": 1,
+    "hours": 16,
+    "minutes": 8,
+    "month": 0,
+    "nanos": 0,
+    "seconds": 41,
+    "time": 1422259721000,
+    "timezoneOffset": -480,
+    "year": 115
+  },
+  "last_update_time": null,
+  "lock_flg": false,
+  "is_transport_template": false,
+  "transport_template_id": 0,
+  "transport_template_price": 0
+}]
+
+showGoodsDetail  查询显示商品详细
+SELECT * FROM `mall_goods` where  goods_id=3;
+
+返回::
+[{
+  "goods_id": 26,
+  "shop_id": 8,
+  "goods_name": "prod111",
+  "cat_id": 6,
+  "ucat_id": 37,
+  "brand_id": 0,
+  "type_id": 1,
+  "goods_intro": "商品介绍：商品介绍：商品介绍：",
+  "goods_wholesale": "",
+  "goods_number": 99,
+  "goods_price": 100,
+  "transport_price": 0,
+  "keyword": "",
+  "is_delete": true,
+  "is_best": false,
+  "is_new": false,
+  "is_hot": false,
+  "is_promote": false,
+  "is_admin_promote": false,
+  "is_on_sale": true,
+  "is_set_image": false,
+  "goods_thumb": "",
+  "pv": 0,
+  "favpv": 0,
+  "sort_order": false,
+  "add_time":   {
+    "date": 26,
+    "day": 1,
+    "hours": 16,
+    "minutes": 8,
+    "month": 0,
+    "nanos": 0,
+    "seconds": 41,
+    "time": 1422259721000,
+    "timezoneOffset": -480,
+    "year": 115
+  },
+  "last_update_time": null,
+  "lock_flg": false,
+  "is_transport_template": false,
+  "transport_template_id": 0,
+  "transport_template_price": 0
+}]
+
+ delGoods 删除商品
+参数：：
+delete from mall_goods   where  goods_id=333;
+返回 空。。
+如有异常，返回异常信息
+
+ queryOrderList查询订单列表
+SELECT * FROM `mall_order_info` where shop_id=5
+
+返回
+[{
+  "shipping_no": null,
+  "consignee": "dasfd",
+  "get_back_time": null,
+  "order_actual": 0,
+  "order_id": 1,
+  "buyer_reply": false,
+  "pay_message": null,
+  "pay_status": false,
+  "telphone": "111111",
+  "city": 52,
+  "order_amount": 196,
+  "protect_status": false,
+  "order_time":   {
+    "date": 26,
+    "day": 1,
+    "hours": 18,
+    "minutes": 0,
+    "month": 0,
+    "nanos": 0,
+    "seconds": 51,
+    "time": 1422266451000,
+    "timezoneOffset": -480,
+    "year": 115
+  },
+  "province": 2,
+  "order_value": 206,
+  "user_id": 8,
+  "district": 501,
+  "pay_id": 4,
+  "complaint": false,
+  "trade_no": null,
+  "transport_type": 1,
+  "shop_id": 5,
+  "transport_price": 10,
+  "shipping_type": null,
+  "zipcode": "d",
+  "group_id": 0,
+  "receive_time": null,
+  "pay_time": null,
+  "payid": "2015012610005170",
+  "order_status": true,
+  "country": 1,
+  "message": "attttt",
+  "seller_reply": false,
+  "shipping_time": null,
+  "email": "",
+  "address": "fdasfadsf",
+  "shipping_name": null,
+  "transport_status": false,
+  "mobile": "",
+  "pay_name": "邮局汇款"
+}]
+
+ queryOrderDetail 查询单笔订单详细
+参数：：SELECT * FROM `mall_order_info` where order_id=1
+返回
+[{
+  "shipping_no": null,
+  "consignee": "dasfd",
+  "get_back_time": null,
+  "order_actual": 0,
+  "order_id": 1,
+  "buyer_reply": false,
+  "pay_message": null,
+  "pay_status": false,
+  "telphone": "111111",
+  "city": 52,
+  "order_amount": 196,
+  "protect_status": false,
+  "order_time":   {
+    "date": 26,
+    "day": 1,
+    "hours": 18,
+    "minutes": 0,
+    "month": 0,
+    "nanos": 0,
+    "seconds": 51,
+    "time": 1422266451000,
+    "timezoneOffset": -480,
+    "year": 115
+  },
+  "province": 2,
+  "order_value": 206,
+  "user_id": 8,
+  "district": 501,
+  "pay_id": 4,
+  "complaint": false,
+  "trade_no": null,
+  "transport_type": 1,
+  "shop_id": 5,
+  "transport_price": 10,
+  "shipping_type": null,
+  "zipcode": "d",
+  "group_id": 0,
+  "receive_time": null,
+  "pay_time": null,
+  "payid": "2015012610005170",
+  "order_status": true,
+  "country": 1,
+  "message": "attttt",
+  "seller_reply": false,
+  "shipping_time": null,
+  "email": "",
+  "address": "fdasfadsf",
+  "shipping_name": null,
+  "transport_status": false,
+  "mobile": "",
+  "pay_name": "邮局汇款"
+}]
+Recharge充值：
+参数
+Uid     用户id
+Amount   充值金额
+ 
+返回（json格式）
+Uid： 用户id
+Amount：  剩余金额
+
+[{ "amount": 58.41000000000001, "id": 3, "uid": 8 }]
+
+
+amount 剩余钱数：
+参数
+Uid     用户id
+ 
+返回（json格式）
+Uid： 用户id
+amount：  金额
+
+[{ "amount": 58.41000000000001, "id": 3, "uid": 8 }]
+
+
+ Draw 支付宝提现:
+参数
+Uid     用户id
+Amount    金额
+Alipay   支付宝账号
+
+返回空。。。 如果异常返回异常
+
+
+Feedback  意见反馈
+contact ：： 联系方式
+Txt：：  内容
+
+
+
+
+ 版本升级接口
+
+
+ 
+QA：：
+get方式发送参数是需要url编码。
+
+ 
+

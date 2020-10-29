@@ -1,0 +1,105 @@
+Atitit.
+_.æä»¶ä¸ä¼ ç»ä»¶éåandæä½³å®è·µæ»ç»(2)----æ­ç¹ç»­ä¼ _
+11
+11
+11
+22
+22
+33
+33
+44
+4
+
+断点续传的原理
+仔细看一下就会发现多了一行RANGE: bytes=2000070-
+range头 是个标准http1.1 协议头...
+也能使用自定义头了...协议也能使用rmi了,不一定要走http协议..
+
+如何判断一个插件/控件是否支持断点续传??
+断点续传的，那个需要服务器端的编码支持..需要...   两端配合一下   记录一下  可以实现...
+  
+服务器端的编码支持好像不通用...  要是一个插件子有客户端码,说明走不支持断点续传...
+
+作者:: 老哇的爪子 Attilax 艾龙，  EMAIL:1466519819@qq.com
+转载请注明来源： http://blog.csdn.net/attilax
+
+常用的组件选型结果::马
+_Uploadify___js+flash_  ,能多文件上传,,不能断点续传..
+大部分支持断点续传的控件都是收费用的...
+
+Java Applet mupload
+Jeig personal prodeuct ..cant resumt....and biggest file 1.5G
+
+========
+JFileUpload is a client-side JAVA™ component (Applet or WebStart) that allows to upload files and folders to a web or ftp server. This component could be integrated into any application. Server-side technology could be JSP/Servlet, PHP, CGI/PERL, Ruby, ColdFusion or Microsoft ASP. Front-end provides an upload progress bar, a cancel button and drag&drop support. JFileUpload supports very large uploads over 2GB and could resume broken uploads. It is customizable (colors, size and multilanguage). See installation instructions below.
+这个支持resume..jeig haosyeo sh com product..
+
+自定义断点续传控件要实现的指标
+JUPload还有大量的配置参数 
+会话管理 
+语言国际化：超过20种语言 
+FTP和HTTP（POST）功能 
+块上传，可指定服务器最大上传大小 
+图片管理,允许缩放、旋转及格式转换 
+允许控制指定的文件扩展名 
+MD5校验和计算 
+上传的目录结构 
+默认模式图： 
+
+
+断点续传实现协议ftp/http/ rmi 等选型..
+
+
+
+
+
+下。基于WEB的文件上传可以使用FTP和HTTP两种协议，用FTP的话虽然传输稳定，但安全性是个严重的问题，而且FTP服务器读用户库获取权限，这样对于用户使用来说还是不太方便。
+
+
+剩下只有HTTP。在HTTP中有3种方式，PUT、WEBDAV、RFC1867，前2种方法不适合大文件上传，目前我们使用的web上传都是基于RFC1867标准的HTML中基于表单的文件上传。
+
+
+   二、利用RFC1867标准处理文件上传的两种方式：
+         1．一次性得到上传的数据，然后分析处理。
+
+但是http有个很大的问题，走十,要俩边编码实现了.工作量大的......
+
+林吧,还是,决定使用ftp协议,中间走字客户端编码走ok兰...
+
+ 
+断点续传实现方式activex，plugin，，applet，  Flash ，能不能实现断点续传??
+ActiveX可以自己写
+Flash Player ActiveX是Adobe写好了
+
+要想功能不受限制当然是自己做ActiveX比较好.但是自己的又没有adobe的那么多功能函数包支持,所以很难两全其美啊. 结合使用吧.
+
+除非使用AIR，自己操作文件和Socket才有可能支持，单纯运行在浏览器里的SWF，理论上是做不到的
+
+ ... 
+
+我觉得应该还是Flash Player ActiveX的限制过多。很多的ActiveX的权限都比Flash Player要大。例如Yahoo相册的上传控件，就可以预览要上传的图片。而Flash Player就_åä¸å°_。目前网上支持断点续传功能的上传组件基本上都是基于ActiveX（例如_è¿ä¸ª_），它又是怎么做到的呢？
+
+能跨平台的子有swf跟个applet兰....林吧还是applet吧...
+
+Missing required permissions manifest attrribute in main jar
+原因...马签名....
+解决::: 控制panal>>>java>>>安全级调整在低的走ok兰...最好是 添加个签名或者调整客户端java.policy 文件...给个all 授权...
+
+
+
+Missing required permissions manifest attrribute in main jar
+
+
+
+
+
+参考：
+paip.silverlight多文件断点续传.txt
+JQuery上传插件Uploadify使用详解 - oec2003 - 博客园_files
+JQuery上传插件Uploadify使用详解 - oec2003 - 博客园
+基于FTP的web版断点续传问题，求大牛-CSDN论坛-CSDN.NET-中国最大的IT技术社区
+\用Java实现断点续传.html
+java断点续传服务端代码 - Pale Life - 博客园.htm
+带进度条的实现原理and组件选型and最佳实践总结O7 
+atitit.文件上传带进度条的实现原理and组件选型and最佳实践总结O7 - attilax的专栏 - 博客频道 - CSDN.NET.htm
+

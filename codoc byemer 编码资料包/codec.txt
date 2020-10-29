@@ -1,0 +1,119 @@
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\2015sumdoc、Atitit.js url的编码 escape,encodeURI,encodeURIComponent  attilax 的大总结.doc.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\2015sumdoc、Atitit.指明css ,js 的字符编码.doc.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\2015sumdoc、Atitit.检测文本文件的编码.doc.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\2015sumdoc、Atitit.网页，文本的保存编码问题 attilax总结.doc.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\Atitit  汉字编码 gbk  Unicode big5 sjis Shift.docx
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\Atitit  汉字编码 gbk  Unicode big5 sjis Shift.docx.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\Atitit 汉字编码大总结attilax总结 艾提拉总结.docx
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\Atitit 汉字编码大总结attilax总结 艾提拉总结.docx.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\Atitit 汉字编码对体积的影响.docx
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\Atitit 汉字编码对体积的影响.docx.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\Atitit 算法之道 编码算法 urlencode v2s55.docx
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\Atitit 算法之道 编码算法 urlencode.docx
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\Atitit 算法之道 编码算法 urlencode.docx.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\Atitit 编码规范 关于包名 类名 方法名.docx.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\Atitit 编码规范attilax著.docx
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\Atitit 编码规范attilax著.docx.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\Atitit 视频编码与动画原理attilax总结.docx
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\Atitit 视频编码与动画原理attilax总结.docx.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\Atitit 视频编码转换以及播放，以及视频内容分析 文本摘要 图片摘要 检索 解决方案au.docx
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\Atitit 视频编码转换以及播放，以及视频内容分析 文本摘要 图片摘要 检索 解决方案au.docx.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\Atitit. 二进制数据ascii表示法，与base64编码解码api 设计标准化总结.docx.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\Atitit. 二进制数据ascii表示法，与base64编码解码api 设计标准化总结4cli.docx.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\atitit.Atitit.检测文本文件的编码.docx.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\Atitit.Base64编码原理与实现设计.docx.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\Atitit.js url的编码 escape,encodeURI,encodeURIComponent  attilax 的大总结.doc.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\Atitit.判断汉字的编码 regedit 注册表里面的reg_sz.docx.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\Atitit.基于js传递的url编码与解码.docx.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\Atitit.指明css ,js 的字符编码.doc.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\Atitit.断点续传的，那个需要服务器端的编码支持 (2).doc
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\Atitit.断点续传的，那个需要服务器端的编码支持 (2).doc.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\Atitit.断点续传的，那个需要服务器端的编码支持.doc
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\Atitit.断点续传的，那个需要服务器端的编码支持.doc.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\Atitit.检测文本文件的编码.doc.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\atitit.正则表达式搜索汉字and 汉字编码最佳实践 (2).doc
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\atitit.正则表达式搜索汉字and 汉字编码最佳实践 (2).doc.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\atitit.正则表达式搜索汉字and 汉字编码最佳实践.doc
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\atitit.正则表达式搜索汉字and 汉字编码最佳实践.doc.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\Atitit.网页，文本的保存编码问题 attilax总结.doc.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\Atitit.软件开发---io系统---文件保存最佳实践文件名称编码...filenameEncode (2).doc
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\Atitit.软件开发---io系统---文件保存最佳实践文件名称编码...filenameEncode (2).doc.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\Atitit.软件开发---io系统---文件保存最佳实践文件名称编码...filenameEncode v2 s427.doc
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\Atitit.软件开发---io系统---文件保存最佳实践文件名称编码...filenameEncode.doc
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\Atitit.软件开发---io系统---文件保存最佳实践文件名称编码...filenameEncode.doc.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\Atitit.软件开发概念(11)--网络子系统--url编码 空格问题URLEncoder java js php.doc
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\Atitit.软件开发概念(11)--网络子系统--url编码 空格问题URLEncoder java js php.doc.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\atititit视频格式编码转换解决方案.docx
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\codec.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\c、005 r8c、atitit uke企业行政部 世界行政区域划分表 与邮政编码规划 v5 r88.docx.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\c、005 r8c、atitit uke企业行政部 世界行政区域划分表 与邮政编码规划 v5 r88.xlsx.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\c、005 r95、Atitit 人的面相编码 attilax总结.docx.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\c、r9b 005、Atitit 身份证 证件编码规范.docx.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\gbk编码.class
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\gbk编码.java
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\paip.python 日志中文编码问题解决.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\paip.字符编码ISO-8859-1和Windows-1252跟windows-1251的区别.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\paip.常见编码gb2312,gbk,gb18030的不同.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\paip.提升效率---自动获取文件中文编码.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\paip.提升效率---自动获取文件中文编码.txt.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\PAIP.架构编码分离.DOC
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\PAIP.架构编码分离.DOC.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\paip.视频编码与封装方式详解.doc
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\paip.视频编码与封装方式详解.doc.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\PHP_编码规范-命名规范.docx.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\r2017 r5 doc v2 raf、Atitit fs.readFileSync fs.readFile node.js读取文件gbk编码支持.docx.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\r5 doc v2 raf、Atitit fs.readFileSync fs.readFile node.js读取文件gbk编码支持.docx.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\r8 doc、005 r8c、atitit uke企业行政部 世界行政区域划分表 与邮政编码规划 v5 r88.docx.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\r8 doc、005 r8c、atitit uke企业行政部 世界行政区域划分表 与邮政编码规划 v5 r88.xlsx.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\r9 doc、005 r95、Atitit 人的面相编码 attilax总结.docx.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\r9 doc、r9b 005、Atitit 身份证 证件编码规范.docx.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\um doc 2005-1014、2014、PHP_编码规范-命名规范.docx.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\um doc 2005-1014、Atitit.断点续传的，那个需要服务器端的编码支持 (2).doc.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\um doc 2005-1014、Atitit.断点续传的，那个需要服务器端的编码支持.doc.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\um doc 2005-1014、atitit.正则表达式搜索汉字and 汉字编码最佳实践 (2).doc.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\um doc 2005-1014、atitit.正则表达式搜索汉字and 汉字编码最佳实践.doc.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\um doc 2005-1014、Atitit.软件开发---io系统---文件保存最佳实践文件名称编码...filenameEncode (2).doc.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\um doc 2005-1014、Atitit.软件开发---io系统---文件保存最佳实践文件名称编码...filenameEncode.doc.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\um doc 2005-1014、Atitit.软件开发概念(11)--网络子系统--url编码 空格问题URLEncoder java js php.doc.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\um doc 2005-1014、doc v3 sumdata_docver、Atitit.断点续传的，那个需要服务器端的编码支持.doc.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\um doc 2005-1014、doc v3 sumdata_docver、atitit.正则表达式搜索汉字and 汉字编码最佳实践.doc.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\um doc 2005-1014、doc v3 sumdata_docver、Atitit.软件开发---io系统---文件保存最佳实践文件名称编码...filenameEncode.doc.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\um doc 2005-1014、doc v3 sumdata_docver、PAIP.架构编码分离.DOC.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\um doc 2005-1014、doc v3 sumdata_docver、paip.视频编码与封装方式详解.doc.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\um doc 2005-1014、PAIP.架构编码分离.DOC.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\um doc 2005-1014、paip.视频编码与封装方式详解.doc.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\um doc 2005-1014、_paip、PAIP.架构编码分离.DOC.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\um doc 2005-1014、_paip、paip.视频编码与封装方式详解.doc.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\um doc 2005-1014、_paip、PAPER.code conversion 代码规范.doc、开发环境编码风格.doc.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\um doc q2016、q1、q115up5、Atitit. 二进制数据ascii表示法，与base64编码解码api 设计标准化总结.docx.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\um doc q2016、q1、q17up5、atitit.Atitit.检测文本文件的编码.docx.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\um doc q2016、q2F、q219、Atitit. 二进制数据ascii表示法，与base64编码解码api 设计标准化总结.docx.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\um doc q2016、q2F、q219、Atitit.基于js传递的url编码与解码.docx.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\um doc q2016、q2、q219、Atitit. 二进制数据ascii表示法，与base64编码解码api 设计标准化总结.docx.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\um doc q2016、q2、q219、Atitit.基于js传递的url编码与解码.docx.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\um doc q2016、q5、q5a、00up q412、新建文件夹、Atitit.判断汉字的编码 regedit 注册表里面的reg_sz.docx.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\um doc q2016、q5、q5a、00up q420、Atitit.Base64编码原理与实现设计.docx.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\um doc q2016、q5、q5a、00up q46、Atitit.判断汉字的编码 regedit 注册表里面的reg_sz.docx.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\um doc q2016、q5、q5a、Atitit.Base64编码原理与实现设计.docx.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\um doc q2016、q5、q5f、0encry solu、Atitit. 二进制数据ascii表示法，与base64编码解码api 设计标准化总结4cli.docx.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\um doc q2016、qa、000case 4 interview、Atitit 视频编码与动画原理attilax总结.docx.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\um doc q2016、qa、000case 4 interview、Atitit 视频编码转换以及播放，以及视频内容分析 文本摘要 图片摘要 检索 解决方案au.docx.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\um doc q2016、qa、000case 4 interview、新建文件夹、Atitit  汉字编码 gbk  Unicode big5 sjis Shift.docx.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\um doc q2016、qd1、00qc29、Atitit 编码规范 关于包名 类名 方法名.docx.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\umdoc from  sum doc mini v6 raj、Atitit.断点续传的，那个需要服务器端的编码支持 (2).doc.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\umdoc from  sum doc mini v6 raj、Atitit.断点续传的，那个需要服务器端的编码支持.doc.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\umdoc from  sum doc mini v6 raj、atitit.正则表达式搜索汉字and 汉字编码最佳实践 (2).doc.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\umdoc from  sum doc mini v6 raj、atitit.正则表达式搜索汉字and 汉字编码最佳实践.doc.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\umdoc from  sum doc mini v6 raj、Atitit.软件开发---io系统---文件保存最佳实践文件名称编码...filenameEncode (2).doc.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\umdoc from  sum doc mini v6 raj、Atitit.软件开发---io系统---文件保存最佳实践文件名称编码...filenameEncode.doc.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\umdoc from  sum doc mini v6 raj、Atitit.软件开发概念(11)--网络子系统--url编码 空格问题URLEncoder java js php.doc.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\umdoc from  sum doc mini v6 raj、atititit视频格式编码转换解决方案.docx.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\umdoc from  sum doc mini v6 raj、PAIP.架构编码分离.DOC.index.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\utf8编码.class
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\utf8编码.java
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\《信息论与编码（第2版）（高等院校信息与通信工程系列教材）》(曹雪虹...)【简介_书评_在线阅读】 - 当当图书.html
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\开发环境编码风格.doc
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\开发环境编码风格.doc.txt
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\视频编码原理简介 - 文章 - 伯乐在线.html
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\软件通常有三种途径来决定文本的字符集和编码。.html
+C:\Users\attilax\Desktop\codoc byemer 编码资料包\，英语的词序是“主语—动词—宾语”， WALS 对 1377 种语言的词序进行编码，其中 .html

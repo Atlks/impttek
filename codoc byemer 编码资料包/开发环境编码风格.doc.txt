@@ -1,0 +1,100 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+开发环境
+
+
+目  录
+
+11
+99
+9
+
+
+开发模板使用
+JavaCodeStyle 使用
+
+
+Code Templates 导入
+Properties for xx project >> java code style > code templaters > import
+
+
+Formatter 文件导入
+Properties for xx project >> java code style > formatter > import
+
+
+
+CheckStyle 使用
+
+安装路径 \\210.1.2.213\style
+CheckStyle的安装
+   CheckStyle有两种使用方式，一种是通过ant来运行的方式；一种是利用插件的使用方式。这里我们介绍插件的使用方式。
+   CheckStyle插件的安装很简单，将插件的文件夹复制到eclipse的plugins目录下。启动eclipse即可。
+CheckStyle 的配置说明
+首先通过菜单window—〉preferences进入CheckStyle的配置项
+
+(图 1)
+点击上面菜单后，弹出如下的配置对话框
+
+(图 2)
+然后我们点击“NEW”按钮弹出如下的对话框，并且在对话框上选择导入外部配置文件，然后点击browse按钮将部门的style配置文件引入，作为我们检查代码的标准。
+
+(图 3)
+
+(图 4)
+这样我们就做好了对checkstyle的格式配置。
+下面我们介绍一下关于图 2中的其他几个重要按钮的介绍：
+   Properties:
+      该按钮实现对现有的检查标准名称的修改和对检查文件的关联地址。如下图示：
+
+(图 5)
+   Configure:
+      该按钮实现对检查标准项的配置：如下图示
+
+(图 6)
+
+Copy: 该按钮实现通过当前已有的代码检查标准生成一个同样的副本。
+
+CheckStyle的使用：
+   首先选择一个工程属性：如下图示
+
+
+	(图 7)
+
+
+(图 8)
+然后选择上图左边树上的checkstyle项，出现如上图右边的显示；选择下拉列表中的”javastyle”项。我们就可以使用checkstyle来检查代码了。
+    
+另外 ，如果是在编码过程中，编译文件时候检查自己的代码的话。将上图中右边的“Exclude from checking”栏中的多选框都选中即可。如果是PM想检查所有的源文件的话，将第二项去掉即可。
+	
+如下图所示的检查结果
+
+其中problems显示出了有问题的代码部分，并且在源代码中作出了标识。我可以根据相关的问题描述做出相应的修改操作。
+
+
+
+
+2
+
+2
+
+万达信息股份有限公司
+2
+
+2
+
+

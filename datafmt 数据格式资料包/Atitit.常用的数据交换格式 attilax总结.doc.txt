@@ -1,0 +1,23 @@
+Atitit.常用的数据交换格式 attilax总结
+
+
+序列化(serialize)
+
+Eval 变量模式
+
+YAML
+
+Xml
+
+Html
+
+Json
+
+Urlparam
+
+Prop、ini
+
+
+
+
+

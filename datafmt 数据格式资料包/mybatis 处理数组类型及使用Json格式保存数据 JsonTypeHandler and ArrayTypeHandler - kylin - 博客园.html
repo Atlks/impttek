@@ -1,0 +1,497 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>mybatis 处理数组类型及使用Json格式保存数据 JsonTypeHandler and ArrayTypeHandler - kylin - 博客园</title>
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=-hy83QNg62d4qYibixJzxMJkbf1P9fTBlqv7SK5zVL01"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/sea/bundle-sea.css?v=PPe3jt1rcXPno6kucw0iQU2MWF3DbrvubQHRM0FEMas1"/>
+<link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/sea/bundle-sea-mobile.css?v=TUq9b8RqI4cnYtP4OpVmWEjd-0geHVUfEk1cNxZl3IA1"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/kylindai/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/kylindai/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/kylindai/wlwmanifest.xml"/>
+<script src="//common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+<script type="text/javascript">var currentBlogApp = 'kylindai', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="/bundles/blog-common.js?v=O-NTEmnhjbG7lSYLc3yeqkrVxfMJyY9iXf4xyjlKikw1" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<!--done-->
+<div id="header">
+	
+<!--done-->
+<div class="header">
+	<div class="headerText">
+		<a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/kylindai/">kylin@network</a><br>
+		
+	</div>
+</div>
+
+</div>
+
+<div id="mytopmenu" >
+	
+		<div id="mylinks"><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a> &nbsp;
+<a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/kylindai/">首页</a> &nbsp;
+<a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a> &nbsp;
+<a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/kylin">联系</a> &nbsp;
+<a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/kylindai/rss">订阅</a><a id="blog_nav_rss_image" href="http://www.cnblogs.com/kylindai/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>&nbsp;
+<a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a>
+</div>
+		<DIV id="mystats"><div id="blog_stats">
+随笔-58&nbsp;
+评论-39&nbsp;
+文章-0&nbsp;
+<!--trackbacks-0-->
+</div></DIV>
+	
+</div>
+<div id="centercontent" >
+	
+<div id="post_detail">
+<div class = "post">
+	<h1 class = "postTitle"><a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/kylindai/p/3563818.html">mybatis 处理数组类型及使用Json格式保存数据 JsonTypeHandler and ArrayTypeHandler</a></h1>
+	<div id="cnblogs_post_body" class="blogpost-body"><p>mybatis 比 ibatis 改进了很多，特别是支持了注解，支持了plugin inteceptor，也给开发者带来了更多的灵活性，相比其他ORM，我还是挺喜欢mybatis的。</p>
+<p>闲言碎语不要讲，今天研究了下mybatis的typeHandler：</p>
+<p>先看这样一张表（postgresql）</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">create</span> <span style="color: #0000ff;">table</span> <span style="color: #ff00ff;">user</span><span style="color: #000000;"> (
+
+  id serial </span><span style="color: #808080;">not</span> <span style="color: #0000ff;">null</span><span style="color: #000000;">
+
+  name </span><span style="color: #0000ff;">character</span> <span style="color: #0000ff;">varchar</span>(<span style="color: #800000; font-weight: bold;">100</span><span style="color: #000000;">),
+
+  age </span><span style="color: #0000ff;">integer</span><span style="color: #000000;">,
+
+  emails </span><span style="color: #0000ff;">character</span> <span style="color: #0000ff;">varchar</span><span style="color: #ff0000;">[]</span>,  <span style="color: #008080;">--</span><span style="color: #008080;"> varchar 数组 表示可以多个email</span>
+<span style="color: #000000;">
+  address </span><span style="color: #0000ff;">character</span> <span style="color: #0000ff;">varchar</span>(<span style="color: #800000; font-weight: bold;">2000</span>) <span style="color: #008080;">--</span><span style="color: #008080;"> 因为地址内容为非结构化的数据，我们希望保存json格式描述的地址信息，以增加灵活性</span>
+<span style="color: #000000;">
+);</span></pre>
+</div>
+<p>这个表有2个字段值得我们注意：</p>
+<p>1. emails 为 character varchar[] 数组类型</p>
+<p>2. address 我们希望保存为json格式的数据，查询时返回json字符串，mybatis orm 之后可以还原为一个数据对象VO。</p>
+<p>完成这2个需求，则需要我们标题中提到的 JsonTypeHandler &amp; ArrayTypeHandler</p>
+<p>&nbsp;</p>
+<p>先看第一个typHandler: ArrayTypeHandler</p>
+<p>我们先准备VO的代码：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> UserVO {
+
+    </span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">long</span><span style="color: #000000;"> id;
+    </span><span style="color: #0000ff;">private</span><span style="color: #000000;"> String name;
+    </span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">int</span><span style="color: #000000;"> age;
+    </span><span style="color: #0000ff;">private</span><span style="color: #000000;"> String[] emails;
+    Private Object address;
+
+    ......
+}</span></pre>
+</div>
+<p>其中 emails 对应数据库的 emails，address 对应数据库的 address，为什么用Object类型呢，这是因为以后我们可能会有个 AddressVO 这样的对象，也可能会有 AddressVO2 extends AddressVO 这样的对象，但是数据库的schame不会变。</p>
+<p>接下来我们看一下 UserDao.xml 中的片段：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">resultMap </span><span style="color: #ff0000;">type</span><span style="color: #0000ff;">="com.kylin.test.userVO"</span><span style="color: #ff0000;"> id</span><span style="color: #0000ff;">="userVO"</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">result </span><span style="color: #ff0000;">property</span><span style="color: #0000ff;">="id"</span><span style="color: #ff0000;"> column</span><span style="color: #0000ff;">="id"</span><span style="color: #0000ff;">/&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">result </span><span style="color: #ff0000;">property</span><span style="color: #0000ff;">="name"</span><span style="color: #ff0000;"> column</span><span style="color: #0000ff;">="name"</span><span style="color: #0000ff;">/&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">result </span><span style="color: #ff0000;">property</span><span style="color: #0000ff;">="age"</span><span style="color: #ff0000;"> column</span><span style="color: #0000ff;">="age"</span><span style="color: #0000ff;">/&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">result </span><span style="color: #ff0000;">property</span><span style="color: #0000ff;">="emails"</span><span style="color: #ff0000;"> column</span><span style="color: #0000ff;">="emails"</span><span style="color: #ff0000;"> typeHandler</span><span style="color: #0000ff;">="com.kylin.test.util.mybatis.handler.ArrayTypeHandler"</span><span style="color: #0000ff;">/&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">result </span><span style="color: #ff0000;">property</span><span style="color: #0000ff;">="address"</span><span style="color: #ff0000;"> column</span><span style="color: #0000ff;">="address"</span><span style="color: #ff0000;"> typeHandler</span><span style="color: #0000ff;">="com.kylin.test.util.mybatis.handler.JsonTypeHandler"</span><span style="color: #0000ff;">/&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">resultMap</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+<p>上面的resultMap中配置了2个typeHandler，关于typeHandler的配置，mybatis有多种方法，这里简单示意一下。</p>
+<p>&nbsp;</p>
+<p>再看UserDao.xml中的2个方法，需要使用到这2个handler</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">insert </span><span style="color: #ff0000;">id</span><span style="color: #0000ff;">="addUser"</span><span style="color: #ff0000;"> parameterType</span><span style="color: #0000ff;">="com.kylin.test.UserVO"</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">    
+    INSERT INTO user (
+        name, 
+        age, 
+        emails, 
+        address)
+    VALUES (
+        #{name, jdbcType=VARCHAR},
+        #{age, jdbcType=INTEGER},
+        #{emails, jdbcType=ARRAY, typeHandler=com.kylin.test.util.mybatis.handler.ArrayTypeHandler},
+        #{address, jdbcType=VARCHAR, typeHandler=com.kylin.test.util.mybatis.handler.JsonTypeHandler})
+</span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">insert</span><span style="color: #0000ff;">&gt;</span>
+
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">select </span><span style="color: #ff0000;">id</span><span style="color: #0000ff;">="getUserById"</span><span style="color: #ff0000;"> resultMap</span><span style="color: #0000ff;">="userVO"</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">
+    SELECT * 
+    FROM user
+    WHERE id = #{0}
+</span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">select</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+<p>&nbsp;</p>
+<p>上述的addUser方法，传入了字符串数组，和Object对象，保存到了数据库中，见下面的代码：</p>
+<div class="cnblogs_code">
+<pre>    UserVO user = <span style="color: #0000ff;">new</span><span style="color: #000000;"> UserVO();
+
+    user.setName(</span>"kylin"<span style="color: #000000;">);
+    user.setAge(</span>30<span style="color: #000000;">);
+    user.setEmails(</span><span style="color: #0000ff;">new</span> String[] <span style="color: #ff0000;"><strong>{ "kylin@163.com", "kylin@263.com"</strong></span><span style="color: #000000;"><span style="color: #ff0000;"><strong> }</strong></span>);
+
+    Map</span>&lt;String, Object&gt; address = <span style="color: #0000ff;">new</span> HashMap&lt;String, Object&gt;<span style="color: #000000;">();
+    address.put(</span>"country", "china"<span style="color: #000000;">);
+    address.put(</span>"province", "guangdong"<span style="color: #000000;">);
+    address.put(</span>"city", "shenzhen"<span style="color: #000000;">);
+    user.setAddress(<strong><span style="color: #ff0000;">address</span></strong>);
+
+    </span><span style="color: #008000;">//</span><span style="color: #008000;"> 调用dao.addUser方法</span>
+    userDao.addUser(user);</pre>
+</div>
+<p>上面这个方法，将emails 字符串数组保存入数据库，将Map address，以json字符串的方式保存到数据库</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">select</span> <span style="color: #808080;">*</span> <span style="color: #0000ff;">from</span> <span style="color: #ff00ff;">user</span><span style="color: #000000;">;
+
+id name     age   emails                                               address
+</span><span style="color: #008080;">--</span><span style="color: #008080;">-----------------------------------------------------------------------------</span>
+ <span style="color: #800000; font-weight: bold;">1</span> kylin        <span style="color: #800000; font-weight: bold;">30</span>   <span style="color: #ff0000;">[</span><span style="color: #ff0000;">"kylin@163.com","kylin@126.com"</span><span style="color: #ff0000;">]</span>  {"contry":"china","province":"guangdong","city":"shenzhen"}</pre>
+</div>
+<p>看到输入按期望的存入到了数据库中，稍后我们看从数据库读取出后是什么样子，我们先看看ArrayTypeHandler.java</p>
+<p>&nbsp;</p>
+<p>mybatis 已经实现了 BaseTypeHandler&lt;T&gt; 这个抽象类，并将公共的逻辑实现好了，我们只需要继承BaseTypeHandler就好，只需要处理简单数据即可。</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> com.kylin.test.util.mybatis.handler;
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.sql.Array;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.sql.CallableStatement;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.sql.Connection;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.sql.PreparedStatement;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.sql.ResultSet;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.sql.SQLException;
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.apache.ibatis.type.BaseTypeHandler;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.apache.ibatis.type.JdbcType;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.apache.ibatis.type.TypeException;
+<br /><span style="color: #008000;">// 继承自BaseTypeHandler&lt;Object[]&gt; 使用时传入的参数一定要是Object[]，例如 int[]是 Object, 不是Object[]，所以传入int[] 会报错的
+</span></span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> ArrayTypeHandler <span style="color: #0000ff;">extends</span> BaseTypeHandler&lt;Object[]&gt;<span style="color: #000000;"> {
+
+    </span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">final</span> String TYPE_NAME_VARCHAR = "varchar"<span style="color: #000000;">;
+    </span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">final</span> String TYPE_NAME_INTEGER = "integer"<span style="color: #000000;">;
+    </span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">final</span> String TYPE_NAME_BOOLEAN = "boolean"<span style="color: #000000;">;
+    </span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">final</span> String TYPE_NAME_NUMERIC = "numeric"<span style="color: #000000;">;
+    
+    @Override
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span> setNonNullParameter(PreparedStatement ps, <span style="color: #0000ff;">int</span><span style="color: #000000;"> i, Object[] parameter,
+            JdbcType jdbcType) </span><span style="color: #0000ff;">throws</span><span style="color: #000000;"> SQLException {
+
+        </span><span style="color: #008000;">/* 这是ibatis时的做法</span><span style="color: #008000;">
+        StringBuilder arrayString = new StringBuilder("{");
+
+        for (int j = 0, l = parameter.length; j &lt; l; j++) {
+            arrayString.append(parameter[j]);
+            if (j &lt; l - 1) {
+                arrayString.append(",");
+            }
+        }
+
+        arrayString.append("}");
+        
+        ps.setString(i, arrayString.toString());
+        </span><span style="color: #008000;">*/</span><span style="color: #000000;">
+        
+        String typeName </span>= <span style="color: #0000ff;">null</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">if</span> (parameter <span style="color: #0000ff;">instanceof</span><span style="color: #000000;"> Integer[]) {
+            typeName </span>=<span style="color: #000000;"> TYPE_NAME_INTEGER;
+        } </span><span style="color: #0000ff;">else</span> <span style="color: #0000ff;">if</span> (parameter <span style="color: #0000ff;">instanceof</span><span style="color: #000000;"> String[]) {
+            typeName </span>=<span style="color: #000000;"> TYPE_NAME_VARCHAR;
+        } </span><span style="color: #0000ff;">else</span> <span style="color: #0000ff;">if</span> (parameter <span style="color: #0000ff;">instanceof</span><span style="color: #000000;"> Boolean[]) {
+            typeName </span>=<span style="color: #000000;"> TYPE_NAME_BOOLEAN;
+        } </span><span style="color: #0000ff;">else</span> <span style="color: #0000ff;">if</span> (parameter <span style="color: #0000ff;">instanceof</span><span style="color: #000000;"> Double[]) {
+            typeName </span>=<span style="color: #000000;"> TYPE_NAME_NUMERIC;
+        }
+        
+        </span><span style="color: #0000ff;">if</span> (typeName == <span style="color: #0000ff;">null</span><span style="color: #000000;">) {
+            </span><span style="color: #0000ff;">throw</span> <span style="color: #0000ff;">new</span> TypeException("ArrayTypeHandler parameter typeName error, your type is " +<span style="color: #000000;"> parameter.getClass().getName());
+        }
+        <br />        <span style="color: #008000;">// 这3行是关键的代码，创建Array，然后ps.setArray(i, array)就可以了</span>
+        Connection conn </span>=<span style="color: #000000;"> ps.getConnection();
+        Array array </span>=<span style="color: #000000;"> conn.createArrayOf(typeName, parameter);
+        ps.setArray(i, array);
+    }
+
+    @Override
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Object[] getNullableResult(ResultSet rs, String columnName)
+            </span><span style="color: #0000ff;">throws</span><span style="color: #000000;"> SQLException {
+
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> getArray(rs.getArray(columnName));
+    }
+
+    @Override
+    </span><span style="color: #0000ff;">public</span> Object[] getNullableResult(ResultSet rs, <span style="color: #0000ff;">int</span> columnIndex) <span style="color: #0000ff;">throws</span><span style="color: #000000;"> SQLException {
+
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> getArray(rs.getArray(columnIndex));
+    }
+
+    @Override
+    </span><span style="color: #0000ff;">public</span> Object[] getNullableResult(CallableStatement cs, <span style="color: #0000ff;">int</span><span style="color: #000000;"> columnIndex)
+            </span><span style="color: #0000ff;">throws</span><span style="color: #000000;"> SQLException {
+
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> getArray(cs.getArray(columnIndex));
+    }
+    
+    </span><span style="color: #0000ff;">private</span><span style="color: #000000;"> Object[] getArray(Array array) {
+        
+        </span><span style="color: #0000ff;">if</span> (array == <span style="color: #0000ff;">null</span><span style="color: #000000;">) {
+            </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">null</span><span style="color: #000000;">;
+        }
+
+        </span><span style="color: #0000ff;">try</span><span style="color: #000000;"> {
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> (Object[]) array.getArray();
+        } </span><span style="color: #0000ff;">catch</span><span style="color: #000000;"> (Exception e) {
+        }
+        
+        </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">null</span><span style="color: #000000;">;
+    }
+}</span></pre>
+</div>
+<p>&nbsp;</p>
+<p>JsonTypeHandler 我们需要用到处理Json的第三方包：<strong><span style="color: #ff0000;">jackson</span></strong>，这个包据说处理json是效率最快的，代价最小的。</p>
+<p>先封装一个JsonUtil，并提供<span style="color: #ff0000;"><strong>JsonUtil.stringify(...) JsonUtil.parse(...)</strong> </span>这样2个方法出来</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> com.kylin.test.util.json;
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.io.OutputStream;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.text.SimpleDateFormat;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.util.ArrayList;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.util.Date;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.util.List;
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.apache.commons.logging.Log;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.apache.commons.logging.LogFactory;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.codehaus.jackson.map.DeserializationConfig;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.codehaus.jackson.map.ObjectMapper;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.codehaus.jackson.map.SerializationConfig;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.codehaus.jackson.map.annotate.JsonFilter;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.codehaus.jackson.map.ser.impl.SimpleBeanPropertyFilter;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.codehaus.jackson.map.ser.impl.SimpleFilterProvider;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.springframework.core.annotation.AnnotationUtils;
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> JsonUtil {
+
+    </span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">static</span> Log log = LogFactory.getLog(JsonUtil.<span style="color: #0000ff;">class</span><span style="color: #000000;">);
+    
+    </span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">static</span> ObjectMapper objectMapper = <span style="color: #0000ff;">null</span><span style="color: #000000;">;
+    
+    </span><span style="color: #0000ff;">static</span><span style="color: #000000;"> {
+        
+        objectMapper </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> ObjectMapper();
+        
+        objectMapper.setDateFormat(</span><span style="color: #0000ff;">new</span><span style="color: #000000;"> SimpleDateFormat(FormatUtil.DATE_FORMAT_LONG));
+        objectMapper.disable(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES);
+        objectMapper.configure(SerializationConfig.Feature.FAIL_ON_EMPTY_BEANS, </span><span style="color: #0000ff;">false</span><span style="color: #000000;">);
+        objectMapper.setFilters(</span><span style="color: #0000ff;">new</span> SimpleFilterProvider().setFailOnUnknownId(<span style="color: #0000ff;">false</span><span style="color: #000000;">));
+    }
+
+    </span><span style="color: #008000;">/*</span><span style="color: #008000;">
+    public static JsonUtil getInstance() {
+        
+        if (instance == null) {
+            synchronized (JsonUtil.class) {
+                if (instance == null) {
+                    instance = new JsonUtil();
+                }
+            }
+        }
+        
+        return instance;
+    }
+    </span><span style="color: #008000;">*/</span>
+    
+    <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span><span style="color: #000000;"> String stringify(Object object) {
+    
+        </span><span style="color: #0000ff;">try</span><span style="color: #000000;"> {
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> objectMapper.writeValueAsString(object);
+        } </span><span style="color: #0000ff;">catch</span><span style="color: #000000;"> (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+        
+        </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">null</span><span style="color: #000000;">;
+    }
+    
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span><span style="color: #000000;"> String stringify(Object object, String... properties) {
+    
+        </span><span style="color: #0000ff;">try</span><span style="color: #000000;"> {
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> objectMapper
+                    .writer(</span><span style="color: #0000ff;">new</span><span style="color: #000000;"> SimpleFilterProvider().addFilter(
+                            AnnotationUtils.getValue(
+                                AnnotationUtils.findAnnotation(object.getClass(), JsonFilter.</span><span style="color: #0000ff;">class</span><span style="color: #000000;">)).toString(), 
+                                SimpleBeanPropertyFilter.filterOutAllExcept(properties)))
+                    .writeValueAsString(object);    
+        } </span><span style="color: #0000ff;">catch</span><span style="color: #000000;"> (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+        
+        </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">null</span><span style="color: #000000;">;
+    }
+    
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> stringify(OutputStream out, Object object) {
+        
+        </span><span style="color: #0000ff;">try</span><span style="color: #000000;"> {
+            objectMapper.writeValue(out, object);
+        } </span><span style="color: #0000ff;">catch</span><span style="color: #000000;"> (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+    }
+    
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> stringify(OutputStream out, Object object, String... properties) {
+        
+        </span><span style="color: #0000ff;">try</span><span style="color: #000000;"> {
+            objectMapper
+                .writer(</span><span style="color: #0000ff;">new</span><span style="color: #000000;"> SimpleFilterProvider().addFilter(
+                        AnnotationUtils.getValue(
+                            AnnotationUtils.findAnnotation(object.getClass(), JsonFilter.</span><span style="color: #0000ff;">class</span><span style="color: #000000;">)).toString(), 
+                            SimpleBeanPropertyFilter.filterOutAllExcept(properties)))
+                .writeValue(out, object);    
+        } </span><span style="color: #0000ff;">catch</span><span style="color: #000000;"> (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+    }
+    
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> &lt;T&gt; T parse(String json, Class&lt;T&gt;<span style="color: #000000;"> clazz) {
+        
+        </span><span style="color: #0000ff;">if</span> (json == <span style="color: #0000ff;">null</span> || json.length() == 0<span style="color: #000000;">) {
+            </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">null</span><span style="color: #000000;">;
+        }
+        
+        </span><span style="color: #0000ff;">try</span><span style="color: #000000;"> {
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> objectMapper.readValue(json, clazz);
+        } </span><span style="color: #0000ff;">catch</span><span style="color: #000000;"> (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+        
+        </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">null</span><span style="color: #000000;">;
+    }
+    
+}</span></pre>
+</div>
+<p>&nbsp;</p>
+<p>接着再看看JsonTypeHandler</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> com.kylin.test.util.mybatis.handler;
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.sql.CallableStatement;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.sql.PreparedStatement;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.sql.ResultSet;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.sql.SQLException;
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.apache.ibatis.type.BaseTypeHandler;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.apache.ibatis.type.JdbcType;
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> com.kylin.test.util.json.JsonUtil;
+<br />// 继承自BaseTypeHandler&lt;Object&gt; 使用Object是为了让JsonUtil可以处理任意类型
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> JsonTypeHandler <span style="color: #0000ff;">extends</span> BaseTypeHandler&lt;Object&gt;<span style="color: #000000;"> {
+
+    @Override
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span> setNonNullParameter(PreparedStatement ps, <span style="color: #0000ff;">int</span><span style="color: #000000;"> i, Object parameter,
+            JdbcType jdbcType) </span><span style="color: #0000ff;">throws</span><span style="color: #000000;"> SQLException {
+        
+        ps.setString(i, JsonUtil.stringify(parameter));
+    }
+
+    @Override
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Object getNullableResult(ResultSet rs, String columnName)
+            </span><span style="color: #0000ff;">throws</span><span style="color: #000000;"> SQLException {
+        
+        </span><span style="color: #0000ff;">return</span> JsonUtil.parse(rs.getString(columnName), Object.<span style="color: #0000ff;">class</span><span style="color: #000000;">);
+    }
+
+    @Override
+    </span><span style="color: #0000ff;">public</span> Object getNullableResult(ResultSet rs, <span style="color: #0000ff;">int</span> columnIndex) <span style="color: #0000ff;">throws</span><span style="color: #000000;"> SQLException {
+        
+        </span><span style="color: #0000ff;">return</span> JsonUtil.parse(rs.getString(columnIndex), Object.<span style="color: #0000ff;">class</span><span style="color: #000000;">);
+    }
+
+    @Override
+    </span><span style="color: #0000ff;">public</span> Object getNullableResult(CallableStatement cs, <span style="color: #0000ff;">int</span><span style="color: #000000;"> columnIndex)
+            </span><span style="color: #0000ff;">throws</span><span style="color: #000000;"> SQLException {
+        
+        </span><span style="color: #0000ff;">return</span> JsonUtil.parse(cs.getString(columnIndex), Object.<span style="color: #0000ff;">class</span><span style="color: #000000;">);
+    }
+
+}</span></pre>
+</div>
+<p>&nbsp;</p>
+<p>至此，JsonTypeHandler 和 ArrayTypeHandler 就分享介绍完了，</p>
+<p>如前面的 resultMap的配置，当调用 getUserById方法时，会返回 String[], 和Map&lt;String, Object&gt;对象回来，</p>
+<p>有了这2个基础TypeHandler，接下来设计数据库和数据结构就会方便和灵活很多了。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+	<div class = "postDesc">posted on <span id="post-date">2014-02-23 23:35</span> <a href='http://www.cnblogs.com/kylindai/'>kylin</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>)  <a href ="https://i.cnblogs.com/EditPosts.aspx?postid=3563818" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(3563818);return false;">收藏</a></div>
+</div>
+<script type="text/javascript">var allowComments=true,cb_blogId=12150,cb_entryId=3563818,cb_blogApp=currentBlogApp,cb_blogUserGuid='799e310b-63cf-dd11-9e4d-001cf0cd104b',cb_entryCreatedDate='2014/2/23 23:35:00';loadViewCount(cb_entryId);var cb_postType=1;</script>
+
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='cnblogs_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<div id='cnblogs_c2' class='c_ad_block'></div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+</div>
+<div id="leftcontent">
+	
+		<DIV id="leftcontentcontainer">
+			
+<!--done-->
+<div class="newsItem">
+	<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script><br>
+			<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script></DIV>
+	
+</div>
+
+<!--done-->
+<div class="footer">
+	Powered by: <a href="http://www.cnblogs.com">博客园</a>	模板提供：<a href="http://blog.hjenglish.com">沪江博客</a>
+	Copyright &copy;2018 kylin
+</div>
+
+
+
+</body>
+</html>

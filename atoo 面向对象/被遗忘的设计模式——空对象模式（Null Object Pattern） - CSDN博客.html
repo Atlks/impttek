@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <link rel="canonical" href="https://blog.csdn.net/qiumengchen12/article/details/44923139"/> 
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="referrer" content="always">
+    <meta name="description" content="GoF（四人帮）那本《设计模式 可复用面向对象软件的基础》可谓是设计模式方面的经典之作，其中介绍的23种设计模式，也可谓是经典中的经典。但是，设计模式的种类绝不仅仅是这23种，除此之外还有很多巧妙可爱的设计模式值得我们学习。这些被遗忘的设计模式，也可以堪称经典之作。今天我们来一起学习被遗忘的设计模式——空对象模式（Null Object Pattern）。一起看看这个模式会带给我们怎样的惊喜？" />
+    <meta name="keywords" content="设计模式,空对象模式" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+    <meta name="shenma-site-verification" content="5a59773ab8077d4a62bf469ab966a63b_1497598848">
+    <script src="https://csdnimg.cn/release/phoenix/vendor/tingyun/tingyun-rum-blog.js"></script>
+
+    <link href="https://csdnimg.cn/public/favicon.ico" rel="SHORTCUT ICON">
+    <title>被遗忘的设计模式——空对象模式（Null Object Pattern） - CSDN博客</title>
+    
+            <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/detail-801161715c.min.css">
+        <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/themes/skin-yellow/skin-yellow-4e9c30ca0e.min.css">
+
+    <script type="text/javascript">
+        var username = "qiumengchen12";
+        var blog_address = "https://blog.csdn.net/qiumengchen12";
+        var static_host = "https://csdnimg.cn/release/phoenix/";
+        var currentUserName = ""; 
+        var isShowAds = true;
+        var isOwner = false;
+        var loginUrl = "https://passport.csdn.net/account/login?from=https://blog.csdn.net/qiumengchen12/article/details/44923139"
+        var blogUrl = "https://blog.csdn.net/";
+        var curSkin = "skin-yellow";
+    </script>
+    <script type="text/javascript">
+        // Traffic Stats of the entire Web site By baidu
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?6bcd52f51e9b3dce32bec4a3997715ac";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+        // Traffic Stats of the entire Web site By baidu end
+    </script>
+    <script src="https://csdnimg.cn/public/common/libs/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script src="https://csdnimg.cn/rabbit/exposure-click/main-1.0.6.js"></script>
+        <script type="text/javascript" src="https://csdnimg.cn/pubfooter/js/tracking-1.0.2.js" charset="utf-8"></script>
+        <link rel="stylesheet" href="https://csdnimg.cn/public/sandalstrap/1.3/css/sandalstrap.min.css"> 
+    <style>
+        .MathJax, .MathJax_Message, .MathJax_Preview{
+            display: none
+        }
+    </style>
+</head>
+<body>    
+    <link rel="stylesheet" href="https://csdnimg.cn/public/common/toolbar/content_toolbar_css/content_toolbar.css">
+    <script id="toolbar-tpl-scriptId" src="https://csdnimg.cn/public/common/toolbar/js/content_toolbar.js" type="text/javascript" domain="https://blog.csdn.net/"></script>
+    <script src="https://csdnimg.cn/public/sandalstrap/1.3/fonts/csdnc/csdnc.js"></script><link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/blog_code-c3a0c33d5c.css">
+<link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/vendor/pagination/paging.css">
+<script type="text/javascript" src="//static.mediav.com/js/mvf_news_feed.js"></script>
+
+<header>
+	<div class="container d-flex clearfix">
+		<div class="title-box">
+			<h2 class="title-blog">
+				<a href="https://blog.csdn.net/qiumengchen12">秋梦尘的博客</a>
+			</h2>
+			<p class="description">Coding，To Change the World！</p>
+		</div>
+		<div class="opt-box d-flex justify-content-end">
+			<a class="btn btn-sm" href="https://blog.csdn.net/qiumengchen12/rss/list">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#csdnc-rss"></use>
+					</svg>RSS订阅</a>
+					</div>
+	</div>
+</header><script src="https://dup.baidustatic.com/js/ds.js"></script>
+<div class="container clearfix pt0" id="mainBox">
+    <main>
+        <div class="blog-content-box">
+	<div class="article-title-box">
+			<span class="article-type type-1 float-left">原</span>		<h1 class="title-article">被遗忘的设计模式——空对象模式（Null Object Pattern）</h1>
+	</div>
+	<div class="article-info-box">
+		<div class="article-bar-top d-flex">
+												<span class="time">2015年04月07日 17:20:38</span>
+			<div class="float-right">
+				<span class="read-count">阅读数：2784</span>
+											</div>
+		</div>
+	</div>
+	<article>
+		<div id="article_content" class="article_content clearfix csdn-tracking-statistics" data-pid="blog"  data-mod=popu_307  data-dsm = "post" >
+                    <div class="markdown_views">
+                <pre><code>    GoF（四人帮）那本《设计模式 可复用面向对象软件的基础》可谓是设计模式方面的经典之作，其中介绍的23种设计模式，
+也可谓是经典中的经典。但是，设计模式的种类绝不仅仅是这23种，除此之外还有很多巧妙可爱的设计模式值得我们学习。这些
+被遗忘的设计模式，也可以堪称经典之作。今天我们来一起学习被遗忘的设计模式——空对象模式（Null Object Pattern）。
+一起看看这个模式会带给我们怎样的惊喜？
+</code></pre>
+
+<h3 id="一pattern-name"><strong>一、Pattern name</strong></h3>
+
+<blockquote>
+  <p>Provide an object as a surrogate for the lack of an object of a given type. The Null Object provides intelligent do nothing behavior, hiding the details from its collaborators.</p>
+</blockquote>
+
+<h3 id="二problem"><strong>二、Problem</strong></h3>
+
+<p>任何没有实际应用场景的设计模式，都是在耍流氓。学习设计模式，不仅仅是为了领悟其精髓，更为了在实践设计当中去运用，去变通，下面我们来看看，什么情况下，这个Null Object Pattern会派上用场呢？</p>
+
+<p>假设这样一个场景：</p>
+
+<blockquote>
+  <p>在一个图书信息查询系统中，你调用一个方法，传过去你要查找图书的ID，然后它返回给你，你要查找的图书对象，这样你就可以调用对象的方法来输出图书的信息。</p>
+</blockquote>
+
+<p>我想这种场景在程序设计中还是比较常见的。下面，我们来实现以下具体的代码。</p>
+
+<blockquote>
+  <p>首先，我们来看一下ConcreteBook类的代码（提供构造函数和展示图书信息的show()方法。）：</p>
+</blockquote>
+
+<pre class="prettyprint"><code class=" hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ConcreteBook</span> {</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> ID;
+    <span class="hljs-keyword">private</span> String name;
+    <span class="hljs-keyword">private</span> String author;
+
+    <span class="hljs-comment">// 构造函数</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-title">ConcreteBook</span>(<span class="hljs-keyword">int</span> ID, String name, String author) {
+        <span class="hljs-keyword">this</span>.ID = ID;
+        <span class="hljs-keyword">this</span>.name = name;
+        <span class="hljs-keyword">this</span>.author = author;
+    }
+
+    <span class="hljs-javadoc">/**
+     * 
+     * Description About show: &lt;br&gt;
+     * 展示图书的相关信息
+     * 
+     *<span class="hljs-javadoctag"> @version</span> V1.0
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">show</span>() {
+        System.out.println(ID + <span class="hljs-string">"**"</span> + name + <span class="hljs-string">"**"</span> + author);
+    }
+
+}</code></pre>
+
+<blockquote>
+  <p>我们再来看看创建图书对象的图书工厂的代码(主要提供一个获得ConcreteBook的方法)：</p>
+</blockquote>
+
+<pre class="prettyprint"><code class=" hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BookFactory</span> {</span>
+    <span class="hljs-javadoc">/**
+     * 
+     * Description About getBook: &lt;br&gt;
+     * 根据ConcreteBook的ID，获取图书对象。
+     *<span class="hljs-javadoctag"> @param</span> ID 图书的ID
+     *<span class="hljs-javadoctag"> @return</span> 图书对象
+     *<span class="hljs-javadoctag"> @version</span> V1.0
+     */</span>
+
+    <span class="hljs-keyword">public</span> ConcreteBook <span class="hljs-title">getBook</span>(<span class="hljs-keyword">int</span> ID) {
+        ConcreteBook book = <span class="hljs-keyword">null</span>;
+        <span class="hljs-keyword">switch</span> (ID) {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+            book = <span class="hljs-keyword">new</span> ConcreteBook(ID, <span class="hljs-string">"设计模式"</span>, <span class="hljs-string">"GoF"</span>);
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">2</span>:
+            book = <span class="hljs-keyword">new</span> ConcreteBook(ID, <span class="hljs-string">"被遗忘的设计模式"</span>, <span class="hljs-string">"Null Object Pattern"</span>);
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">default</span>:
+            book = <span class="hljs-keyword">null</span>;<span class="hljs-comment">// 其实这个可以省略，因为初始化已经赋值为null。</span>
+            <span class="hljs-keyword">break</span>;
+        }
+
+        <span class="hljs-keyword">return</span> book;
+    }
+}</code></pre>
+
+<p>最后，来看一下客户端的代码：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs cs"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> Client {
+
+    <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> main(String[] args) {
+        BookFactory bookFactory = <span class="hljs-keyword">new</span> BookFactory();
+        ConcreteBook book = bookFactory.getBook(<span class="hljs-number">1</span>);
+        book.show();
+    }
+
+}</code></pre>
+
+<p>上面三段代码很简单，我就不做详细解释了。下面，我们来运行一下，结果如下：</p>
+
+<p><img src="https://img-blog.csdn.net/20150407161321127" alt="这里写图片描述" title=""></p>
+
+<p>很好，运行很顺利，这时，我们把ConcreteBook book = bookFactory.getBook(1);中的1改为2，恩，也运行成功。这时候，我们改成-1。再来运行一下，发现如下报错：</p>
+
+<p><img src="https://img-blog.csdn.net/20150407161528314" alt="这里写图片描述" title=""></p>
+
+<blockquote>
+  <p>空指针报错，是的，这应该是Java初学者见到最多的报错了。它提示我们第28行book.show()报错。这是为什么呢？因为我们通过bookFactory.getBook()方法获取ConcreteBook对象的时候，如果我们传入的参数，即图书的ID，属于非法值（如-1）或者不存在（如3）的话（其实这种情况是经常遇到的。），就会返回null，表示我们查找的图书信息并不存在。这时，book为null.你再调用book.show()。当然要报空指针的错误了。那怎么解决呢？</p>
+</blockquote>
+
+<p>我们比较常规的做法就是在客户端加一个判断，判断是否为null。如果为null的话，就不再调用show()方法。如果不为null再调用show()方法。更改如下：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs cs"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span>(String[] args) {
+        BookFactory bookFactory = <span class="hljs-keyword">new</span> BookFactory();
+        ConcreteBook book = bookFactory.getBook(-<span class="hljs-number">1</span>);
+        <span class="hljs-comment">//判断book对象是否为null。</span>
+        <span class="hljs-keyword">if</span> (book == <span class="hljs-keyword">null</span>) {
+            System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">"book对象为 null。"</span>);
+        } <span class="hljs-keyword">else</span> {
+            book.show();
+        }
+    }</code></pre>
+
+<p>此时，再运行，就不会报错了。而是，输出了：book对象为null。</p>
+
+<blockquote>
+  <p><strong>但是，你有没有考虑过？这样做，确实消除了报错，但是这样做真的好吗？你想如果在一段程序中有很多处调用getBook()方法或者有很多个客户端的话（比如图书馆的查询终端肯定不止一个啊），岂不是很多处都要判断book对象是否为null？这还不算坏，如果哪一处没有判断，然后报错了，很有可能导致程序没法继续运行甚至崩溃。而且，你要记住，永远都不要太相信客户端（Client），不要把整个程序的稳定性寄托在客户端身上。还有，像上面的处理方法，当获取对象为null的时候，输出的提示信息是有客户端来定制的，这样岂不是把主动权交给了客户端，而不是我们系统本身？</strong></p>
+</blockquote>
+
+<p>那究竟应该如何实现才会更加合适呢？那就要用到我们今天要将的Null Object Pattern——一种被遗忘的设计模式</p>
+
+<h3 id="三solution"><strong>三、Solution</strong></h3>
+
+<p>首先，我们来看一下Null Object Pattern的UML类图结构：</p>
+
+<p><img src="https://img-blog.csdn.net/20150407163112755" alt="这里写图片描述" title=""></p>
+
+<p>这个类图结构其实还是很简单的，这里面的RealObject其实就相当于我们的ConcreteBook类，而NullObject就是我们将要增加的空对象类，而AbstractObject类就是我们要提出来的父类。我们只是在Client和AbstractObject之间增加了一个BookFactory而已。</p>
+
+<p>下面，我们来改一下我们的代码：</p>
+
+<blockquote>
+  <p>新增的抽象接口Book类的代码：</p>
+</blockquote>
+
+<pre class="prettyprint"><code class=" hljs cs"><span class="hljs-keyword">interface</span> Book {
+    <span class="hljs-comment">// 判断Book对象是否为空对象（Null Object）</span>
+    <span class="hljs-keyword">public</span> boolean <span class="hljs-title">isNull</span>();
+
+    <span class="hljs-comment">// 展示Book对象的信息内容。</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">show</span>();
+}</code></pre>
+
+<blockquote>
+  <p>新增的空对象类NullBook类的代码（继承Book类）：</p>
+</blockquote>
+
+<pre class="prettyprint"><code class=" hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NullBook</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Book</span> {</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isNull</span>() {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">show</span>() {
+
+    }
+}</code></pre>
+
+<blockquote>
+  <p>原有的ConcreteBook类修改后的代码（增加对Book接口的实现，实现isNull方法）：</p>
+</blockquote>
+
+<pre class="prettyprint"><code class=" hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ConcreteBook</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Book</span>{</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> ID;
+    <span class="hljs-keyword">private</span> String name;
+    <span class="hljs-keyword">private</span> String author;
+
+    <span class="hljs-comment">// 构造函数</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-title">ConcreteBook</span>(<span class="hljs-keyword">int</span> ID, String name, String author) {
+        <span class="hljs-keyword">this</span>.ID = ID;
+        <span class="hljs-keyword">this</span>.name = name;
+        <span class="hljs-keyword">this</span>.author = author;
+    }
+
+    <span class="hljs-javadoc">/**
+     * 
+     * Description About show: &lt;br&gt;
+     * 展示图书的相关信息
+     * 
+     *<span class="hljs-javadoctag"> @version</span> V1.0
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">show</span>() {
+        System.out.println(ID + <span class="hljs-string">"**"</span> + name + <span class="hljs-string">"**"</span> + author);
+    }
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isNull</span>(){
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+    }
+}</code></pre>
+
+<blockquote>
+  <p>工厂类（BookFactory）修改后的代码（返回对象从ConcreteBook改为Book，并当ID属于非法值或者不存在时，返回NullBook对象。）：</p>
+</blockquote>
+
+<pre class="prettyprint"><code class=" hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BookFactory</span> {</span>
+    <span class="hljs-javadoc">/**
+     * Description About getBook: &lt;br&gt;
+     * 根据ConcreteBook的ID，获取图书对象。
+     *<span class="hljs-javadoctag"> @param</span> ID 图书的ID
+     *<span class="hljs-javadoctag"> @return</span> 图书对象
+     *<span class="hljs-javadoctag"> @version</span> V1.0
+     */</span>
+
+    <span class="hljs-keyword">public</span> Book <span class="hljs-title">getBook</span>(<span class="hljs-keyword">int</span> ID) {
+        Book book;<span class="hljs-comment">//将原来的ConcreteBook改为Book</span>
+        <span class="hljs-keyword">switch</span> (ID) {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+            book = <span class="hljs-keyword">new</span> ConcreteBook(ID, <span class="hljs-string">"设计模式"</span>, <span class="hljs-string">"GoF"</span>);
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">2</span>:
+            book = <span class="hljs-keyword">new</span> ConcreteBook(ID, <span class="hljs-string">"被遗忘的设计模式"</span>, <span class="hljs-string">"Null Object Pattern"</span>);
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">default</span>:
+            book = <span class="hljs-keyword">new</span> NullBook();<span class="hljs-comment">//创建一个NullBook对象</span>
+            <span class="hljs-keyword">break</span>;
+        }
+
+        <span class="hljs-keyword">return</span> book;
+    }
+}</code></pre>
+
+<p>客户端的代码为：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs cs">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span>(String[] args) {
+        BookFactory bookFactory = <span class="hljs-keyword">new</span> BookFactory();
+        Book book = bookFactory.getBook(-<span class="hljs-number">1</span>);
+        book.show();
+    }</code></pre>
+
+<blockquote>
+  <p><strong>运行一下，我们发现，即使传入的参数是非法值或者不存在的值时，也不会报错了，这是Null Object Pattern的第一个好处。但是现在不报错，也没有任何输出，肯定不够友好，不够人性化。此时，在NullBook类的show方法中，我们可以定制我们的输出提醒，当用户调用空对象的show方法时，就会输出我们定制的提醒。这回我们可以实现，一处定制，处处输出，主动权在我们手里，而不是在客户端的手里。这是Null Object Pattern的第二个好处。</strong></p>
+</blockquote>
+
+<p>比如我们进行如下修改，修改后的NullBook类代码：</p>
+
+<pre class="prettyprint"><code class=" hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NullBook</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Book</span> {</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isNull</span>() {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">show</span>() {
+        System.out.println(<span class="hljs-string">"Sorry，未找到符合您输入的ID的图书信息，请确认您输入的不是非法值。"</span>);
+    }
+}</code></pre>
+
+<p>此时，在执行一下Client，你会发现控制台输出为：Sorry，未找到符合您输入的ID的图书信息，请确认您输入的不是非法值。</p>
+
+<p><strong>其实，虽然在客户端我们不进行检测也可以保证程序不报错，但是最好的方式，还是进行相应的检测，如下：</strong></p>
+
+
+
+<pre class="prettyprint"><code class=" hljs cs">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span>(String[] args) {
+        BookFactory bookFactory = <span class="hljs-keyword">new</span> BookFactory();
+        Book book = bookFactory.getBook(-<span class="hljs-number">1</span>);
+        <span class="hljs-keyword">if</span> (book.isNull()) {
+            <span class="hljs-comment">//这里由客户端定制提醒代码</span>
+            System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">"兄弟，你输入的ID不符合规范吧。"</span>);
+        }<span class="hljs-keyword">else</span>{
+            book.show();
+        }
+    }</code></pre>
+
+<p>我们看到相比之下，book.isNull()比book == null更加优雅一点。到这里，Null Object Pattern大概就介绍完了。我们可以看到，其实Null Object Pattern还是有点意思的，可以说使整个系统更加坚固了。</p>
+
+<h3 id="四consequences"><strong>四、Consequences</strong></h3>
+
+<p>Null Object Pattern，作为一种被遗忘的设计模式，却有着不能被遗忘的作用。</p>
+
+<blockquote>
+  <p>（1）它可以加强系统的稳固性，能有有效地防止空指针报错对整个系统的影响，使系统更加稳定。 <br>
+  （2）它能够实现对空对象情况的定制化的控制，能够掌握处理空对象的主动权。 <br>
+  （3）它并不依靠Client来保证整个系统的稳定运行。 <br>
+  （4）它通过isNull对==null的替换，显得更加优雅，更加易懂。</p>
+</blockquote>
+
+<h3 id="五总结"><strong>五、总结</strong></h3>
+
+<p>到这里，我们的Null Object Pattern就介绍完了，还可以参考这篇资料，也是讲得很不错的。<a href="http://www.cs.oberlin.edu/~jwalker/nullObjPattern/">http://www.cs.oberlin.edu/~jwalker/nullObjPattern/</a></p>            </div>
+            <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/markdown_views-ea0013b516.css" />
+                </div>
+				<div class="hide-article-box text-center csdn-tracking-statistics tracking-click" data-mod="popu_376">
+			<a class="btn btn-red-hollow" id="btn-readmore">阅读更多</a>
+		</div>
+        	</article>
+	
+		<div class="article-bar-bottom">
+						<div class="tags-box artic-tag-box">
+			<span class="label">文章标签：</span>
+						<a class="tag-link" href="http://so.csdn.net/so/search/s.do?q=设计模式&t=blog" target="_blank">设计模式						<a class="tag-link" href="http://so.csdn.net/so/search/s.do?q=空对象模式&t=blog" target="_blank">空对象模式						<a class="tag-link" href="http://so.csdn.net/so/search/s.do?q=NullObject&t=blog" target="_blank">NullObject						<a class="tag-link" href="http://so.csdn.net/so/search/s.do?q=pattern&t=blog" target="_blank">pattern						<a class="tag-link" href="http://so.csdn.net/so/search/s.do?q=设计&t=blog" target="_blank">设计						</a>
+		</div>
+						<div class="tags-box">
+			<span class="label">个人分类：</span>
+						<a class="tag-link" href="https://blog.csdn.net/qiumengchen12/article/category/3063409"  target="_blank">设计模式						</a>
+		</div>
+					</div>
+	
+	<!-- !empty($pre_next_article[0]) -->
+		</div>
+<script>
+    $(".MathJax").remove();
+</script>
+
+<script type="text/javascript" src="https://static-blog.csdn.net/mdeditor/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+			"HTML-CSS": {
+					linebreaks: { automatic: true, width: "94%container" },
+					imageFont: null
+			},
+			tex2jax: {
+				preview: "none"
+			},
+			mml2jax: {
+				preview: 'none'
+			}
+	});
+</script>
+<script>
+	(function(){
+		var btnReadmore = $("#btn-readmore");
+		if(btnReadmore.length>0){
+			var winH = $(window).height();
+			var articleBox = $("div.article_content");
+			var artH = articleBox.height();
+			if(artH > winH*2){
+				articleBox.css({
+					'height':winH*2+'px',
+					'overflow':'hidden'
+				})
+				btnReadmore.click(function(){
+					articleBox.removeAttr("style");
+					$(this).parent().remove();
+				})
+			}else{
+				btnReadmore.parent().remove();
+			}
+		}
+	})()
+</script>        <div class="edu-promotion"></div>
+<script type="text/javascript">
+	var edu_ad_is_big_data = 0;
+	var edu_ad_id_mapping = {"0":["https:\/\/edu.csdn.net\/sp\/blog.php?type=python1","https:\/\/edu.csdn.net\/sp\/blog.php?type=web1"],"1":["https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1","https:\/\/edu.csdn.net\/sp\/blog.php?type=web1"],"8":[],"2":["https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1","https:\/\/edu.csdn.net\/sp\/blog.php?type=python1"],"3":["https:\/\/edu.csdn.net\/sp\/blog.php?type=ai1","https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1"],"6":["https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1","https:\/\/edu.csdn.net\/sp\/blog.php?type=ai1"],"12":["https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1","https:\/\/edu.csdn.net\/sp\/blog.php?type=ai1"],"14":["https:\/\/edu.csdn.net\/sp\/blog.php?type=web1","https:\/\/edu.csdn.net\/sp\/blog.php?type=python1"],"15":["https:\/\/edu.csdn.net\/sp\/blog.php?type=ai1","https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1"],"16":["https:\/\/edu.csdn.net\/sp\/blog.php?type=web1","https:\/\/edu.csdn.net\/sp\/blog.php?type=python1"],"28":["https:\/\/edu.csdn.net\/sp\/blog.php?type=ai1","https:\/\/edu.csdn.net\/sp\/blog.php?type=python1"],"29":["https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1","https:\/\/edu.csdn.net\/sp\/blog.php?type=ai1"],"30":["https:\/\/edu.csdn.net\/sp\/blog.php?type=python1","https:\/\/edu.csdn.net\/sp\/blog.php?type=ai1"],"32":["https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1","https:\/\/edu.csdn.net\/sp\/blog.php?type=python1"],"33":["https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1","https:\/\/edu.csdn.net\/sp\/blog.php?type=ai1"],"35":["https:\/\/edu.csdn.net\/sp\/blog.php?type=ai1","https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1"],"37":["https:\/\/edu.csdn.net\/sp\/blog.php?type=web1","https:\/\/edu.csdn.net\/sp\/blog.php?type=python1"],"7":["https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1","https:\/\/edu.csdn.net\/sp\/blog.php?type=python1"],"17":["https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1","https:\/\/edu.csdn.net\/sp\/blog.php?type=ai1"],"34":["https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1","https:\/\/edu.csdn.net\/sp\/blog.php?type=python1"],"36":["https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1","https:\/\/edu.csdn.net\/sp\/blog.php?type=ai1"],"31":["https:\/\/edu.csdn.net\/sp\/blog.php?type=python1","https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1"]};
+</script>        <a id="commentBox"></a>
+<div class="comment-box">
+	  	<div class="unlogin-box text-center">
+		想对作者说点什么？
+		<!-- $curl 当前地址 -->
+		<a href="https://passport.csdn.net/account/login?from=https://blog.csdn.net/qiumengchen12/article/details/44923139#commentBox" class="btn btn-sm btn-red">我来说一句</a>
+	</div>
+			<div class="comment-list-container">
+		<a id="comments"></a>
+		<div class="comment-list-box">
+		</div>
+		<div id="commentPage" class="pagination-box d-none"></div>
+		<div class="opt-box text-center">
+			<button class="btn btn-sm btn-link-blue" id="btnMoreComment"></button>
+		</div>
+	</div>
+</div>        <div class="recommend-box">
+            		<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/paincupid/article/details/46992307" target="_blank" strategy="BlogCommendFromBaidu_0">
+				空<em>对象</em><em>模式</em> - 行为<em>模式</em>			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/paincupid/article/details/46992307" target="_blank" >
+				空<em>对象</em><em>模式</em>: 提供一个<em>对象</em>，作为一个缺少类型<em>对象</em>的代理。Provide an <em>object</em> as a surrogate for the lack of an <em>object</em> of a given ty...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/paincupid" title="paincupid" target="_blank">
+					<img src="https://avatar.csdn.net/B/5/2/3_paincupid.jpg" alt="paincupid" class="avatar-pic">
+					<span class="name">paincupid</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2015-07-21 21:24:31</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：649</span>
+			</p>
+		</div>
+	</div>
+					<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/binglumeng/article/details/53537127" target="_blank" strategy="BlogCommendFromBaidu_1">
+				<em>设计模式</em>学习笔记--空<em>对象</em><em>模式</em>			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/binglumeng/article/details/53537127" target="_blank" >
+				二十二、空<em>对象</em><em>模式</em>空<em>对象</em><em>模式</em>(null <em>object</em> <em>pattern</em>),并不是构建一个null<em>对象</em>，而是构建一个用于响应无数据或者默认处理的<em>对象</em>。实现创建一个操作抽象类AbstractCustomer...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/binglumeng" title="binglumeng" target="_blank">
+					<img src="https://avatar.csdn.net/8/C/2/3_binglumeng.jpg" alt="binglumeng" class="avatar-pic">
+					<span class="name">binglumeng</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2016-12-09 11:47:58</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：737</span>
+			</p>
+		</div>
+	</div>
+								<div class="recommend-item-box recommend-ad-box" id="ad1"></div>
+				<script>
+				  var width = $("div.recommend-box").outerWidth() - 48;
+					NEWS_FEED({
+						w: width,
+						h : 90,
+						showid : 'GNKXx7',
+						placeholderId: "ad1",
+						inject : 'define',
+						define : {
+							imagePosition : 'right',
+							imageBorderRadius : 0,
+							imageWidth: 120,
+							imageHeight: 90,
+							imageFill : 'clip',
+							displayImage : true,
+							displayTitle : true,
+							titleFontSize: 20,
+							titleFontColor: '#333',
+							titleFontFamily : 'Microsoft Yahei',
+							titleFontWeight: 'bold',
+							titlePaddingTop : 0,
+							titlePaddingRight : 0,
+							titlePaddingBottom : 10,
+							titlePaddingLeft : 0,
+							displayDesc : true,
+							descFontSize: 14,
+							descFontColor: '#6b6b6b',
+							descFontFamily : 'Microsoft Yahei',
+							paddingTop : 0,
+							paddingRight : 0,
+							paddingBottom : 0,
+							paddingLeft : 0,
+							backgroundColor: '#fff',
+							hoverColor: '#ca0c16'
+						}
+					})
+				</script>
+
+			
+				<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/dyllove98/article/details/9256069" target="_blank" strategy="BlogCommendFromBaidu_2">
+				<em>设计模式</em>：空<em>对象</em><em>模式</em>（Null <em>Object</em> <em>Pattern</em>）			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/dyllove98/article/details/9256069" target="_blank" >
+				背景  群里聊到《ASP.NET<em>设计模式</em>》，这本书里有一个“Null <em>Object</em> <em>Pattern</em>”，大家就闲聊了一下这个<em>模式</em>，在此记录一下大概的结论。  典型结构  <em>模式</em>的结构非常简单，这里就不多说...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/dyllove98" title="dyllove98" target="_blank">
+					<img src="https://avatar.csdn.net/3/C/2/3_dyllove98.jpg" alt="dyllove98" class="avatar-pic">
+					<span class="name">dyllove98</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2013-07-05 23:19:39</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：2380</span>
+			</p>
+		</div>
+	</div>
+					<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/xiaokang123456kao/article/details/69676798" target="_blank" strategy="BlogCommendFromBaidu_3">
+				java<em>设计模式</em>之空<em>对象</em><em>模式</em>			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/xiaokang123456kao/article/details/69676798" target="_blank" >
+				一、空<em>对象</em><em>模式</em>简介
+在空<em>对象</em><em>模式</em>中，一个空<em>对象</em>取代NULL<em>对象</em>的实例的检查。NULL<em>对象</em>不是检查空值，而是反映一个不做任何动作的关系。这样的NULL<em>对象</em>也可以在数据不可用的时候提供默认的行为。
+在...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/xiaokang123456kao" title="xiaokang123456kao" target="_blank">
+					<img src="https://avatar.csdn.net/0/4/3/3_xiaokang123456kao.jpg" alt="xiaokang123456kao" class="avatar-pic">
+					<span class="name">xiaokang123456kao</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2017-04-08 16:21:55</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：640</span>
+			</p>
+		</div>
+	</div>
+					<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/han1202012/article/details/47684729" target="_blank" strategy="BlogCommendFromBaidu_5">
+				【UML 建模】在线UML建模工具 ProcessOn 使用详解			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/han1202012/article/details/47684729" target="_blank" >
+				UML			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/han1202012" title="han1202012" target="_blank">
+					<img src="https://avatar.csdn.net/5/4/2/3_han1202012.jpg" alt="han1202012" class="avatar-pic">
+					<span class="name">han1202012</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2015-08-17 22:33:22</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：14152</span>
+			</p>
+		</div>
+	</div>
+					<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/u011012826/article/details/48804491" target="_blank" strategy="BlogCommendFromBaidu_6">
+				JSP解析JSON<em>Object</em>类型<em>对象</em>出现null <em>object</em>异常解决方案			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/u011012826/article/details/48804491" target="_blank" >
+				jsp解析json<em>object</em><em>对象</em>null <em>object</em>异常几种解决方案			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/u011012826" title="u011012826" target="_blank">
+					<img src="https://avatar.csdn.net/2/A/F/3_u011012826.jpg" alt="u011012826" class="avatar-pic">
+					<span class="name">u011012826</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2015-09-29 11:15:36</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：8370</span>
+			</p>
+		</div>
+	</div>
+					<div class="recommend-item-box recommend-ad-box" id="a_d_feed_0"></div>
+			<script>
+				var width = $("div.recommend-box").outerWidth() - 48;
+				NEWS_FEED({
+					w: width,
+					h: 90,
+					showid: 'Afihld',
+					placeholderId: 'a_d_feed_0',
+					inject: 'define',
+					define: {
+						imagePosition: 'right',
+						imageBorderRadius: 0,
+						imageWidth: 120,
+						imageHeight: 90,
+						imageFill: 'clip',
+						displayImage: true,
+						displayTitle: true,
+						titleFontSize: 20,
+						titleFontColor: '#333',
+						titleFontFamily: 'Microsoft Yahei',
+						titleFontWeight: 'bold',
+						titlePaddingTop: 0,
+						titlePaddingRight: 0,
+						titlePaddingBottom: 10,
+						titlePaddingLeft: 0,
+						displayDesc: true,
+						descFontSize: 14,
+						descFontColor: '#6b6b6b',
+						descFontFamily: 'Microsoft Yahei',
+						paddingTop: 0,
+						paddingRight: 0,
+						paddingBottom: 0,
+						paddingLeft: 0,
+						backgroundColor: '#fff',
+						hoverColor: '#ca0c16'
+					}
+				})
+			</script>
+			<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/liuhe688/article/details/6586458" target="_blank" strategy="BlogCommendFromBaidu_7">
+				在代码中引入Null <em>Object</em><em>模式</em>			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/liuhe688/article/details/6586458" target="_blank" >
+				相信大家一定见过类似这样的代码：public Book getBook(int id) {
+		if (id &lt; 0) {
+			return null;
+		}
+		return new Book(...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/liuhe688" title="liuhe688" target="_blank">
+					<img src="https://avatar.csdn.net/8/5/D/3_liuhe688.jpg" alt="liuhe688" class="avatar-pic">
+					<span class="name">liuhe688</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2011-07-05 20:15:21</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：10437</span>
+			</p>
+		</div>
+	</div>
+					<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/JamieCheung/article/details/51967951" target="_blank" strategy="BlogCommendFromBaidu_8">
+				on a null <em>object</em> reference 问题的解决办法			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/JamieCheung/article/details/51967951" target="_blank" >
+				准备做下拉刷新的功能的时候，自定义了一个ExpandableListView控件，突然报了一个空<em>对象</em>on a null <em>object</em> reference 的错误，找了很多资料都不能解决问题。
+
+
+我又...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/JamieCheung" title="JamieCheung" target="_blank">
+					<img src="https://avatar.csdn.net/B/F/E/3_jamiecheung.jpg" alt="JamieCheung" class="avatar-pic">
+					<span class="name">JamieCheung</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2016-07-20 14:29:35</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：15151</span>
+			</p>
+		</div>
+	</div>
+					<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/maguanghui_2012/article/details/55188722" target="_blank" strategy="BlogCommendFromBaidu_9">
+				<em>object</em> ==null 与 null ==<em>object</em> 在Java中有区别吗？ 为什么有些人用后者？			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/maguanghui_2012/article/details/55188722" target="_blank" >
+				其实没区别。原因是c开发的一个规范导致到。
+在c里， if(c=1)  和 if(c==1)都是合法的，但是效果是不一样的。第一个是赋值，然后把赋值结果判断，一个是判读是否相等。这种情况很容易写错，为...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/maguanghui_2012" title="maguanghui_2012" target="_blank">
+					<img src="https://avatar.csdn.net/8/5/B/3_maguanghui_2012.jpg" alt="maguanghui_2012" class="avatar-pic">
+					<span class="name">maguanghui_2012</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2017-02-15 09:27:53</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：1000</span>
+			</p>
+		</div>
+	</div>
+					<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/nabila/article/details/7903678" target="_blank" strategy="BlogCommendFromBaidu_10">
+				Null <em>Object</em><em>模式</em>			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/nabila/article/details/7903678" target="_blank" >
+				第一次听说这个<em>模式</em>，这个<em>模式</em>看起来好像很简单，但是实际用起来还是有点不太容易理解。
+我们在代码里经常会进行null检查，这种检查是易出错的，假设我们在代码里对null的情况也需要作出响应，Null ...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/nabila" title="nabila" target="_blank">
+					<img src="https://avatar.csdn.net/6/5/2/3_nabila.jpg" alt="nabila" class="avatar-pic">
+					<span class="name">nabila</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2012-08-24 13:43:00</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：599</span>
+			</p>
+		</div>
+	</div>
+			            <div class="recommend-loading-box">
+                <img src='https://csdnimg.cn/release/phoenix/images/feedLoading.gif'>
+            </div>
+            <div class="recommend-end-box">
+                <p class="text-center">没有更多推荐了，<a href="https://blog.csdn.net/" class="c-blue c-blue-hover c-blue-focus">返回首页</a></p>
+            </div>
+        </div>
+    </main>
+    <aside>
+		    <div id="asideProfile" class="aside-box">
+    <h3 class="aside-title">个人资料</h3>
+    <div class="profile-intro d-flex">
+        <div class="avatar-box d-flex justify-content-center flex-column">
+            <a href="https://blog.csdn.net/qiumengchen12">
+                <img src="https://avatar.csdn.net/4/E/B/3_qiumengchen12.jpg" class="avatar_pic">
+            </a>
+        </div>
+        <div class="user-info d-flex justify-content-center flex-column">
+            <p class="name csdn-tracking-statistics tracking-click" data-mod="popu_379">
+                <a href="https://blog.csdn.net/qiumengchen12" target="_blank" class="text-truncate" id="uid">qiumengchen12</a>
+            </p>
+                    </div>
+                <div class="opt-box d-flex justify-content-center flex-column">
+            <span  class="csdn-tracking-statistics tracking-click" data-mod="popu_379">
+                                <a class="btn btn-sm btn-red-hollow" href="https://passport.csdn.net/account/login?from=https://blog.csdn.net/qiumengchen12/article/details/44923139" target="_self">关注</a>
+                            </span>
+                    </div>
+            </div>
+    <div class="data-info d-flex item-tiling">
+                <dl class="text-center" title="43">
+                        <dt><a href="https://blog.csdn.net/qiumengchen12?t=1">原创</a></dt>
+            <dd><a href="https://blog.csdn.net/qiumengchen12?t=1"><span class="count">43</span></a></dd>
+                    </dl>
+        <dl class="text-center" title="41">
+            <dt>粉丝</dt>
+            <dd><span class="count" id="fan">41</span></dd>
+        </dl>
+        <dl class="text-center" title="4">
+            <dt>喜欢</dt>
+            <dd><span class="count">4</span></dd>
+        </dl>
+        <dl class="text-center" title="52">
+            <dt>评论</dt>
+            <dd><span class="count">52</span></dd>
+        </dl>
+    </div>
+    <div class="grade-box clearfix">
+        <dl>
+            <dt>等级：</dt>
+            <dd>
+                <a href="https://blog.csdn.net/home/help.html#level" title="4级,点击查看等级说明" target="_blank">
+                    <svg class="icon icon-level" aria-hidden="true">
+                        <use xlink:href="#csdnc-bloglevel-4"></use>
+                    </svg>
+                </a>
+            </dd>
+        </dl>
+        <dl>
+            <dt>访问：</dt>
+            <dd title="100583">
+                10万+            </dd>
+        </dl>
+        <dl>
+            <dt>积分：</dt>
+            <dd title="1538">
+                1538            </dd>
+        </dl>
+        <dl title="33806">
+            <dt>排名：</dt>
+            <dd>3万+</dd>
+        </dl>
+    </div>
+    </div>		    <div class="csdn-tracking-statistics mb8 box-shadow" data-pid="blog" data-mod="popu_4" style="height:250px;">
+    <div class="aside-content text-center" id="cpro_u2734133">
+        <!-- 投放代码 -->
+        <script type="text/javascript" src="//cee1.iteye.com/lgyyovfyh.js"></script>
+    </div>
+</div>
+		    <div id="asideNewArticle" class="aside-box">
+    <h3 class="aside-title">最新文章</h3>
+    <div class="aside-content">
+        <ul class="inf_list clearfix csdn-tracking-statistics tracking-click" data-mod="popu_382">
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/qiumengchen12/article/details/77067694" target="_blank">JSON开发笔记（四）—— JSON Schema实战（下）</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/qiumengchen12/article/details/77067613" target="_blank">JSON开发笔记（三）—— JSON Schema实战（中）</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/qiumengchen12/article/details/72650291" target="_blank">JSON开发笔记（二）—— JSON Schema实战（上）</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/qiumengchen12/article/details/72283079" target="_blank">JSON开发笔记（一）—— JSON基础</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/qiumengchen12/article/details/71690047" target="_blank">J2EE开发笔记（四）—— pom.xml文件详解</a>
+            </li>
+                    </ul>
+    </div>
+</div>
+		    		    <div id="asideCategory" class="aside-box flexible-box">
+    <h3 class="aside-title">个人分类</h3>
+    <div class="aside-content">
+        <ul>
+                        <li>
+                <a href="https://blog.csdn.net/qiumengchen12/article/category/6884307">
+                    J2EE开发笔记                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/qiumengchen12/article/category/6913790">
+                    Maven开发笔记                    <span class="count float-right">6篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/qiumengchen12/article/category/6921294">
+                    JSON开发笔记                    <span class="count float-right">4篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/qiumengchen12/article/category/3041591">
+                    Java                    <span class="count float-right">12篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/qiumengchen12/article/category/3041599">
+                    数据结构                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/qiumengchen12/article/category/3063409">
+                    设计模式                    <span class="count float-right">8篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/qiumengchen12/article/category/3041615">
+                    Eclipse使用心得                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/qiumengchen12/article/category/3069041">
+                    万事开头难——各种领域入门指导                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/qiumengchen12/article/category/3105945">
+                    软件测试                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/qiumengchen12/article/category/3135647">
+                    XML                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/qiumengchen12/article/category/3041593">
+                    Cocos2d-JS游戏开发                    <span class="count float-right">15篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/qiumengchen12/article/category/3063049">
+                    杂记                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                    </ul>
+    </div>
+        <p class="text-center">
+        <a class="btn btn-link-blue flexible-btn" data-fbox="aside-archive">展开</a>
+    </p>
+    </div>
+		    <div id="asideArchive" class="aside-box flexible-box">
+    <h3 class="aside-title">归档</h3>
+    <div class="aside-content">
+        <ul class="archive-list">
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/qiumengchen12/article/month/2017/08">
+                    2017年8月                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/qiumengchen12/article/month/2017/05">
+                    2017年5月                    <span class="count float-right">8篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/qiumengchen12/article/month/2015/08">
+                    2015年8月                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/qiumengchen12/article/month/2015/07">
+                    2015年7月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/qiumengchen12/article/month/2015/05">
+                    2015年5月                    <span class="count float-right">10篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/qiumengchen12/article/month/2015/04">
+                    2015年4月                    <span class="count float-right">17篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/qiumengchen12/article/month/2015/03">
+                    2015年3月                    <span class="count float-right">8篇</span>
+                </a>
+            </li>
+                    </ul>
+    </div>
+        <p class="text-center">
+        <a class="btn btn-link-blue flexible-btn" data-fbox="aside-archive">展开</a>
+    </p>
+    </div>
+		    <div id="asideHotArticle" class="aside-box">
+	<h3 class="aside-title">热门文章</h3>
+	<div class="aside-content">
+		<ul class="hotArticle-list csdn-tracking-statistics tracking-click" data-mod="popu_521">
+							<li>
+					<a href="https://blog.csdn.net/qiumengchen12/article/details/44852023">Java接口中的成员变量为什么必须声明为public static final？</a>
+					<p class="read">阅读量：<span>6189</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/qiumengchen12/article/details/45485893">Cocos2d-JS中使用CocosStudio资源——登录界面</a>
+					<p class="read">阅读量：<span>5954</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/qiumengchen12/article/details/47669341">细说Cocos2d-JS——从项目构造说起</a>
+					<p class="read">阅读量：<span>5748</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/qiumengchen12/article/details/44860867">如何在Eclipse中查看JDK以及Java框架的源码</a>
+					<p class="read">阅读量：<span>5742</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/qiumengchen12/article/details/44939929">别说你懂修饰符——深入分析Java修饰符</a>
+					<p class="read">阅读量：<span>5402</span></p>
+				</li>
+					</ul>
+	</div>
+</div>
+		    <div id="asideNewComments" class="aside-box">
+    <h3 class="aside-title">最新评论</h3>
+    <div class="aside-content">
+        <ul class="newcomment-list">
+                        <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/qiumengchen12/article/details/77067613#comments">JSON开发笔记（三）—— JSO...</a>
+                <p class="comment">
+                    <a href="https://my.csdn.net/weixin_42045488" class="user-name" target="_blank">weixin_42045488</a>：问一下 这个验证 比如name 和price 改成别的namemm  和price   也会验证成...                </p>
+            </li>
+                        <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/qiumengchen12/article/details/44923139#comments">被遗忘的设计模式——空对象模式（N...</a>
+                <p class="comment">
+                    <a href="https://my.csdn.net/Aheaboy" class="user-name" target="_blank">Aheaboy</a>：对于String这种null还是无能为力。这种方法虽好不过有局限性。                </p>
+            </li>
+                        <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/qiumengchen12/article/details/44726787#comments">如何在Cocos2d-JS环境下使...</a>
+                <p class="comment">
+                    <a href="https://my.csdn.net/u012347225" class="user-name" target="_blank">u012347225</a>：感谢楼主！！！～～ 帮助很大，自己配各种问题郁闷的要命……                </p>
+            </li>
+                        <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/qiumengchen12/article/details/44852023#comments">Java接口中的成员变量为什么必须...</a>
+                <p class="comment">
+                    <a href="https://my.csdn.net/david0624" class="user-name" target="_blank">david0624</a>：static的用法是静态,不是为了你区分方便吧                </p>
+            </li>
+                        <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/qiumengchen12/article/details/44852023#comments">Java接口中的成员变量为什么必须...</a>
+                <p class="comment">
+                    <a href="https://my.csdn.net/qq_31311837" class="user-name" target="_blank">qq_31311837</a>：“而且，这个接口中的方法是不可更改的。”
+为什么呀？我们不是还要实现他，咋就不可改了，感觉这话说的...                </p>
+            </li>
+                    </ul>
+    </div>
+</div>
+		<div id="asideFooter">
+			
+		<div class="aside-box">
+						<script type="text/javascript" src="//cee1.iteye.com/mhzzpwgzj.js"></script>
+					</div>
+				<div class="aside-box">
+			<div class="persion_article">
+			</div>
+		</div>
+	</div>
+</aside>
+<script src="https://csdnimg.cn/pubfooter/js/publib_footer-1.0.3.js?20180309" data-isfootertrack="false" type="text/javascript"></script>
+<script>
+	$("a.flexible-btn").click(function(){
+		$(this).parents('div.aside-box').removeClass('flexible-box');
+		$(this).remove();
+	})
+</script>
+</div>
+<div class="mask-dark"></div>
+<div class="report-box">
+    <div class="pos-box">
+        <h2 class="title">不良信息举报</h2>
+        <a class="btn-close">
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#csdnc-times"></use>
+            </svg>
+        </a>
+        <form id="frmReport">
+            <div class="form-box">
+                <div class="txt-row-box">
+                    <label class="title" id="reptTit">举报内容：</label>
+                    <p class="rpt-title text-truncate">被遗忘的设计模式——空对象模式（Null Object Pattern）</p>
+                </div>
+                <div class="txt-row-box">
+                    <label class="title">举报原因：</label>
+                    <div class="rdo-box">
+                        <label><input type="radio" class="rdo-chk report-type" id="report_sex" name="report_type" value="1">色情</label>
+                        <label><input type="radio" class="rdo-chk report-type" id="report_Politics" name="report_type" value="2">政治</label>
+                        <label><input type="radio" class="rdo-chk report-type" id="report_copy" name="report_type" value="3">抄袭</label>
+                        <label><input type="radio" class="rdo-chk report-type" id="report_ad" name="report_type" value="4">广告</label>
+                        <label><input type="radio" class="rdo-chk report-type" id="report_want" name="report_type" value="5">招聘</label>
+                        <label><input type="radio" class="rdo-chk report-type" id="report_call" name="report_type" value="6">骂人</label>
+                        <label><input type="radio" class="rdo-chk report-type" id="report_other" name="report_type" value="7">其他</label>
+                    </div>
+                </div>
+                <div class="txt-row-box" id="rptOriginalurl">
+                    <label class="title">原文地址：</label>
+                    <div class="txt-box">
+                        <input class="ipt" type="text" id="originalurl" name="originalurl">
+                    </div>
+                </div>
+                <div class="txt-row-box">
+                    <label class="title">原因补充：</label>
+                    <div class="txt-box">
+                        <textarea class="ipt ipt-textarea" name="description" maxlength="30"></textarea>
+                        <p class="remark">最多只允许输入30个字</p>
+                    </div>
+                </div>
+            </div>
+            <div class="opt-box text-right">
+                <input type="reset" class="btn btn-link-gray btn-close" value="取消">
+                <input type="submit" class="btn btn-red btn-submit" value="提交">
+            </div>
+        </form>
+    </div>
+</div>
+<div class="pulllog-box" style="display: block;">
+	<div class="pulllog clearfix">
+		<span class="text float-left">加入CSDN，享受更精准的内容推荐，与500万程序员共同成长！</span>
+		<div class="pulllog-btn float-right clearfix">
+            <button class="pulllog-login float-left csdn-tracking-statistics tracking-click" data-mod="popu_557">
+                登录
+            </button>
+            <div class="pulllog-sigin float-left csdn-tracking-statistics tracking-click" data-mod="popu_558">
+                <a href="https://passport.csdn.net/account/mobileregister" target="_blank">注册</a>
+            </div>
+            <button class="btn-close">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#csdnc-times"></use>
+                </svg>
+            </button>
+		</div>
+	</div>
+</div>
+<div id="loginWrap" style="display:none"></div>
+<div class="tool-box">
+	<ul class="meau-list">
+		<li>
+			<button class="btn-like " title="点赞">
+				<svg class="icon active" aria-hidden="true">
+					<use xlink:href="#csdnc-thumbsup-ok"></use>
+				</svg><svg class="icon no-active" aria-hidden="true">
+					<use xlink:href="#csdnc-thumbsup"></use>
+				</svg>
+				<p>3</p>
+			</button>
+		</li>
+		<li class="toc-container-box" id="liTocBox">
+			<button class="btn-toc" title="目录">
+				<svg class="icon" aria-hidden="true">
+					<use xlink:href="#csdnc-contents"></use>
+				</svg><br>目录
+			</button>
+			<div class="toc-container">
+				<div class="pos-box">
+					<div class="icon-arrow"></div>
+					<div class="scroll-box">
+						<div class="toc-box"></div>
+					</div>
+				</div>
+				<div class="opt-box">
+					<button class="btn-opt prev nomore" title="向上">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#csdnc-chevronup"></use>
+						</svg>
+					</button>
+					<button class="btn-opt next">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#csdnc-chevrondown"></use>
+						</svg>
+					</button>
+				</div>
+			</div>
+		</li>
+		<li>
+			<button class="btn-bookmark" title="收藏">
+				<svg class="icon active" aria-hidden="true">
+					<use xlink:href="#csdnc-bookmark-ok"></use>
+				</svg><svg class="icon no-active" aria-hidden="true">
+					<use xlink:href="#csdnc-bookmark"></use>
+				</svg><br>收藏
+			</button>
+		</li>
+		<li>
+			<a class="btn-comments" title="评论" href="#commentBox">
+				<svg class="icon" aria-hidden="true">
+					<use xlink:href="#csdnc-comments"></use>
+				</svg><br>评论
+			</a>
+		</li>
+				<li class="bdsharebuttonbox">
+			<a class="btn-comments bds_weixin" data-cmd="weixin" title="微信分享">
+				<svg class="icon" aria-hidden="true">
+					<use xlink:href="#csdnc-wechat"></use>
+				</svg><br>微信
+			</a>
+		</li>
+		<li class="bdsharebuttonbox">
+			<a class="btn-comments bds_tsina" data-cmd="tsina" title="微博分享">
+				<svg class="icon" aria-hidden="true">
+					<use xlink:href="#csdnc-weibo"></use>
+				</svg><br>微博
+			</a>
+		</li>
+		<li class="bdsharebuttonbox">
+			<a class="btn-comments bds_qzone" data-cmd="qzone" title="QQ分享">
+				<svg class="icon" aria-hidden="true">
+					<use xlink:href="#csdnc-qq"></use>
+				</svg><br>QQ
+			</a>
+		</li>
+	</ul>
+</div>
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'https://csdnimg.cn/static/api/js/share.js?v=89860594'];</script>
+<script>
+    var recommendCount = 10;
+    recommendCount = recommendCount > 1 ? (recommendCount + (recommendCount>6 ? 2 : 1)) : recommendCount;
+    var articleTit = '被遗忘的设计模式——空对象模式（Null Object Pattern）';
+    var ChannelId = 15;
+    var articleId = '44923139';
+    var commentscount = 4;
+    var islock = false;
+    var curentUrl = "https://blog.csdn.net/qiumengchen12/article/details/44923139";
+    var myUrl = "https://my.csdn.net/";
+    //1禁止评论，2正常
+    var commentAuth = 2;
+    //百度搜索
+    var baiduKey = "null+%E6%A8%A1%E5%BC%8F";
+    var needInsertBaidu = false;
+</script>
+<script src="https://csdnimg.cn/public/sandalstrap/1.3/js/sandalstrap.min.js"></script>
+<script src="https://csdnimg.cn/release/phoenix/vendor/pagination/paging.js"></script>
+<script src='https://csdnimg.cn/public/common/gotop/js/goTop-v1.0.min.js?v201803151422'></script>
+<script>
+    GoTop({
+        right: 8,
+        hasReport: true,
+        reportFun: function() {
+            showReport(false,'被遗忘的设计模式——空对象模式（Null Object Pattern）');
+        }
+    })
+</script>
+<script src="https://csdnimg.cn/release/phoenix/template/js/common-bd54b21308.min.js"></script>
+<script src="https://csdnimg.cn/release/phoenix/template/js/detail-19690effc9.min.js"></script>
+<script src="https://csdnimg.cn/release/phoenix/themes/skin-yellow/skin-yellow-22f3069ef3.min.js"></script>
+<script src="https://csdnimg.cn/search/baidu_search-1.1.2.js?v=201802071056&autorun=true&install=true&keyword=null+%E6%A8%A1%E5%BC%8F"  type="text/javascript"></script>
+</body>
+<div class="box-box-default">
+    <a class="btn-remove">
+        关闭
+    </a>
+    <script type="text/javascript" src="//cee1.iteye.com/mhzzjepzz.js"></script>
+</div>
+<div class="box-box-large">
+    <a class="btn-remove">
+        关闭
+    </a>
+    <script type="text/javascript" src="//cee1.iteye.com/idvveasfs.js"></script>
+</div>
+</html>

@@ -1,0 +1,11 @@
+Atitit.基于js传递的url编码与解码
+
+需要二次url编码
+
+	var sql= encodeURIComponent( encodeURIComponent(sql));
+
+
+
+接收方  
+	var sql=decodeURIComponent( UrlParm.parm('sql'));
+

@@ -1,0 +1,8 @@
+Atiti.api的设计以及版本控制原则
+稳定性标签：stable、unstable或deprecated。并
+标准库API的稳定性
+Rust为标准库内所有API，即所有fn、所有type(struct/enum/trait)、所有method、所有impl、所有const/static、所有macro_rules!，都逐一标注了稳定性标签：stable、unstable或deprecated。并且声明，1.0版本内包含的所有stable API，都将在SemVer 2.0规范下得到向后兼容性保证，今后所有1.x版本都不会破坏其稳定性（除非遇到重大BUG不得已而为之）。
+我们去查Rust开发组公开的会议记录，会发现在2014年6月23日到10月1日，共有8次API review专题会议(012345 6 7)，逐一审查确定各API的稳定性标签。此后更长的时间里，又不定期的将更多API标注为stable或unstable/deprecated，在rust repo里搜索"stabilize" 可以得到大批提交记录，显示出这项系统工程显然不是一朝一夕所能完成的。
+目前标准库名下stable API大约有2500条，占总数的80%。新生编程语言中能做到这个程度的，很少见。
+
+

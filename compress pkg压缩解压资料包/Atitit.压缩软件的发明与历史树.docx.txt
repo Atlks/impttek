@@ -1,0 +1,5 @@
+Atitit.压缩软件的发明与历史树
+
+
+ZIP文件格式(PKZIP) 在1989年由 Phil Katz 和他的 PKWare 公司在MS-DOS上所发明。因为 PKWare 没有为 Zip 注册商标和申请算法专利，并且没有意识到 Windows 将会统治操作系统市场，Nico Mak (当时效力于 Mansfield Software Group，Inc.) 抓住了这个时机并为 Windows 平台开发了 WinZip。一些被 PKWARE 使用的算法抄袭System Enhancement Associates的Thom Henderson发明的ARC，这可能是PKWARE不能为PKZIP申请专利的原因
+

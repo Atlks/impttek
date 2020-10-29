@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="gb2312" />
+<meta name="applicable-device" content="pc">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<title>javascript获取函数名称、函数参数、对象属性名称的代码实例_基础知识_脚本之家</title>
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+<meta name="keywords" content="javascript,获取函数名称,获取函数参数,获取对象属性名称" />
+<meta name="description" content="这篇文章主要介绍了javascript获取函数名称、函数参数、对象属性的代码实例,需要的朋友可以参考下" />
+<link rel="alternate" media="only screen and(max-width: 640px)" href="https://m.jb51.net/article/48945.htm" />
+<meta http-equiv="mobile-agent" content="format=html5; url=https://m.jb51.net/article/48945.htm" />
+<meta http-equiv="mobile-agent" content="format=xhtml; url=https://m.jb51.net/article/48945.htm" />
+<script type="text/javascript">
+var tougao="junjie",lmname="JavaScript",suoyin="no";
+(function(){var reWriteUrl=function(url){if(url){var Splits=url.split("/"),siteName=window.location.pathname;if(typeof siteName!=="undefined"){return "https://m.jb51.net"+siteName}}};if(/Android|webOS|iPhone|iPad|Windows Phone|iPod|BlackBerry|SymbianOS|Nokia|Mobile/i.test(navigator.userAgent)){var url=window.location.href;var pathname=window.location.pathname;if(url.indexOf("?pc")<0){try{window.location.href=reWriteUrl(url)}catch(e){}}}})();
+</script>
+<link type="text/css" href="/skin/2018/css/base.css" rel="stylesheet" />
+<link type="text/css" href="/skin/2018/css/common.css" rel="stylesheet" />
+<script type="text/javascript" src="//apps.bdimg.com/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>
+if (!window.jQuery) {
+	var script = document.createElement('script');
+	script.src = "/skin/js/jquery.js";
+	document.body.appendChild(script);}
+</script>
+<script type=text/javascript src="/js/function.js"></script> 
+</head>
+<body>
+<!--topTools Start -->
+<div class="topTools">
+    <div class="wrap clear_fix">
+		<div class="topToolsLeft">
+			<a href="/" target="_blank">脚本之家</a>
+			<a href="http://s.jb51.net" target="_blank" rel="nofollow">服务器常用软件</a>
+		</div>
+		<div class="right">
+			<ul>
+				<li><i class="sprite md left"></i><a target="_blank" href="https://m.jb51.net/" rel="nofollow">手机版</a></li>
+				<li><i class="sprite tg left"></i><a href="http://tougao.jb51.net" rel="nofollow" target="_blank">投稿中心</a></li>
+				<li id="wxHide"><i class="sprite wx left"></i><a href="#" target="_blank">关注微信</a>
+					<div id="wxShow" class="wxHide_box"><img src="//files.jb51.net/skin/2018/images/erwm.jpg" alt="扫一扫" width="84" hight="84" data-baiduimageplus-ignore></div>
+				</li>
+			</ul>
+			<!--快捷导航 开始 -->
+			<div class="text_d right" id="navHide">
+        <a rel="nofollow" href="javascript:void(0);">快捷导航 <i id="icon" class="sprite arrowRight"></i></a>
+        <div id="navBox" class="nwebNav" style="display: none;">
+                <div class="ndealList clear_fix">
+                        <div class="navTitle left">
+                                <h4>
+                                        <a rel="nofollow" href="/softs/" target="_blank">软件下载</a></h4>
+                        </div>
+                        <dl class="right">
+                                <dd>
+                                        <a rel="nofollow" href="/softs/android.html" target="_blank">android</a>
+                                        <a rel="nofollow" href="/softs/mac.html" target="_blank">MAC</a>
+                                        <a rel="nofollow" href="/qudong/" target="_blank">驱动下载</a>
+                                        <a rel="nofollow" href="/fonts/" target="_blank">字体下载</a>
+                                        <a rel="nofollow" href="/dll/" target="_blank">DLL</a></dd>
+                        </dl>
+                </div>
+                <div class="ndealList clear_fix">
+                        <div class="navTitle left">
+                                <h4>
+                                        <a rel="nofollow" href="/codes/" target="_blank">源码下载</a></h4>
+                        </div>
+                        <dl class="right">
+                                <dd>
+                                        <a rel="nofollow" href="/codes/php.html" target="_blank">PHP</a>
+                                        <a rel="nofollow" href="/codes/aspnet.html" target="_blank">ASP.NET</a>
+                                        <a rel="nofollow" href="/codes/asp.html" target="_blank">ASP</a>
+                                        <a rel="nofollow" href="/codes/jsp.html" target="_blank">JSP</a></dd>
+                        </dl>
+                </div>
+                <div class="ndealList clear_fix">
+                        <div class="navTitle left">
+                                <h4><a rel="nofollow" href="/list/index_84.htm" target="_blank">软件编程</a></h4>
+                        </div>
+                        <dl class="right">
+                                <dd>
+                                        <a rel="nofollow" href="/list/list_85_1.htm" target="_blank">C#</a>
+                                        <a rel="nofollow" href="/list/list_134_1.htm" target="_blank">JAVA</a>
+                                        <a rel="nofollow" href="/list/list_159_1.htm" target="_blank">C 语言</a>
+                                        <a rel="nofollow" href="/list/list_206_1.htm" target="_blank">Delphi</a>
+                                        <a rel="nofollow" href="/list/list_233_1.htm" target="_blank">Android</a></dd>
+                        </dl>
+                </div>
+                <div class="ndealList clear_fix">
+                        <div class="navTitle left">
+                                <h4><a rel="nofollow" href="/list/index_1.htm" target="_blank">网络编程</a></h4>
+                        </div>
+                        <dl class="right">
+                                <dd>
+                                        <a rel="nofollow" href="/list/list_15_1.htm" target="_blank">PHP</a>
+                                        <a rel="nofollow" href="/list/list_21_1.htm" target="_blank">ASP.NET</a>
+                                        <a rel="nofollow" href="/list/list_2_1.htm" target="_blank">ASP</a>
+                                        <a rel="nofollow" href="/list/list_3_1.htm" target="_blank">JavaScript</a></dd>
+                        </dl>
+                </div>
+                <div class="ndealList clear_fix">
+                        <div class="navTitle left">
+                                <h4><a rel="nofollow" href="http://tools.jb51.net/" target="_blank">在线工具</a></h4>
+                        </div>
+                        <dl class="right">
+                                <dd>
+                                        <a rel="nofollow" href="/tools/cssyasuo.shtml" target="_blank">CSS格式化</a>
+                                        <a rel="nofollow" href="http://tools.jb51.net/tools/js_geshihua.asp" target="_blank">JS格式化</a>
+                                        <a rel="nofollow" href="/tools/html-js.htm" target="_blank" rel="nofollow">Html转化为Js</a></dd>
+                        </dl>
+                </div>
+                <div class="ndealList clear_fix">
+                        <div class="navTitle left">
+                                <h4><a rel="nofollow" href="/list/index_104.htm" target="_blank">数据库</a></h4>
+                        </div>
+                        <dl class="right">
+                                <dd>
+                                        <a rel="nofollow" href="/list/list_112_1.htm" target="_blank">MYSQL</a>
+                                        <a rel="nofollow" href="/list/list_113_1.htm" target="_blank">MSSQL</a>
+                                        <a rel="nofollow" href="/list/list_154_1.htm" target="_blank">oracle</a>
+                                        <a rel="nofollow" href="/list/list_155_1.htm" target="_blank">DB2</a>
+                                        <a rel="nofollow" href="/list/list_252_1.htm" target="_blank">MARIADB</a></dd>
+                        </dl>
+                </div>
+                <div class="ndealList clear_fix">
+                        <div class="navTitle left">
+                                <h4><a rel="nofollow" href="/cms/" target="_blank">CMS</a></h4>
+                        </div>
+                        <dl class="right">
+                                <dd>
+                                        <a rel="nofollow" href="/cms/list411_1.html" target="_blank">PHPCMS</a>
+                                        <a rel="nofollow" href="/cms/list408_1.html" target="_blank">DEDECMS</a>
+                                        <a rel="nofollow" href="/cms/list578_1.html" target="_blank">帝国CMS</a>
+                                        <a rel="nofollow" href="/cms/list419_1.html" target="_blank">WordPress</a>
+                                </dd>
+                        </dl>
+                </div>
+                <div class="ndealList clear_fix">
+                        <div class="navTitle left">
+                                <h4><a rel="nofollow" href="javascript:0;" target="_blank">常用工具</a></h4>
+                        </div>
+                        <dl class="right">
+                                <dd>
+                                        <a rel="nofollow" href="/zt/phphuanjing.html" target="_blank">PHP开发工具</a>
+                                        <a rel="nofollow" href="/zt/python.html" target="_blank">python</a>
+                                        <a rel="nofollow" href="/zt/photoshopxz.html" target="_blank">Photoshop</a>
+                                        <a rel="nofollow" href="/bibei/win/index.html" target="_blank">必备软件</a></dd>
+                        </dl>
+                </div>
+        </div>
+</div>
+			<!--快捷导航 结束 -->
+		</div>
+    </div>
+</div>
+<!--topTools end -->
+
+<div class="header">
+	<!-- Logo start -->
+	<div class="wrap">
+		<div class="mtb10 clearfix">
+		  <div class="logo"><a href="//www.jb51.net/"><img src="//www.jb51.net/images/logo.gif" title="脚本之家" alt="脚本之家" /></a></div>
+		  <div class="logom fl"><span id="logo_m" class="jbTestPos"></span></div>
+		  <div class="logor fr"><span id="logo_r" class="jbTestPos"></span></div>
+		</div>
+	</div>
+	<!--Logo end -->
+	
+	<!-- 导航开始 -->
+	<div class="nav_top clearfix">
+		<ul>
+			<li><a href="/">网站首页</a></li>
+			<li><a href="/web/">网页制作</a></li>
+			<li><a href="/list/index_1.htm">网络编程</a></li>
+			<li><a href="/list/index_96.htm">脚本专栏</a></li>
+			<li><a href="/jiaoben/">脚本下载</a></li>
+			<li><a href="/list/index_104.htm">数据库</a></li>
+			<li><a href="/list/list_82_1.htm">服务器</a></li>
+			<li><a href="/books/">电子书籍</a></li>
+			<li><a href="/os/">操作系统</a></li>
+			<li><a href="/yunying/">网站运营</a></li>
+			<li><p><i>其它</i><span>
+				<a href="/pingmian/">平面设计</a>
+				<a href="/media/">媒体动画</a>
+				<a href="/diannaojichu/">电脑基础</a>
+				<a href="/hardware/">硬件教程</a>
+				<a href="/hack/">网络安全</a>	
+			</span></p></li>
+		</ul>
+	</div>
+	<!--导航结束-->
+</div>
+
+<!-- 二级菜单开始 -->
+<div class="wrap">
+	<div class="subnav clearfix">
+<ul><li><a href='/list/list_61_1.htm' title="基础知识">基础知识</a></li>
+<li><a href='/list/list_23_1.htm' title="javascript类库">javascript类库</a></li>
+<li><a href='/list/list_22_1.htm' title="表单特效">表单特效</a></li>
+<li><a href='/list/list_18_1.htm' title="广告代码">广告代码</a></li>
+<li><a href='/list/list_43_1.htm' title="网页特效">网页特效</a></li>
+<li><a href='/list/list_26_1.htm' title="黑客性质">黑客性质</a></li>
+<li><a href='/list/list_222_1.htm' title="javascript技巧">javascript技巧</a></li>
+<li><a href='/list/list_232_1.htm' title="DOM">DOM</a></li>
+<li><a href='/list/list_243_1.htm' title="node.js">node.js</a></li>
+<li><a href='/list/list_248_1.htm' title="js其它">js其它</a></li>
+</ul>
+	</div>
+</div>
+<!-- 二级菜单结束 -->	
+
+<div class="main mb10 clearfix">
+	<div class="clearfix"><span id="tonglan1" class="jbTestPos"></span></div>
+</div>
+<div class="main clearfix">
+	<div class="NavBar clearfix ptb10">
+		<div class="fl w690">
+			<div class="box mb15 mt10"><i class="icon"></i>您的位置：<a href='/'>首页</a> → <a href="/list/index_1.htm" title="网络编程">网络编程</a> → <a href="/list/list_3_1.htm" title="JavaScript">JavaScript</a> → <a href="/list/list_61_1.htm" title="基础知识">基础知识</a> → 正文内容 javascript获取函数名称、函数参数、对象属性</div>
+		</div>
+		<div class="fr w300"><div class="search">
+		<form action="/do/search.php" target="_blank">
+			<input type="hidden" name="s" value="10520733385329581432">
+			<input type="hidden" name="ie" value="gbk">
+			<input type="text" name="q" class="key_input" placeholder="请输入关键词">
+			<input type="submit" value=" " class="c_btn">
+		</form></div>
+		</div>
+	</div>
+</div>
+<!--content Star -->
+<div id="contents">
+ <!--share start-->
+ <div id="right-share">
+	<div class="right-share jb-share" id="jb-share">
+		<a class="rshare-weixin" title="">微信</a>
+		<a class="rshare-qzone" target="_blank" href="http://tougao.jb51.net/" title="投稿">投稿</a>
+		<a class="rshare-sqq" target="_blank" href="http://shequ.jb51.net/" title="交流社区">交流社区</a>
+		<a class="rshare-tsina" target="_blank" href="http://youhui.jb51.net/" title="领取优惠券">领取优惠券</a>
+	</div>
+	<a class="rshare-top" onClick="javascript:;"></a>
+			
+	<div id="weixin-code" class="hide">
+	<div class="popup_weixin_head"><p>关注微信公众号</p> 
+	<div id="code"><img src="//files.jb51.net/skin/2018/images/erwm.jpg" alt="扫一扫" width="100" hight="100"></div>
+	</div>
+	</div>	
+ </div>
+<!--share end-->
+
+ <div class="main clearfix bgf">
+      <div class="w750 fl">
+      <div class="article-content border">
+      <div class="title">
+            <h1 class="YaHei">javascript获取函数名称、函数参数、对象属性名称的代码实例</h1>
+            <p><i>转载</i> &nbsp;2014-04-12 &nbsp; 作者：  &nbsp; <a href="#comments"> <img src="/skin/2018/images/text-message.png" width="15" height="15" /> 我要评论</a> </p>
+        </div>
+        <div class="art_desc mt10"><div id="art_demo">这篇文章主要介绍了javascript获取函数名称、函数参数、对象属性的代码实例,需要的朋友可以参考下</div></div>
+        <div class="lbd clearfix"><span id="art_up" class="jbTestPos"></span></div>
+        <div id="content">
+            <P><STRONG>一、获取函数名称的3种实现方法<BR></STRONG><BR><STRONG>实例1：</STRONG></P>
+<P>在js权威指南中看到的一个方法：</P>
+<P>Function.prototype.getName = function(){<BR>&nbsp;&nbsp;&nbsp; return this.name || this.toString().match(/function\s*([^(]*)\(/)[1]<BR>}</P>
+<P><STRONG>实例2：</STRONG></P>
+<P>如果当前函数是有名函数，则返回其名字，如果是匿名函数则返回被赋值的函数变量名，如果是闭包中匿名函数则返回“anonymous”。<BR><div class="codetitle"><span><a style="CURSOR: pointer" data="63666" class="copybut" id="copybut63666" onclick="doCopy('code63666')"><U>复制代码</U></a></span> 代码如下:</div><div class="codebody" id="code63666"><BR>&nbsp;&nbsp;&nbsp;&nbsp; var getFnName = function(callee){<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var _callee = callee.toString().replace(/[\s\?]*/g,""),<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; comb = _callee.length &gt;= 50 ? 50 :_callee.length;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _callee = _callee.substring(0,comb);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var name = _callee.match(/^function([^\(]+?)\(/);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(name && name[1]){<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return name[1];<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var caller = callee.caller,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _caller = caller.toString().replace(/[\s\?]*/g,"");<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var last = _caller.indexOf(_callee),<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; str = _caller.substring(last-30,last);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; name = str.match(/var([^\=]+?)\=/);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(name && name[1]){<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return name[1];<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return "anonymous"<BR>&nbsp;&nbsp;&nbsp; };<BR></div><BR>使用：在要调查的函数内部执行此函数，传入一个参数，为arguments.callee。<BR><div class="codetitle"><span><a style="CURSOR: pointer" data="55380" class="copybut" id="copybut55380" onclick="doCopy('code55380')"><U>复制代码</U></a></span> 代码如下:</div><div class="codebody" id="code55380"><BR>&nbsp;&nbsp;&nbsp; function&nbsp; ee(){<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //+++++++++++++++++++++++++++++++++<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var fnname =getFnName(arguments.callee)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //+++++++++++++++++++++++++++++++++<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; alert(fnname)<BR>&nbsp;&nbsp;&nbsp; };<BR>&nbsp;&nbsp;&nbsp; ee();<BR></div></P>
+<P><STRONG>实例3：</STRONG></P>
+<P><div class="codetitle"><span><a style="CURSOR: pointer" data="565" class="copybut" id="copybut565" onclick="doCopy('code565')"><U>复制代码</U></a></span> 代码如下:</div><div class="codebody" id="code565"><BR>function getFuncName(_callee)<BR>{<BR>&nbsp;var _text = _callee.toString();<BR>&nbsp;var _scriptArr = document.scripts;<BR>&nbsp;for (var i=0; i&lt;_scriptArr.length; i++)<BR>&nbsp;{<BR>&nbsp;&nbsp;var _start = _scriptArr[i].text.indexOf(_text);<BR>&nbsp;&nbsp;if (_start != -1)<BR>&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;if (/^function\s*\(.*\).*\r\n/.test(_text))<BR>&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;var _tempArr = _scriptArr[i].text.substr(0, _start).split('\r\n');<BR>&nbsp;&nbsp;&nbsp;&nbsp;return _tempArr[_tempArr.length - 1].replace(/(var)|(\s*)/g, '').replace(/=/g, '');<BR>&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;else<BR>&nbsp;&nbsp;&nbsp;&nbsp;return _text.match(/^function\s*([^\(]+).*\r\n/)[1];<BR>&nbsp;&nbsp;}<BR>&nbsp;}<BR>}<BR>function a()<BR>{<BR>&nbsp;return getFuncName(arguments.callee);<BR>}<BR>var b = function()<BR>{<BR>&nbsp;return getFuncName(arguments.callee);<BR>}<BR>window.alert(a());<BR>window.alert(b());</P>
+<P></div></P>
+<P>以上的方法还有一个情况没法解决，希望有办法的能给出指点。<BR><div class="codetitle"><span><a style="CURSOR: pointer" data="40086" class="copybut" id="copybut40086" onclick="doCopy('code40086')"><U>复制代码</U></a></span> 代码如下:</div><div class="codebody" id="code40086"><BR>var x =&nbsp;&nbsp; <BR>{&nbsp; <BR>&nbsp;&nbsp;&nbsp; run : function()&nbsp; <BR>&nbsp;&nbsp;&nbsp; {&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return getFuncName(arguments.callee);&nbsp; <BR>&nbsp;&nbsp;&nbsp; }&nbsp; <BR>}&nbsp; <BR>window.alert(x.run());&nbsp; <BR></div><BR>这个情况下无法得到函数的名称；</P>
+<P><STRONG>二、js获取函数的所有参数和遍历某个对象所有的属性名称和值的方法</STRONG></P>
+<P><STRONG>1.获取所有参数<BR></STRONG><div class="codetitle"><span><a style="CURSOR: pointer" data="21523" class="copybut" id="copybut21523" onclick="doCopy('code21523')"><U>复制代码</U></a></span> 代码如下:</div><div class="codebody" id="code21523"><BR>function test(){</P>
+<P>for(var i=0;i&lt;arguments.length;i++)<BR>&nbsp;document.write(arguments[i]);</P>
+<P>}</div></P>
+<P><STRONG>2.遍历某个对象所有的属性名称和值的方法<BR></STRONG><div class="codetitle"><span><a style="CURSOR: pointer" data="3769" class="copybut" id="copybut3769" onclick="doCopy('code3769')"><U>复制代码</U></a></span> 代码如下:</div><div class="codebody" id="code3769"><BR>&lt;script language="javascript"&gt;</P>
+<P>var obj = new Object();<BR>obj.myname = "我是对象";<BR>obj.pro2 = "23";<BR>obj.pro3 = "abcdeg"; php程序员站</P>
+<P>for (items in obj){<BR>&nbsp;document.write("属性:"+items+"的值是 ("+ obj[items] +")");<BR>&nbsp;document.write("&lt;br&gt;");<BR>}<BR>&lt;/script&gt;<BR></div><BR></P>
+            
+            <div class="art_xg">
+<h4>您可能感兴趣的文章:</h4><ul><li><a href="/article/98863.htm" title="遍历json 对象的属性并且动态添加属性的实现" target="_blank">遍历json 对象的属性并且动态添加属性的实现</a></li><li><a href="/article/95291.htm" title="JS动态给对象添加属性和值的实现方法" target="_blank">JS动态给对象添加属性和值的实现方法</a></li><li><a href="/article/89351.htm" title="jquery动态遍历Json对象的属性和值的方法" target="_blank">jquery动态遍历Json对象的属性和值的方法</a></li><li><a href="/article/46289.htm" title="javascript动态添加、修改、删除对象的属性与方法详解" target="_blank">javascript动态添加、修改、删除对象的属性与方法详解</a></li><li><a href="/article/20430.htm" title="显示js对象所有属性和方法的函数" target="_blank">显示js对象所有属性和方法的函数</a></li><li><a href="/article/29302.htm" title="js 遍历对象的属性的代码" target="_blank">js 遍历对象的属性的代码</a></li><li><a href="/article/48594.htm" title="JavaScript对象的property属性详解" target="_blank">JavaScript对象的property属性详解</a></li><li><a href="/article/37052.htm" title="javascript检测对象中是否存在某个属性判断方法小结" target="_blank">javascript检测对象中是否存在某个属性判断方法小结</a></li><li><a href="/article/50020.htm" title="JavaScript中对象属性的添加和删除示例" target="_blank">JavaScript中对象属性的添加和删除示例</a></li><li><a href="/article/26465.htm" title="js中将具有数字属性名的对象转换为数组" target="_blank">js中将具有数字属性名的对象转换为数组</a></li><li><a href="/article/20574.htm" title="javascript window对象属性整理" target="_blank">javascript window对象属性整理</a></li><li><a href="/article/43531.htm" title="获得Javascript对象属性个数的示例代码" target="_blank">获得Javascript对象属性个数的示例代码</a></li><li><a href="/article/102095.htm" title="JS实现给对象动态添加属性的方法" target="_blank">JS实现给对象动态添加属性的方法</a></li></ul>
+</div>
+<div class="clearfix">
+<span id="art_bot" class="jbTestPos"></span>
+</div>
+        </div><!--endmain-->
+<div class="tags clearfix">
+	<i class="icon-tag"></i>
+	<ul class="meta-tags items">
+	  <li class="tag item"><a href="http://common.jb51.net/tag/javascript/1.htm" target="_blank" title="搜索关于javascript的文章" rel="nofollow">javascript</a></li>
+<li class="tag item"><a href="http://common.jb51.net/tag/%E5%87%BD%E6%95%B0/1.htm" target="_blank" title="搜索关于函数的文章" rel="nofollow">函数</a></li>
+
+	</ul>
+</div>        
+
+<div class="lbd clearfix">
+<span id="art_down" class="jbTestPos"></span>
+</div>
+<div id="shoucang"></div>
+
+<div class="xgcomm clearfix">
+	<h2>相关文章</h2>
+	<ul><li class="lbd clearfix"><span id="art_xg" class="jbTestPos"></span></li><li><div class="item-inner"><a href="/article/52308.htm" title="js 模式窗口(模式对话框和非模式对话框)的使用介绍" class="img-wrap" target="_blank"> <img alt="js 模式窗口(模式对话框和非模式对话框)的使用介绍" src="//files.jb51.net/images/xgimg/bcimg0.png"> </a><div class="rbox"><div class="rbox-inner"><p><a class="link title" target="_blank" href="/article/52308.htm" title="js 模式窗口(模式对话框和非模式对话框)的使用介绍">js 模式窗口(模式对话框和非模式对话框)的使用介绍</a></p><div class="item-info"><div class="js">Javascript里面分模式对话框和非模式对话框，下面对两者的使用做下介绍</div><span class="lbtn" style="float:right"> 2014-07-07 </span></div></div></div></div></li>
+<li><div class="item-inner"><a href="/article/25308.htm" title="菜鸟学习JavaScript小实验之函数引用" class="img-wrap" target="_blank"> <img alt="菜鸟学习JavaScript小实验之函数引用" src="//files.jb51.net/images/xgimg/bcimg1.png"> </a><div class="rbox"><div class="rbox-inner"><p><a class="link title" target="_blank" href="/article/25308.htm" title="菜鸟学习JavaScript小实验之函数引用">菜鸟学习JavaScript小实验之函数引用</a></p><div class="item-info"><div class="js">由于变量b中保存的是函数的引用，当函数变化时，b也随时变化，且不管函数出现的先后顺序。两次alert（b），虽然位置不一样，但是内容相同。</div><span class="lbtn" style="float:right"> 2010-11-11 </span></div></div></div></div></li>
+<li><div class="item-inner"><a href="/article/83100.htm" title="Function.prototype.apply()与Function.prototype.call()小结" class="img-wrap" target="_blank"> <img alt="Function.prototype.apply()与Function.prototype.call()小结" src="//files.jb51.net/images/xgimg/bcimg2.png"> </a><div class="rbox"><div class="rbox-inner"><p><a class="link title" target="_blank" href="/article/83100.htm" title="Function.prototype.apply()与Function.prototype.call()小结">Function.prototype.apply()与Function.prototype.call()小结</a></p><div class="item-info"><div class="js">JavaScript 中，某个函数的参数数量是不固定的，因此要说适用条件的话，当你的参数是明确知道数量时，用 call，而不确定的时候，用 apply，然后把参数 push 进数组传递进去。当参数数量不确定时，函数内部也可以通过 arguments 这个数组来便利所有的参数</div><span class="lbtn" style="float:right"> 2016-04-04 </span></div></div></div></div></li>
+<li><div class="item-inner"><a href="/article/106119.htm" title="深入理解Javascript中的观察者模式" class="img-wrap" target="_blank"> <img alt="深入理解Javascript中的观察者模式" src="//files.jb51.net/images/xgimg/bcimg3.png"> </a><div class="rbox"><div class="rbox-inner"><p><a class="link title" target="_blank" href="/article/106119.htm" title="深入理解Javascript中的观察者模式">深入理解Javascript中的观察者模式</a></p><div class="item-info"><div class="js">观察者模式又称发布订阅模式，是一种最常用的设计模式之一了。下面这篇文章主要给大家深入的介绍了Javascript中观察者模式的相关资料，需要的朋友可以参考借鉴，下面来一起看看吧。</div><span class="lbtn" style="float:right"> 2017-02-02 </span></div></div></div></div></li>
+<li><div class="item-inner"><a href="/article/57815.htm" title="JS跨域问题详解" class="img-wrap" target="_blank"> <img alt="JS跨域问题详解" src="//files.jb51.net/images/xgimg/bcimg4.png"> </a><div class="rbox"><div class="rbox-inner"><p><a class="link title" target="_blank" href="/article/57815.htm" title="JS跨域问题详解">JS跨域问题详解</a></p><div class="item-info"><div class="js">本文结合实际，分两种情况讨论跨域技术：首先讨论不同子域的跨域技术，然后讨论完全不同域的跨域技术。有需要的小伙伴可要看仔细了。</div><span class="lbtn" style="float:right"> 2014-11-11 </span></div></div></div></div></li>
+<li><div class="item-inner"><a href="/article/67423.htm" title="JavaScript中的fontsize()方法使用详解" class="img-wrap" target="_blank"> <img alt="JavaScript中的fontsize()方法使用详解" src="//files.jb51.net/images/xgimg/bcimg5.png"> </a><div class="rbox"><div class="rbox-inner"><p><a class="link title" target="_blank" href="/article/67423.htm" title="JavaScript中的fontsize()方法使用详解">JavaScript中的fontsize()方法使用详解</a></p><div class="item-info"><div class="js">这篇文章主要介绍了JavaScript中的fontsize()方法使用详解,是JS入门学习中的基础知识,需要的朋友可以参考下</div><span class="lbtn" style="float:right"> 2015-06-06 </span></div></div></div></div></li>
+<li><div class="item-inner"><a href="/article/126436.htm" title="现代 JavaScript 参考" class="img-wrap" target="_blank"> <img alt="现代 JavaScript 参考" src="//files.jb51.net/images/xgimg/bcimg6.png"> </a><div class="rbox"><div class="rbox-inner"><p><a class="link title" target="_blank" href="/article/126436.htm" title="现代 JavaScript 参考">现代 JavaScript 参考</a></p><div class="item-info"><div class="js">一份现代 JavaScript 参考，你在现代项目中会经常遇到，以及最新的代码示例,需要的朋友可以参考下</div><span class="lbtn" style="float:right"> 2017-10-10 </span></div></div></div></div></li>
+<li><div class="item-inner"><a href="/article/25089.htm" title="document.write与writeln的输出内容区别说明" class="img-wrap" target="_blank"> <img alt="document.write与writeln的输出内容区别说明" src="//files.jb51.net/images/xgimg/bcimg7.png"> </a><div class="rbox"><div class="rbox-inner"><p><a class="link title" target="_blank" href="/article/25089.htm" title="document.write与writeln的输出内容区别说明">document.write与writeln的输出内容区别说明</a></p><div class="item-info"><div class="js">document.write()和document.writeln都是JavaScript向客户端写入的方法，writeln是以行方式输出的，但并不是指页面实际效果中的换行，两种方法在查看源代码时才看得出区别。</div><span class="lbtn" style="float:right"> 2010-10-10 </span></div></div></div></div></li>
+<li><div class="item-inner"><a href="/article/43223.htm" title="使用JS CSS去除IE链接虚线框的三种方法" class="img-wrap" target="_blank"> <img alt="使用JS CSS去除IE链接虚线框的三种方法" src="//files.jb51.net/images/xgimg/bcimg8.png"> </a><div class="rbox"><div class="rbox-inner"><p><a class="link title" target="_blank" href="/article/43223.htm" title="使用JS CSS去除IE链接虚线框的三种方法">使用JS CSS去除IE链接虚线框的三种方法</a></p><div class="item-info"><div class="js">本文使用JS、CSS、标签属性等方式去除IE链接上的虚线框，方法很简单，大家可以选择使用</div><span class="lbtn" style="float:right"> 2013-11-11 </span></div></div></div></div></li>
+<li><div class="item-inner"><a href="/article/58134.htm" title="Javascript堆排序算法详解" class="img-wrap" target="_blank"> <img alt="Javascript堆排序算法详解" src="//files.jb51.net/images/xgimg/bcimg9.png"> </a><div class="rbox"><div class="rbox-inner"><p><a class="link title" target="_blank" href="/article/58134.htm" title="Javascript堆排序算法详解">Javascript堆排序算法详解</a></p><div class="item-info"><div class="js">这篇文章主要介绍了Javascript堆排序算法及其示例，非常实用,需要的朋友可以参考下</div><span class="lbtn" style="float:right"> 2014-12-12 </span></div></div></div></div></li>
+</ul>
+</div>
+<div class="lbd clearfix mt5">
+<span id="art_down2" class="jbTestPos"></span>
+</div>
+<a href="#comments"></a>
+<div id="comments">
+<H2>最新评论</H2>
+<div class="pd5"><div id="SOHUCS" sid="art_48945"></div></div>
+</div>
+      </div><!--endborder-->
+      </div><!--end fl-->
+      
+<div class="w350 fr">
+<div class="article-right">
+<div class="r300 clearfix"><span id="side_up" class="jbTestPos"></span></div>
+<DIV class="tabTitleBar mt10 bgf borderTblue">
+<DIV class="borderTnone pb10 YaHei">
+<H4 class="blue">大家感兴趣的内容</H4>
+<UL class="newsList newList-in">
+<li><EM class="no1">1</EM><a href="/article/30288.htm" title="js split 的用法和定义 js split分割字符串成数组的实例代码" target="_blank">js split 的用法和定义 js split</a></li><li><EM class="no2">2</EM><a href="/article/53479.htm" title="window.location.href的用法(动态输出跳转)" target="_blank">window.location.href的用法(动态</a></li><li><EM class="no3">3</EM><a href="/article/23398.htm" title="js 小数取整的函数" target="_blank">js 小数取整的函数</a></li><li><EM class="no4">4</EM><a href="/article/17550.htm" title="JS array 数组详解" target="_blank">JS array 数组详解</a></li><li><EM class="no5">5</EM><a href="/article/69039.htm" title="JavaScript中判断两个字符串是否相等的方法" target="_blank">JavaScript中判断两个字符串是否</a></li><li><EM class="no6">6</EM><a href="/article/36548.htm" title="基于JavaScript 声明全局变量的三种方式详解" target="_blank">基于JavaScript 声明全局变量的三</a></li><li><EM class="no7">7</EM><a href="/article/32584.htm" title="HTML复选框和单选框 checkbox和radio事件介绍" target="_blank">HTML复选框和单选框 checkbox和r</a></li><li><EM class="no8">8</EM><a href="/article/22446.htm" title="Javascript Math ceil()、floor()、round()三个函数的区别" target="_blank">Javascript Math ceil()、floor(</a></li><li><EM class="no9">9</EM><a href="/article/20741.htm" title="JavaScript window.setTimeout() 的详细用法" target="_blank">JavaScript window.setTimeout()</a></li><li><EM class="no10">10</EM><a href="/article/32540.htm" title="ajax不执行success回调而是执行了error回调" target="_blank">ajax不执行success回调而是执行了</a></li>
+</UL>
+</DIV>
+</DIV>
+<div class="r300 clearfix mt10"><span id="idctu" class="jbTestPos"></span></div>
+<DIV class="tabTitleBar mt10 bgf borderTblue">
+<DIV class="borderTnone pb10 YaHei">
+<H4 class="blue">最近更新的内容</H4>
+<UL class="newsListA">
+<li><a href="/article/17169.htm" title="javascript 学习之旅 （2）" target="_blank">javascript 学习之旅 （2）</a></li><li><a href="/article/58250.htm" title="JS数组(Array)处理函数整理" target="_blank">JS数组(Array)处理函数整理</a></li><li><a href="/article/60130.htm" title="DOM基础教程之使用DOM控制表单" target="_blank">DOM基础教程之使用DOM控制表单</a></li><li><a href="/article/67908.htm" title="在JavaScript的正则表达式中使用exec()方法" target="_blank">在JavaScript的正则表达式中使用exec()方</a></li><li><a href="/article/61703.htm" title="深入理解JavaScript系列（40）：设计模式之组合模式详解" target="_blank">深入理解JavaScript系列（40）：设计模式</a></li><li><a href="/article/39828.htm" title="转义字符（\）对JavaScript中JSON.parse的影响概述" target="_blank">转义字符（\）对JavaScript中JSON.parse的</a></li><li><a href="/article/57815.htm" title="JS跨域问题详解" target="_blank">JS跨域问题详解</a></li><li><a href="/article/68808.htm" title="深入理解JavaScript的React框架的原理" target="_blank">深入理解JavaScript的React框架的原理</a></li><li><a href="/article/32535.htm" title="怎样在JavaScript里写一个swing把数据插入数据库" target="_blank">怎样在JavaScript里写一个swing把数据插入</a></li><li><a href="/article/5351.htm" title="Javascript SHA-1：Secure Hash Algorithm" target="_blank">Javascript SHA-1：Secure Hash Algorith</a></li>
+</UL>
+</DIV>
+</DIV>   
+<div class="r300 clearfix mt10"><span id="idctu1" class="jbTestPos"></span></div>
+<DIV class="tabTitleBar mt10 bgf borderTblue">
+<DIV class="borderTnone pb10 YaHei">
+<H4 class="blue">常用在线小工具</H4>
+<ul class="newsListA"><span id="bctools" class="jbTestPos"></span></ul>
+</DIV>
+</DIV>
+<div class="r300 clearfix mt10 mb10"><span id="idctu2" class="jbTestPos"></span></div> 
+<div class="rFixedBox">
+<script type="text/javascript">jb51_a_d("jb51xf");</script>
+</div>
+  </div>   
+      
+      </div><!--end fr-->
+      </div>
+</div><!--end content-->
+<div id="footer">
+<div class="main clearfix">
+<p>
+<a rel="nofollow" href="/about.htm" target="_blank">关于我们</a> - 
+<a rel="nofollow" href="/support.htm" target="_blank">广告合作</a> - 
+<a rel="nofollow" href="/linkus.htm" target="_blank">联系我们</a> -  
+<a rel="nofollow" href="/sm.htm" target="_blank">免责声明</a> -  
+<a rel="nofollow" href="/sitemap.htm" target="_blank">网站地图</a> - 
+<a rel="nofollow" href="tencent://message/?uin=461478385&Site=http://www.jb51.net" target="_blank">投诉建议</a> - 
+<a rel="nofollow" href="/up.htm" target="_blank">在线投稿</a>
+</p>
+<p><a rel="nofollow" class="ba" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=32031102000137"><img src="http://www.beian.gov.cn/file/ghs.png"/> 苏公网安备 32031102000137号</a>&nbsp;&nbsp;<a href="http://www.miibeian.gov.cn" class="ba" rel="nofollow" target="_blank">苏ICP备14036222号</a></p>
+<p>&copy;CopyRight 2006-2018 JB51.Net Inc All Rights Reserved. 脚本之家 版权所有</p>
+</div>
+</div><!--end footer-->
+<link type="text/css" rel="stylesheet" href="/jslib/syntaxhighlighter/styles/shCore.css" />
+<link type="text/css" rel="Stylesheet" href="/jslib/syntaxhighlighter/styles/shThemeDefault.css" />
+<script type="text/javascript" src="/jslib/syntaxhighlighter/scripts/shCore.js"></script>
+<script type="text/javascript" src="/jslib/syntaxhighlighter/scripts/shAutoloader.js"></script>
+<script type="text/javascript">
+(function(){
+	var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+/*更多导航*/
+$(".nav_top p").hover(function(){$(this).addClass("hover")},function(){$(this).removeClass("hover")});
+
+if (top.location != self.location)top.location=self.location;
+
+var varwindow=$(window);
+$(function(){
+	$('#content').find('img').each(function(){
+        var img = this;
+        if (img.width >= 650){
+            img.style.width = "650px";
+            img.style.height = "auto";
+            //$(img).removeAttr('height');
+            var aTag = document.createElement('a');
+            aTag.href = img.src;
+			aTag.target="_blank";
+            $(aTag).addClass('bPic')
+            .insertAfter(img).append(img)
+          }
+    });
+	varwindow.scroll(function()
+    {	
+    	//rFixedBox跟随滚动
+    	var h = varwindow.height();
+        var top = varwindow.scrollTop();
+    	var rFixedBox = $('.rFixedBox').prev().offset();
+        var fixedTop = rFixedBox.top;
+		
+        if(top>=fixedTop+344)
+        {
+			var h1 = parseInt($('#content').children('.main').height());
+			if(parseInt(top) + 340 < h1){
+				$('.rFixedBox').css({'position':'fixed','top': 0});
+			}else{
+				$('.rFixedBox').css({'position':'absolute','top': h1-510});
+			}
+        }
+        else
+        {
+            $('.rFixedBox').css({'position':'static', 'top':0});   
+        }	
+       /* return true;*/
+	   
+	   /*右侧快捷菜单*/
+	   sideFixed();
+    });
+	var ww = varwindow.width();
+	
+	function sideFixed(){
+	var scrolltop = document.body.scrollTop || document.documentElement.scrollTop;
+	var a1 = 550;
+	if(ww>440){
+		if(a1<=scrolltop){
+			$('#right-share').slideDown();
+			}
+		else{
+			$('#right-share').slideUp();
+			}
+		}
+	}
+	$('.rshare-weixin').hover(function(){
+			$('#weixin-code').removeClass('hide');
+		},function(){
+			$('#weixin-code').addClass('hide');
+		});
+	/*二维码*/
+	$('#right-share .rshare-top').on('click',function(){
+        $('html,body').animate({'scrollTop':0},500);
+    });
+/*$(document).ready(function() {
+  $("#content img").unveil();
+});	*/
+
+if(suoyin=="ok"){
+	GenerateContentList();
+}
+
+SyntaxHighlighter.autoloader(
+	'applescript			/jslib/syntaxhighlighter/scripts/shBrushAppleScript.js',
+	'actionscript3 as3		/jslib/syntaxhighlighter/scripts/shBrushAS3.js',
+	'bash shell				/jslib/syntaxhighlighter/scripts/shBrushBash.js',
+	'coldfusion cf			/jslib/syntaxhighlighter/scripts/shBrushColdFusion.js',
+	'cpp c					/jslib/syntaxhighlighter/scripts/shBrushCpp.js',
+	'obj-c objc				/jslib/syntaxhighlighter/scripts/shBrushObjC.js',
+	'c# c-sharp csharp		/jslib/syntaxhighlighter/scripts/shBrushCSharp.js',
+	'css					/jslib/syntaxhighlighter/scripts/shBrushCss.js',
+	'delphi pascal			/jslib/syntaxhighlighter/scripts/shBrushDelphi.js',
+	'diff patch pas			/jslib/syntaxhighlighter/scripts/shBrushDiff.js',
+	'erl erlang				/jslib/syntaxhighlighter/scripts/shBrushErlang.js',
+	'groovy					/jslib/syntaxhighlighter/scripts/shBrushGroovy.js',
+	'haxe hx				/jslib/syntaxhighlighter/scripts/shBrushHaxe.js',
+	'java					/jslib/syntaxhighlighter/scripts/shBrushJava.js',
+	'jfx javafx				/jslib/syntaxhighlighter/scripts/shBrushJavaFX.js',
+	'js jscript javascript	/jslib/syntaxhighlighter/scripts/shBrushJScript.js',
+	'perl pl				/jslib/syntaxhighlighter/scripts/shBrushPerl.js',
+	'php					/jslib/syntaxhighlighter/scripts/shBrushPhp.js',
+	'text plain				/jslib/syntaxhighlighter/scripts/shBrushPlain.js',
+	'py python				/jslib/syntaxhighlighter/scripts/shBrushPython.js',
+	'ruby rails ror rb		/jslib/syntaxhighlighter/scripts/shBrushRuby.js',
+	'scala					/jslib/syntaxhighlighter/scripts/shBrushScala.js',
+	'sql					/jslib/syntaxhighlighter/scripts/shBrushSql.js',
+	'vb vbnet				/jslib/syntaxhighlighter/scripts/shBrushVb.js',
+	'ps powershell			/jslib/syntaxhighlighter/scripts/shBrushPowerShell.js',
+	'xml xhtml xslt html	/jslib/syntaxhighlighter/scripts/shBrushXml.js'
+);
+SyntaxHighlighter.all();
+});
+var ourl="";
+</script>
+<script type="text/javascript" src='//icws.jb51.net/good/arcts.js'></script>
+<script>jbLoader();</script><script class="closetag">jbLoader(true);</script>
+<script>jbLoader();</script><script class="closetag">jbLoader(true);</script>
+<script>jbLoader();</script><script class="closetag">jbLoader(true);</script>
+<script>jbLoader();</script><script class="closetag">jbLoader(true);</script>
+<script>jbLoader();</script><script class="closetag">jbLoader(true);</script>
+<script>jbLoader();</script><script class="closetag">jbLoader(true);</script>
+<script>jbLoader();</script><script class="closetag">jbLoader(true);</script>
+<script>jbLoader();</script><script class="closetag">jbLoader(true);</script>
+<script>jbLoader();</script><script class="closetag">jbLoader(true);</script>
+<script>jbLoader();</script><script class="closetag">jbLoader(true);</script>
+<script>jbLoader();</script><script class="closetag">jbLoader(true);</script>
+<script>jbLoader();</script><script class="closetag">jbLoader(true);</script>
+<script>jbLoader();</script><script class="closetag">jbLoader(true);</script>
+<script>jbLoader();</script><script class="closetag">jbLoader(true);</script>
+<script>jbLoader();</script><script class="closetag">jbLoader(true);</script>
+<div id="tongji">
+<script type="text/javascript" src="http://tongji.jbzj.com/tongji/tongji.js"></script>
+<script type="text/javascript">
+//tu+
+var cpro_id = "u1893014";
+document.write('<scri'+'pt src="//cpro.baidustatic.com/cpro/ui/i.js" type="text/javascript"></s'+'cript>');
+</script>
+<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+(function(){
+var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?2f793ca9dd6f4c32488903eed5c7fbcb":"https://jspassport.ssl.qhimg.com/11.0.1.js?2f793ca9dd6f4c32488903eed5c7fbcb";
+document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+window.changyan.api.config({
+appid: 'cyrHH3dwi',
+conf: 'prod_1dc5dc80970106099d43fe242b7465fc'
+});
+</script>
+</div> 
+<script type="text/javascript" src="//www.jb51.net/pl.asp?id=48945"></script>
+</body>
+</html>
+<!-- published at 2018/3/26 22:56:29By dxycms qq:461478385  -->

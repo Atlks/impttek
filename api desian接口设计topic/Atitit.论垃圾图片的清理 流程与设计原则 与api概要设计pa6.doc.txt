@@ -1,0 +1,81 @@
+Atitit.论垃圾图片文件的清理 流程与设计原则 与api概要设计pa6
+
+
+11
+11
+11
+11
+11
+11
+22
+22
+22
+22
+22
+22
+33
+3
+
+
+俩个问题：：识别垃圾文件与清理策略
+作者:: 老哇的爪子 Attilax 艾龙，  EMAIL:1466519819@qq.com
+转载请注明来源： http://blog.csdn.net/attilax
+
+如何识别垃圾图片
+清理非图片(bmp,jpg,jpeg,png）的文件
+体积过小图片
+尺寸过小图片（210*150）
+清理重复图片（此结果不能加入指纹库）
+非本类别的图片（人工识别）
+
+垃圾图片文件指纹库
+根据垃圾文件指纹库（模式结果固化）
+根据垃圾文件路径名称库（加快性能比对速度，md5可能比较慢）
+
+人工识别垃圾图片策略
+不好的isho
+不能like的pic
+误删除的文件专门集中放在isho_manu文件夹中，人工处理
+
+
+
+清理策略
+生成清理脚本（或者直接java程序模式）
+移动到制定文件夹（推荐）
+
+
+Code
+AtibrowPrj
+public class ClrerPicClrer extends ClrerAbs {
+
+
+	public static void main(String[] args) {
+		ClrerPicClrer c=	new ClrerPicClrer();
+		c.dir="d:\\ati\\isheo";
+		//c.GabFileRecongers.add(new NoPicReconer());
+		
+	
+		tooMiniPixPicClrerPartImp ClrerPartImp = new tooMiniPixPicClrerPartImp();
+		ClrerPartImp.dir=c.dir;
+		ClrerPartImp.targetDir="d:\\ati\\tooMiniPixPic_files";
+		
+		
+		c.IClrerParts.add(ClrerPartImp);
+		
+		tooMinSizePicClrerPartImp tmsc=new tooMinSizePicClrerPartImp();
+		tmsc.dir=c.dir;
+		tmsc.targetDir="d:/ati/tooMinSize_files";
+		
+		c.IClrerParts.add(tmsc);
+		 
+		c.traveDir(c.dir);
+		System.out.println("--f");
+	}
+
+
+
+文件去重
+DeduliAbs_ByMoveToNewFolder.java
+
+
+

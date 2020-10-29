@@ -1,0 +1,16 @@
+Atitit.指明css ,js 的字符编码
+
+
+Css文件里面 @charset "utf-8";
+
+@charset "utf-8";
+#navP26 {
+	color: #ccc;
+	font-size: 24px;
+	 
+}
+
+调用css页面使用 charset="utf-8" 属性
+<link rel="stylesheet" type="text/css" href="js/index.css" charset="utf-8">
+Js调用页面使用gbk属性
+

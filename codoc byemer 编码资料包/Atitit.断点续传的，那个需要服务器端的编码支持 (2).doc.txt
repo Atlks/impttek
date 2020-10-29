@@ -1,0 +1,61 @@
+Atitit.断点续传的，那个需要服务器端的编码支持
+
+不支持断点续传的，那个需要服务器端的编码支持，后面会考虑特定语言的断点续传，请关注
+
+ 需要...   两端配合一下   记录一下  说不定可以实现   断点技术很没深触过   呵呵
+
+Java Applet mupload
+Jeig personal prodeuct ..cant resumt....and biggest file 1.5G
+
+========
+JFileUpload is a client-side JAVA™ component (Applet or WebStart) that allows to upload files and folders to a web or ftp server. This component could be integrated into any application. Server-side technology could be JSP/Servlet, PHP, CGI/PERL, Ruby, ColdFusion or Microsoft ASP. Front-end provides an upload progress bar, a cancel button and drag&drop support. JFileUpload supports very large uploads over 2GB and could resume broken uploads. It is customizable (colors, size and multilanguage). See installation instructions below.
+这个支持resume..jeig haosyeo sh com product..
+
+
+下。基于WEB的文件上传可以使用FTP和HTTP两种协议，用FTP的话虽然传输稳定，但安全性是个严重的问题，而且FTP服务器读用户库获取权限，这样对于用户使用来说还是不太方便。
+
+
+剩下只有HTTP。在HTTP中有3种方式，PUT、WEBDAV、RFC1867，前2种方法不适合大文件上传，目前我们使用的web上传都是基于RFC1867标准的HTML中基于表单的文件上传。
+
+
+   二、利用RFC1867标准处理文件上传的两种方式：
+         1．一次性得到上传的数据，然后分析处理。
+看了N多代码之后发现，目前无组件程序和一些COM组件都是使用Request.BinaryRead方法。一次性得到上传的数据，然后分析处理。这就是为什么上传大文件很慢的原因了，IIS超时不说，就算几百M文件上去了，分析处理也得一阵子。
+         2．一边接收文件，一边写硬盘。
+ 
+了解了一下国外的商业组件，比较流行的有Power- Web，AspUpload,ActiveFile,ABCUpload,aspSmartUpload,SA-FileUp。其中比较优秀的是 ASPUPLOAD和SA-FILE，他们号称可以处理2G的文件(SA-FILE EE版甚至没有文件大小的限制)，而且效率也是非常棒，难道编程语言 的效率差这么多?查了一些资料,觉得他们都是直接操作文件流。这样就不受文件大小的制约
+
+
+
+
+Missing required permissions manifest attrribute in main jar
+
+
+Flash 能不能实现resume
+ActiveX可以自己写
+Flash Player ActiveX是Adobe写好了
+
+要想功能不受限制当然是自己做ActiveX比较好.但是自己的又没有adobe的那么多功能函数包支持,所以很难两全其美啊. 结合使用吧.
+
+除非使用AIR，自己操作文件和Socket才有可能支持，单纯运行在浏览器里的SWF，理论上是做不到的
+
+上传的续传是非常危险的 ... 
+
+我觉得应该还是Flash Player ActiveX的限制过多。很多的ActiveX的权限都比Flash Player要大。例如Yahoo相册的上传控件，就可以预览要上传的图片。而Flash Player就_åä¸å°_。目前网上支持断点续传功能的上传组件基本上都是基于ActiveX（例如_è¿ä¸ª_），它又是怎么做到的呢？
+
+
+JUPload还有大量的配置参数 
+会话管理 
+语言国际化：超过20种语言 
+FTP和HTTP（POST）功能 
+块上传，可指定服务器最大上传大小 
+图片管理,允许缩放、旋转及格式转换 
+允许控制指定的文件扩展名 
+MD5校验和计算 
+上传的目录结构 
+默认模式图： 
+
+
+
+
+

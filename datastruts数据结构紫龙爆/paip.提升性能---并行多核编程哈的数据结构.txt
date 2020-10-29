@@ -1,0 +1,36 @@
+paip.提升性能---并行多核编程哈的数据结构list,set,map
+
+vector/copyonwritearraylist 都是线程安全的.
+或者经过包装的list ::: collections.sysnchronizedList(list);
+
+作者Attilax  艾龙，  EMAIL:1466519819@qq.com
+来源：attilax的专栏
+地址：http://blog.csdn.net/attilax
+
+以读为主.copyonwritearraylist 性能高..大概高一倍..
+以写为主.vector性能高
+
+//////set
+collections.sysnchronizedset(set)
+或者copyonwritearrayset
+
+
+//////map
+collections.sysnchronizedMap
+或者concurrentHashmap。。它的get没lock,,put小锁...这样,性能高的..
+chm比同步MAP快一倍。
+
+/////队列
+concurrentLInkedQueue..
+blockingQueue..
+双端QUEUE::   DEQUE..
+
+///int,string,array
+java.util.concurrent.atomic ::无锁算法实现的原子类..
+
+
+//apache amino framework..list,set etc..
+freelocklist,freelockvector..
+性能大概是同布的VETOR的5倍...
+lockFREEset 比SET高。25%
+

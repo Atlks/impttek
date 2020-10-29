@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="canonical" href="https://blog.csdn.net/michaelwubo/article/details/50865185"/> 
+    <script type="text/javascript">
+        var username = "michaelwubo";
+        var _blogger = username;
+        var blog_address = "https://blog.csdn.net/michaelwubo";
+        var static_host = "https://csdnimg.cn/release/phoenix/";
+        var currentUserName = "attilax"; 
+        var fileName = '50865185';
+        var commentscount = 1;
+        var islock = false;
+        window.quickReplyflag = true;
+        var totalFloor = 1;
+        var isBole = false;
+        var isDigg = false;
+        var isExpert = false;
+        var isAdm = false;
+        var baiduKey = "java+guava%E7%BC%93%E5%AD%98";
+        var needInsertBaidu = false;
+        var isShowAds = true;
+        var ChannelId = 0;
+    </script>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="referrer" content="always">
+    <script src="https://csdnimg.cn/public/common/libs/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://csdnimg.cn/public/static/css/avatar.css">
+                <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/production/main-f869aa95a4.css">
+          <link rel="stylesheet" href="https://csdnimg.cn/public/common/toolbar/content_toolbar_css/content_toolbar.css">
+
+    <script src="https://csdnimg.cn/rabbit/exposure-click/main-1.0.5.js"></script>
+    <script type="text/javascript" src="https://csdnimg.cn/pubfooter/js/tracking-1.0.2.js" charset="utf-8"></script>
+    <script type="text/javascript" src="https://csdnimg.cn/release/phoenix/production/main-e96db8abdf.js"></script>
+
+    <script src="https://dup.baidustatic.com/js/ds.js"></script>
+    <script type="text/javascript">
+        // Traffic Stats of the entire Web site By baidu
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?6bcd52f51e9b3dce32bec4a3997715ac";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+        // Traffic Stats of the entire Web site By baidu end
+    </script>
+    <meta name="description" content="一.背景
+
+缓存是我们在开发中为了提高系统的性能，把经常的访问业务的数据第一次把处理结果先放到缓存中，第二次就不用在对相同的业务数据在重新处理一遍，这样就提高了系统的性能。缓存分好几种：
+（1）本地缓存。
+（2）数据库缓存。
+（3）分布式缓存。
+
+分布式缓存比较常用的有memcached等，memcached是高性能的分布式内存缓存服务器，缓存业务处理结果，减少数据库访问次数和相同复" />
+    <meta name="keywords" content="" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+    <meta name="shenma-site-verification" content="5a59773ab8077d4a62bf469ab966a63b_1497598848">
+    <title>Java 高并发缓存与Guava Cache - CSDN博客</title>
+    <link href="https://csdnimg.cn/public/favicon.ico" rel="SHORTCUT ICON">
+              <script src="https://csdnimg.cn/search/baidu_search-1.1.2.js?v=201802071056&autorun=true&install=true&keyword=java+guava%E7%BC%93%E5%AD%98"  type="text/javascript"></script>
+                      <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/production/htmledit_views-0a60691e80.css">
+            <style>
+            .MathJax, .MathJax_Message, .MathJax_Preview{
+                display: none
+            }
+      </style>
+</head>
+<body>
+<script id="toolbar-tpl-scriptId" prod="download" skin="black" src="https://csdnimg.cn/public/common/toolbar/js/content_toolbar.js" type="text/javascript" domain="https://blog.csdn.net/"></script>
+<div class="container clearfix">
+  <main>
+    <div style="display:none;">
+      <img src="" onerror='setTimeout(function(){if(!/(csdn.net|iteye.com|baiducontent.com|googleusercontent.com|360webcache.com|sogoucdn.com|bingj.com|baidu.com)$/.test(window.location.hostname)){window.location.href="\x68\x74\x74\x70\x73\x3a\x2f\x2f\x77\x77\x77\x2e\x63\x73\x64\x6e\x2e\x6e\x65\x74"}},3000);'>
+    </div>
+    <article>
+        <h1 class="csdn_top">Java 高并发缓存与Guava Cache</h1>
+        <div class="article_bar clearfix">
+            <div class="artical_tag">
+                <span class="original">
+                转载                </span>
+                <span class="time">2016年03月12日 13:51:45</span>
+            </div>
+
+            <ul class="article_tags clearfix csdn-tracking-statistics tracking-click" data-mod="popu_377" >
+                <li class="tit">标签：</li>
+
+<!--          [startarticletags]-->
+                <!--          [endarticletags]-->
+            </ul>
+            <ul class="right_bar">
+                <li><button class="btn-noborder"><i class="icon iconfont icon-read"></i><span class="txt">13276</span></button></li>
+                <li class="edit">
+                    <a class="btn-noborder" href="" >
+                        <i class="icon iconfont icon-bianji"></i><span class="txt">编辑</span>
+                    </a>
+                </li>
+                <li class="del">
+                    <a class="btn-noborder" onclick="javascript:deleteArticle(fileName);return false;">
+                        <i class="icon iconfont icon-shanchu"></i><span class="txt">删除</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div id="article_content" class="article_content csdn-tracking-statistics tracking-click" data-mod="popu_519" data-dsm="post">
+                            <div class="htmledit_views">
+                        
+<p><span style="font-size:24px;"><strong>一.背景</strong></span></p>
+<p></p>
+<p><span style="font-size:18px;">缓存是我们在开发中为了提高系统的性能，把经常的访问业务的数据第一次把处理结果先放到缓存中，第二次就不用在对相同的业务数据在重新处理一遍，这样就提高了系统的性能。缓存分好几种：</span></p>
+<p><span style="font-size:18px;">（1）本地缓存。</span></p>
+<p><span style="font-size:18px;">（2）数据库缓存。</span></p>
+<p><span style="font-size:18px;">（3）分布式缓存。</span></p>
+<p></p>
+<p style="font-size:18px;">分布式缓存比较常用的有<span style="font-family:'Times New Roman';">memcached</span><span style="font-family:'宋体';">等，</span><span style="font-family:'Times New Roman';">memcached</span><span style="font-family:'宋体';">是高性能的分布式内存缓存服务器，</span>缓存业务处理结果，减少数据库访问次数和相同复杂逻辑处理的时间，以提高动态<span style="font-family:'Times New Roman';">Web</span><span style="font-family:'宋体';">应用的速度、
+ 提高可扩展性</span>。</p>
+<p style="font-size:18px;"></p>
+<p><span style="font-size:24px;"><strong>二.本地缓存在高并发下的问题以及解决</strong></span></p>
+<p style="font-size:18px;"></p>
+<p>今天我们介绍的是本地缓存缓存，我们这边采用<span style="font-family:'Times New Roman';">java.util.concurrent.ConcurrentHashMap</span><span style="font-family:'宋体';">来保存，</span><span style="font-family:'Times New Roman';">ConcurrentHashMap</span><span style="font-family:'宋体';">是一个线程安全的</span><span style="font-family:'Times New Roman';">HashTable</span><span style="font-family:'宋体';">，并提供了一组和</span><span style="font-family:'Times New Roman';">HashTable</span><span style="font-family:'宋体';">功能相同但是线程安全的方法，</span><span style="font-family:'Times New Roman';">ConcurrentHashMap</span><span style="font-family:'宋体';">可以做到读取数据不加锁，提高了并发能力。</span><span style="color:#ff0000;">我们先不考虑内存元素回收或者在保存数据会出现内存溢出的情况</span>，我们用<span style="font-family:'Times New Roman';">ConcurrentHashMap</span><span style="font-family:'宋体';">模拟本地缓存，当在高并发环境一下，会出现一些什么问题？</span></p>
+<p><span style="font-family:'宋体';"><br /></span></p>
+<p><span style="font-family:'宋体';">我们这边采用实现多个线程来模拟高并发场景。</span></p>
+<p><span style="font-family:'宋体';"><br /></span></p>
+<p><span style="font-family:'宋体';"><strong>第一种：我们先来看一下代码：</strong></span></p>
+<br /><div class="dp-highlighter bg_java">
+<div class="bar">
+<div class="tools"><strong>[java]</strong> <a class="ViewSource" title="view plain" href="http://blog.csdn.net/congcong68/article/details/41146295#">
+view plain</a><span class="tracking-ad"> <a class="CopyToClipboard" title="copy" href="http://blog.csdn.net/congcong68/article/details/41146295#">
+copy</a></span><span class="tracking-ad"> <a class="PrintSource" title="print" href="http://blog.csdn.net/congcong68/article/details/41146295#">
+print</a></span><a class="About" title="?" href="http://blog.csdn.net/congcong68/article/details/41146295#">?</a></div>
+</div>
+<ol class="dp-j"><li class="alt"><span class="keyword">public</span> <span class="keyword">class</span> TestConcurrentHashMapCache&lt;K,V&gt; {
+</li><li><span class="keyword">private</span> <span class="keyword">final</span> ConcurrentHashMap&lt;K, V&gt; cacheMap=<span class="keyword">new</span> ConcurrentHashMap&lt;K,V&gt; ();
+</li><li class="alt"></li><li><span class="keyword">public</span> Object getCache(K keyValue,String ThreadName){
+</li><li class="alt">System.out.println(<span class="string">"ThreadName getCache=============="</span>+ThreadName);
+</li><li>Object value=<span class="keyword">null</span>; </li><li class="alt"><span class="comment">//从缓存获取数据 </span></li><li>value=cacheMap.get(keyValue); </li><li class="alt"><span class="comment">//如果没有的话，把数据放到缓存 </span></li><li><span class="keyword">if</span>(value==<span class="keyword">null</span>){ </li><li class="alt"><span class="keyword">return</span> putCache(keyValue,ThreadName);
+</li><li>} </li><li class="alt"><span class="keyword">return</span> value; </li><li>} </li><li class="alt"></li><li><span class="keyword">public</span> Object putCache(K keyValue,String ThreadName){
+</li><li class="alt">System.out.println(<span class="string">"ThreadName 执行业务数据并返回处理结果的数据（访问数据库等）=============="</span>+ThreadName);
+</li><li><span class="comment">//可以根据业务从数据库获取等取得数据,这边就模拟已经获取数据了 </span></li><li class="alt"><span class="annotation">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)
+</li><li>V value=(V) <span class="string">"dataValue"</span>; </li><li class="alt"><span class="comment">//把数据放到缓存 </span></li><li>cacheMap.put(keyValue, value); </li><li class="alt"><span class="keyword">return</span> value; </li><li>} </li><li class="alt"></li><li></li><li class="alt"></li><li><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">
+void</span> main(String[] args) { </li><li class="alt"><span class="keyword">final</span> TestConcurrentHashMapCache&lt;String,String&gt; TestGuaVA=<span class="keyword">new</span> TestConcurrentHashMapCache&lt;String,String&gt;();
+</li><li></li><li class="alt">Thread t1=<span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {
+</li><li><span class="annotation">@Override</span> </li><li class="alt"><span class="keyword">public</span> <span class="keyword">void</span> run() {
+</li><li></li><li class="alt">System.out.println(<span class="string">"T1======start========"</span>);
+</li><li>Object value=TestGuaVA.getCache(<span class="string">"key"</span>,<span class="string">"T1"</span>);
+</li><li class="alt">System.out.println(<span class="string">"T1 value=============="</span>+value);
+</li><li>System.out.println(<span class="string">"T1======end========"</span>); </li><li class="alt"></li><li>} </li><li class="alt">}); </li><li></li><li class="alt">Thread t2=<span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {
+</li><li><span class="annotation">@Override</span> </li><li class="alt"><span class="keyword">public</span> <span class="keyword">void</span> run() {
+</li><li>System.out.println(<span class="string">"T2======start========"</span>); </li><li class="alt">Object value=TestGuaVA.getCache(<span class="string">"key"</span>,<span class="string">"T2"</span>);
+</li><li>System.out.println(<span class="string">"T2 value=============="</span>+value);
+</li><li class="alt">System.out.println(<span class="string">"T2======end========"</span>);
+</li><li></li><li class="alt">} </li><li>}); </li><li class="alt"></li><li>Thread t3=<span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {
+</li><li class="alt"><span class="annotation">@Override</span> </li><li><span class="keyword">public</span> <span class="keyword">void</span> run() {
+</li><li class="alt">System.out.println(<span class="string">"T3======start========"</span>);
+</li><li>Object value=TestGuaVA.getCache(<span class="string">"key"</span>,<span class="string">"T3"</span>);
+</li><li class="alt">System.out.println(<span class="string">"T3 value=============="</span>+value);
+</li><li>System.out.println(<span class="string">"T3======end========"</span>); </li><li class="alt"></li><li>} </li><li class="alt">}); </li><li></li><li class="alt">t1.start(); </li><li>t2.start(); </li><li class="alt">t3.start(); </li><li></li><li class="alt">} </li><li></li><li class="alt">} </li></ol></div>
+<pre style="display:none;" class="java">public class TestConcurrentHashMapCache&lt;K,V&gt; {
+	private final ConcurrentHashMap&lt;K, V&gt;  cacheMap=new ConcurrentHashMap&lt;K,V&gt; (); 
+	
+	public  Object getCache(K keyValue,String ThreadName){
+		System.out.println("ThreadName getCache=============="+ThreadName);
+		Object value=null;
+		//从缓存获取数据
+		value=cacheMap.get(keyValue);
+		//如果没有的话，把数据放到缓存
+		if(value==null){
+			return putCache(keyValue,ThreadName);
+		}
+		return value;
+	}
+	
+	public Object putCache(K keyValue,String ThreadName){
+		System.out.println("ThreadName 执行业务数据并返回处理结果的数据（访问数据库等）=============="+ThreadName);
+		//可以根据业务从数据库获取等取得数据,这边就模拟已经获取数据了
+		@SuppressWarnings("unchecked")
+		V value=(V) "dataValue";
+		//把数据放到缓存
+		 cacheMap.put(keyValue, value);
+		return value;
+	}
+
+	
+	
+	public static void main(String[] args) {
+		final TestConcurrentHashMapCache&lt;String,String&gt; TestGuaVA=new TestConcurrentHashMapCache&lt;String,String&gt;();
+		
+		Thread t1=new Thread(new Runnable() {
+			@Override
+			public void run() {
+				
+				System.out.println("T1======start========");
+			    Object value=TestGuaVA.getCache("key","T1");
+			    System.out.println("T1 value=============="+value);
+				System.out.println("T1======end========");
+				
+			}
+		});
+		
+		Thread t2=new Thread(new Runnable() {
+			@Override
+			public void run() {
+				System.out.println("T2======start========");
+				Object value=TestGuaVA.getCache("key","T2");
+			    System.out.println("T2 value=============="+value);
+				System.out.println("T2======end========");
+				
+			}
+		});
+		
+		Thread t3=new Thread(new Runnable() {
+			@Override
+			public void run() {
+				System.out.println("T3======start========");
+				Object value=TestGuaVA.getCache("key","T3");
+			    System.out.println("T3 value=============="+value);
+				System.out.println("T3======end========");
+				
+			}
+		});
+		
+		t1.start();
+		t2.start();
+		t3.start();
+
+	}
+
+}</pre> 我们看一下执行结果，如图所示：
+<p style="font-size:18px;"><img alt="" src="https://img-blog.csdn.net/20141115152659676?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY29uZ2Nvbmc2OA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" /></p>
+<p style="font-size:18px;"></p>
+<p>我们实现了本地缓存代码，我们执行一下结果，发现在多线程时，出现了在缓存里没有缓存时，会执行一样执行多次的业务数据并返回处理的数据，我们分析一下出现这种情况的：</p>
+<p>（1）当线程<span style="font-family:'Times New Roman';">T1</span><span style="font-family:'宋体';">访问</span><span style="font-family:'Times New Roman';">cacheMap</span><span style="font-family:'宋体';">里面有没有，这时根据业务到后台处理业务数据并返回处理数据，<span style="color:#ff0000;">并放入缓存</span>。</span></p>
+<p>（2）当线程<span style="font-family:'Times New Roman';">T2</span><span style="font-family:'宋体';">访问</span><span style="font-family:'Times New Roman';">cacheMap</span><span style="font-family:'宋体';">里面同样也没有，也把根据业务到后台处理业务数据并返回处理数据，<span style="color:#ff0000;">并放入缓存</span>。</span></p>
+<p><strong>第二种：</strong></p>
+<p>这样相同的业务并处理两遍，如果在高并发的情况下相同的业务不止执行两遍，这样这样跟我们当初做缓存不相符合，这时我们想到了<span style="font-family:'Times New Roman';">Java</span><span style="font-family:'宋体';">多线程时，在执行获取缓存上加上</span><span style="font-family:'Times New Roman';">Synchronized</span><span style="font-family:'宋体';">，代码如下：</span></p>
+<p><span style="font-family:'宋体';"></span></p>
+<div class="dp-highlighter bg_java">
+<div class="bar">
+<div class="tools"><strong>[java]</strong> <a class="ViewSource" title="view plain" href="http://blog.csdn.net/congcong68/article/details/41146295#">
+view plain</a><span class="tracking-ad"> <a class="CopyToClipboard" title="copy" href="http://blog.csdn.net/congcong68/article/details/41146295#">
+copy</a></span><span class="tracking-ad"> <a class="PrintSource" title="print" href="http://blog.csdn.net/congcong68/article/details/41146295#">
+print</a></span><a class="About" title="?" href="http://blog.csdn.net/congcong68/article/details/41146295#">?</a></div>
+</div>
+<ol class="dp-j"><li class="alt"><span class="keyword">public</span> <span class="keyword">class</span> TestConcurrentHashMapCache&lt;K,V&gt; {
+</li><li><span class="keyword">private</span> <span class="keyword">final</span> ConcurrentHashMap&lt;K, V&gt; cacheMap=<span class="keyword">new</span> ConcurrentHashMap&lt;K,V&gt; ();
+</li><li class="alt"></li><li><span class="keyword">public</span> &lt;span style=<span class="string">"color:#ff0000;"</span>&gt;<span class="keyword">synchronized</span> &lt;/span&gt;Object getCache(K keyValue,String ThreadName){
+</li><li class="alt">System.out.println(<span class="string">"ThreadName getCache=============="</span>+ThreadName);
+</li><li>Object value=<span class="keyword">null</span>; </li><li class="alt"><span class="comment">//从缓存获取数据 </span></li><li>value=cacheMap.get(keyValue); </li><li class="alt"><span class="comment">//如果没有的话，把数据放到缓存 </span></li><li><span class="keyword">if</span>(value==<span class="keyword">null</span>){ </li><li class="alt"><span class="keyword">return</span> putCache(keyValue,ThreadName);
+</li><li>} </li><li class="alt"><span class="keyword">return</span> value; </li><li>} </li><li class="alt"></li><li><span class="keyword">public</span> Object putCache(K keyValue,String ThreadName){
+</li><li class="alt">System.out.println(<span class="string">"ThreadName 执行业务数据并返回处理结果的数据（访问数据库等）=============="</span>+ThreadName);
+</li><li><span class="comment">//可以根据业务从数据库获取等取得数据,这边就模拟已经获取数据了 </span></li><li class="alt"><span class="annotation">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)
+</li><li>V value=(V) <span class="string">"dataValue"</span>; </li><li class="alt"><span class="comment">//把数据放到缓存 </span></li><li>cacheMap.put(keyValue, value); </li><li class="alt"><span class="keyword">return</span> value; </li><li>} </li><li class="alt"></li><li></li><li class="alt"></li><li><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">
+void</span> main(String[] args) { </li><li class="alt"><span class="keyword">final</span> TestConcurrentHashMapCache&lt;String,String&gt; TestGuaVA=<span class="keyword">new</span> TestConcurrentHashMapCache&lt;String,String&gt;();
+</li><li></li><li class="alt">Thread t1=<span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {
+</li><li><span class="annotation">@Override</span> </li><li class="alt"><span class="keyword">public</span> <span class="keyword">void</span> run() {
+</li><li></li><li class="alt">System.out.println(<span class="string">"T1======start========"</span>);
+</li><li>Object value=TestGuaVA.getCache(<span class="string">"key"</span>,<span class="string">"T1"</span>);
+</li><li class="alt">System.out.println(<span class="string">"T1 value=============="</span>+value);
+</li><li>System.out.println(<span class="string">"T1======end========"</span>); </li><li class="alt"></li><li>} </li><li class="alt">}); </li><li></li><li class="alt">Thread t2=<span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {
+</li><li><span class="annotation">@Override</span> </li><li class="alt"><span class="keyword">public</span> <span class="keyword">void</span> run() {
+</li><li>System.out.println(<span class="string">"T2======start========"</span>); </li><li class="alt">Object value=TestGuaVA.getCache(<span class="string">"key"</span>,<span class="string">"T2"</span>);
+</li><li>System.out.println(<span class="string">"T2 value=============="</span>+value);
+</li><li class="alt">System.out.println(<span class="string">"T2======end========"</span>);
+</li><li></li><li class="alt">} </li><li>}); </li><li class="alt"></li><li>Thread t3=<span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {
+</li><li class="alt"><span class="annotation">@Override</span> </li><li><span class="keyword">public</span> <span class="keyword">void</span> run() {
+</li><li class="alt">System.out.println(<span class="string">"T3======start========"</span>);
+</li><li>Object value=TestGuaVA.getCache(<span class="string">"key"</span>,<span class="string">"T3"</span>);
+</li><li class="alt">System.out.println(<span class="string">"T3 value=============="</span>+value);
+</li><li>System.out.println(<span class="string">"T3======end========"</span>); </li><li class="alt"></li><li>} </li><li class="alt">}); </li><li></li><li class="alt">t1.start(); </li><li>t2.start(); </li><li class="alt">t3.start(); </li><li></li><li class="alt">} </li><li></li><li class="alt">} </li></ol></div>
+<pre style="display:none;" class="java">public class TestConcurrentHashMapCache&lt;K,V&gt; {
+	private final ConcurrentHashMap&lt;K, V&gt;  cacheMap=new ConcurrentHashMap&lt;K,V&gt; (); 
+	
+	public &lt;span style="color:#ff0000;"&gt;synchronized &lt;/span&gt;Object getCache(K keyValue,String ThreadName){
+		System.out.println("ThreadName getCache=============="+ThreadName);
+		Object value=null;
+		//从缓存获取数据
+		value=cacheMap.get(keyValue);
+		//如果没有的话，把数据放到缓存
+		if(value==null){
+			return putCache(keyValue,ThreadName);
+		}
+		return value;
+	}
+	
+	public Object putCache(K keyValue,String ThreadName){
+		System.out.println("ThreadName 执行业务数据并返回处理结果的数据（访问数据库等）=============="+ThreadName);
+		//可以根据业务从数据库获取等取得数据,这边就模拟已经获取数据了
+		@SuppressWarnings("unchecked")
+		V value=(V) "dataValue";
+		//把数据放到缓存
+		 cacheMap.put(keyValue, value);
+		return value;
+	}
+
+	
+	
+	public static void main(String[] args) {
+		final TestConcurrentHashMapCache&lt;String,String&gt; TestGuaVA=new TestConcurrentHashMapCache&lt;String,String&gt;();
+		
+		Thread t1=new Thread(new Runnable() {
+			@Override
+			public void run() {
+				
+				System.out.println("T1======start========");
+			    Object value=TestGuaVA.getCache("key","T1");
+			    System.out.println("T1 value=============="+value);
+				System.out.println("T1======end========");
+				
+			}
+		});
+		
+		Thread t2=new Thread(new Runnable() {
+			@Override
+			public void run() {
+				System.out.println("T2======start========");
+				Object value=TestGuaVA.getCache("key","T2");
+			    System.out.println("T2 value=============="+value);
+				System.out.println("T2======end========");
+				
+			}
+		});
+		
+		Thread t3=new Thread(new Runnable() {
+			@Override
+			public void run() {
+				System.out.println("T3======start========");
+				Object value=TestGuaVA.getCache("key","T3");
+			    System.out.println("T3 value=============="+value);
+				System.out.println("T3======end========");
+				
+			}
+		});
+		
+		t1.start();
+		t2.start();
+		t3.start();
+
+	}
+
+}
+</pre>执行结果，如图所示：
+<p style="font-size:18px;"><img alt="" src="https://img-blog.csdn.net/20141115153042148?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY29uZ2Nvbmc2OA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" /></p>
+<p></p>
+<p style="font-size:18px;">这样就实现了串行，在高并发行时，就不会出现了第二个访问相同业务，肯定是从缓存获取，但是加上<span style="font-family:'Times New Roman';">Synchronized</span><span style="font-family:'宋体';">变成串行，这样在高并发行时性能也下降了。</span></p>
+<p style="font-size:18px;"><span style="font-family:'宋体';"><strong>第三种：</strong></span></p>
+<p style="font-size:18px;">我们为了实现性能和缓存的结果，我们采用<span style="font-family:'Times New Roman';">Future</span><span style="font-family:'宋体';">，因为</span><span style="font-family:'Times New Roman';"><span style="color:#ff0000;">Future</span></span><span style="font-family:'宋体';">在计算完成时获取，否则会一直阻塞直到任务转入完成状态和</span><span style="font-family:'Times New Roman';">ConcurrentHashMap.</span>putIfAbsent方法，代码如下：</p>
+<span style="font-size:18px;"></span>
+<div class="dp-highlighter bg_java">
+<div class="bar">
+<div class="tools"><strong>[java]</strong> <a class="ViewSource" title="view plain" href="http://blog.csdn.net/congcong68/article/details/41146295#">
+view plain</a><span class="tracking-ad"> <a class="CopyToClipboard" title="copy" href="http://blog.csdn.net/congcong68/article/details/41146295#">
+copy</a></span><span class="tracking-ad"> <a class="PrintSource" title="print" href="http://blog.csdn.net/congcong68/article/details/41146295#">
+print</a></span><a class="About" title="?" href="http://blog.csdn.net/congcong68/article/details/41146295#">?</a></div>
+</div>
+<ol class="dp-j"><li class="alt"><span class="keyword">public</span> <span class="keyword">class</span> TestFutureCahe&lt;K,V&gt; {
+</li><li><span class="keyword">private</span> <span class="keyword">final</span> ConcurrentHashMap&lt;K, Future&lt;V&gt;&gt; cacheMap=<span class="keyword">new</span> ConcurrentHashMap&lt;K, Future&lt;V&gt;&gt; ();
+</li><li class="alt"></li><li><span class="keyword">public</span> Object getCache(K keyValue,String ThreadName){
+</li><li class="alt">Future&lt;V&gt; value=<span class="keyword">null</span>; </li><li><span class="keyword">try</span>{ </li><li class="alt">System.out.println(<span class="string">"ThreadName getCache=============="</span>+ThreadName);
+</li><li><span class="comment">//从缓存获取数据 </span></li><li class="alt">value=cacheMap.get(keyValue); </li><li><span class="comment">//如果没有的话，把数据放到缓存 </span></li><li class="alt"><span class="keyword">if</span>(value==<span class="keyword">null</span>){
+</li><li>value= putCache(keyValue,ThreadName); </li><li class="alt"><span class="keyword">return</span> value.get(); </li><li>} </li><li class="alt"><span class="keyword">return</span> value.get(); </li><li></li><li class="alt">}<span class="keyword">catch</span> (Exception e) { </li><li>} </li><li class="alt"><span class="keyword">return</span> <span class="keyword">null</span>;
+</li><li>} </li><li class="alt"></li><li></li><li class="alt"><span class="keyword">public</span> Future&lt;V&gt; putCache(K keyValue,<span class="keyword">final</span> String ThreadName){
+</li><li><span class="comment">// //把数据放到缓存 </span></li><li class="alt">Future&lt;V&gt; value=<span class="keyword">null</span>; </li><li>Callable&lt;V&gt; callable=<span class="keyword">new</span> Callable&lt;V&gt;() { </li><li class="alt"><span class="annotation">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)
+</li><li><span class="annotation">@Override</span> </li><li class="alt"><span class="keyword">public</span> V call() <span class="keyword">
+throws</span> Exception { </li><li><span class="comment">//可以根据业务从数据库获取等取得数据,这边就模拟已经获取数据了 </span></li><li class="alt">System.out.println(<span class="string">"ThreadName 执行业务数据并返回处理结果的数据（访问数据库等）=============="</span>+ThreadName);
+</li><li><span class="keyword">return</span> (V) <span class="string">"dataValue"</span>;
+</li><li class="alt">} </li><li>}; </li><li class="alt">FutureTask&lt;V&gt; futureTask=<span class="keyword">new</span> FutureTask&lt;V&gt;(callable);
+</li><li>value=cacheMap.putIfAbsent(keyValue, futureTask); </li><li class="alt"><span class="keyword">if</span>(value==<span class="keyword">null</span>){
+</li><li>value=futureTask; </li><li class="alt">futureTask.run(); </li><li>} </li><li class="alt"><span class="keyword">return</span> value; </li><li>} </li><li class="alt"></li><li></li><li class="alt"></li><li></li><li class="alt"></li><li><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">
+void</span> main(String[] args) { </li><li class="alt"><span class="keyword">final</span> TestFutureCahe&lt;String,String&gt; TestGuaVA=<span class="keyword">new</span> TestFutureCahe&lt;String,String&gt;();
+</li><li></li><li class="alt">Thread t1=<span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {
+</li><li><span class="annotation">@Override</span> </li><li class="alt"><span class="keyword">public</span> <span class="keyword">void</span> run() {
+</li><li></li><li class="alt">System.out.println(<span class="string">"T1======start========"</span>);
+</li><li>Object value=TestGuaVA.getCache(<span class="string">"key"</span>,<span class="string">"T1"</span>);
+</li><li class="alt">System.out.println(<span class="string">"T1 value=============="</span>+value);
+</li><li>System.out.println(<span class="string">"T1======end========"</span>); </li><li class="alt"></li><li>} </li><li class="alt">}); </li><li></li><li class="alt">Thread t2=<span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {
+</li><li><span class="annotation">@Override</span> </li><li class="alt"><span class="keyword">public</span> <span class="keyword">void</span> run() {
+</li><li>System.out.println(<span class="string">"T2======start========"</span>); </li><li class="alt">Object value=TestGuaVA.getCache(<span class="string">"key"</span>,<span class="string">"T2"</span>);
+</li><li>System.out.println(<span class="string">"T2 value=============="</span>+value);
+</li><li class="alt">System.out.println(<span class="string">"T2======end========"</span>);
+</li><li></li><li class="alt">} </li><li>}); </li><li class="alt"></li><li>Thread t3=<span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {
+</li><li class="alt"><span class="annotation">@Override</span> </li><li><span class="keyword">public</span> <span class="keyword">void</span> run() {
+</li><li class="alt">System.out.println(<span class="string">"T3======start========"</span>);
+</li><li>Object value=TestGuaVA.getCache(<span class="string">"key"</span>,<span class="string">"T3"</span>);
+</li><li class="alt">System.out.println(<span class="string">"T3 value=============="</span>+value);
+</li><li>System.out.println(<span class="string">"T3======end========"</span>); </li><li class="alt"></li><li>} </li><li class="alt">}); </li><li></li><li class="alt">t1.start(); </li><li>t2.start(); </li><li class="alt">t3.start(); </li><li></li><li class="alt">} </li><li></li><li class="alt">} </li></ol></div>
+<pre style="display:none;font-size:18px;" class="java">public class TestFutureCahe&lt;K,V&gt; {
+	private final ConcurrentHashMap&lt;K, Future&lt;V&gt;&gt;  cacheMap=new ConcurrentHashMap&lt;K, Future&lt;V&gt;&gt; (); 
+	
+	public   Object getCache(K keyValue,String ThreadName){
+		Future&lt;V&gt; value=null;
+		try{
+			System.out.println("ThreadName getCache=============="+ThreadName);
+			//从缓存获取数据
+			value=cacheMap.get(keyValue);
+			//如果没有的话，把数据放到缓存
+			if(value==null){
+				value= putCache(keyValue,ThreadName);
+				return value.get();
+			}
+			return value.get();
+				
+		}catch (Exception e) {
+		}
+		return null;
+	}
+	
+	
+	public Future&lt;V&gt; putCache(K keyValue,final String ThreadName){
+//		//把数据放到缓存
+		Future&lt;V&gt; value=null;
+		Callable&lt;V&gt; callable=new Callable&lt;V&gt;() {
+				@SuppressWarnings("unchecked")
+				@Override
+				public V call() throws Exception {
+					//可以根据业务从数据库获取等取得数据,这边就模拟已经获取数据了
+					System.out.println("ThreadName 执行业务数据并返回处理结果的数据（访问数据库等）=============="+ThreadName);
+					return (V) "dataValue";
+				}
+			};
+			FutureTask&lt;V&gt; futureTask=new FutureTask&lt;V&gt;(callable);
+			value=cacheMap.putIfAbsent(keyValue, futureTask);
+			if(value==null){
+				value=futureTask;
+				futureTask.run();
+			}
+		return value;
+	}
+	
+	
+
+	
+	
+	public static void main(String[] args) {
+		final TestFutureCahe&lt;String,String&gt; TestGuaVA=new TestFutureCahe&lt;String,String&gt;();
+		
+		Thread t1=new Thread(new Runnable() {
+			@Override
+			public void run() {
+				
+				System.out.println("T1======start========");
+				Object value=TestGuaVA.getCache("key","T1");
+				System.out.println("T1 value=============="+value);
+				System.out.println("T1======end========");
+				
+			}
+		});
+		
+		Thread t2=new Thread(new Runnable() {
+			@Override
+			public void run() {
+				System.out.println("T2======start========");
+				Object value=TestGuaVA.getCache("key","T2");
+				System.out.println("T2 value=============="+value);
+				System.out.println("T2======end========");
+				
+			}
+		});
+		
+		Thread t3=new Thread(new Runnable() {
+			@Override
+			public void run() {
+				System.out.println("T3======start========");
+				Object value=TestGuaVA.getCache("key","T3");
+				System.out.println("T3 value=============="+value);
+				System.out.println("T3======end========");
+				
+			}
+		});
+		
+		t1.start();
+		t2.start();
+		t3.start();
+
+	}
+
+}</pre>
+<p style="font-size:18px;">线程<span style="font-family:'Times New Roman';">T1</span><span style="font-family:'宋体';">或者线程</span><span style="font-family:'Times New Roman';">T2</span><span style="font-family:'宋体';">访问</span><span style="font-family:'Times New Roman';">cacheMap</span><span style="font-family:'宋体';">，如果都没有时，这时执行了</span><span style="font-family:'Times New Roman';">FutureTask</span><span style="font-family:'宋体';">来完成异步任务，假如线程</span><span style="font-family:'Times New Roman';">T1</span><span style="font-family:'宋体';">执行了</span><span style="font-family:'Times New Roman';"><span style="color:#ff0000;">FutureTask</span></span><span style="font-family:'宋体';">，并把保存到</span><span style="font-family:'Times New Roman';">ConcurrentHashMap</span><span style="font-family:'宋体';">中，通过</span><span style="font-family:'Times New Roman';">P</span>utIfAbsent方法，因为<span style="color:#ff0000;">putIfAbsent</span>方法如果不存在<span style="font-family:'Times New Roman';">key</span><span style="font-family:'宋体';">对应的值，则将</span><span style="font-family:'Times New Roman';">value</span><span style="font-family:'宋体';">以</span><span style="font-family:'Times New Roman';">key</span><span style="font-family:'宋体';">加入</span><span style="font-family:'Times New Roman';">Map</span><span style="font-family:'宋体';">，否则返回</span><span style="font-family:'Times New Roman';">key</span><span style="font-family:'宋体';">对应的旧值。这时线程</span><span style="font-family:'Times New Roman';">T2</span><span style="font-family:'宋体';">进来时可以获取</span><span style="font-family:'Times New Roman';">Future</span><span style="font-family:'宋体';">对象，如果没值没关系，这时是对象的引用，等</span><span style="font-family:'Times New Roman';">FutureTask</span><span style="font-family:'宋体';">执行完，在通过</span><span style="font-family:'Times New Roman';">get</span><span style="font-family:'宋体';">返回。</span></p>
+<p style="font-size:18px;"></p>
+<p>我们问题解决了高并发访问缓存的问题，可以回收元素这些，都没有，容易造成内存溢出，<span style="font-family:'Times New Roman';">Google Guava Cache</span><span style="font-family:'宋体';">在这些问题方面都做得挺好的，接下来我们介绍一下。</span></p>
+<span style="font-size:24px;"><strong>三.Google Guava Cache的介绍和应用</strong></span><br /><br /><br /><br /><span style="font-size:18px;">http://www.java2s.com/Code/Jar/g/Downloadguava1401jar.htm 下载对应的jar包</span>
+<p><span style="font-size:18px;"><br /></span></p>
+<p><span style="font-size:18px;">Guava Cache<span style="font-family:'宋体';">与</span><span style="font-family:'Times New Roman';">ConcurrentMap</span><span style="font-family:'宋体';">很相似，</span><span style="font-family:'Times New Roman';">Guava Cache</span><span style="font-family:'宋体';">能设置回收，能解决在大数据内存溢出的问题，源代码如下：</span></span></p>
+<p><span style="font-size:18px;"><span style="font-family:'宋体';"><br /><br />
+public class TestGuaVA&lt;K,V&gt; {<br /><span style="white-space:pre;"></span>private Cache&lt;K, V&gt; cache= CacheBuilder.newBuilder() .maximumSize(2).expireAfterWrite(10, TimeUnit.MINUTES).build();
+<br /><span style="white-space:pre;"></span>public Object getCache(K keyValue,final String ThreadName){<br /><span style="white-space:pre;"></span>Object value=null;<br /><span style="white-space:pre;"></span>try {<br /><span style="white-space:pre;"></span>System.out.println("ThreadName getCache=============="+ThreadName);<br /><span style="white-space:pre;"></span>//从缓存获取数据<br /><span style="white-space:pre;"></span>value = cache.get(keyValue, new Callable&lt;V&gt;() {
+<br /><span style="white-space:pre;"></span>@SuppressWarnings("unchecked")<br /><span style="white-space:pre;"></span>public V call() { <br /><span style="white-space:pre;"></span><span style="white-space:pre;"></span>System.out.println("ThreadName 执行业务数据并返回处理结果的数据（访问数据库等）=============="+ThreadName);<br /><span style="white-space:pre;"></span>return (V) "dataValue";<br /><span style="white-space:pre;"></span>} <br /><span style="white-space:pre;"></span>}); <br /><span style="white-space:pre;"></span>} catch (ExecutionException e) {<br /><span style="white-space:pre;"></span>e.printStackTrace();<br /><span style="white-space:pre;"></span>}<br /><span style="white-space:pre;"></span>return value;<br /><span style="white-space:pre;"></span>}<br /><span style="white-space:pre;"></span><br /><br /><br /><span style="white-space:pre;"></span><br /><span style="white-space:pre;"></span><br /><span style="white-space:pre;"></span>public static void main(String[] args) {<br /><span style="white-space:pre;"></span>final TestGuaVA&lt;String,String&gt; TestGuaVA=new TestGuaVA&lt;String,String&gt;();<br /><span style="white-space:pre;"></span><br /><span style="white-space:pre;"></span><br /><span style="white-space:pre;"></span>Thread t1=new Thread(new Runnable() {<br /><span style="white-space:pre;"></span>@Override<br /><span style="white-space:pre;"></span>public void run() {<br /><span style="white-space:pre;"></span><br /><span style="white-space:pre;"></span>System.out.println("T1======start========");<br /><span style="white-space:pre;"></span>Object value=TestGuaVA.getCache("key","T1");<br /><span style="white-space:pre;"></span>System.out.println("T1 value=============="+value);<br /><span style="white-space:pre;"></span>System.out.println("T1======end========");<br /><span style="white-space:pre;"></span><br /><span style="white-space:pre;"></span>}<br /><span style="white-space:pre;"></span>});<br /><span style="white-space:pre;"></span><br /><span style="white-space:pre;"></span>Thread t2=new Thread(new Runnable() {<br /><span style="white-space:pre;"></span>@Override<br /><span style="white-space:pre;"></span>public void run() {<br /><span style="white-space:pre;"></span>System.out.println("T2======start========");<br /><span style="white-space:pre;"></span>Object value=TestGuaVA.getCache("key","T2");<br /><span style="white-space:pre;"></span>System.out.println("T2 value=============="+value);<br /><span style="white-space:pre;"></span>System.out.println("T2======end========");<br /><span style="white-space:pre;"></span><br /><span style="white-space:pre;"></span>}<br /><span style="white-space:pre;"></span>});<br /><span style="white-space:pre;"></span><br /><span style="white-space:pre;"></span>Thread t3=new Thread(new Runnable() {<br /><span style="white-space:pre;"></span>@Override<br /><span style="white-space:pre;"></span>public void run() {<br /><span style="white-space:pre;"></span>System.out.println("T3======start========");<br /><span style="white-space:pre;"></span>Object value=TestGuaVA.getCache("key","T3");<br /><span style="white-space:pre;"></span>System.out.println("T3 value=============="+value);<br /><span style="white-space:pre;"></span>System.out.println("T3======end========");<br /><span style="white-space:pre;"></span><br /><span style="white-space:pre;"></span>}<br /><span style="white-space:pre;"></span>});<br /><span style="white-space:pre;"></span><br /><span style="white-space:pre;"></span>t1.start();<br /><span style="white-space:pre;"></span>t2.start();<br /><span style="white-space:pre;"></span>t3.start();<br /><br /><br /><span style="white-space:pre;"></span>}<br /><br /><br />
+}</span></span></p>
+<br /><span style="font-size:18px;">说明：</span>
+<p><span style="font-size:18px;"></span></p>
+<p>CacheBuilder.newBuilder()<span style="font-family:'宋体';">后面能带一些设置回收的方法：</span></p>
+<p><span style="color:#cc0000;">（<span style="font-family:'Times New Roman';">1</span><span style="font-family:'宋体';">）</span><span style="font-family:'Times New Roman';">maximumSize(long)</span><span style="font-family:'宋体';">：设置容量大小，超过就开始回收。</span></span></p>
+<p><span style="color:#cc0000;">（<span style="font-family:'Times New Roman';">2</span><span style="font-family:'宋体';">）</span><span style="font-family:'Times New Roman';">expireAfterAccess(long, TimeUnit)</span><span style="font-family:'宋体';">：在这个时间段内没有被读</span><span style="font-family:'Times New Roman';">/</span><span style="font-family:'宋体';">写访问，就会被回收。</span></span></p>
+<p><span style="color:#cc0000;">（<span style="font-family:'Times New Roman';">3</span><span style="font-family:'宋体';">）</span><span style="font-family:'Times New Roman';">expireAfterWrite(long, TimeUnit)</span><span style="font-family:'宋体';">：在这个时间段内没有被写访问，就会被回收</span>
+ 。</span></p>
+<p></p>
+<p><span style="color:#cc0000;">(4)removalListener(RemovalListener)<span style="font-family:'宋体';">：监听事件，在元素被删除时，进行监听。</span></span></p>
+<p><span style="font-family:'宋体';">执行结果，如图所示：</span></p>
+<p><span style="font-family:'宋体';"><img alt="" src="https://img-blog.csdn.net/20141115153507906?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY29uZ2Nvbmc2OA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" /></span></p>
+<p><span style="font-family:'宋体';"><br /></span></p>
+                </div>
+                    </div>
+        <script>
+        $(".MathJax").remove();
+        </script>
+    </article>
+      <div class="readall_box csdn-tracking-statistics tracking-click" data-mod="popu_376">
+          <div class="read_more_mask"></div>
+          <a class="btn btn-large btn-gray-fred read_more_btn" target="_self">阅读全文</a>
+      </div>
+      <div class="article_copyright">
+
+              </div>
+      <ul class="article_collect clearfix csdn-tracking-statistics tracking-click"  data-mod="popu_378">
+          <li class="tit">本文已收录于以下专栏：</li>
+<!--          [startarticlecolumns]-->
+                                <!--          [endarticlecolumns]-->
+      </ul>
+      <div class="edu_promotion" style="margin: 16px 0;display:none;"></div>
+      <div class="comment_box clearfix" id="comments">
+          <div id="comment_form">
+              <div id="commentsbmitarear">
+                                  <div class="comment_area clearfix">
+                      <div class="userimg">
+                        <a href="https://my.csdn.net/attilax">
+                          <img src="https://avatar.csdn.net/3/9/1/3_attilax.jpg">
+                        </a>
+                      </div>
+
+                      <form action="https://blog.csdn.net/michaelwubo/phoenix/comment/submit?id=50865185" method="post" onsubmit="return subform(this);" id="commentform">
+                          <textarea class="comment_content" name="comment_content" id="comment_content" placeholder="写下你的评论…"></textarea>
+                          <div class="bot_bar clearfix">
+                              <div id="ubbtools" class="add_code">
+                                  <a href="#insertcode" code="code" target="_self"><i class="icon iconfont icon-daima"></i></a>
+                              </div>
+
+                              <input type="hidden" id="comment_replyId" name="comment_replyId">
+                              <input type="hidden" id="comment_userId" name="comment_userId" value="">
+                              <input type="hidden" id="commentId" name="commentId" value="">
+                              <input type="submit" class="btn btn-redborder" value="发表评论">
+                              <span id="tip_comment" class="tip">
+                              <div style="display: none;" class="csdn-tracking-statistics tracking-click" data-mod="popu_384"><a href="#" target="_blank" class="comment_area_btn">发表评论</a></div>
+
+                              <div id="lang_list" code="code">
+                                  <a href="#html" style="width:95px;" class="long_name" target="_self">HTML/XML</a>
+                                  <a href="#objc" style="width:95px;" class="long_name" target="_self">objective-c</a>
+                                  <a href="#delphi" style="width:58px;" class="zhong_name" target="_self">Delphi</a>
+                                  <a href="#ruby" class="zhong_name" target="_self">Ruby</a>
+                                  <a href="#php" target="_self">PHP</a>
+                                  <a href="#csharp" class="duan_name" target="_self">C#</a>
+                                  <a style=" border-right: none;" href="#cpp" class="duan_name" target="_self">C++</a>
+                                  <a style=" border-bottom:none;width:95px;" href="#javascript" class="long_name" target="_self">JavaScript</a>
+                                  <a style=" border-bottom:none;width:95px;" href="#vb" class="long_name" target="_self">Visual Basic</a>
+                                  <a style=" border-bottom:none;" href="#python" class="zhong_name" target="_self">Python</a>
+                                  <a style=" border-bottom:none;" href="#java" class="zhong_name" target="_self">Java</a>
+                                  <a style="border-bottom:none;" href="#css" class="duan_name" target="_self">CSS</a>
+                                  <a style="border-bottom:none;" href="#sql" class="duan_name" target="_self">SQL</a>
+                                  <a style="border:none; " href="#plain" class="duan_name" target="_self">其它</a>
+                                  <span class="arrb"></span>
+                              </div>
+                          </div>
+                      </form>
+                  </div>
+                              </div>
+          </div>
+      </div>
+      <div class="comment_li_outbox">
+          <div id="comment_list"></div>
+      </div>
+
+      <div class="more_comment">
+          <div id="comment_bar" class="trackgin-ad" data-mod="popu_385"></div>
+      </div>
+
+      <!-- <h3 class="recommend_tit" id="related">相关文章推荐</h3> -->
+      <div class="recommend_list clearfix" id="rasss">
+                                          <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/EthanWhite/article/details/51278133"  target="_blank" strategy="BlogCommendFromBaidu_0">
+                    <dd>
+                        <h2>Java 下实现Cache</h2>
+                        <div class="summary">
+                            最近在做Spring的项目，想做一个缓存，访问数据库，定期来做数据更新 
+要实现两个功能
+可以通过http请求来立刻刷新缓存
+缓存可以通过自己配置的时间间隔来定期刷新
+通过Controller来做因为...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/F/D/B/3_ethanwhite.jpg" alt="EthanWhite" title="EthanWhite"></li>
+                            <li class="user_name">EthanWhite</li>
+                            <li class="time">2016年04月28日 22:17</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>1949</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/boonya/article/details/54632129"  target="_blank" strategy="BlogCommendFromBaidu_1">
+                    <dd>
+                        <h2>Java Caching(缓存)-策略和JCache API</h2>
+                        <div class="summary">
+                            探讨JCache和其他缓存API的构建块，以及在应用程序中实现临时数据存储的多种策略。缓存提供了几个好处，这就是为什么它在需要快速访问数据的使用情况下大量利用的原因。正确的缓存可以提高性能，减少资源使...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/9/4/B/3_boonya.jpg" alt="boonya" title="boonya"></li>
+                            <li class="user_name">boonya</li>
+                            <li class="time">2017年01月20日 17:26</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>4411</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                          <dl class="">
+            <script>
+            (function() {
+              var s = "_" + Math.random().toString(36).slice(2);
+              document.write('<div id="' + s + '"></div>');
+              (window.slotbydup=window.slotbydup || []).push({
+                id: '4765209',
+                container: s,
+                size: '808,120',
+                display: 'inlay-fix'
+              });
+            })();
+            </script>
+          </dl>
+                                        <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/u011202334/article/details/61916154"  target="_blank" strategy="BlogCommendFromBaidu_2">
+                    <dd>
+                        <h2>java中利用spring cache解耦业务中的缓存</h2>
+                        <div class="summary">
+                            摘要： 本文讲的是java中利用spring cache解耦业务中的缓存， 虽然以前实现缓存的方式，是定义了缓存操作接口，可以灵活实现不同的缓存，可毕竟精力有限，要完成不同的缓存实现也是件麻烦的事。更...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/7/9/F/3_u011202334.jpg" alt="u011202334" title="u011202334"></li>
+                            <li class="user_name">u011202334</li>
+                            <li class="time">2017年03月13日 13:21</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>705</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/michaellufhl/article/details/6203666"  target="_blank" strategy="BlogCommendFromBaidu_3">
+                    <dd>
+                        <h2>Java实现cache的基本机制</h2>
+                        <div class="summary">
+                                
+我这里说的cache不是指CPU和RAM之间的缓存，而是java应用中间常用的缓存。最常使用的场合就是访问数据库的时候为了提高效率而使用的
+cache。一般的用法就是把数据从数据库读到内...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/6/A/2/3_michaellufhl.jpg" alt="michaellufhl" title="michaellufhl"></li>
+                            <li class="user_name">michaellufhl</li>
+                            <li class="time">2011年02月23日 22:21</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>13426</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/zhangpengju999/article/details/11603419"  target="_blank" strategy="BlogCommendFromBaidu_4">
+                    <dd>
+                        <h2>Java中用Cache</h2>
+                        <div class="summary">
+                            系统缓存是位于应用程序与物理数据源之间，用于临时存放复制数据的内存区域，目的是为减少应用程序对物理数据源访问的次数，从而提高应用程序的运行性能。缓存设想内存是有限的，缓存的时效性也是有限的，所以可以设...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/4/6/F/3_zhangpengju999.jpg" alt="zhangpengju999" title="zhangpengju999"></li>
+                            <li class="user_name">zhangpengju999</li>
+                            <li class="time">2013年09月12日 18:52</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>7738</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/yandaonan/article/details/50844806"  target="_blank" strategy="BlogCommendFromBaidu_5">
+                    <dd>
+                        <h2>java codeCache</h2>
+                        <div class="summary">
+                            1.问题
+
+随着系统不断变大，访问量不断增加，出现了启动后的负载很高的问题。
+
+关于启动后负载高的原因，网上很多文章都说是由于启动后随着代码的执行，jvm的jit编译器将部分热点代码编译为目标...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/5/D/C/3_yandaonan.jpg" alt="yandaonan" title="yandaonan"></li>
+                            <li class="user_name">yandaonan</li>
+                            <li class="time">2016年03月10日 11:06</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>4057</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/a454832841/article/details/47340049"  target="_blank" strategy="BlogCommendFromBaidu_6">
+                    <dd>
+                        <h2>Java 中常用缓存Cache机制的实现</h2>
+                        <div class="summary">
+                            package lhm.hcy.guge.frameset.cache; 
+ 
+import java.util.*; 
+ 
+ //Description: 管理缓存 
+ 
+ //可扩展的...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/8/4/C/3_a454832841.jpg" alt="a454832841" title="a454832841"></li>
+                            <li class="user_name">a454832841</li>
+                            <li class="time">2015年08月07日 15:27</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>2124</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/guozebo/article/details/51590517"  target="_blank" strategy="BlogCommendFromBaidu_8">
+                    <dd>
+                        <h2>GuavaCache简介（一）</h2>
+                        <div class="summary">
+                            前言
+在多线程高并发场景中往往是离不开cache的，需要根据不同的应用场景来需要选择不同的cache，比如分布式的cache如redis、memcached，还有进程内的cache如ehcache、G...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/2/E/7/3_guozebo.jpg" alt="guozebo" title="guozebo"></li>
+                            <li class="user_name">guozebo</li>
+                            <li class="time">2016年06月18日 21:16</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>16898</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/fy_hanxu/article/details/51445413"  target="_blank" strategy="BlogCommendFromBaidu_9">
+                    <dd>
+                        <h2>使用google guava做内存缓存</h2>
+                        <div class="summary">
+                            google guava中有cache包，此包提供内存缓存功能。内存缓存需要考虑很多问题，包括并发问题，缓存失效机制，内存不够用时缓存释放，缓存的命中率，缓存的移除等等。 当然这些东西guava都考虑...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/5/4/E/3_fy_hanxu.jpg" alt="fy_hanxu" title="fy_hanxu"></li>
+                            <li class="user_name">fy_hanxu</li>
+                            <li class="time">2016年05月18日 16:59</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>2260</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                              </div>
+  </main>
+<aside>
+    <div class="right_box user_info">
+    <dl class="inf_bar clearfix">
+        <dt class="csdn-tracking-statistics tracking-click" data-mod="popu_381">
+                <a href="https://blog.csdn.net/michaelwubo" target="_blank">
+                    <img src="https://avatar.csdn.net/E/D/0/3_michaelwubo.jpg" class="avatar_pic">
+        </a>
+      </dt><dd>
+            <h3 class="csdn-tracking-statistics tracking-click"  data-mod="popu_380"><a href="https://blog.csdn.net/michaelwubo" target="_blank" id="uid">michaelwubo</a></h3>
+            <div class="medals" title="">
+                      </div>
+                        <span  class="csdn-tracking-statistics tracking-click" data-mod="popu_379"><a class="btn btn-redborder-small "  id="span_add_follow" target="_self">关注</a></span>
+                    </dd>
+    </dl>
+    <div class="inf_number_box clearfix">
+        <dl title="412">
+            <dt>原创</dt>
+            <dd>412</dd>
+        </dl>
+        <dl title="48">
+            <dt>粉丝</dt>
+            <dd id='fan'>48</dd>
+        </dl>
+        <dl title="26">
+            <dt>喜欢</dt>
+            <dd>26</dd>
+        </dl>
+        <dl title="9">
+          <dt>评论</dt>
+          <dd>9</dd>
+        </dl>
+    </div>
+
+</div>
+<div class="interflow clearfix">
+      <div class="grade gradeAndbadge gradewidths">
+      <span>等级：</span>
+      <div>
+        <a href="https://blog.csdn.net/home/help.html#level" title="6级,点击查看等级说明" target="_blank">
+          <img class="grade-img" src="https://csdnimg.cn/jifen/images/xunzhang/jianzhang/blog6.png" alt="6级,点击查看等级说明">
+        </a>
+      </div>
+    </div>
+    <div class="gradeAndbadge gradewidths" title="340376">
+        <span>访问量：</span>
+        <span class="num odd-overhidden">34万+</span>
+    </div>
+
+    <div class="gradeAndbadge gradewidths" title="7484">
+      <span>积分：</span>
+      <span  class="num odd-overhidden">7484</span>
+    </div>
+    <div class="gradeAndbadge gradewidths" title="3640">
+        <span>排名：</span>
+        <span class="num odd-overhidden">3640</span>
+    </div>
+
+</div>
+<script type="text/javascript">
+  // 判断并设置用户名位置，没有博客专家与关注按钮时，用户名居中
+  $medals_children = $('.medals').children().length;
+  $span_add_follow = $('#span_add_follow').length;
+  if($medals_children === 0 && $span_add_follow === 0){
+    $('.inf_bar dd').css('vertical-align','10px')
+  }
+</script>          <div class="extension_other csdn-tracking-statistics tracking-click" data-mod="popu_389">
+          <!--u3032528-->
+        <div class="flashrecommend">
+                        <script type="text/javascript" src="//cee1.iteye.com/bwocoltly.js"></script>
+                    </div>
+      </div>
+            <div class="writings">
+      <div class="public_signal clearfix">
+        <h3>博主最新文章</h3>
+        <a href="https://blog.csdn.net/michaelwubo" target="_blank" class="more"><span>更多文章</span></a>
+      </div>
+        <ul class="inf_list clearfix csdn-tracking-statistics tracking-click" data-mod="popu_382">
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/Michaelwubo/article/details/79756969" target="_blank">nexus docker docker login push pull</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/Michaelwubo/article/details/79643228" target="_blank">MXNet, Caffe, TensorFlow, Torch, Theano</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/Michaelwubo/article/details/79642556" target="_blank">python虚拟环境</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/Michaelwubo/article/details/79625212" target="_blank">机器学习，深度学习，人工智能，神经网络</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/Michaelwubo/article/details/79554621" target="_blank">VAGRANT 和 Docker</a>
+            </li>
+                    </ul>
+    </div>
+                <div class="user-hotArticle sort ClassSort">
+            <h3>文章分类</h3>
+            <ul class="hotArticle-list sort-list ClassSort-list">
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/michaelwubo/article/category/2538365" class="odd-overhidden floatL">Linux文件系统</a>
+                        <div class="read list-left floatR"><span>13篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/michaelwubo/article/category/2538367" class="odd-overhidden floatL">Linux网络协议栈</a>
+                        <div class="read list-left floatR"><span>2篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/michaelwubo/article/category/2538373" class="odd-overhidden floatL">Linux进程和线程</a>
+                        <div class="read list-left floatR"><span>1篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/michaelwubo/article/category/2538379" class="odd-overhidden floatL">Linux命令</a>
+                        <div class="read list-left floatR"><span>4篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/michaelwubo/article/category/2538385" class="odd-overhidden floatL">Linux-debian-deb包管理与制作</a>
+                        <div class="read list-left floatR"><span>2篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/michaelwubo/article/category/2538433" class="odd-overhidden floatL">Linux-服务器和性能优化</a>
+                        <div class="read list-left floatR"><span>18篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/michaelwubo/article/category/2707523" class="odd-overhidden floatL">Linux 内核配置与安装</a>
+                        <div class="read list-left floatR"><span>12篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/michaelwubo/article/category/2538435" class="odd-overhidden floatL">Linux-集群</a>
+                        <div class="read list-left floatR"><span>2篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/michaelwubo/article/category/2538529" class="odd-overhidden floatL">java-开发环境的搭建</a>
+                        <div class="read list-left floatR"><span>1篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/michaelwubo/article/category/2538403" class="odd-overhidden floatL">java-Thread/Runtable</a>
+                        <div class="read list-left floatR"><span>28篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/michaelwubo/article/category/2538443" class="odd-overhidden floatL">java-spring</a>
+                        <div class="read list-left floatR"><span>1篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/michaelwubo/article/category/2656739" class="odd-overhidden floatL">Mysql</a>
+                        <div class="read list-left floatR"><span>5篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/michaelwubo/article/category/2704075" class="odd-overhidden floatL">C语言常用函数</a>
+                        <div class="read list-left floatR"><span>237篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/michaelwubo/article/category/5796165" class="odd-overhidden floatL">虚拟化</a>
+                        <div class="read list-left floatR"><span>8篇</span></div>
+                    </li>
+                            </ul>
+            <div class="unfold-btn">
+              <span>展开</span><i class="icon iconfont icon-xiajiantou"></i>
+            </div>
+        </div>
+    <!--    [StartShowSelfColumn]-->
+    <!--    [EndShowSelfColumn]-->
+            <div class="user-hotArticle sort timeSort">
+          <h3>文章存档</h3>
+          <ul class="hotArticle-list timeSort-list">
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/michaelwubo/article/month/2018/03" class="odd-overhidden floatL">2018年3月</a>
+                  <div class="read list-left floatR"><span>10篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/michaelwubo/article/month/2018/02" class="odd-overhidden floatL">2018年2月</a>
+                  <div class="read list-left floatR"><span>1篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/michaelwubo/article/month/2018/01" class="odd-overhidden floatL">2018年1月</a>
+                  <div class="read list-left floatR"><span>2篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/michaelwubo/article/month/2017/12" class="odd-overhidden floatL">2017年12月</a>
+                  <div class="read list-left floatR"><span>1篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/michaelwubo/article/month/2017/11" class="odd-overhidden floatL">2017年11月</a>
+                  <div class="read list-left floatR"><span>3篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/michaelwubo/article/month/2017/10" class="odd-overhidden floatL">2017年10月</a>
+                  <div class="read list-left floatR"><span>8篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/michaelwubo/article/month/2017/09" class="odd-overhidden floatL">2017年9月</a>
+                  <div class="read list-left floatR"><span>5篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/michaelwubo/article/month/2017/08" class="odd-overhidden floatL">2017年8月</a>
+                  <div class="read list-left floatR"><span>2篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/michaelwubo/article/month/2017/03" class="odd-overhidden floatL">2017年3月</a>
+                  <div class="read list-left floatR"><span>1篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/michaelwubo/article/month/2016/11" class="odd-overhidden floatL">2016年11月</a>
+                  <div class="read list-left floatR"><span>4篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/michaelwubo/article/month/2016/10" class="odd-overhidden floatL">2016年10月</a>
+                  <div class="read list-left floatR"><span>3篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/michaelwubo/article/month/2016/09" class="odd-overhidden floatL">2016年9月</a>
+                  <div class="read list-left floatR"><span>7篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/michaelwubo/article/month/2016/08" class="odd-overhidden floatL">2016年8月</a>
+                  <div class="read list-left floatR"><span>10篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/michaelwubo/article/month/2016/07" class="odd-overhidden floatL">2016年7月</a>
+                  <div class="read list-left floatR"><span>3篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/michaelwubo/article/month/2016/06" class="odd-overhidden floatL">2016年6月</a>
+                  <div class="read list-left floatR"><span>5篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/michaelwubo/article/month/2016/03" class="odd-overhidden floatL">2016年3月</a>
+                  <div class="read list-left floatR"><span>131篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/michaelwubo/article/month/2015/11" class="odd-overhidden floatL">2015年11月</a>
+                  <div class="read list-left floatR"><span>1篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/michaelwubo/article/month/2015/09" class="odd-overhidden floatL">2015年9月</a>
+                  <div class="read list-left floatR"><span>9篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/michaelwubo/article/month/2015/08" class="odd-overhidden floatL">2015年8月</a>
+                  <div class="read list-left floatR"><span>14篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/michaelwubo/article/month/2015/07" class="odd-overhidden floatL">2015年7月</a>
+                  <div class="read list-left floatR"><span>14篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/michaelwubo/article/month/2015/05" class="odd-overhidden floatL">2015年5月</a>
+                  <div class="read list-left floatR"><span>2篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/michaelwubo/article/month/2015/01" class="odd-overhidden floatL">2015年1月</a>
+                  <div class="read list-left floatR"><span>1篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/michaelwubo/article/month/2014/12" class="odd-overhidden floatL">2014年12月</a>
+                  <div class="read list-left floatR"><span>34篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/michaelwubo/article/month/2014/11" class="odd-overhidden floatL">2014年11月</a>
+                  <div class="read list-left floatR"><span>226篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/michaelwubo/article/month/2014/10" class="odd-overhidden floatL">2014年10月</a>
+                  <div class="read list-left floatR"><span>6篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/michaelwubo/article/month/2014/09" class="odd-overhidden floatL">2014年9月</a>
+                  <div class="read list-left floatR"><span>30篇</span></div>
+                </li>
+                      </ul>
+          <div class="unfold-btn">
+            <span>展开</span><i class="icon iconfont icon-xiajiantou"></i>
+          </div>
+        </div>
+            <div class="user-hotArticle">
+        <h3>博主热门文章</h3>
+        <ul class="hotArticle-list csdn-tracking-statistics tracking-click" data-mod="popu_521">
+<!--        [StartHotArticles]-->
+                            <li>
+                    <a href="https://blog.csdn.net/michaelwubo/article/details/50865246">HTML5 jQuery+FormData 异步上传文件，带进度条</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>14874</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/michaelwubo/article/details/50865185">Java 高并发缓存与Guava Cache</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>13248</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/michaelwubo/article/details/40588059">deb包构建手册</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>8156</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/michaelwubo/article/details/41844997">使用apt-mirror建立本地debian仓库源</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>8022</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/michaelwubo/article/details/50879832">HDFS常用的Java Api详解</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>6581</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/michaelwubo/article/details/46878053">Linux测试标准------stress压力测试</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>6474</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/michaelwubo/article/details/41942483">Deb打包入门</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>6133</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/michaelwubo/article/details/47802877">parted的使用</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>4878</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/michaelwubo/article/details/50879797">HBase MapReduce实例分析</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>4617</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/michaelwubo/article/details/41694805">Yum软件仓库配置</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>4496</span></div>
+                </li>
+            <!--        [EndHotArticles]-->
+        </ul>
+    </div>
+    
+<!--    [startcustom]-->
+    <!--    [endcustom]-->
+  <div class="fixRight_box" style="height:256px">
+    <div class="fixRight">
+                    <!--u3163270-->
+                        <script type="text/javascript" src="//cee1.iteye.com/avneunkwb.js"></script>
+                          <div class="persion_article"></div>
+    </div>
+  </div>
+</aside>
+</div>
+
+<div class="left_fixed">
+    <div class="left_show_button">
+        <span>
+          <i class="icon iconfont icon-youjiantou"></i>
+        </span>
+    </div>
+    <ul class="left_menu" id="share_box">
+        <li>
+            <button class="left-fixed-btn btn-like csdn-tracking-statistics tracking-click" data-mod="popu_373" target="_self" title="点赞">
+                <a href="javascript:void(0);" class="iconbox border_red" ><i class="icon iconfont icon-dianzan"></i></a>
+                <a class="txt" href="javascript:void(0);">2</a>
+            </button>
+        </li>
+        <li id="blog_artical_directory">
+            <button class="left-fixed-btn left_menu_btn csdn-tracking-statistics tracking-click" data-mod="popu_372" target="_self" title="目录">
+                <a href="javascript:void(0);" class="iconbox border_black" ><i class="icon iconfont icon-mulu"></i></a>
+            </button>
+        </li>
+        <li class="menu_con">
+            <div class="list_father">
+                <div class="arr_box">
+                    <button class="btn-noborder arr-btn scroll-down  left_scroll_down"><i class="icon iconfont icon-xiajiantou"></i></button>
+                    <button class="btn-noborder arr-btn scroll-up left_scroll_top"><i class="icon iconfont icon-shangjiantou"></i></button>
+                </div>
+                <div class="arr"></div>
+                <div id="csdnBlogDir"></div>
+            </div>
+        </li>
+        <!--        <li>-->
+        <!--            <button class="left-fixed-btn btn-like tracking-ad" data-mod="popu_373" target="_self">-->
+        <!--                <span class="iconbox border_red"><i class="icon iconfont icon-xihuan-"></i></span>-->
+        <!--                <span class="txt">喜欢</span>-->
+        <!--                <span class="untxt">取消喜欢</span>-->
+        <!--            </button>-->
+        <!--        </li>-->
+        <li>
+            <button class="left-fixed-btn csdn-tracking-statistics tracking-click" data-mod="popu_374"  id="com-quick-collect" target="_self" title="收藏">
+                <a href="javascript:void(0);" class="iconbox border_purple" ><i class="icon iconfont icon-shoucang"></i></a>
+            </button>
+        </li>
+        <li>
+            <button class="left-fixed-btn btn-pinglun csdn-tracking-statistics tracking-click" data-mod="popu_544" title="评论">
+                <a href="javascript:void(0);" class="iconbox border_purple" ><i class="icon iconfont icon-pinglun"></i></a>
+            </button>
+        </li>
+        <li class="bdsharebuttonbox csdn-tracking-statistics tracking-click" data-mod="popu_172">
+            <a class="bds_tsina outside left-fixed-btn" data-cmd="tsina" title="分享到新浪微博"></a>
+            <span class="iconbox border_red2"><i class="icon iconfont icon-xinlang"></i></span>
+        </li>
+        <li class="bdsharebuttonbox csdn-tracking-statistics tracking-click" data-mod="popu_172">
+            <a class="bds_weixin outside left-fixed-btn" data-cmd="weixin" title="分享到微信"></a>
+            <span class="iconbox border_green"><i class="icon iconfont icon-weixin"></i></span>
+        </li>
+        <li class="bdsharebuttonbox csdn-tracking-statistics tracking-click" data-mod="popu_172">
+            <a class="bds_qzone outside left-fixed-btn" data-cmd="qzone" title="分享到QQ空间"></a>
+            <span class="iconbox border_blue"><i class="icon iconfont icon-QQ"></i></span>
+        </li>
+        <li id="share_box">
+
+            <div class="bdsharebuttonbox csdn-tracking-statistics tracking-click" data-mod="popu_172">
+
+
+
+            </div>
+        </li>
+    </ul>
+</div>
+<div id="pop_win"></div>
+<div id="popup_mask"></div>
+<div class="pop_CA_cover" ></div>
+<div class="pop pop_CA" >
+    <div class="CA_header">
+        收藏助手
+        <span class="cancel_icon"  id="fapancle" ></span>
+    </div>
+    <iframe src="" id="collectIframe" frameborder="0" width="100%" height="360"  scrolling="no" ></iframe>
+</div>
+<!--举报-->
+<div id="report_dialog" style="top: 250px; left: 343.5px;"><div id="panel_report">
+    <div class="panel_head">不良信息举报</div>
+    <form method="post" id="frmReport" class="panel_body">
+        <table border="0" cellpadding="0" cellspacing="4" class="pop_table">
+            <tbody><tr><td colspan="2">您举报文章：<a href="https://blog.csdn.net/Michaelwubo/article/details/50865185" target="_blank">Java 高并发缓存与Guava Cache</a></td></tr>
+            <tr>
+                <th style="width:60px;">举报原因：</th>
+                <td id="panel_reporttype">
+                    <label><input type="radio" class="report_type" id="report_sex" name="report_type" value="1">色情</label>
+                    <label><input type="radio" class="report_type" id="report_Politics" name="report_type" value="2">政治</label>
+                    <label><input type="radio" class="report_type" id="report_copy" name="report_type" value="3">抄袭</label>
+                    <label><input type="radio" class="report_type" id="report_ad" name="report_type" value="4">广告</label>
+                    <label><input type="radio" class="report_type" id="report_want" name="report_type" value="5">招聘</label>
+                    <label><input type="radio" class="report_type" id="report_call" name="report_type" value="6">骂人</label>
+                    <br>
+                    <label><input type="radio" class="report_type" id="report_other" name="report_type" value="7">其他</label>
+                    <input type="text" name="report_other_content" id="report_other_content" maxlength="30" style="display: none;">
+                </td>
+            </tr>
+            <tr id="panel_originalurl" style="display: none;">
+                <th>原文地址：</th>
+                <td>
+                    <input id="originalurl" value="http://" name="originalurl" type="text" style="width: 90%;">
+                </td>
+            </tr>
+            <tr>
+                <th id="sp_reason">原因补充：</th>
+                <td>
+                    <textarea id="report_description" style="width: 300px;" rows="3" name="report_description"></textarea>
+                    <p id="sp_n" style="color:#999;margin:0px;padding:0px;">(最多只允许输入30个字)</p>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input id="btnSubmitReport" name="submit" type="image" align="middle" class="btn_1" src="https://csdnimg.cn/release/phoenix/images/btn_submit.jpg">
+                    <span style="padding-left:20px;"></span>
+                    <img id="btnCloseReportDialog" src="https://csdnimg.cn/release/phoenix/images/btn_cancel.jpg" align="middle">
+                    <div id="error" style="color: Red">
+                    </div>
+                </td>
+            </tr>
+            </tbody></table>
+    </form>
+</div>
+    <script language="javascript" type="text/javascript">
+        var isComment=0;
+        //显示隐藏地址
+        $(function () {
+          console.log("version:phoenix");
+            if(isComment){
+                $("#report_description").attr("disabled",true);
+                $("#sp_n").hide();
+                $("#sp_reason").html("评论内容：");
+            }
+            $(".report_type").click(function () {
+                $("#panel_originalurl,#report_other_content").hide();
+                switch ($(this).val()) {
+                    case '3':
+                        $("#panel_originalurl").show();
+                        $("#originalurl").focus();
+                        break;
+                    case '7':
+                        if(isComment){
+                            $("#report_other_content").show().focus();
+                        }
+                        break;
+                }
+
+            });
+
+            $("#frmReport").submit(function () {
+                if (!currentUserName) {
+
+                    if (confirm("您的操作必须登录，是否登录？")) {
+                        location.href = "https://passport.csdn.net/account/login?from=" + encodeURIComponent(location.href);
+                        return false;
+                    }
+                    return false;
+                }
+
+                var reportType = $("input[name=report_type]:checked").val();
+                if(!reportType){
+                    alert("请选择举报原因！");
+                    return false;
+                }
+                var otherInfo = "";
+                switch (reportType) {
+                    case '3':
+                        otherInfo = $("#originalurl").val();
+                        if (otherInfo == ""||otherInfo=="http://") {
+                            alert("举报抄袭必须提供原创文章地址！");
+                            $("#originalurl").focus();
+                            return false;
+                        } else if(!checkeURL(otherInfo)) {
+                            alert("请输入正确的原创文章地址！");
+                            $("#originalurl").focus();
+                            return false;
+                        }
+                        break;
+                    case '7':
+                        otherInfo = $("#report_other_content").val();
+                        if (isComment && !otherInfo) {
+                            alert("请填写举报的具体原因！");
+                            $("#report_other_content").focus();
+                            return false;
+                        }
+                        if(!isComment){
+                            if(!$("#report_description").val()){
+                                alert("请填写举报的具体原因！");
+                                $("#report_description").focus();
+                                return false;
+                            }
+                        }
+                        break;
+                }
+                if(!isComment){
+                    if($("#report_description").val().length>30){
+                        alert("举报原因最多只允许输入30个字！");
+                        return false;
+                    }
+                }
+	            nowTime = {
+		            year: new Date().getFullYear(),
+		            month: parseInt(new Date().getMonth())+1,
+		            day: new Date().getDate(),
+		            hours: parseInt(new Date().getHours())+1,
+		            minutes: parseInt(new Date().getMinutes())+1,
+		            seconds: parseInt(new Date().getSeconds())+1
+	            };
+	            var data = {
+		            articleId: fileName,
+		            commentId: 0,
+		            reportType: reportType,
+		            originalurl: $("#originalurl").val(),
+		            report_other_content: $("#report_other_content").val(),
+		            report_description: $("#report_description").val(),
+		            currentUserName: currentUserName,
+		            updatetime: nowTime.year+'/'+nowTime.month+'/'+nowTime.day+' '+ nowTime.hours+':'+nowTime.minutes+':'+seconds,
+		            blogUser: username
+	            };
+	            if(!isComment){//如果是举报文章
+		            data.report_other_content = data.report_description;
+		            // data.report_description = "1. 神经网络这是一个常见的神经网络的图：这是一个常见的三层神经网络的基本构成，Layer L1是输入层，Layer L2是隐含层";
+	            }
+
+	            $.post(blog_address + "/common/report?id="+fileName+"&t=2", data, function (data) {
+		            if (data.result == 1){
+			            SetError("感谢您的举报，我们会尽快审核！");
+		            }else{
+			            if (data.content) alert(data.content);
+		            }
+
+	            });
+                return false;
+            });
+
+            $("#btnCloseReportDialog").click(function () {
+                CloseDiv();
+            });
+
+        });
+
+        //提示后关闭方法
+        function SetError(error) {
+            $("#btnCloseReportDialog").trigger("click");
+            alert(error);
+            CloseDiv();
+        }
+
+        //关闭方法
+        function CloseDiv() {
+
+            $.removeMask();
+            $("#report_dialog").hide();
+            return false;
+        }
+
+        //验证url
+        function checkeURL(url){
+            return /^http(s)?:\/\/([\w-]+\.)+[\w-]+/i.test(url);
+        }
+    </script>
+</div>
+<!--  fixme 后期清理掉  -->
+<div id="a52b5334d" style="width: 1px; height: 1px; display: none;">
+    <script id="adJs52b5334"></script>
+    <script>document.getElementById("adJs52b5334").src = "https://ads.csdn.net/js/opt/52b5334.js?t=" + Math.random();</script>
+</div>
+<script type="text/javascript" src="https://static-blog.csdn.net/mdeditor/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            linebreaks: { automatic: true, width: "94%container" },
+            imageFont: null
+        }
+    });
+</script>
+<!-- <script type="text/javascript" src="https://passport.csdn.net/content/loginbox/login.js"></script> -->
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'https://csdnimg.cn/static/api/js/share.js?v=89860594'];</script>
+<script type="text/javascript" >
+    if($(".article_collect li").length==1){$(".article_collect").hide();}
+    if($(".article_tags li").length==1){$(".article_tags").hide();}
+    $(".edit a").attr("href","https://mp.csdn.net/postedit/"+fileName);
+    $.each($(".edu_li a"),function(){$(this).attr("href",$(this).attr("href").replace("blog7","blog9"))});
+    new CNick('#uid').showNickname();
+
+    if($("#fan").html()=="")
+    {
+	    $("#fan").html(0);
+    }
+</script>
+<script src="https://csdnimg.cn/public/common/append_mark/appendMark.min.js?v=5.00.43" type="text/javascript"></script>
+<script type="text/javascript">
+    appendMark($('.recommend_list').children('a').find('dt'),$('.extension_other'),$('.yd_a_d_feed_cla'))
+</script>
+<script src='https://csdnimg.cn/pubfooter/js/publib_footer-1.0.3.js?v201804111810' data-isfootertrack="false"></script>
+<script src='https://csdnimg.cn/public/common/gotop/js/goTop-v1.0.min.js?v201803151422'></script>
+<script>
+    GoTop({
+        right: 8,
+        hasReport: true,
+        reportFun: function() {
+            $.createMask();
+            var r = blog_address + "/common/report?id=" + fileName + "&t=" + 2;
+            if (3 == 2) {
+                var s = n.parentNode.parentNode.parentNode.getAttribute("floor");
+                r += "&floor=" + s
+            }
+            var i = (document.documentElement.clientHeight - 400) / 2 + (document.documentElement.scrollTop || document.body.scrollTop),
+                a = (document.documentElement.clientWidth - 400) / 2;
+
+            $("#report_dialog").load(r).css({
+                //top: i + "px",
+                top: '20%',
+                left: a
+            }).show()
+        }
+    })
+</script>
+<script src="https://dup.baidustatic.com/js/os.js"></script>
+
+<div id="loginWrap"></div>
+<div id="dlMask"></div>
+</body>

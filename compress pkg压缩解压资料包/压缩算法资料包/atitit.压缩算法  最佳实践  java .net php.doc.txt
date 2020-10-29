@@ -1,0 +1,47 @@
+atitit.压缩算法  最佳实践  java .net php
+
+11
+11
+11
+22
+22
+22
+22
+33
+3
+压缩算法的归类::: 纯算法,带归档算法
+
+ZIP、RAR等归档算法
+ZLib可以简单的理解为压缩/解压缩算法，它与ZIP、RAR等归档算法有所不同， 
+
+zlib(适合字符串压缩)
+zlib是一个通用的压缩开源库，提供了在内存中压缩和解压的函数，包括对解压后数据的校验。目前版本的zlib只支持deflate方法，    它的设计目标是处理单纯的数据（而不管数据的来源是什么）
+
+作者::老哇的爪子Attilax艾龙，EMAIL:1466519819@qq.com
+转载请注明来源： http://blog.csdn.net/attilax
+
+  gzip( 适合单个的文件)
+  gzip也是一种数据压缩格式，可以大体分为头部，数据部和尾部三个部分，其中头部和尾部主要是一些文档属性和校验信息（rfc1952），数据部主要是用deflate方法压缩得到的数据。
+gzip是一种文件压缩工具（或该压缩工具产生的压缩文件格式），它的设计目标是处理单个的文件。gzip在压缩文件中的数据时使用的就是zlib。为了 保存与文件属性有关的信息，gzip需要在压缩文件（*.gz）中保存更多的头信息内容，而zlib不用考虑这一点。但gzip只适用于单个文件，所以我 们在UNIX/Linux上经常看到的压缩包后缀都是*.tar.gz或*.tgz，也就是先用tar把多个文件打包成单个文件，再用gzip压缩的结 果。
+
+zip
+zip是适用于压缩多个文件的格式（相应的工具有PkZip和WinZip等），因此，zip文件还要进一步包含文件目录结构的信息，比gzip的头信息 更多。但需要注意，zip格式可采用多种压缩算法，我们常见的zip文件大多不是用zlib的算法压缩的，其压缩数据的格式与gzip大不一样。
+
+
+java jdk 给zlib,gzip,zip的支持
+
+Java SDK提供了对上述三种压缩技术的支持：Inflater类和Deflater类直接用zlib库对数据压缩/解压缩，GZIPInputStream类 和GZIPOutputStream类提供了对gzip格式的支持，ZipFile、ZipInputStream、ZipOutputStream则用 于处理zip格式的文件
+zlib---gzip 压缩在后长度比较
+gzip>>>zlib
+244>>>214  
+
+别的bzip,,tar
+GZIP是JDK自带的算法实现，但BZip2则不曾享受这个待遇。 不过，强大的Apache坚决不会让这些个在Linux下如鱼得水的算法在Java世界中销声匿迹。Apache在_Commons_Compress_中提供了相应的实现。同时，还包括众所周知的tar、cpio、zip等算法实现，其中最为丰富的当属zip
+
+在linux下，tar是一个归档命令。当然，如果配合gzip、bzip2就可以达到归档+压缩的效果！ 
+我们通过tar获得归档压缩文件其实恰恰包含了归档和压缩两个操作，并且其操作次序也是先做归档操作，再做压缩操作！ 通常我们忽略了归档的概念，将归档压缩文件简称为压缩文件！～ 
+Java压缩技术（七） TAR——Commons实现
+参考
+Java压缩技术（七） TAR——Commons实现 - Snowolf的意境空间！ - ITeye技术网站.htm
+有关压缩的一些东西 - wyingquan的专栏 - 博客频道 - CSDN.NET.htm
+

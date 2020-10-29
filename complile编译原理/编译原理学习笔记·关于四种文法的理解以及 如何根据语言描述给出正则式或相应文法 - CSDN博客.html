@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <link rel="canonical" href="https://blog.csdn.net/jave_f/article/details/78209622"/> 
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="referrer" content="always">
+    <meta name="description" content="根据题意描述 写文法、写正则式 并简明扼要介绍了0~3型文法" />
+    <meta name="keywords" content="编译原理,文法" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+    <meta name="shenma-site-verification" content="5a59773ab8077d4a62bf469ab966a63b_1497598848">
+    <script src="https://csdnimg.cn/release/phoenix/vendor/tingyun/tingyun-rum-blog.js"></script>
+
+    <link href="https://csdnimg.cn/public/favicon.ico" rel="SHORTCUT ICON">
+    <title>编译原理学习笔记·关于四种文法的理解以及 如何根据语言描述给出正则式或相应文法 - CSDN博客</title>
+    
+            <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/detail-801161715c.min.css">
+        <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/themes/skin-blue/skin-blue-007e688c99.min.css">
+
+    <script type="text/javascript">
+        var username = "jave_f";
+        var blog_address = "https://blog.csdn.net/jave_f";
+        var static_host = "https://csdnimg.cn/release/phoenix/";
+        var currentUserName = ""; 
+        var isShowAds = true;
+        var isOwner = false;
+        var loginUrl = "https://passport.csdn.net/account/login?from=https://blog.csdn.net/jave_f/article/details/78209622"
+        var blogUrl = "https://blog.csdn.net/";
+        var curSkin = "skin-blue";
+    </script>
+    <script type="text/javascript">
+        // Traffic Stats of the entire Web site By baidu
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?6bcd52f51e9b3dce32bec4a3997715ac";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+        // Traffic Stats of the entire Web site By baidu end
+    </script>
+    <script src="https://csdnimg.cn/public/common/libs/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script src="https://csdnimg.cn/rabbit/exposure-click/main-1.0.6.js"></script>
+        <script type="text/javascript" src="https://csdnimg.cn/pubfooter/js/tracking-1.0.2.js" charset="utf-8"></script>
+        <link rel="stylesheet" href="https://csdnimg.cn/public/sandalstrap/1.3/css/sandalstrap.min.css"> 
+    <style>
+        .MathJax, .MathJax_Message, .MathJax_Preview{
+            display: none
+        }
+    </style>
+</head>
+<body>    
+    <link rel="stylesheet" href="https://csdnimg.cn/public/common/toolbar/content_toolbar_css/content_toolbar.css">
+    <script id="toolbar-tpl-scriptId" src="https://csdnimg.cn/public/common/toolbar/js/content_toolbar.js" type="text/javascript" domain="https://blog.csdn.net/"></script>
+    <script src="https://csdnimg.cn/public/sandalstrap/1.3/fonts/csdnc/csdnc.js"></script><link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/blog_code-c3a0c33d5c.css">
+<link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/vendor/pagination/paging.css">
+<script type="text/javascript" src="//static.mediav.com/js/mvf_news_feed.js"></script>
+
+<header>
+	<div class="container d-flex clearfix">
+		<div class="title-box">
+			<h2 class="title-blog">
+				<a href="https://blog.csdn.net/jave_f">北岛向南的小站 - CSDN</a>
+			</h2>
+			<p class="description">I want to write, not to run blogging software.</p>
+		</div>
+		<div class="opt-box d-flex justify-content-end">
+			<a class="btn btn-sm" href="https://blog.csdn.net/jave_f/rss/list">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#csdnc-rss"></use>
+					</svg>RSS订阅</a>
+					</div>
+	</div>
+</header><script src="https://dup.baidustatic.com/js/ds.js"></script>
+<div class="container clearfix pt0" id="mainBox">
+    <main>
+        <div class="blog-content-box">
+	<div class="article-title-box">
+			<span class="article-type type-1 float-left">原</span>		<h1 class="title-article">编译原理学习笔记·关于四种文法的理解以及 如何根据语言描述给出正则式或相应文法</h1>
+	</div>
+	<div class="article-info-box">
+		<div class="article-bar-top d-flex">
+												<span class="time">2017年10月11日 23:04:17</span>
+			<div class="float-right">
+				<span class="read-count">阅读数：1607</span>
+											</div>
+		</div>
+	</div>
+	<article>
+		<div id="article_content" class="article_content clearfix csdn-tracking-statistics" data-pid="blog"  data-mod=popu_307  data-dsm = "post" >
+                    <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/htmledit_views-0a60691e80.css" />
+            <div class="htmledit_views">
+                
+<address><span style="font-size:14px;">首先要说明的是：<br />
+一般的文法至少都是0型文法，也就是说0型文法限制最少。若将0型文法比作基类的话，1、2、3型文法就是不断继承并加以限制得到的子类。<br />
+文法表示过程中，常用大写字母表示非终结符V<sub>N</sub>，而小写字母表示的是终结符V<sub>T</sub>。</span></address>
+<address><span style="color:#FF0000;font-size:18px;"><br /></span></address>
+<h2><span style="color:#FF0000;font-size:18px;">文法概要</span></h2>
+<p><span style="font-size:14px;"><span style="color:#FF0000;">设文法</span><span style="color:#FF0000;">G[S]=</span><span style="color:#FF0000;">（</span><span style="color:#FF0000;">V<sub>N</sub></span><span style="color:#FF0000;">，</span><span style="color:#FF0000;">V<sub>T</sub></span><span style="color:#FF0000;">，</span><span style="color:#FF0000;">S</span><span style="color:#FF0000;">，</span><span style="color:#FF0000;">P</span><span style="color:#FF0000;">）</span></span></p>
+<p><span style="font-size:14px;"><span style="color:#FF0000;">0</span><span style="color:#FF0000;">型文法（对应图灵机）</span></span></p>
+<p></p>
+<ul><li><span style="font-size:14px;">如果它的每个产生式α→β是这样一种结构：α∈(V<sub>N</sub>∪V<sub>T</sub>)*且至少含有一个非终结符，而β∈(V<sub>N</sub>∪V<sub>T</sub>)*，则G[S]是一个0型文法。</span></li><li><span style="font-size:14px;">0型文法也称短语文法，记为PSG。</span></li><li><span style="font-size:14px;">一个非常重要的理论结果是：0型文法的能力相当于图灵机。或者说，任何0型文语言都是递归可枚举的，反之，递归可枚举集必定是一个0型语言。</span></li></ul><div><span style="font-size:14px;"><br /></span></div>
+<p></p>
+<p><span style="font-size:14px;"><span style="color:#FF0000;">1</span><span style="color:#FF0000;">型文法（对应线性界线自动机，自然语言）</span></span></p>
+<p></p>
+<ul><li><span style="font-size:14px;">它是在0型文法的基础上每一个α→β,都有|β|&gt;=|α|。这里的|β|表示的是β的长度。</span></li><li><span style="font-size:14px;">注意：虽然要求|β|&gt;=|α|，但有一特例：α→ε也满足1型文法。</span></li><li><span style="font-size:14px;">1型文法也叫上下文有关文法，记为CSG。</span></li><li><span style="font-size:14px;">此文法对应于线性有界自动机。</span></li></ul><div><span style="font-size:14px;"><br /></span></div>
+<p></p>
+<p><span style="font-size:14px;"><span style="color:#FF0000;">2</span><span style="color:#FF0000;">型文法（对应下推自动机，程序设计语言）</span></span></p>
+<p></p>
+<ul><li><span style="font-size:14px;">2型文法是在1型文法的基础上,再满足：每一个α→β都有α是非终结符。</span></li><li><span style="font-size:14px;"> 2型文法也叫上下文无关文法，记为CFG。</span></li><li><span style="font-size:14px;">此文法对应于下推自动机。</span></li></ul><div><span style="font-size:14px;"><br /></span></div>
+<p></p>
+<p><span style="font-size:14px;"><span style="color:#FF0000;">3</span><span style="color:#FF0000;">型文法（对应有限自动机）</span></span></p>
+<p></p>
+<ul><li><span style="font-size:14px;">它是在2型文法的基础上满足:A→α|αB（右线性）或A→α|Bα（左线性）。</span></li><li><span style="font-size:14px;">3型文法也叫正规文法，记为RG。</span></li><li><span style="font-size:14px;">此文法对应于有限状态自动机。</span></li></ul><div><span style="font-size:14px;"><br /></span></div>
+<p></p>
+<h2><em><span style="font-size:18px;">四类文法的关系与区别</span></em></h2>
+<p><span style="font-size:14px;">       1~3型文法都属于0型文法，2、3型文法不一定属于1型文法(如果存在A→ε的产生式，则不属于1型文法)，3型文法属于2型文法。四类文法区别如下：</span></p>
+<p><span style="font-size:14px;">          （1）1型文法中不允许有形如A→ε的产生式存在，而2、3型文法则允许出现。</span></p>
+<p><span style="font-size:14px;">          （2）0、1型文法产生式左部存在含有终结符的符号串或两个以上的非终结符，而2、3型文法的产生式左部只允许是单个非终结符号。</span></p>
+<p><span style="font-size:14px;"> </span></p>
+<p><span style="font-size:14px;">Eg.判断该产生式 S-&gt; aSb|ab对应的文法。</span></p>
+<p> </p>
+<h2><span style="font-size:18px;">关于正规表达式与上下文无关文法</span></h2>
+<p><span style="font-size:14px;">         正规表达式所描述的语言结构均可以用上下文无关文法描述，反之则不一定。</span></p>
+<p><span style="font-size:14px;"><br /></span></p>
+<p><strong><span style="font-size:14px;">（一）、正规表达式</span></strong></p>
+<p><span style="font-size:14px;">1. S={0,1}，没有连续两个1的0和1组成的串集合 。</span></p>
+<p><span style="font-size:14px;"><span style="color:#FF0000;">(10|0)*(1|</span><span style="color:#FF0000;">e</span><span style="color:#FF0000;">)</span></span></p>
+<p><span style="font-size:14px;"><span style="color:#FF0000;"><br /></span></span></p>
+<p><span style="font-size:14px;">2. S＝{a,b,c} ，包含至少一个a和一个b的串集合。</span></p>
+<p><span style="color:#FF0000;"><span style="font-size:14px;">c*a(a|c)*b(a|b|c)* | c*b(b|c)*a(a|b|c)*</span></span></p>
+<p><span style="font-size:14px;"> </span></p>
+<p><span style="font-size:14px;">3. S={0,1},使每对相邻的0都出现在任何一对相邻的1之前的所有01串集合。</span></p>
+<p><span style="font-size:14px;"><span style="color:#FF0000;">(10|0)*|(1|</span><span style="color:#FF0000;">e</span><span style="color:#FF0000;">)(01|1)* |(0|</span><span style="color:#FF0000;">e</span><span style="color:#FF0000;">)</span></span></p>
+<p><span style="font-size:14px;"><span style="color:#FF0000;"><br /></span></span></p>
+<p><span style="font-size:14px;"><strong><span style="color:#0070C0;background:#C0C0C0;">[</span><span style="color:#0070C0;background:#C0C0C0;">分析</span><span style="color:#0070C0;background:#C0C0C0;">]</span></strong>这题换个说法来理解就是“<span style="color:#00B0F0;">如果出现任意一对相邻的</span><span style="color:#00B0F0;">1</span><span style="color:#00B0F0;">，那么它后面必然不会出现相邻的</span><span style="color:#00B0F0;">0</span>”。首先，我们将这个01串拆成前后两个部分来考虑，首先给出没有连续两个1的01串的前缀，则这样表示(10|0)*|(1|e)，这时需要考虑后面尾部的情况有两种：</span></p>
+<p></p>
+<ul><li><span style="font-size:14px;"> 一种是没有一对相邻的1，那么之前表示足以。</span></li><li><span style="font-size:14px;">另一种是存在若干对相邻的1，那么则用(01|1)* |(0|e) 来表示。</span></li></ul><div><span style="font-size:14px;"><br /></span></div>
+<p></p>
+<p><span style="font-size:14px;">4. S={0,1} ，不包含101作为子串的集合。</span></p>
+<p><span style="font-size:14px;"><span style="color:#FF0000;">0*|0*11*|0*11*0|(0*11*00)*(0*11*|0*11*0|</span><span style="color:#FF0000;">e</span><span style="color:#FF0000;">)</span></span></p>
+<p style="text-align:center;"><span style="font-size:14px;"><span style="color:#FF0000;"><img src="https://img-blog.csdn.net/20171011231208759" alt="" /><br /></span></span></p>
+<p><strong><span style="font-size:14px;"><br /></span></strong></p>
+<p><strong><span style="font-size:14px;">（二）、文法</span></strong></p>
+<p><span style="font-size:14px;">按指定类型，给出语言的文法。</span></p>
+<p><span style="font-size:14px;">1. L={a<sup>n</sup>b<sup>n </sup>| n≥1}的上下文无关文法</span></p>
+<p><span style="font-size:14px;"><span style="color:#FF0000;">G[S]:   S</span><span style="color:#FF0000;">→</span><span style="color:#FF0000;">aT</span></span></p>
+<p><span style="font-size:14px;"><span style="color:#FF0000;">T</span><span style="color:#FF0000;">→</span><span style="color:#FF0000;">Sb|b</span></span></p>
+<p><span style="font-size:14px;"> </span></p>
+<p><span style="font-size:14px;">2. L={a<sup>i</sup>b<sup>j </sup>| j＞i≥0}的上下文无关文法</span></p>
+<p><span style="font-size:14px;"><span style="color:#FF0000;">G[S]:   S</span><span style="color:#FF0000;">→</span><span style="color:#FF0000;">aSb|Sb|b</span></span></p>
+<p><span style="font-size:14px;"> </span></p>
+<p><span style="font-size:14px;">3.由相同个数a和b组成句子的无二义文法</span></p>
+<p><span style="font-size:14px;"><em><strong>官方标配答案：</strong></em></span></p>
+<p><span style="font-size:14px;">我们用一个非终结符A代表一个a(即有A→a)，用一个非终结符B代表一个b(即有B→b)；为了保证a和b的个数相同，则在出现一个a时应相应地出现一个B，出现一个b时则相应出现一个A。假定已推导出bA，如果下一步要推导出连续两个b时，则应有bAbbAA。也即为了保证b和A的个数一致，应有A→bAA；同理有B→aBB。此外，为了保证递归地推出所要求的ab串，应有S→aBS和S→bAS。由此得到无二义文法G[S]为    </span></p>
+<p><span style="font-size:14px;"><span style="color:#FF0000;">G[S]:   S</span><span style="color:#FF0000;">→</span><span style="color:#FF0000;">aBS|bAS|</span><strong><span style="color:#FF0000;">ε</span></strong></span></p>
+<p><span style="font-size:14px;"><span style="color:#FF0000;">A</span><span style="color:#FF0000;">→</span><span style="color:#FF0000;">bAA|a</span></span></p>
+<p><span style="font-size:14px;"><span style="color:#FF0000;">B</span><span style="color:#FF0000;">→</span><span style="color:#FF0000;">aBB|b</span></span></p>
+<p><span style="font-size:14px;"><span style="color:#FF0000;"><br /></span></span></p>
+<p><span style="font-size:14px;"><em><strong>自己来看的理解与解题过程：</strong></em></span></p>
+<p><span style="font-size:14px;">我们规定S 能推导出所有具有相等个数a和b的符号串</span></p>
+<p><span style="font-size:14px;"><span style="white-space:pre;"></span>S→<strong>ε</strong>（最简单的情况，a、b都没有）</span></p>
+<p><span style="font-size:14px;"><span style="white-space:pre;"></span>S→a B （其中B 中b的个数比a多一个）</span></p>
+<p><span style="font-size:14px;"><span style="white-space:pre;"></span>S→b A （其中A中a的个数比b多一个）</span></p>
+<p><span style="font-size:14px;">这里可以看出，引入两个非终极符B和A来分别推出相应的后缀。得到S的产生式：</span></p>
+<p><span style="font-size:14px;"><span style="color:#0070C0;"><span style="white-space:pre;"></span>S</span><span style="color:#3366ff;"><span style="font-size:14px;">→</span>aB | bA | e</span></span></p>
+<p><span style="font-size:14px;"> </span></p>
+<p><span style="font-size:14px;">接下来，对B采用同样的方法来考虑: </span></p>
+<p><span style="font-size:14px;">      B <span style="font-size:14px;">→</span> b （最简单的情况，a没有）</span></p>
+<p><span style="font-size:14px;"><strong>      </strong>B <span style="font-size:14px;">
+→</span>b S</span></p>
+<p><span style="font-size:14px;">      B <span style="font-size:14px;">→</span> a BB</span></p>
+<p><span style="font-size:14px;">于是可得到B的产生式: </span></p>
+<p><span style="font-size:14px;color:#3366ff;"><span style="white-space:pre;"></span>B<span style="font-size:14px;">→</span>bS | aBB | b</span></p>
+<p><span style="color:#0070C0;"><span style="font-size:14px;"> </span></span></p>
+<p><span style="font-size:14px;">同样地，可得到A的产生式:</span></p>
+<p><span style="font-size:14px;color:#3366ff;"><span style="white-space:pre;"></span>A<span style="font-size:14px;">→</span> aS | bAA | a</span></p>
+<p><span style="color:#0070C0;"><span style="font-size:14px;"> </span></span></p>
+<p><span style="font-size:14px;">将三部分放在一起，我们就得到了文法G[S], 如下：</span></p>
+<p><span style="font-size:14px;"><span style="color:#FF0000;"><span style="white-space:pre;"></span>S</span><span style="color:#FF0000;"></span><span style="color:rgb(255,0,0);font-size:14px;">→</span><span style="color:#FF0000;">aB | bA |</span><span style="color:#FF0000;">e</span></span></p>
+<p><span style="font-size:14px;"><span style="color:#FF0000;"><span style="white-space:pre;"></span>B</span><span style="color:rgb(255,0,0);font-size:14px;">→</span><span style="color:#FF0000;">bS | aBB | b</span></span></p>
+<p><span style="font-size:14px;"><span style="color:#FF0000;"><span style="white-space:pre;"></span>A</span><span style="color:#FF0000;"></span><span style="color:rgb(255,0,0);font-size:14px;">→</span><span style="color:#FF0000;">aS | bAA | a</span></span></p>
+<p><span style="font-size:12px;"><em><span style="color:rgb(0,112,192);">[</span><span style="color:rgb(0,112,192);">拓展思考</span><span style="color:rgb(0,112,192);">]</span><span style="color:rgb(0,112,192);">如果将</span><span style="color:rgb(0,112,192);">A</span><span style="color:rgb(0,112,192);">或</span><span style="color:rgb(0,112,192);">B</span><span style="color:rgb(0,112,192);">作为开始符号，得到的语言是什么？</span></em></span></p>
+<p><span style="font-size:14px;"><br /></span></p>
+<p><span style="font-size:14px;">4. 字母表Σ={a,b}上的同时只有奇数个a和奇数个b的所有串的集合的正规文法。</span></p>
+<p><span style="font-size:14px;">为了构造字母表Σ={a,b}上同时只有奇数个a和奇数个b的所有串集合的正规式，我们画出如图所示的DFA，即由开始符S出发，经过奇数个a到达状态A，或经过奇数个b到达状态B；而由状态A出发，经过奇数个b到达状态C(终态)；同样，由状态B出发经过奇数个a到达终态C。由图可直接得到正规文法G[S]如下： </span></p>
+<p style="text-align:center;"><span style="font-size:14px;"><img src="https://img-blog.csdn.net/20171011231409628" alt="" /><br /></span></p>
+<p><span style="font-size:14px;"><span style="color:#FF0000;">G[S]:   S</span><span style="color:#FF0000;">→</span><span style="color:#FF0000;">aA|bB </span></span></p>
+<p><span style="font-size:14px;"><span style="color:#FF0000;">A</span><span style="color:#FF0000;">→</span><span style="color:#FF0000;">aS|bC|b </span></span></p>
+<p><span style="font-size:14px;"><span style="color:#FF0000;">B</span><span style="color:#FF0000;">→</span><span style="color:#FF0000;">bS|aC|a      </span></span></p>
+<p><span style="font-size:14px;"><span style="color:#FF0000;">C</span><span style="color:#FF0000;">→</span><span style="color:#FF0000;">bA|aB|</span><strong><span style="color:#FF0000;">ε</span></strong></span></p>
+<p><em><span style="font-size:12px;">[<span style="color:rgb(91,155,213);">拓展思考</span>：奇数个a和偶数个b、偶数个a和偶数个b、偶数个a和奇数个b又怎么表示呢？]</span></em></p>
+<p><em>更多文法构造例子：<a href="http://download.csdn.net/download/jave_f/10016955">http://download.csdn.net/download/jave_f/10016955</a></em></p>
+<p><em><span style="font-size:12px;"><br /></span></em></p>
+<p><em><span style="font-size:12px;"><br /></span></em></p>
+<p><em><span style="font-size:12px;"><br /></span></em></p>
+<p><em><span style="font-size:12px;"><span style="color:rgb(102,102,102);font-family:'Microsoft YaHei';font-size:10.9091px;">【附：一文一图】</span><br /></span></em></p>
+<p style="text-align:center;"><em><span style="font-size:12px;"><span style="color:rgb(102,102,102);font-family:'Microsoft YaHei';font-size:10.9091px;"><img src="https://img-blog.csdn.net/20171011233447607" alt="" /><br /></span></span></em></p>
+            </div>
+                </div>
+				<div class="hide-article-box text-center csdn-tracking-statistics tracking-click" data-mod="popu_376">
+			<a class="btn btn-red-hollow" id="btn-readmore">阅读更多</a>
+		</div>
+        	</article>
+	
+<a id="chatqa"></a>
+<div class="answer-box d-flex">
+  <div class="img-qrcode-box">
+    <img src="http://images.gitbook.cn/0c0d1110-5342-11e8-ae30-296671409171" alt="">
+    <p>扫码向博主提问</p>
+  </div>
+
+      <a href="https://mp.csdn.net/ask" class="btn btn-sm btn-link-blue btn-op-answer" target="_blank">去开通我的Chat快问</a>
+    
+  <div class="content-box  d-flex flex-column justify-content-center">
+    <div class="info-box d-flex">
+      <img src="https://avatar.csdn.net/E/B/0/3_jave_f.jpg" alt="" class="avatar-pic">
+      <p class="name d-flex align-items-center">jave_f</p>
+          </div>
+    <div class="remark text-truncate">
+      非学，无以致疑；非问，无以广识    </div>
+          <ul class="expertise-list d-flex align-content-start flex-wrap">
+            <li class="title">擅长领域：</li>
+                              <li>计算机</li>
+                              <li>网络</li>
+                    </ul>
+      </div>
+</div>
+
+		<div class="article-bar-bottom">
+				<div class="article-copyright">
+			版权声明：本文为北岛向南(www.zhouie.cn)原创文章，未经博主允许不得转载。			https://blog.csdn.net/jave_f/article/details/78209622		</div>
+						<div class="tags-box artic-tag-box">
+			<span class="label">文章标签：</span>
+						<a class="tag-link" href="http://so.csdn.net/so/search/s.do?q=编译原理&t=blog" target="_blank">编译原理						<a class="tag-link" href="http://so.csdn.net/so/search/s.do?q=文法&t=blog" target="_blank">文法						<a class="tag-link" href="http://so.csdn.net/so/search/s.do?q=正规式&t=blog" target="_blank">正规式						</a>
+		</div>
+						<div class="tags-box">
+			<span class="label">个人分类：</span>
+						<a class="tag-link" href="https://blog.csdn.net/jave_f/article/category/7161309"  target="_blank">StudyStudy						</a>
+		</div>
+					</div>
+	
+	<!-- !empty($pre_next_article[0]) -->
+		</div>
+<script>
+    $(".MathJax").remove();
+</script>
+
+<script type="text/javascript" src="https://static-blog.csdn.net/mdeditor/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+			"HTML-CSS": {
+					linebreaks: { automatic: true, width: "94%container" },
+					imageFont: null
+			},
+			tex2jax: {
+				preview: "none"
+			},
+			mml2jax: {
+				preview: 'none'
+			}
+	});
+</script>
+<script>
+	(function(){
+		var btnReadmore = $("#btn-readmore");
+		if(btnReadmore.length>0){
+			var winH = $(window).height();
+			var articleBox = $("div.article_content");
+			var artH = articleBox.height();
+			if(artH > winH*2){
+				articleBox.css({
+					'height':winH*2+'px',
+					'overflow':'hidden'
+				})
+				btnReadmore.click(function(){
+					articleBox.removeAttr("style");
+					$(this).parent().remove();
+				})
+			}else{
+				btnReadmore.parent().remove();
+			}
+		}
+	})()
+</script>        <div class="edu-promotion"></div>
+<script type="text/javascript">
+	var edu_ad_is_big_data = 0;
+	var edu_ad_id_mapping = {"0":["https:\/\/edu.csdn.net\/sp\/blog.php?type=ai1","https:\/\/edu.csdn.net\/sp\/blog.php?type=python1"],"1":["https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1","https:\/\/edu.csdn.net\/sp\/blog.php?type=web1"],"8":["https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1"],"2":["https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1","https:\/\/edu.csdn.net\/sp\/blog.php?type=python1"],"3":["https:\/\/edu.csdn.net\/sp\/blog.php?type=ai1","https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1"],"6":["https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1","https:\/\/edu.csdn.net\/sp\/blog.php?type=ai1"],"12":["https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1","https:\/\/edu.csdn.net\/sp\/blog.php?type=ai1"],"14":["https:\/\/edu.csdn.net\/sp\/blog.php?type=web1","https:\/\/edu.csdn.net\/sp\/blog.php?type=python1"],"15":["https:\/\/edu.csdn.net\/sp\/blog.php?type=ai1","https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1"],"16":["https:\/\/edu.csdn.net\/sp\/blog.php?type=web1","https:\/\/edu.csdn.net\/sp\/blog.php?type=python1"],"28":["https:\/\/edu.csdn.net\/sp\/blog.php?type=ai1","https:\/\/edu.csdn.net\/sp\/blog.php?type=python1"],"29":["https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1","https:\/\/edu.csdn.net\/sp\/blog.php?type=ai1"],"30":["https:\/\/edu.csdn.net\/sp\/blog.php?type=python1","https:\/\/edu.csdn.net\/sp\/blog.php?type=ai1"],"32":["https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1","https:\/\/edu.csdn.net\/sp\/blog.php?type=python1"],"33":["https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1","https:\/\/edu.csdn.net\/sp\/blog.php?type=ai1"],"35":["https:\/\/edu.csdn.net\/sp\/blog.php?type=ai1","https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1"],"37":["https:\/\/edu.csdn.net\/sp\/blog.php?type=web1","https:\/\/edu.csdn.net\/sp\/blog.php?type=python1"],"7":["https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1","https:\/\/edu.csdn.net\/sp\/blog.php?type=ai1"],"17":["https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1","https:\/\/edu.csdn.net\/sp\/blog.php?type=ai1"],"34":["https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1","https:\/\/edu.csdn.net\/sp\/blog.php?type=python1"],"36":["https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1","https:\/\/edu.csdn.net\/sp\/blog.php?type=ai1"],"31":["https:\/\/edu.csdn.net\/sp\/blog.php?type=python1","https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1"],"19":["https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1"],"20":["https:\/\/edu.csdn.net\/sp\/blog.php?type=bigdata1"]};
+</script>        <a id="commentBox"></a>
+<div class="comment-box">
+	  	<div class="unlogin-box text-center">
+		想对作者说点什么？
+		<!-- $curl 当前地址 -->
+		<a href="https://passport.csdn.net/account/login?from=https://blog.csdn.net/jave_f/article/details/78209622#commentBox" class="btn btn-sm btn-red">我来说一句</a>
+	</div>
+			<div class="comment-list-container">
+		<a id="comments"></a>
+		<div class="comment-list-box">
+		</div>
+		<div id="commentPage" class="pagination-box d-none"></div>
+		<div class="opt-box text-center">
+			<button class="btn btn-sm btn-link-blue" id="btnMoreComment"></button>
+		</div>
+	</div>
+</div>        <div class="recommend-box">
+            		<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/Anwhere_jin/article/details/61917844" target="_blank" strategy="BlogCommendFromBaidu_0">
+				<em>编译原理</em>--<em>文法</em>的<em>理解</em>			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/Anwhere_jin/article/details/61917844" target="_blank" >
+				附上原文链接 转载自步春辉
+
+
+  大部分人的首要反应就是苦恼。确实，<em>编译原理</em>这一部分的内容在计算机学习中是比较难以<em>理解</em>的一部分。首次接触<em>编译原理</em>，我也感觉很复杂，难以<em>理解</em>。但是当看过几次之后，对于一...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/Anwhere_jin" title="Anwhere_jin" target="_blank">
+					<img src="https://avatar.csdn.net/E/7/5/3_anwhere_jin.jpg" alt="Anwhere_jin" class="avatar-pic">
+					<span class="name">Anwhere_jin</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2017-03-13 20:40:08</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：2410</span>
+			</p>
+		</div>
+	</div>
+					<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/aboy123/article/details/7982813" target="_blank" strategy="BlogCommendFromBaidu_1">
+				令人头疼的<em>编译原理</em>之<em>文法</em>			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/aboy123/article/details/7982813" target="_blank" >
+				提到“<em>编译原理</em>”，大部分人的首要反应就是苦恼。确实，<em>编译原理</em>这一部分的内容在计算机学习中是比较难以<em>理解</em>的一部分。首次接触<em>编译原理</em>，我也感觉很复杂，难以<em>理解</em>。但是当看过几次之后，对于一些简单知识点的<em>理解</em>...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/aboy123" title="aboy123" target="_blank">
+					<img src="https://avatar.csdn.net/2/8/E/3_aboy123.jpg" alt="aboy123" class="avatar-pic">
+					<span class="name">aboy123</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2012-09-15 19:09:21</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：8337</span>
+			</p>
+		</div>
+	</div>
+								<div class="recommend-item-box recommend-ad-box" id="ad1"></div>
+				<script>
+				  var width = $("div.recommend-box").outerWidth() - 48;
+					NEWS_FEED({
+						w: width,
+						h : 90,
+						showid : 'GNKXx7',
+						placeholderId: "ad1",
+						inject : 'define',
+						define : {
+							imagePosition : 'right',
+							imageBorderRadius : 0,
+							imageWidth: 120,
+							imageHeight: 90,
+							imageFill : 'clip',
+							displayImage : true,
+							displayTitle : true,
+							titleFontSize: 20,
+							titleFontColor: '#333',
+							titleFontFamily : 'Microsoft Yahei',
+							titleFontWeight: 'bold',
+							titlePaddingTop : 0,
+							titlePaddingRight : 0,
+							titlePaddingBottom : 10,
+							titlePaddingLeft : 0,
+							displayDesc : true,
+							descFontSize: 14,
+							descFontColor: '#6b6b6b',
+							descFontFamily : 'Microsoft Yahei',
+							paddingTop : 0,
+							paddingRight : 0,
+							paddingBottom : 0,
+							paddingLeft : 0,
+							backgroundColor: '#fff',
+							hoverColor: '#ca0c16'
+						}
+					})
+				</script>
+
+			
+				<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/CristianoJason/article/details/51298011" target="_blank" strategy="BlogCommendFromBaidu_2">
+				[<em>编译原理</em>]<em>学习笔记</em>（二）——<em>文法</em>和<em>语言</em>			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/CristianoJason/article/details/51298011" target="_blank" >
+				一、 对程序设计<em>语言</em>的<em>描述</em>从语法、语义和语用三个因素考虑：
+a) 语法：对<em>语言</em>结构的定义；
+b) 语义：<em>语言</em>的含义；
+c) 语用：从使用的角度<em>描述</em><em>语言</em>。
+形式<em>语言</em>理论是编译的理论基础。
+二、...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/CristianoJason" title="CristianoJason" target="_blank">
+					<img src="https://avatar.csdn.net/D/6/7/3_cristianojason.jpg" alt="CristianoJason" class="avatar-pic">
+					<span class="name">CristianoJason</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2016-05-02 20:18:13</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：3781</span>
+			</p>
+		</div>
+	</div>
+					<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/wulingmin21/article/details/7484446" target="_blank" strategy="BlogCommendFromBaidu_3">
+				<em>编译原理</em>之<em>文法</em>一			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/wulingmin21/article/details/7484446" target="_blank" >
+				一、先简单介绍一下形式<em>语言</em>基本知识
+
+
+
+1、字母表：符号的非空有限集合称为字母表
+
+
+2、符号串：由某一字母表中的符号组成的有限符号序列称为该字母表的符号串
+
+
+
+
+二、非形...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/wulingmin21" title="wulingmin21" target="_blank">
+					<img src="https://avatar.csdn.net/0/9/2/3_wulingmin21.jpg" alt="wulingmin21" class="avatar-pic">
+					<span class="name">wulingmin21</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2012-04-21 16:04:50</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：7649</span>
+			</p>
+		</div>
+	</div>
+					<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/wulingmin21/article/details/7485645" target="_blank" strategy="BlogCommendFromBaidu_4">
+				<em>编译原理</em>之<em>文法</em>二			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/wulingmin21/article/details/7485645" target="_blank" >
+				四、著名<em>语言</em>学家NoamChomsky(乔姆斯基)<em>根据</em>对产生式所施加的限制的不同，把<em>文法</em>分成<em>四种</em>类型，即0型、1型、2型和3型。
+
+
+
+
+
+
+
+
+
+<em>文法</em>类型
+
+
+
+产生式的...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/wulingmin21" title="wulingmin21" target="_blank">
+					<img src="https://avatar.csdn.net/0/9/2/3_wulingmin21.jpg" alt="wulingmin21" class="avatar-pic">
+					<span class="name">wulingmin21</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2012-04-22 00:13:50</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：7350</span>
+			</p>
+		</div>
+	</div>
+					<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/zgljl2012/article/details/53883459" target="_blank" strategy="BlogCommendFromBaidu_5">
+				【<em>编译原理</em>系列】<em>文法</em>的定义			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/zgljl2012/article/details/53883459" target="_blank" >
+				当我们要<em>描述</em>一种<em>语言</em>时，需要<em>给出</em>这种<em>语言</em>的所有句子，当句子的数目是有限可数时，就要都列出来；当句子是一个无穷集，也就是无限不可数时，就要<em>给出</em>可以表示它们的结构的<em>描述</em>方法或者说，句子的组成规则。这种规则...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/zgljl2012" title="zgljl2012" target="_blank">
+					<img src="https://avatar.csdn.net/0/F/1/3_zgljl2012.jpg" alt="zgljl2012" class="avatar-pic">
+					<span class="name">zgljl2012</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2016-12-26 09:06:26</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：2786</span>
+			</p>
+		</div>
+	</div>
+					<div class="recommend-item-box recommend-ad-box" id="a_d_feed_0"></div>
+			<script>
+				var width = $("div.recommend-box").outerWidth() - 48;
+				NEWS_FEED({
+					w: width,
+					h: 90,
+					showid: 'Afihld',
+					placeholderId: 'a_d_feed_0',
+					inject: 'define',
+					define: {
+						imagePosition: 'right',
+						imageBorderRadius: 0,
+						imageWidth: 120,
+						imageHeight: 90,
+						imageFill: 'clip',
+						displayImage: true,
+						displayTitle: true,
+						titleFontSize: 20,
+						titleFontColor: '#333',
+						titleFontFamily: 'Microsoft Yahei',
+						titleFontWeight: 'bold',
+						titlePaddingTop: 0,
+						titlePaddingRight: 0,
+						titlePaddingBottom: 10,
+						titlePaddingLeft: 0,
+						displayDesc: true,
+						descFontSize: 14,
+						descFontColor: '#6b6b6b',
+						descFontFamily: 'Microsoft Yahei',
+						paddingTop: 0,
+						paddingRight: 0,
+						paddingBottom: 0,
+						paddingLeft: 0,
+						backgroundColor: '#fff',
+						hoverColor: '#ca0c16'
+					}
+				})
+			</script>
+			<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/Fire_to_cheat_/article/details/78116341" target="_blank" strategy="BlogCommendFromBaidu_6">
+				<em>编译原理</em>--<em>文法</em>和<em>语言</em>			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/Fire_to_cheat_/article/details/78116341" target="_blank" >
+				一、逐渐对产生式施加限制     
+          <em>四种</em>类型：0型，1型，2型，3型
+0型：（短语结构<em>文法</em>）
+    G=(VT,VN,S,P)，对任一产生式α→β，都α∈(VN∪VT)+，...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/Fire_to_cheat_" title="Fire_to_cheat_" target="_blank">
+					<img src="https://avatar.csdn.net/9/3/9/3_fire_to_cheat_.jpg" alt="Fire_to_cheat_" class="avatar-pic">
+					<span class="name">Fire_to_cheat_</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2017-09-27 19:35:54</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：270</span>
+			</p>
+		</div>
+	</div>
+					<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/Chen_dSir/article/details/72781375" target="_blank" strategy="BlogCommendFromBaidu_7">
+				<em>编译原理</em>中<em>四种</em><em>文法</em><em>语言</em>的基本概念			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/Chen_dSir/article/details/72781375" target="_blank" >
+				马上就要<em>编译原理</em>的考试了，看了看去年试卷，做几道题，发现自己对<em>文法</em>的概念都很模糊，下面整理了一下<em>四种</em><em>文法</em>的基本概念：
+
+
+
+
+　 那么什么是<em>文法</em>呢？
+
+乔姆斯基把<em>文法</em>分成<em>四种</em>类型，即0型、1型、2型和...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/Chen_dSir" title="Chen_dSir" target="_blank">
+					<img src="https://avatar.csdn.net/8/6/E/3_chen_dsir.jpg" alt="Chen_dSir" class="avatar-pic">
+					<span class="name">Chen_dSir</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2017-05-27 15:04:58</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：2361</span>
+			</p>
+		</div>
+	</div>
+						<div class="recommend-item-box recommend-download-box csdn-tracking-statistics clearfix" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+			<div class="content float-left">
+				<h4 class="text-truncate">
+					<a href="https://download.csdn.net/download/u014427391/9519386" target="_blank" strategy="BlogCommendFromBaidu_8">
+						<em>编译原理</em>自底向上的语法分析(1)					</a>
+				</h4>
+				<p>
+					<span class="data">2016年05月13日 </span>
+					<span class="size">335KB</span>
+					<span class="type">下载</span>
+				</p>
+			</div>
+			<div class="img-box float-right">
+				<a href="https://download.csdn.net/download/u014427391/9519386" target="_blank" strategy="BlogCommendFromBaidu_8">
+					<img src="http://csdnimg.cn/release/download/old_static/images/minetype/ppt.svg" alt="">
+				</a>
+			</div>
+		</div>
+					<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/yangbodong22011/article/details/53415401" target="_blank" strategy="BlogCommendFromBaidu_9">
+				【<em>编译原理</em>】LL1<em>文法</em>语法分析器			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/yangbodong22011/article/details/53415401" target="_blank" >
+				上篇文章 【<em>编译原理</em>】语法分析——自上向下分析 分析了LL1语法，文章最后说<em>给出</em>栗子，现在补上去。说明：
+这个语法分析器是利用LL1分析方法实现的。
+预测分析表和终结符<em>以及</em>非终结符都是针对一个特定<em>文法</em>...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/yangbodong22011" title="yangbodong22011" target="_blank">
+					<img src="https://avatar.csdn.net/0/F/6/3_yangbodong22011.jpg" alt="yangbodong22011" class="avatar-pic">
+					<span class="name">yangbodong22011</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2016-11-30 23:23:14</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：8858</span>
+			</p>
+		</div>
+	</div>
+			            <div class="recommend-loading-box">
+                <img src='https://csdnimg.cn/release/phoenix/images/feedLoading.gif'>
+            </div>
+            <div class="recommend-end-box">
+                <p class="text-center">没有更多推荐了，<a href="https://blog.csdn.net/" class="c-blue c-blue-hover c-blue-focus">返回首页</a></p>
+            </div>
+        </div>
+    </main>
+    <aside>
+		    <div id="asideProfile" class="aside-box">
+    <h3 class="aside-title">个人资料</h3>
+    <div class="profile-intro d-flex">
+        <div class="avatar-box d-flex justify-content-center flex-column">
+            <a href="https://blog.csdn.net/jave_f">
+                <img src="https://avatar.csdn.net/E/B/0/3_jave_f.jpg" class="avatar_pic">
+            </a>
+        </div>
+        <div class="user-info d-flex justify-content-center flex-column">
+            <p class="name csdn-tracking-statistics tracking-click" data-mod="popu_379">
+                <a href="https://blog.csdn.net/jave_f" target="_blank" class="text-truncate" id="uid">jave_f</a>
+            </p>
+                    </div>
+                <div class="opt-box d-flex justify-content-center flex-column">
+            <span  class="csdn-tracking-statistics tracking-click" data-mod="popu_379">
+                                <a class="btn btn-sm btn-red-hollow" href="https://passport.csdn.net/account/login?from=https://blog.csdn.net/jave_f/article/details/78209622" target="_self">关注</a>
+                            </span>
+                        <span  class="csdn-tracking-statistics tracking-click" data-mod="">
+                <a class="btn btn-sm btn-yellow-hollow" id="btnAsk" href="#chatqa" target="_self">向TA提问</a>
+            </span>
+                    </div>
+            </div>
+    <div class="data-info d-flex item-tiling">
+                <dl class="text-center" title="24">
+                        <dt><a href="https://blog.csdn.net/jave_f?t=1">原创</a></dt>
+            <dd><a href="https://blog.csdn.net/jave_f?t=1"><span class="count">24</span></a></dd>
+                    </dl>
+        <dl class="text-center" title="14">
+            <dt>粉丝</dt>
+            <dd><span class="count" id="fan">14</span></dd>
+        </dl>
+        <dl class="text-center" title="16">
+            <dt>喜欢</dt>
+            <dd><span class="count">16</span></dd>
+        </dl>
+        <dl class="text-center" title="1">
+            <dt>评论</dt>
+            <dd><span class="count">1</span></dd>
+        </dl>
+    </div>
+    <div class="grade-box clearfix">
+        <dl>
+            <dt>等级：</dt>
+            <dd>
+                <a href="https://blog.csdn.net/home/help.html#level" title="2级,点击查看等级说明" target="_blank">
+                    <svg class="icon icon-level" aria-hidden="true">
+                        <use xlink:href="#csdnc-bloglevel-2"></use>
+                    </svg>
+                </a>
+            </dd>
+        </dl>
+        <dl>
+            <dt>访问：</dt>
+            <dd title="22178">
+                2万+            </dd>
+        </dl>
+        <dl>
+            <dt>积分：</dt>
+            <dd title="490">
+                490            </dd>
+        </dl>
+        <dl title="106984">
+            <dt>排名：</dt>
+            <dd>10万+</dd>
+        </dl>
+    </div>
+        <div class="badge-box d-flex">
+        <span>勋章：</span>
+                        <a class="icon-badge" title="持之以恒">
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#csdnc-m-lasting"></use>
+            </svg>
+            <div class="icon-arrow"></div>
+            <div class="grade-detail-box item2">
+                <div class="pos-box">
+                    <div class="left-box d-flex justify-content-center align-items-center flex-column">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#csdnc-m-lasting"></use>
+                        </svg>
+                        <p>持之以恒</p>
+                    </div>
+                    <div class="right-box d-flex justify-content-center align-items-center">
+                        授予每个自然月内发布4篇或4篇以上原创或翻译IT博文的用户。不积跬步无以至千里，不积小流无以成江海，程序人生的精彩需要坚持不懈地积累！
+                    </div>
+                </div>
+            </div>
+        </a>
+                            </div>
+    </div>		    <div class="csdn-tracking-statistics mb8 box-shadow" data-pid="blog" data-mod="popu_4" style="height:250px;">
+    <div class="aside-content text-center" id="cpro_u2734133">
+        <!-- 投放代码 -->
+        <script type="text/javascript" src="//cee1.iteye.com/lgyyovfyh.js"></script>
+    </div>
+</div>
+		    <!--自定义模块-->
+<div id="asideCustom62404396" class="aside-box custom-box">
+    <h3 class="aside-title">微信公众号</h3>
+    <div class="aside-content clearfix">
+        
+<ul class="panel_body">
+<img src="http://img.my.csdn.net/uploads/201804/08/1523153885_1616.jpg"> </ul>
+    </div>
+</div>
+		    <div id="asideNewArticle" class="aside-box">
+    <h3 class="aside-title">最新文章</h3>
+    <div class="aside-content">
+        <ul class="inf_list clearfix csdn-tracking-statistics tracking-click" data-mod="popu_382">
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/jave_f/article/details/80290796" target="_blank">收纳箱(一)</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/jave_f/article/details/80290748" target="_blank">基于Travis CI实现Hexo在Github和Coding的同步自动化部署</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/jave_f/article/details/80290724" target="_blank">收纳箱(二)</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/jave_f/article/details/80290717" target="_blank">物联网概论复习总结</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/jave_f/article/details/80071827" target="_blank">【分享】· 图床&amp;在线分享演示文稿</a>
+            </li>
+                    </ul>
+    </div>
+</div>
+		    <div id="asideColumn" class="aside-box">
+    <h3 class="aside-title">博主专栏</h3>
+    <div class="aside-content">
+        <ul class="column-box csdn-tracking-statistics tracking-click" data-mod="popu_520" >
+                            <li class="clearfix">
+                    <div class="img-box float-left">
+                        <a class="d-flex align-items-center" href="https://blog.csdn.net/column/details/21329.html">
+                            <img src="//img-blog.csdn.net/20180409204652596?imageView2/5/w/120/h/120" alt="">
+                        </a>
+                    </div>
+                    <div class="info">
+                        <p class="title"><a href="https://blog.csdn.net/column/details/21329.html">Internet+ Daily</a></p>
+                        <div class="data">阅读量：<span>162</span><span class="count">1 篇</span></div>
+                    </div>
+                </li>
+                            <li class="clearfix">
+                    <div class="img-box float-left">
+                        <a class="d-flex align-items-center" href="https://blog.csdn.net/column/details/21331.html">
+                            <img src="//img-blog.csdn.net/20180408105710375?imageView2/5/w/120/h/120" alt="">
+                        </a>
+                    </div>
+                    <div class="info">
+                        <p class="title"><a href="https://blog.csdn.net/column/details/21331.html">计算机算法算法设计与分析</a></p>
+                        <div class="data">阅读量：<span>74</span><span class="count">2 篇</span></div>
+                    </div>
+                </li>
+                    </ul>
+    </div>
+    </div>
+		    <div id="asideHotArticle" class="aside-box">
+	<h3 class="aside-title">热门文章</h3>
+	<div class="aside-content">
+		<ul class="hotArticle-list csdn-tracking-statistics tracking-click" data-mod="popu_521">
+							<li>
+					<a href="https://blog.csdn.net/jave_f/article/details/71437469">操作系统练习题·成组链接法</a>
+					<p class="read">阅读量：<span>5398</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/jave_f/article/details/78277440">编译原理学习笔记·语法分析（LL(1)分析法/算符优先分析法OPG）及例子详解</a>
+					<p class="read">阅读量：<span>1845</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/jave_f/article/details/77689781">XTUOJ 程序设计实践II-2017(部分)</a>
+					<p class="read">阅读量：<span>1792</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/jave_f/article/details/77778459">Codeblocks编译C++出现to_string is not a member of std 或者 to_string was not declared in this scope的解决方法</a>
+					<p class="read">阅读量：<span>1742</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/jave_f/article/details/78209622">编译原理学习笔记·关于四种文法的理解以及 如何根据语言描述给出正则式或相应文法</a>
+					<p class="read">阅读量：<span>1577</span></p>
+				</li>
+					</ul>
+	</div>
+</div>
+		    <div id="asideArchive" class="aside-box flexible-box">
+    <h3 class="aside-title">归档</h3>
+    <div class="aside-content">
+        <ul class="archive-list">
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/jave_f/article/month/2018/05">
+                    2018年5月                    <span class="count float-right">4篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/jave_f/article/month/2018/04">
+                    2018年4月                    <span class="count float-right">7篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/jave_f/article/month/2018/01">
+                    2018年1月                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/jave_f/article/month/2017/12">
+                    2017年12月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/jave_f/article/month/2017/11">
+                    2017年11月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/jave_f/article/month/2017/10">
+                    2017年10月                    <span class="count float-right">6篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/jave_f/article/month/2017/09">
+                    2017年9月                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/jave_f/article/month/2017/08">
+                    2017年8月                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/jave_f/article/month/2017/06">
+                    2017年6月                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/jave_f/article/month/2017/05">
+                    2017年5月                    <span class="count float-right">5篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/jave_f/article/month/2017/04">
+                    2017年4月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/jave_f/article/month/2017/03">
+                    2017年3月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                    </ul>
+    </div>
+        <p class="text-center">
+        <a class="btn btn-link-blue flexible-btn" data-fbox="aside-archive">展开</a>
+    </p>
+    </div>
+		    <div id="asideCategory" class="aside-box flexible-box">
+    <h3 class="aside-title">个人分类</h3>
+    <div class="aside-content">
+        <ul>
+                        <li>
+                <a href="https://blog.csdn.net/jave_f/article/category/6806228">
+                    Database+Oracle                    <span class="count float-right">6篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/jave_f/article/category/6907861">
+                    ExperRoom                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/jave_f/article/category/7135892">
+                    OJ                    <span class="count float-right">4篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/jave_f/article/category/6999138">
+                    分享                    <span class="count float-right">4篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/jave_f/article/category/7161304">
+                    Ques                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/jave_f/article/category/7161309">
+                    StudyStudy                    <span class="count float-right">11篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/jave_f/article/category/7410508">
+                    GitHub Pages Article                    <span class="count float-right">6篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/jave_f/article/category/7573692">
+                    算法                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/jave_f/article/category/7579754">
+                    Internet+ Daily                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/jave_f/article/category/7581253">
+                    Tools                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                    </ul>
+    </div>
+        <p class="text-center">
+        <a class="btn btn-link-blue flexible-btn" data-fbox="aside-archive">展开</a>
+    </p>
+    </div>
+		<div id="asideFooter">
+			
+		<div class="aside-box">
+						<script type="text/javascript" src="//cee1.iteye.com/mhzzpwgzj.js"></script>
+					</div>
+				<div class="aside-box">
+			<div class="persion_article">
+			</div>
+		</div>
+	</div>
+</aside>
+<script src="https://csdnimg.cn/pubfooter/js/publib_footer-1.0.3.js?20180309" data-isfootertrack="false" type="text/javascript"></script>
+<script>
+	$("a.flexible-btn").click(function(){
+		$(this).parents('div.aside-box').removeClass('flexible-box');
+		$(this).remove();
+	})
+</script>
+</div>
+<div class="mask-dark"></div>
+<div class="pulllog-box" style="display: block;">
+	<div class="pulllog clearfix">
+		<span class="text float-left">加入CSDN，享受更精准的内容推荐，与500万程序员共同成长！</span>
+		<div class="pulllog-btn float-right clearfix">
+            <button class="pulllog-login float-left csdn-tracking-statistics tracking-click" data-mod="popu_557">
+                登录
+            </button>
+            <div class="pulllog-sigin float-left csdn-tracking-statistics tracking-click" data-mod="popu_558">
+                <a href="https://passport.csdn.net/account/mobileregister" target="_blank">注册</a>
+            </div>
+            <button class="btn-close">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#csdnc-times"></use>
+                </svg>
+            </button>
+		</div>
+	</div>
+</div>
+<div id="loginWrap" style="display:none"></div>
+<div class="tool-box">
+	<ul class="meau-list">
+		<li>
+			<button class="btn-like " title="点赞">
+				<svg class="icon active" aria-hidden="true">
+					<use xlink:href="#csdnc-thumbsup-ok"></use>
+				</svg><svg class="icon no-active" aria-hidden="true">
+					<use xlink:href="#csdnc-thumbsup"></use>
+				</svg>
+				<p>0</p>
+			</button>
+		</li>
+		<li class="toc-container-box" id="liTocBox">
+			<button class="btn-toc" title="目录">
+				<svg class="icon" aria-hidden="true">
+					<use xlink:href="#csdnc-contents"></use>
+				</svg><br>目录
+			</button>
+			<div class="toc-container">
+				<div class="pos-box">
+					<div class="icon-arrow"></div>
+					<div class="scroll-box">
+						<div class="toc-box"></div>
+					</div>
+				</div>
+				<div class="opt-box">
+					<button class="btn-opt prev nomore" title="向上">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#csdnc-chevronup"></use>
+						</svg>
+					</button>
+					<button class="btn-opt next">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#csdnc-chevrondown"></use>
+						</svg>
+					</button>
+				</div>
+			</div>
+		</li>
+		<li>
+			<button class="btn-bookmark" title="收藏">
+				<svg class="icon active" aria-hidden="true">
+					<use xlink:href="#csdnc-bookmark-ok"></use>
+				</svg><svg class="icon no-active" aria-hidden="true">
+					<use xlink:href="#csdnc-bookmark"></use>
+				</svg><br>收藏
+			</button>
+		</li>
+		<li>
+			<a class="btn-comments" title="评论" href="#commentBox">
+				<svg class="icon" aria-hidden="true">
+					<use xlink:href="#csdnc-comments"></use>
+				</svg><br>评论
+			</a>
+		</li>
+				<li>
+			<a class="btn-comments" title="快问" href="#chatqa">
+				<svg class="icon" aria-hidden="true">
+					<use xlink:href="#csdnc-chat-qa"></use>
+				</svg><br>快问
+			</a>
+		</li>
+				<li class="bdsharebuttonbox">
+			<a class="btn-comments bds_weixin" data-cmd="weixin" title="微信分享">
+				<svg class="icon" aria-hidden="true">
+					<use xlink:href="#csdnc-wechat"></use>
+				</svg><br>微信
+			</a>
+		</li>
+		<li class="bdsharebuttonbox">
+			<a class="btn-comments bds_tsina" data-cmd="tsina" title="微博分享">
+				<svg class="icon" aria-hidden="true">
+					<use xlink:href="#csdnc-weibo"></use>
+				</svg><br>微博
+			</a>
+		</li>
+		<li class="bdsharebuttonbox">
+			<a class="btn-comments bds_qzone" data-cmd="qzone" title="QQ分享">
+				<svg class="icon" aria-hidden="true">
+					<use xlink:href="#csdnc-qq"></use>
+				</svg><br>QQ
+			</a>
+		</li>
+	</ul>
+</div>
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'https://csdnimg.cn/static/api/js/share.js?v=89860594'];</script>
+<script>
+    var recommendCount = 10;
+    recommendCount = recommendCount > 1 ? (recommendCount + (recommendCount>6 ? 2 : 1)) : recommendCount;
+    var articleTit = '编译原理学习笔记·关于四种文法的理解以及 如何根据语言描述给出正则式或相应文法';
+    var ChannelId = 37;
+    var articleId = '78209622';
+    var commentscount = 0;
+    var islock = false;
+    var curentUrl = "https://blog.csdn.net/jave_f/article/details/78209622";
+    var myUrl = "https://my.csdn.net/";
+    //1禁止评论，2正常
+    var commentAuth = 2;
+    //百度搜索
+    var baiduKey = "%E6%96%87%E6%B3%95%E4%BA%A7%E7%94%9F%E5%BC%8F";
+    var needInsertBaidu = false;
+</script>
+<script src="https://csdnimg.cn/public/sandalstrap/1.3/js/sandalstrap.min.js"></script>
+<script src="https://csdnimg.cn/release/phoenix/vendor/pagination/paging.js"></script>
+<script src='https://csdnimg.cn/public/common/gotop/js/goTop-v1.0.min.js?v201803151422'></script>
+<script>
+    GoTop({
+        right: 8,
+        hasReport: true,
+        reportFun: function() {
+            showReport(false,'编译原理学习笔记·关于四种文法的理解以及 如何根据语言描述给出正则式或相应文法');
+        }
+    })
+</script>
+<script src="https://csdnimg.cn/release/phoenix/template/js/common-bd54b21308.min.js"></script>
+<script src="https://csdnimg.cn/release/phoenix/template/js/detail-444d167241.min.js"></script>
+<script src="https://csdnimg.cn/release/phoenix/themes/skin-yellow/skin-yellow-22f3069ef3.min.js"></script>
+<script src="https://csdnimg.cn/search/baidu_search-1.1.2.js?v=201802071056&autorun=true&install=true&keyword=%E6%96%87%E6%B3%95%E4%BA%A7%E7%94%9F%E5%BC%8F"  type="text/javascript"></script>
+</body>
+<div class="box-box-default">
+    <a class="btn-remove">
+        关闭
+    </a>
+    <script type="text/javascript" src="//cee1.iteye.com/mhzzjepzz.js"></script>
+</div>
+<div class="box-box-large">
+    <a class="btn-remove">
+        关闭
+    </a>
+    <script type="text/javascript" src="//cee1.iteye.com/idvveasfs.js"></script>
+</div>
+</html>

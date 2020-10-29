@@ -1,0 +1,286 @@
+时时彩数据结构表
+注：1。如需要添加字段或者表请用红色字体
+	2．如果要删除某个表或字段请用灰色字体
+
+
+
+Lot_Bet_List 	--代购历史记录表
+
+字段	类型	中文说明	默认值	备注
+id	Int	主键		
+UserId	Int	用户ID		
+UserName	Varchar	用户名	‘’	
+PlayTypeId	Int	玩法ID	0	
+BonusNo	Varchar	期号		
+AnteNumber	Varchar	投注号码		
+Multiple	Int	倍数		
+Numbers	Int	注数		
+Money	Money	金额		
+IPAddress	Varchar	IP地址		
+BuyTime	Datetime	投注时间		
+IsGo	Bit	是否追号	0	0表示不追1表示追号
+ProjectId	Int	和买ID	0	
+StatusId	Int	状态ID		
+Secret	Varchar	加密字段		
+ManagerName	Varchar	处理人		
+ManagerRemarks	Varchar	备注		
+ManagerTime	Datetime	处理时间		
+BonusMoney	Money	中奖金额		
+BonusNumbers	Varchar	?开奖号码		
+
+
+
+
+
+Lot_Bet_Today 	--代购今日记录表
+
+字段	类型	中文说明	默认值	备注
+id	Int	主键		
+UserId	Int	用户ID		
+UserName	Varchar	用户名	‘’	
+PlayTypeId	Int	玩法ID	0	
+BonusNo	Varchar	期号		
+AnteNumber	Varchar	投注号码		
+Multiple	Int	倍数		
+Numbers	Int	注数		
+Money	Money	金额		
+IPAddress	Varchar	IP地址		
+BuyTime	Datetime	投注时间		
+IsGo	Bit	是否追号	0	0表示不追1表示追号
+ProjectId	Int	和买ID	0	
+StatusId	Int	状态ID		
+Secret	Varchar	加密字段		
+ManagerName	Varchar	处理人		
+ManagerRemarks	Varchar	备注		
+ManagerTime	Datetime	处理时间		
+BonusMoney	Money	中奖金额		
+BonusNumbers	Varchar	开奖号码		
+
+
+Lot_Bet_Games – 彩种种类
+
+字段	类型	中文说明	默认值	备注
+Id				
+GameName	Varchar	玩法种类		
+
+
+
+
+
+Lot_Bet_PlayTypes  -- 彩种类型表
+
+字段	类型	中文说明	默认值	备注
+Id				
+GameId	Int	玩法ID		
+PlayTypeName	varchar	玩法名称		
+				
+
+
+
+Lot_Bet_Status  -- 状态表
+
+字段	类型	中文说明	默认值	备注
+Id				
+StatusName	Varchar	状态名称		
+
+
+
+Lot_Bet_DateNO  -- 期号表
+
+字段	类型	中文说明	默认值	备注
+Id				
+GameId	Int	玩法ID	0	
+BonusNo	varchar	期号	‘’	
+AddTime	Datetime	添加时间		
+BeginTime	Datetime	本期的开始时间		
+EndTime	Datetime	本期的结束时间		
+BonusNubers	Varchar	开奖号码		
+SellMoney	Money	销售额	0	
+BonusMoney	Money	中将额	0	
+
+
+Lot_Bet_Actors  -=-  和买
+
+字段	类型	中文说明	默认值	备注
+Id				
+ProjectID	Int	和买ID	0	
+ActorID	Int	参与着d		
+ActorName	Varchar	参与人名		
+Money	Money	方案金额		
+ActorTime	Datetime	加入时间		
+Dedoct	Int	反点比例	0	
+				
+				
+
+Lot_Bet_Projects  -- 和买发起
+
+字段	类型	中文说明	默认值	备注
+Id				
+BetListID	Int	Lot_Bet_List表的ID		
+AutoId	Int	发起者id		
+AutoName	Varchar	发起人		
+ProjectName	Varchar	和买名称		
+ProjectDescription	Varchar	详细描述		
+Parts	Int	股数		
+Status	0	状态		
+DropTime	datetime	停止时间		
+
+
+
+
+
+
+
+
+Lot_UserInfo   --    用户信息
+
+字段	类型	中文说明	默认值	备注
+Id		用户编号		
+UserName	Varchar	用户名		
+UserPwd	Varchar	密码		
+TrueName	Varchar	真实姓名		
+UserIdentityCard	varchar	银行卡号		
+UserSex	Bit	性别	0	0男 1 女
+UserQQ	varchar	QQ		
+Email	varchar	Email		
+PassFaq	varchar	密码问题		
+PassDh	varchar	密码答案		
+Address	varchar	住址		
+Mobile	varchar	电话		
+RegTime	Datetime	注册时间		
+LastTime	Datetime	最后登陆时间		
+LoginTime	Datetime			
+IPAddress	Varchar	登陆IP		
+UserStatus	bit	用户状态		
+				
+
+Lot_Money_Info	---	帐户信息
+字段	类型	说明	默认值	备注
+Id	Int	自动编号		
+UserId	Int	用户编号		
+UserName	Varchar	用户名称		
+Balance	Money	帐户余额	0	
+Income	Money	总额	0	
+Spend	Money	花费总额	0	
+Intergral	Int	用户积分	0	
+ChargeMoney	Money	冲值总金额		
+FatchMoney	Money	提现总金额		
+BetMoney	Money	投注总金额		
+BonusMoney	Money	中奖总金额		
+AgentMoney	Money	代理提成总金额		
+IntergralMoney	Money	积分兑换总金额		
+Password	Varchar	提现密码		
+Percents	Int		0	
+Status	Bit	帐户状态	0	0表示正常，1表示停止
+
+Lot_Money_Log	--	帐户明细
+
+字段	类型	说明	默认值	备注
+Id	Int	自动编号		
+UserName	Varchar	用户名称		
+UserId	Int	用户编号		
+ShowMoney	Money	收支明细		
+Remarks	Varchar	说明		
+AddTime	Datetime	提交时间		
+
+Lot_Money_Get	--	金钱提现
+
+字段	类型	说明	默认值	备注
+Id	Int	自动编号		
+Userid	Int	用户编号		
+UserName	Varchar	用户名称		
+Money	Money	提现金额		
+BankName	Varchar	银行名称		
+BankCard	Varchar	银行卡号		
+BankAddress	Varchar	银行地址		
+AddTime	Datetime	提交时间		
+ManagerName	Varchar	处理人姓名		
+ManagerTime	Varchar	处理时间		
+ManagerRemarks	Varchar	处理说明		
+Status	Varchar	提现状态		
+
+
+Lot_News	--	新闻列表
+
+字段	类型	说明	默认值	备注
+Id	Int	自动编号		
+Title	Varchar	新闻标题		
+Typeid	Int	新闻类型		
+Content	Text	新闻内容		
+AddTime	Datetime	新闻提交时间		
+
+Lot_NewsTypes	--	新闻分类
+
+字段	类型	说明	默认值	备注
+Id	Int	自动编号		
+TyepName	Varchar	分类名称		
+FatherId	Int	父分类编号	0	
+
+Lot_Intergral_Log	--	积分明细
+
+字段	类型	说明	默认值	备注
+Id	Int	自动编号		
+Userid	Int	用户编号		
+UserName	Varchar	用户名		
+Intergrals	Int	操作积分数	0	
+Money	Money	兑换金钱	0	
+Remarks	Varchar	详细说明		
+AddTime	Datetime	提交时间		
+
+Lot_Intergral_Set		--	积分兑换设定
+
+字段	类型	说明	默认值	备注
+Id	Int	自动编号		
+Intergrals	Int	兑换积分数		
+Money	money	兑换金钱数		
+
+Lot_Agent_list	--	代理商列表
+
+字段	类型	说明	默认值	备注
+Id	Int	自动编号		
+AgentId	Int	代理的用户编号		
+AgentName	Varchar	代理的用户名称		
+Deduct	Int	代理的返点折扣	0	
+Url	Varchar	代理商域名		
+
+Lot_Agent_Members	--	代理下属会员列表
+
+字段	类型	说明	默认值	备注
+Id	Int	自动编号		
+Agentid	Int	代理的用户编号		
+AgentName	Varchar	代理的用户名称		
+MeberId	Int	下属的用户编号		
+
+Lot_Admin_Users		--	后台管理用户
+
+字段	类型	说明	默认值	备注
+Id	Int	自动编号		
+AdminUserName	Varchar	管理员帐户		
+NickName	Varchar	昵称		
+AdminPWD	Varchar	密码		
+TelNO	Varchar	联系电话		
+RoleID	int	用户角色		
+
+Lot_Admin_Roles		--		后台用户角色
+
+字段	类型	说明	默认值	备注
+Id	Int	自动编号		
+RoleName	Varchar	角色名称		
+
+Lot_Admin_Modules		--		后台管理模块
+
+字段	类型	说明	默认值	备注
+Id	Int	自动编号		
+ModuleName	Varchar	模块名称		
+Url	Varchar	模块连接地址		
+FatherId	Varchar	父模块编号	0	
+
+Lot_Price_Set		--		彩票奖金设置
+
+字段	类型	说明	默认值	备注
+Id	Int	自动编号		
+PlayTypeId	Int	时时彩玩法编号		
+PlayTypeName	Varchar	时时彩玩法名称		
+Price	Money	中奖金额		
+
+

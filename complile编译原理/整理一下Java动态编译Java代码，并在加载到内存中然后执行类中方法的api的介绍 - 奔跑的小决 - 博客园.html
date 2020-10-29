@@ -1,0 +1,406 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>整理一下Java动态编译Java代码，并在加载到内存中然后执行类中方法的api的介绍 - 奔跑的小决 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=-hy83QNg62d4qYibixJzxMJkbf1P9fTBlqv7SK5zVL01"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/red_autumnal_leaves/bundle-red_autumnal_leaves.css?v=ZipDsDzpG834fSe0WALuUK8hEhRoldtko072Ms-Etm81"/>
+<link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/red_autumnal_leaves/bundle-red_autumnal_leaves-mobile.css?v=d9LctKHRIQp9rreugMcQ1-UJuq_j1fo0GZXTXj8Bqrk1"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/benpaodexiaojue/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/benpaodexiaojue/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/benpaodexiaojue/wlwmanifest.xml"/>
+<script src="//common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+<script type="text/javascript">var currentBlogApp = 'benpaodexiaojue', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="/bundles/blog-common.js?v=d16NGD79qD3qnJt25hXDZ2sGoojamz2W5Rl4vT0CGVg1" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a id="lnkBlogLogo" href="http://www.cnblogs.com/benpaodexiaojue/"><img id="blogLogo" src="/Skins/custom/images/logo.gif" alt="返回主页" /></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/benpaodexiaojue/">奔跑的小决</a></h1>
+<h2></h2>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+<li><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/benpaodexiaojue/">首页</a></li>
+<li><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/%E5%A5%94%E8%B7%91%E7%9A%84%E5%B0%8F%E5%86%B3">联系</a></li>
+<li><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/benpaodexiaojue/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/benpaodexiaojue/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<span id="stats_post_count">随笔 - 15&nbsp; </span>
+<span id="stats_article_count">文章 - 1&nbsp; </span>
+<span id="stats-comment_count">评论 - 3</span>
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class = "post">
+		<h1 class = "postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/benpaodexiaojue/p/6972509.html">整理一下Java动态编译Java代码，并在加载到内存中然后执行类中方法的api的介绍</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body" class="blogpost-body"><p><strong>本文的资料来源：</strong>http://blog.sina.com.cn/s/blog_70279be20101dk0j.html</p>
+<p>&nbsp;</p>
+<p>近来要开发一个上传java文件，就能动态的将其加载到内存中并执行它的方法的小功能，</p>
+<p>在网上找到了一篇不错的api介绍，特将其记下，下面直接进入正题：</p>
+<p>步骤：</p>
+<p><strong>1.编译</strong></p>
+<ol>
+<li><span style="background-color: #ccffff;">public static Map&lt;String, byte[]&gt; compile(String javaName, String javaSrc) {</span></li>
+<li><span style="background-color: #ccffff;">&nbsp; JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();</span></li>
+<li><span style="background-color: #ccffff;">&nbsp; StandardJavaFileManager stdManager = compiler.getStandardFileManager(null, null, null);</span></li>
+<li><span style="background-color: #ccffff;">&nbsp; try (MemoryJavaFileManager manager = new MemoryJavaFileManager(stdManager)) {</span></li>
+<li><span style="background-color: #ccffff;">&nbsp; JavaFileObject javaFileObject = manager.makeStringSource(javaName, javaSrc);</span></li>
+<li><span style="background-color: #ccffff;">&nbsp; JavaCompiler.CompilationTask task = compiler.getTask(null, manager, null, null, null, Arrays.asList(javaFileObject));</span></li>
+<li><span style="background-color: #ccffff;">&nbsp; if (task.call())</span></li>
+<li><span style="background-color: #ccffff;">&nbsp; &nbsp;return manager.getClassBytes();</span></li>
+<li><span style="background-color: #ccffff;">&nbsp; } catch (IOException e) {</span></li>
+<li><span style="background-color: #ccffff;">&nbsp; &nbsp;e.printStackTrace();</span></li>
+<li><span style="background-color: #ccffff;">&nbsp; }</span></li>
+<li><span style="background-color: #ccffff;">&nbsp; &nbsp;return null;</span></li>
+<li><span style="background-color: #ccffff;">}</span></li>
+</ol>
+<p><strong><span style="color: #000000;">该方法的功能描述</span></strong>：通过类名和其代码（Java代码字符串），编译得到字节码，返回类名及其对应类的字节码，封装于Map中，</p>
+<p>&nbsp;值得注意的是，平常类中就编译出来的字节码只有一个类，但是考虑到<span style="color: #00ccff;">内部类</span>的情况，会出现很多个类名及其字节码，所以用Map封装方便。</p>
+<p><strong>参数详解</strong>：javaName,类名，一般就是我们上传Java文件的名字，javaSrc，Java代码的字符串</p>
+<p><strong>2.类的动态加载</strong></p>
+<ol>
+<li><span style="color: #000000; background-color: #ccffff;">public static class MemoryClassLoader extends URLClassLoader {</span></li>
+<li><span style="color: #000000; background-color: #ccffff;">Map&lt;String, byte[]&gt; classBytes = new HashMap&lt;String, byte[]&gt;();</span></li>
+<li><span style="color: #000000; background-color: #ccffff;"> public MemoryClassLoader(Map&lt;String, byte[]&gt; classBytes) {</span></li>
+<li><span style="color: #000000; background-color: #ccffff;"> super(new URL[0], MemoryClassLoader.class.getClassLoader());</span></li>
+<li><span style="color: #000000; background-color: #ccffff;"> this.classBytes.putAll(classBytes);</span></li>
+<li><span style="color: #000000; background-color: #ccffff;"> }</span></li>
+<li><span style="color: #000000; background-color: #ccffff;"> @Override</span></li>
+<li><span style="color: #000000; background-color: #ccffff;"> protected Class&lt;?&gt; findClass(String name) throws ClassNotFoundException {</span></li>
+<li><span style="color: #000000; background-color: #ccffff;"> byte[] buf = classBytes.get(name);</span></li>
+<li><span style="color: #000000; background-color: #ccffff;"> if (buf == null) {</span></li>
+<li><span style="color: #000000; background-color: #ccffff;"> return super.findClass(name);</span></li>
+<li><span style="color: #000000; background-color: #ccffff;"> }</span></li>
+<li><span style="color: #000000; background-color: #ccffff;"> classBytes.remove(name);</span></li>
+<li><span style="color: #000000; background-color: #ccffff;"> return defineClass(name, buf, 0, buf.length);</span></li>
+<li><span style="color: #000000; background-color: #ccffff;"> }</span></li>
+<li><span style="color: #000000; background-color: #ccffff;"> }</span></li>
+</ol>
+<p><span style="color: #000000; background-color: #ffffff;">功能：根据类名和字节码，先根据类名在内存中查找是否已存在该类，若不存在则调用URLClassLoader 的</span></p>
+<p><span style="color: #000000; background-color: #ffffff;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;defineClass方法加载该类。</span></p>
+<p><strong><span style="color: #000000; background-color: #ffffff;">3.调用动态加载进来的类的方法</span></strong></p>
+<p><span style="color: #000000; background-color: #ffffff;">&nbsp; &nbsp;</span></p>
+<ol>
+<li><span style="background-color: #ccffff;"> Class clazz = classLoader.loadClass("TestClass");</span></li>
+<li><span style="background-color: #ccffff;"> Object object = clazz.newInstance();</span></li>
+<li><span style="background-color: #ccffff;"> Method method = clazz.getMethod("add", int.class, int.class);</span></li>
+<li><span style="background-color: #ccffff;"> Object returnValue = method.invoke(object, a, b);</span></li>
+<li><span style="background-color: #ccffff;">}</span></li>
+</ol>
+<p>&nbsp;</p>
+<p>&nbsp;其实不一定非得用这种方法，可以调用Class.forName()获取Class对象都行。</p>
+<p>以下是一个小demo，来源：http://blog.sina.com.cn/s/blog_70279be20101dk0j.html</p>
+<p>&nbsp;</p>
+<ol>
+<li><span style="background-color: #ccffff;">import javax.tools.*;</span></li>
+<li><span style="background-color: #ccffff;">import java.io.*;</span></li>
+<li><span style="background-color: #ccffff;">import java.net.URI;</span></li>
+<li><span style="background-color: #ccffff;">import java.net.URL;</span></li>
+<li><span style="background-color: #ccffff;">import java.net.URLClassLoader;</span></li>
+<li><span style="background-color: #ccffff;">import java.nio.CharBuffer;</span></li>
+<li><span style="background-color: #ccffff;">import java.util.Arrays;</span></li>
+<li><span style="background-color: #ccffff;">import java.util.HashMap;</span></li>
+<li><span style="background-color: #ccffff;">import java.util.Map;</span></li>
+<li><span style="background-color: #ccffff;">&nbsp;</span></li>
+<li><span style="background-color: #ccffff;">public class DynamicLoader {</span></li>
+<li><span style="background-color: #ccffff;">    /**</span></li>
+<li><span style="background-color: #ccffff;">     * auto fill in the java-name with code, return null if cannot find the public class</span></li>
+<li><span style="background-color: #ccffff;">     * @param javaSrc source code string</span></li>
+<li><span style="background-color: #ccffff;">     * @return return the Map, the KEY means ClassName, the VALUE means bytecode.</span></li>
+<li><span style="background-color: #ccffff;">     */</span></li>
+<li><span style="background-color: #ccffff;">    public static Map&lt;String, byte[]&gt; compile(String javaSrc) {</span></li>
+<li><span style="background-color: #ccffff;">        Pattern pattern = Pattern.compile("public\\s+class\\s+(\\w+)");</span></li>
+<li><span style="background-color: #ccffff;">        Matcher matcher = pattern.matcher(javaSrc);</span></li>
+<li><span style="background-color: #ccffff;">        if (matcher.find())</span></li>
+<li><span style="background-color: #ccffff;">            return compile(matcher.group(1) + ".java", javaSrc);</span></li>
+<li><span style="background-color: #ccffff;">        return null;</span></li>
+<li><span style="background-color: #ccffff;">    }</span></li>
+<li>    </li>
+<li><span style="background-color: #ccffff;">    /**</span></li>
+<li><span style="background-color: #ccffff;">     * @param javaName the name of your public class,eg: &lt;code&gt;TestClass.java&lt;/code&gt;</span></li>
+<li><span style="background-color: #ccffff;">     * @param javaSrc source code string</span></li>
+<li><span style="background-color: #ccffff;">     * @return return the Map, the KEY means ClassName, the VALUE means bytecode.</span></li>
+<li><span style="background-color: #ccffff;">     */</span></li>
+<li><span style="background-color: #ccffff;">    public static Map&lt;String, byte[]&gt; compile(String javaName, String javaSrc) {</span></li>
+<li><span style="background-color: #ccffff;">        JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();</span></li>
+<li><span style="background-color: #ccffff;">        StandardJavaFileManager stdManager = compiler.getStandardFileManager(null, null, null);</span></li>
+<li><span style="background-color: #ccffff;">        try (MemoryJavaFileManager manager = new MemoryJavaFileManager(stdManager)) {</span></li>
+<li><span style="background-color: #ccffff;">            JavaFileObject javaFileObject = manager.makeStringSource(javaName, javaSrc);</span></li>
+<li><span style="background-color: #ccffff;">            JavaCompiler.CompilationTask task = compiler.getTask(null, manager, null, null, null, Arrays.asList(javaFileObject));</span></li>
+<li><span style="background-color: #ccffff;">            if (task.call())</span></li>
+<li><span style="background-color: #ccffff;">                return manager.getClassBytes();</span></li>
+<li><span style="background-color: #ccffff;">        } catch (IOException e) {</span></li>
+<li><span style="background-color: #ccffff;">            e.printStackTrace();</span></li>
+<li><span style="background-color: #ccffff;">        }</span></li>
+<li><span style="background-color: #ccffff;">        return null;</span></li>
+<li><span style="background-color: #ccffff;">    }</span></li>
+<li><span style="background-color: #ccffff;">    public static class MemoryClassLoader extends URLClassLoader {</span></li>
+<li><span style="background-color: #ccffff;">        Map&lt;String, byte[]&gt; classBytes = new HashMap&lt;String, byte[]&gt;();</span></li>
+<li><span style="background-color: #ccffff;">        public MemoryClassLoader(Map&lt;String, byte[]&gt; classBytes) {</span></li>
+<li><span style="background-color: #ccffff;">            super(new URL[0], MemoryClassLoader.class.getClassLoader());</span></li>
+<li><span style="background-color: #ccffff;">            this.classBytes.putAll(classBytes);</span></li>
+<li><span style="background-color: #ccffff;">        }</span></li>
+<li><span style="background-color: #ccffff;">        @Override</span></li>
+<li><span style="background-color: #ccffff;">        protected Class&lt;?&gt; findClass(String name) throws ClassNotFoundException {</span></li>
+<li><span style="background-color: #ccffff;">            byte[] buf = classBytes.get(name);</span></li>
+<li><span style="background-color: #ccffff;">            if (buf == null) {</span></li>
+<li><span style="background-color: #ccffff;">                return super.findClass(name);</span></li>
+<li><span style="background-color: #ccffff;">            }</span></li>
+<li><span style="background-color: #ccffff;">            classBytes.remove(name);</span></li>
+<li><span style="background-color: #ccffff;">            return defineClass(name, buf, 0, buf.length);</span></li>
+<li><span style="background-color: #ccffff;">        }</span></li>
+<li><span style="background-color: #ccffff;">    }</span></li>
+<li><span style="background-color: #ccffff;">}</span></li>
+<li><span style="background-color: #ccffff;">&nbsp;</span></li>
+<li><span style="background-color: #ccffff;"> * MemoryJavaFileManager.java</span></li>
+<li><span style="background-color: #ccffff;"> * @author A. Sundararajan</span></li>
+<li><span style="background-color: #ccffff;"> */</span></li>
+<li><span style="background-color: #ccffff;">/**</span></li>
+<li><span style="background-color: #ccffff;"> * JavaFileManager that keeps compiled .class bytes in memory.</span></li>
+<li><span style="background-color: #ccffff;"> */</span></li>
+<li><span style="background-color: #ccffff;">@SuppressWarnings("unchecked")</span></li>
+<li><span style="background-color: #ccffff;">final class MemoryJavaFileManager extends ForwardingJavaFileManager {</span></li>
+<li><span style="background-color: #ccffff;">    /**</span></li>
+<li><span style="background-color: #ccffff;">     * Java source file extension.</span></li>
+<li><span style="background-color: #ccffff;">     */</span></li>
+<li><span style="background-color: #ccffff;">    private final static String EXT = ".java";</span></li>
+<li><span style="background-color: #ccffff;">    private Map&lt;String, byte[]&gt; classBytes;</span></li>
+<li><span style="background-color: #ccffff;">    public MemoryJavaFileManager(JavaFileManager fileManager) {</span></li>
+<li><span style="background-color: #ccffff;">        super(fileManager);</span></li>
+<li><span style="background-color: #ccffff;">        classBytes = new HashMap&lt;String, byte[]&gt;();</span></li>
+<li><span style="background-color: #ccffff;">    }</span></li>
+<li><span style="background-color: #ccffff;">    public Map&lt;String, byte[]&gt; getClassBytes() {</span></li>
+<li><span style="background-color: #ccffff;">        return classBytes;</span></li>
+<li><span style="background-color: #ccffff;">    }</span></li>
+<li><span style="background-color: #ccffff;">    public void close() throws IOException {</span></li>
+<li><span style="background-color: #ccffff;">        classBytes = new HashMap&lt;String, byte[]&gt;();</span></li>
+<li><span style="background-color: #ccffff;">    }</span></li>
+<li><span style="background-color: #ccffff;">    public void flush() throws IOException {</span></li>
+<li><span style="background-color: #ccffff;">    }</span></li>
+<li><span style="background-color: #ccffff;">    /**</span></li>
+<li><span style="background-color: #ccffff;">     * A file object used to represent Java source coming from a string.</span></li>
+<li><span style="background-color: #ccffff;">     */</span></li>
+<li><span style="background-color: #ccffff;">    private static class StringInputBuffer extends SimpleJavaFileObject {</span></li>
+<li><span style="background-color: #ccffff;">        final String code;</span></li>
+<li><span style="background-color: #ccffff;">        StringInputBuffer(String name, String code) {</span></li>
+<li><span style="background-color: #ccffff;">            super(toURI(name), Kind.SOURCE);</span></li>
+<li><span style="background-color: #ccffff;">            this.code = code;</span></li>
+<li><span style="background-color: #ccffff;">        }</span></li>
+<li><span style="background-color: #ccffff;">        public CharBuffer getCharContent(boolean ignoreEncodingErrors) {</span></li>
+<li><span style="background-color: #ccffff;">            return CharBuffer.wrap(code);</span></li>
+<li><span style="background-color: #ccffff;">        }</span></li>
+<li><span style="background-color: #ccffff;">        public Reader openReader() {</span></li>
+<li><span style="background-color: #ccffff;">            return new StringReader(code);</span></li>
+<li><span style="background-color: #ccffff;">        }</span></li>
+<li><span style="background-color: #ccffff;">    }</span></li>
+<li><span style="background-color: #ccffff;">    /**</span></li>
+<li><span style="background-color: #ccffff;">     * A file object that stores Java bytecode into the classBytes map.</span></li>
+<li><span style="background-color: #ccffff;">     */</span></li>
+<li><span style="background-color: #ccffff;">    private class ClassOutputBuffer extends SimpleJavaFileObject {</span></li>
+<li><span style="background-color: #ccffff;">        private String name;</span></li>
+<li><span style="background-color: #ccffff;">        ClassOutputBuffer(String name) {</span></li>
+<li><span style="background-color: #ccffff;">            super(toURI(name), Kind.CLASS);</span></li>
+<li><span style="background-color: #ccffff;">            this.name = name;</span></li>
+<li><span style="background-color: #ccffff;">        }</span></li>
+<li><span style="background-color: #ccffff;">        public OutputStream openOutputStream() {</span></li>
+<li><span style="background-color: #ccffff;">            return new FilterOutputStream(new ByteArrayOutputStream()) {</span></li>
+<li><span style="background-color: #ccffff;">                public void close() throws IOException {</span></li>
+<li><span style="background-color: #ccffff;">                    out.close();</span></li>
+<li><span style="background-color: #ccffff;">                    ByteArrayOutputStream bos = (ByteArrayOutputStream) out;</span></li>
+<li><span style="background-color: #ccffff;">                    classBytes.put(name, bos.toByteArray());</span></li>
+<li><span style="background-color: #ccffff;">                }</span></li>
+<li><span style="background-color: #ccffff;">            };</span></li>
+<li><span style="background-color: #ccffff;">        }</span></li>
+<li><span style="background-color: #ccffff;">    }</span></li>
+<li><span style="background-color: #ccffff;">    public JavaFileObject getJavaFileForOutput(JavaFileManager.Location location,</span></li>
+<li><span style="background-color: #ccffff;">                                               String className,</span></li>
+<li><span style="background-color: #ccffff;">                                               JavaFileObject.Kind kind,</span></li>
+<li><span style="background-color: #ccffff;">                                               FileObject sibling) throws IOException {</span></li>
+<li><span style="background-color: #ccffff;">        if (kind == JavaFileObject.Kind.CLASS) {</span></li>
+<li><span style="background-color: #ccffff;">            return new ClassOutputBuffer(className);</span></li>
+<li><span style="background-color: #ccffff;">        } else {</span></li>
+<li><span style="background-color: #ccffff;">            return super.getJavaFileForOutput(location, className, kind, sibling);</span></li>
+<li><span style="background-color: #ccffff;">        }</span></li>
+<li><span style="background-color: #ccffff;">    }</span></li>
+<li><span style="background-color: #ccffff;">    static JavaFileObject makeStringSource(String name, String code) {</span></li>
+<li><span style="background-color: #ccffff;">        return new StringInputBuffer(name, code);</span></li>
+<li><span style="background-color: #ccffff;">    }</span></li>
+<li><span style="background-color: #ccffff;">    static URI toURI(String name) {</span></li>
+<li><span style="background-color: #ccffff;">        File file = new File(name);</span></li>
+<li><span style="background-color: #ccffff;">        if (file.exists()) {</span></li>
+<li><span style="background-color: #ccffff;">            return file.toURI();</span></li>
+<li><span style="background-color: #ccffff;">        } else {</span></li>
+<li><span style="background-color: #ccffff;">            try {</span></li>
+<li><span style="background-color: #ccffff;">                final StringBuilder newUri = new StringBuilder();</span></li>
+<li><span style="background-color: #ccffff;">                newUri.append("mfm:///");</span></li>
+<li><span style="background-color: #ccffff;">                newUri.append(name.replace('.', '/'));</span></li>
+<li><span style="background-color: #ccffff;">                if (name.endsWith(EXT)) newUri.replace(newUri.length() - EXT.length(), newUri.length(), EXT);</span></li>
+<li><span style="background-color: #ccffff;">                return URI.create(newUri.toString());</span></li>
+<li><span style="background-color: #ccffff;">            } catch (Exception exp) {</span></li>
+<li><span style="background-color: #ccffff;">                return URI.create("mfm:///com/sun/script/java/java_source");</span></li>
+<li><span style="background-color: #ccffff;">            }</span></li>
+<li><span style="background-color: #ccffff;">        }</span></li>
+<li><span style="background-color: #ccffff;">    }</span></li>
+<li><span style="background-color: #ccffff;">}</span></li>
+</ol>
+<p><span style="background-color: #ffffff;">测试代码如下：</span></p>
+<p>&nbsp;</p>
+<ol>
+<li><span style="background-color: #ccffff;">import org.junit.Assert;</span></li>
+<li><span style="background-color: #ccffff;">import org.junit.Test;</span></li>
+<li><span style="background-color: #ccffff;">import java.lang.reflect.InvocationTargetException;</span></li>
+<li><span style="background-color: #ccffff;">import java.lang.reflect.Method;</span></li>
+<li><span style="background-color: #ccffff;">import java.util.Iterator;</span></li>
+<li><span style="background-color: #ccffff;">import java.util.Map;</span></li>
+<li><span style="background-color: #ccffff;">import java.util.Random;</span></li>
+<li><span style="background-color: #ccffff;">public class DynamicLoaderTestCase {</span></li>
+<li><span style="background-color: #ccffff;">    private String javaSrc = "public class TestClass{" +</span></li>
+<li><span style="background-color: #ccffff;">            "public void sayHello(String msg) {" +</span></li>
+<li><span style="background-color: #ccffff;">            "System.out.printf(\"Hello %s! This message from a Java String.%n\",msg);" +</span></li>
+<li><span style="background-color: #ccffff;">            "}" +</span></li>
+<li><span style="background-color: #ccffff;">            "public int add(int a,int b){" +</span></li>
+<li><span style="background-color: #ccffff;">            "return a+b;" +</span></li>
+<li><span style="background-color: #ccffff;">            "}" +</span></li>
+<li><span style="background-color: #ccffff;">            "}";</span></li>
+<li><span style="background-color: #ccffff;">    @Test</span></li>
+<li><span style="background-color: #ccffff;">    public void testCompile() {</span></li>
+<li><span style="background-color: #ccffff;">        Map&lt;String, byte[]&gt; bytecode = DynamicLoader.compile("TestClass.java", javaSrc);</span></li>
+<li><span style="background-color: #ccffff;">        for (Iterator&lt;String&gt; iterator = bytecode.keySet().iterator(); iterator.hasNext(); ) {</span></li>
+<li><span style="background-color: #ccffff;">            String key = iterator.next();</span></li>
+<li><span style="background-color: #ccffff;">            byte[] code = bytecode.get(key);</span></li>
+<li><span style="background-color: #ccffff;">            System.out.printf("Class: %s, Length: %d%n", key, code.length);</span></li>
+<li><span style="background-color: #ccffff;">        }</span></li>
+<li><span style="background-color: #ccffff;">        // Since the compiler and compiler options are different, the size of the bytes may be inconsistent.</span></li>
+<li><span style="background-color: #ccffff;">        Assert.assertEquals(558, bytecode.get("TestClass").length);</span></li>
+<li><span style="background-color: #ccffff;">    }</span></li>
+<li><span style="background-color: #ccffff;">    @Test</span></li>
+<li><span style="background-color: #ccffff;">    public void testInvoke() throws ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {</span></li>
+<li><span style="background-color: #ccffff;">        Random random = new Random();</span></li>
+<li><span style="background-color: #ccffff;">        int a = random.nextInt(1024);</span></li>
+<li><span style="background-color: #ccffff;">        int b = random.nextInt(1024);</span></li>
+<li><span style="background-color: #ccffff;">        Map&lt;String, byte[]&gt; bytecode = DynamicLoader.compile("TestClass.java", javaSrc);</span></li>
+<li><span style="background-color: #ccffff;">        DynamicLoader.MemoryClassLoader classLoader = new DynamicLoader.MemoryClassLoader(bytecode);</span></li>
+<li><span style="background-color: #ccffff;">        Class clazz = classLoader.loadClass("TestClass");</span></li>
+<li><span style="background-color: #ccffff;">        Object object = clazz.newInstance();</span></li>
+<li><span style="background-color: #ccffff;">        Method method = clazz.getMethod("add", int.class, int.class);</span></li>
+<li><span style="background-color: #ccffff;">        Object returnValue = method.invoke(object, a, b);</span></li>
+<li><span style="background-color: #ccffff;">        Assert.assertEquals(a + b, returnValue);</span></li>
+<li><span style="background-color: #ccffff;">    }</span></li>
+<li><span style="background-color: #ccffff;">}</span></li>
+</ol>
+<p><span style="background-color: #ccffff;">&nbsp;</span></p>
+<p><span style="background-color: #ffffff;">在开发的过程中，我们将上传的Java文件动态编译，加载到Tomcat的容器中，因此不能用Java的classloader,</span></p>
+<p><span style="background-color: #ffffff;">我们用到了WebappClassLoader</span></p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+		</div>
+		<div class = "postDesc">posted @ <span id="post-date">2017-06-09 16:19</span> <a href='http://www.cnblogs.com/benpaodexiaojue/'>奔跑的小决</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>)  <a href ="https://i.cnblogs.com/EditPosts.aspx?postid=6972509" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(6972509);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=247505,cb_entryId=6972509,cb_blogApp=currentBlogApp,cb_blogUserGuid='c159d799-d867-e511-9fc1-ac853d9f53cc',cb_entryCreatedDate='2017/6/9 16:19:00';loadViewCount(cb_entryId);var cb_postType=1;</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='cnblogs_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<div id='cnblogs_c2' class='c_ad_block'></div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright &copy;2018 奔跑的小决
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+</body>
+</html>

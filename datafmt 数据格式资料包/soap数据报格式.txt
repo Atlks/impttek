@@ -1,0 +1,103 @@
+request-->
+GET /web-services/Circle?WSDL HTTP/1.0
+User-Agent: Java1.4.2_08
+Host: 127.0.0.1:7003
+Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+Connection: Keep-Alive
+
+POST /web-services/Circle HTTP/1.0
+Content-Type: text/xml; charset=utf-8
+SOAPAction: ""
+User-Agent: Java1.4.2_08
+Host: 127.0.0.1:7003
+Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+Connection: Keep-Alive
+Content-Length: 484
+
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+   <env:Envelope xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <env:Body env:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">  //指明了JAVA语言和SOAP之间的映射
+         <m:countSize xmlns:m="http://webserviceapp">
+            <doubleVal xsi:type="xsd:double">1.2</doubleVal>   //XML的xsd:double的类型到JAVA的转换
+         </m:countSize>
+      </env:Body>
+   </env:Envelope>
+
+
+
+response-->
+HTTP/1.1 200 OK
+Date: Thu, 08 Mar 2007 04:13:18 GMT
+Content-Length: 3054
+Content-Type: text/xml
+Connection: Keep-Alive
+
+<?xml version="1.0" encoding="UTF-8"?>
+   <definitions  xmlns:tns="http://webserviceapp"  xmlns:wsr="http://www.openuri.org/2002/10/soap/reliability/"  xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"  xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"  xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"  xmlns:soap12enc="http://www.w3.org/2003/05/soap-encoding"  xmlns:conv="http://www.openuri.org/2002/04/wsdl/conversation/"  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"  xmlns:s="http://www.w3.org/2001/XMLSchema"  xmlns="http://schemas.xmlsoap.org/wsdl/"  targetNamespace="http://webserviceapp"> 
+      <message   name="countLength">  
+         <part    xmlns:partns="http://www.w3.org/2001/XMLSchema"    type="partns:double"    name="doubleVal">  </part> 
+      </message> 
+      <message   name="countLengthResponse">  
+         <part    xmlns:partns="http://www.w3.org/2001/XMLSchema"    type="partns:double"    name="result">  </part> 
+      </message> 
+      <message   name="countSize">  
+         <part    xmlns:partns="http://www.w3.org/2001/XMLSchema"    type="partns:double"    name="doubleVal">  </part> 
+      </message> 
+      <message   name="countSizeResponse">  
+         <part    xmlns:partns="http://www.w3.org/2001/XMLSchema"    type="partns:double"    name="result">  </part> 
+      </message> 
+      <portType   name="CirclePort">  
+         <operation    name="countLength">   
+            <input     message="tns:countLength">   </input>   
+            <output     message="tns:countLengthResponse">   </output>  
+         </operation>  
+         <operation    name="countSize">   
+            <input     message="tns:countSize">   </input>   
+            <output     message="tns:countSizeResponse">   </output>  
+         </operation> 
+      </portType> 
+      <binding   type="tns:CirclePort"   name="CirclePort">  
+         <soap:binding    style="rpc"    transport="http://schemas.xmlsoap.org/soap/http">  </soap:binding>  
+         <operation    name="countLength">   
+            <soap:operation     style="rpc"     soapAction="">   </soap:operation>   
+            <input>    
+               <soap:body      namespace="http://webserviceapp"      encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"      use="encoded">    </soap:body>   
+            </input>   
+            <output>    
+               <soap:body      namespace="http://webserviceapp"      encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"      use="encoded">    </soap:body>   
+            </output>  
+         </operation>  
+         <operation    name="countSize">   
+            <soap:operation     style="rpc"     soapAction="">   </soap:operation>   
+            <input>    
+               <soap:body      namespace="http://webserviceapp"      encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"      use="encoded">    </soap:body>   
+            </input>   
+            <output>    
+               <soap:body      namespace="http://webserviceapp"      encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"      use="encoded">    </soap:body>   
+            </output>  
+         </operation> 
+      </binding> 
+      <service   name="Circle">  
+         <port    name="CirclePort"    binding="tns:CirclePort">   
+            <soap:address     location="http://127.0.0.1:7003/web-services/Circle">   </soap:address>  
+         </port> 
+      </service>
+   </definitions>HTTP/1.1 200 OK
+Date: Thu, 08 Mar 2007 04:13:18 GMT
+Content-Length: 508
+Content-Type: text/xml; charset=utf-8
+Connection: Keep-Alive
+Set-Cookie: JSESSIONID=FvNphbHCvsW1mqGJ8Ttmy0L3wvVTjj8w5v7vYFNg0j2jR6T8GHh1!944292174; path=/
+
+
+   <?xml version="1.0" encoding="utf-8" standalone="yes"?>
+      <env:Envelope xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+         <env:Body env:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+            <m:countSizeResponse xmlns:m="http://webserviceapp">
+               <result xsi:type="xsd:double">4.523893421169302</result>
+            </m:countSizeResponse>
+         </env:Body>
+      </env:Envelope>
+
+
+

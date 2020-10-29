@@ -1,0 +1,135 @@
+atitit.api设计 方法 指南 手册 v2 q929.docx
+atitit.api设计原则与方法
+
+
+	1. 归一化（锤子钉子理论）	1
+	1.1. 链式方法	2
+	1.2. 规则5：建立返回值类型	2
+	1.3. 参数接收 JSON 对象	2
+	1.4. 参数默认值	2
+	1.5. 命名参数 support by map	2
+	1.6.  处理类型 类型自动转换	4
+	1.7.  处理 undefined null  empty	5
+	1.8. .使用结构化语法	5
+	1.9. 设置和获取操作，可以合二为一；方法越多，文档可能越难写 jq.val()	5
+	2. 扩展性	5
+	2.1. 回调（callbacks）	5
+	2.2. 事件（events）	5
+	3. 处理错误 throw friendly ex	6
+	4. 可预测性 兼容性	6
+	4.1. 参考	6
+
+
+归一化（锤子钉子理论）
+
+链式方法
+规则5：建立返回值类型
+
+当涉及到返回值类型时，你应该创建一致的、正规的API，下面提供一套设置规则（你可能会对下面的规则存在异议）：
+当方法返回一个单独的对象，但并没有对象被发现时，应该返回null。
+当方法返回多个对象，但并没有对象被发现时，应该返回空List、Set、Map、array等，而不是null。
+方法应该抛异常以防万一
+对于上面的1、2条，最好的实践应该是：
+抛出ObjectNotFoundExceptions当没有对象被发现时
+ 
+不要返回null，一般以throw ex 尾号。。除非专门一个XXretNull的方法.. Null方便的if判断..
+参数接收 JSON 对象
+与其接收一堆参数，不如接收一个 JSON 对象：
+参数默认值
+参数最好有默认值，通过 jQuery.extend() , _.extend() 和 Protoype 的 Object.extend，可以覆盖预设的默认值。
+
+命名参数 support by map
+接收 map 映射参数，回调或者序列化的属性名，不仅让你的 API 更干净，而且使用起来更舒服、高效。
+
+jQuery 的  css()  方法可以给 DOM 元素设置样式：
+JavaScript
+
+1
+2
+3
+4
+5
+jQuery("#some-selector")
+  .css("background", "red")
+  .css("color", "white")
+  .css("font-weight", "bold")
+  .css("padding", 10);
+这个方法可以接受一个 JSON 对象：
+JavaScript
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+jQuery("#some-selector").css({
+  "background" : "red",
+  "color" : "white",
+  "font-weight" : "bold",
+  "padding" : 10
+});
+ 
+// 通过传一个 map 映射绑定事件
+jQuery("#some-selector").on({
+  "click" : myClickHandler,
+  "keyup" : myKeyupHandler,
+  "change" : myChangeHandler
+});
+ 
+// 为多个事件绑定同一个处理函数
+jQuery("#some-selector").on("click keyup change", myEventHandler);
+ 处理类型 类型自动转换
+定义方法的时候，需要决定它可以接收什么样的参数。我们不清楚人们如何使用我们的代码，但可以更有远见，考虑支持哪些参数类型。
+// 修改后的代码
+DateInterval.prototype.days = function(start, end) {
+  if (!(start instanceof Date)) {
+    start = new Date(start);
+  }
+  if (!(end instanceof Date)) {
+    end = new Date(end);
+  }
+ 
+  return Math.floor((end.getTime() - start.getTime()) / 86400000);
+};
+加了短短的 6 行代码，我们的方法强大到可以接收  Date 对象，数字的时间戳，甚至像 Sat Sep 08 2012 15:34:35 GMT+0200 (CEST)  这样的字符串。
+ 处理 undefined null  empty
+
+为了使你的 API 更健壮，需要鉴别是否真
+
+.使用结构化语法
+使用结构化的API语法：用thing.action或thing.property代替do_action_with_thing。语法将自然而然地适应模块化的方法，其中每个模块是一个类。
+
+设置和获取操作，可以合二为一；方法越多，文档可能越难写 jq.val()
+扩展性
+回调（callbacks）
+通过回调， API 用户可以覆盖你的某一部分代码。把一些需要自定义的功能开放成可配置的回调函数，允许 API 用户轻松覆盖你的默认代码。
+API 接口一旦接收回调，确保在文档中加以说明，并提供代码示例。
+事件（events）
+事件接口最好见名知意，可以自由选择事件名字，避免与原生事件 重名。
+处理错误 throw friendly ex
+不是所有的错误都对开发者调试代码有用
+同时俩个方法返回null和ex 
+Ex对大部分情况有用，单判断场合代码太多。Null则有用。。
+对于类库开发者，最好俩个都提供即可。工用户select
+可预测性 兼容性
+好的 API 具有可预测性，开发者可以根据例子推断它的用法。
+Modernizr’s 特性检测 是个例子：
+a) 它使用的属性名完全与 HTML5、CSS 概念和 API 相匹配
+反面例子 反模式
+
+参考
+优秀API设计的十大原则 - 51CTO.COM.html
+设计优秀API的五大规则-CSDN.NET.html
+JavaScript API 设计原则 - WEB前端 - 伯乐在线.html
+

@@ -1,0 +1,68 @@
+Atitit. 二进制数据ascii表示法，与base64编码解码api 设计标准化总结4cli.docx
+
+
+	1. Base64编码，	1
+	1.1. 子模式 urlsafe Or  url unsafe	1
+	2. bin2hex() ,Quoted-printable ,UUencode	2
+	3. Base64常用api	2
+	3.1. ------------解码api	2
+	3.2. decode(String s, OutputStream out)	2
+	3.3. Base64  decode_retByteArr(String s)	2
+	3.4. String decode(String s)	2
+	3.5. ----------------------编码api	2
+	3.6. 根据字符串，字节数组，stream三个模式...	2
+	3.7. Php版本base64_decode	3
+	4. Atibase64功能说明	3
+	4.1. 支持urlsafe 模式	3
+	4.2. 支持自定义输入输出字符串文本字符集编码模式	3
+	4.3. 支持直接输出字节数组	3
+	4.4. 支持流式io，适应超大文件下的base64编码	3
+	4.5. Api 兼容java php俩种模式	3
+	4.6. 多引擎模式，有效解决了类库冲突	3
+	4.7. 自定义base64码表功能（暂在规划）	3
+	4.8. Cli与api sdk接口	3
+	5. 常用的base64类库	3
+	6. 参考	3
+
+	Base64编码，
+是我们程序开发中经常使用到的编码方法。它是一种基于用64个可打印字符来表示二进制数据的表示方法。它通常用作存储、传输一些二进制数据编码方法！也是MIME（多用途互联网邮件扩展，主要用作电子邮件标准）中一种可打印字符表示二进制数据的常见编码方法！它其实只是定义用可打印字符传输内容一种方法，并不会产生新的字符集！ 
+子模式 urlsafe Or  url unsafe
+
+
+  case 62: c = isURLSafe? '-': '+'; break;
+          case 63: c = isURLSafe? '_': '/'; break;
+          default: throw new RuntimeException("Cannot happen.");
+
+
+  bin2hex() ,Quoted-printable ,UUencode 
+Quoted-printable 编码介绍、编码解码转换-程默的博客.html
+UUencode 编码，UU编码介绍、UUencode编码转换原理、算法-程默的博客.html
+Base64常用api
+------------解码api
+decode(String s, OutputStream out)
+Base64  decode_retByteArr(String s)
+   String decode(String s)  
+----------------------编码api
+根据字符串，字节数组，stream三个模式...
+
+
+
+Php版本base64_decode
+Atibase64功能说明
+支持urlsafe 模式
+支持自定义输入输出字符串文本字符集编码模式
+支持直接输出字节数组
+支持流式io，适应超大文件下的base64编码
+Api 兼容java php俩种模式
+多引擎模式，有效解决了类库冲突
+自定义base64码表功能（暂在规划）
+Cli与api sdk接口
+常用的base64类库
+Apache common codec
+Jdk
+
+
+参考
+Atitit.字节数组转字符串 base64 base16 Quoted-printable 编码原理设计 attilax 总结
+
+

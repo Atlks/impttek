@@ -1,0 +1,40 @@
+Atitit.js url的编码 escape,encodeURI,encodeURIComponent  attilax 的大总结
+
+
+
+
+js对文字进行编码涉及3个函数：escape,encodeURI,encodeURIComponent
+，相应3个解码函数：unescape,decodeURI,decodeURIComponent
+
+
+Escape
+这个是escape对0-255以外的unicode值进行编码时输出%u****格式，而在的utf8   %**%**%**格式。。
+其它情况下escape，encodeURI，encodeURIComponent编码结果相同。
+
+这个的特点是方便人类读取转换
+
+
+escape不编码字符有69个：*，+，-，.，/，@，_，0-9，a-z，A-Z
+
+
+进行url跳转时可以整体使用encodeURI
+这个用来给url中的参数值编码。。这样就不要一个个拆分编码在拼接了。。
+例如：Location.href=encodeURI(_http://cang.baidu.com/do/s?word=ç¾åº¦&ct=21_);
+
+
+整体参数编码使用传递参数时需要使用encodeURIComponent，
+这样组合的url才不会被#等特殊字符截断。                            
+例如：<script language="javascript">document.write('<a href="http://passport.baidu.com/?logout&aid=7&u='+encodeURIComponent ("http://cang.baidu.com/bruce42")+'">退出</a>');</script>
+
+encodeURI不编码字符有82个：!，#，$，&，'，(，)，*，+，,，-，.，/，:，;，=，?，@，_，~，0-9，a-z，A-Z
+encodeURIComponent不编码字符有71个：!， '，(，)，*，-，.，_，~，0-9，a-z，A-Z
+
+
+这个编码是用utf8的。。不收html也的meta 编码设置的影响。
+参考
+javascript中escape()、unescape()、encodeURI()、encodeURIComponent()、decodeURI()、decodeURIComponent()比较 - 唔愛吃蘋果 - 博客园.htm
+
+
+
+
+

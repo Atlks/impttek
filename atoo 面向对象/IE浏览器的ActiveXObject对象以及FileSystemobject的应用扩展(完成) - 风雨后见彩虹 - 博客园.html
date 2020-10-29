@@ -1,0 +1,648 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>IE浏览器的ActiveXObject对象以及FileSystemobject的应用扩展(完成) - 风雨后见彩虹 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=-hy83QNg62d4qYibixJzxMJkbf1P9fTBlqv7SK5zVL01"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/darkgreentrip/bundle-darkgreentrip.css?v=xPXJVC4GCITs1yYYgSeLkcicCxapqseaPVQLFGMO1wc1"/>
+<link type="text/css" rel="stylesheet" href="/blog/customcss/172908.css?v=lj7qvCvzaaA6Yht2Ksn8ov%2bKupc%3d"/>
+<link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/darkgreentrip/bundle-darkgreentrip-mobile.css?v=6NcJHqsIyaE4w19VtgFvCFahrnr2rYCTRRTdxlMDhhQ1"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/moqiutao/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/moqiutao/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/moqiutao/wlwmanifest.xml"/>
+<script src="//common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+<script type="text/javascript">var currentBlogApp = 'moqiutao', cb_enable_mathjax=true;var isLogined=false;</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'blogpost-body', processEscapes: true },
+        TeX: { 
+            equationNumbers: { autoNumber: ['AMS'], useLabelIds: true }, extensions: ['extpfeil.js'] },
+            'HTML-CSS': { linebreaks: { automatic: true } },
+            SVG: { linebreaks: { automatic: true } }
+        });
+    </script><script src="//mathjax.cnblogs.com/2_7_2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script src="/bundles/blog-common.js?v=d16NGD79qD3qnJt25hXDZ2sGoojamz2W5Rl4vT0CGVg1" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+<!--PageBeginHtml Block Begin-->
+<script src="https://files.cnblogs.com/files/moqiutao/highlight.pack.js"></script>
+<script>
+$(document).ready(function() {
+
+hljs.initHighlightingOnLoad();
+});
+
+$(document).ready(function() {
+  $('pre').each(function(i, block) {
+   $(this).find('span').removeAttr('style');
+    hljs.highlightBlock(block);
+  });
+ $(".cnblogs_code_toolbar").remove();
+});
+
+</script>
+
+<script src="https://files.cnblogs.com/files/moqiutao/bootstrap.scrollspy.js"></script>
+<script src="https://files.cnblogs.com/files/moqiutao/generateDirTitle.js"></script>
+<script src="https://files.cnblogs.com/files/moqiutao/generateDir.js"></script>
+<style>
+.generationcatListTitle{font-weight:bold;font-size: 2em; margin-bottom: 5px;}
+.postBody .directoryDiv {/*background: #F6F6F6;*/ padding: 10px 0 20px 10px;border-radius: 5px;box-shadow: 0 1px 4px #827f7f;}
+.postBody .directoryDiv a{text-decoration:none;border-bottom: 1px dotted #333;/*border-bottom:0;color:#390;*/}
+.postBody .directoryDiv a:hover{color:red;border-bottom: 1px dotted red;}
+.directoryDiv .listCon>ul>li>a{}
+
+
+#sideBar{position: relative;border-left:1px solid #e9e9e9}
+#sideBar .directoryDiv ul{padding:0;/*list-style-type: square;*/list-style-type:none;}
+#sideBar .directoryDiv ul.nav{position:relative;z-index:2;font-family: Helvetica Neue,Helvetica,Arial,PingFang SC,Hiragino Sans GB,WenQuanYi Micro Hei,Microsoft Yahei,sans-serif;}
+#sideBar li{/*list-style-type:square;list-style-position: inside;*/padding-left:18px;color:#009a61;}
+#sideBar .directoryDiv ul li a{position: relative;padding:3px 0;color:#000;display:block;text-decoration: none;/*white-space:nowrap;text-overflow:ellipsis;overflow:hidden;*/font-size:14px;box-sizing:border-box;}
+#sideBar .directoryDiv ul li a:before{content:'';position:absolute;left:-10px;top:11px;width:5px;height:5px;background:#000;}
+#sideBar .directoryDiv ul li.active-current a:before{background:#009a61}
+#sideBar .directoryDiv{width:100%;background:#fff;width:370px;}
+#sideBar .directoryDiv .dirInner{padding:0 12px;overflow:hidden;position:relative;}
+#sideBar .directoryDiv .dirInner:before{content:'';position:absolute;top:0;left:0;width:3px; height:100%;background:#ddd;}
+#sideBar .directoryDiv .dirInner .highlight-title{
+	position:absolute;left: 0;
+    right: 0;
+    background: #f3f3f3;
+    z-index: 1;
+    border-left: 3px solid #009A61;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+#sideBar .directoryDiv .dirInner .listCon{overflow:hidden;height:100%;background:#fff;}
+#sideBar .directoryDiv ul li.active-current>a{color:#009a61;}
+#sideBar .directoryDiv ul li a:hover{color:#000;text-decoration: underline;}
+#sideBar .directoryDiv ul li.active-current a:hover{color:#009a61;}
+#sideBar .directoryDiv.fixed{position:fixed;top:0;width:370px;/*overflow:hidden;*/z-index:9999}
+@media (max-width: 768px){
+#sideBar{border-left:0;width:100% !important;;}
+
+}
+</style>
+<!--PageBeginHtml Block End-->
+
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a id="lnkBlogLogo" href="http://www.cnblogs.com/moqiutao/"><img id="blogLogo" src="/Skins/custom/images/logo.gif" alt="返回主页" /></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/moqiutao/">风雨后见彩虹</a></h1>
+<h2>无论什么时候开始，重要的是不要停止。</h2>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+<li><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/moqiutao/">首页</a></li>
+<li></li>
+<li><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/%E9%A3%8E%E9%9B%A8%E5%90%8E%E8%A7%81%E5%BD%A9%E8%99%B9">联系</a></li>
+<li><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/moqiutao/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/moqiutao/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<span id="stats_post_count">随笔 - 320&nbsp; </span>
+<span id="stats_article_count">文章 - 0&nbsp; </span>
+<span id="stats-comment_count">评论 - 76</span>
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class = "post">
+		<h1 class = "postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/moqiutao/p/7253056.html">IE浏览器的ActiveXObject对象以及FileSystemobject的应用扩展(完成)</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body" class="blogpost-body"><h2 id="articleHeader0">ActiveXObject 对象</h2>
+<p>启用和返回对自动化对象的引用。<br />此对象仅用于实例化自动化对象，且此对象没有成员。</p>
+<blockquote>
+<p>警告：此对象为 Microsoft 扩展，仅在 Internet Explorer 中受支持，在 Windows 8.x 应用商店应用中不受支持。</p>
+
+
+
+</blockquote>
+<p><strong>语法：</strong></p>
+<div class="cnblogs_code">
+<pre>newObj = <span style="color: #0000ff;">new</span> ActiveXObject(servername.typename[, location])</pre>
+</div>
+<p><strong>参数：</strong><br /><span style="color: #ff0000;"><code>newObj</code></span>：必选。ActiveXObject 分配到的变量名称。&nbsp;<br /><span style="color: #ff0000;"><code>servername</code></span>：必选。提供对象的应用程序的名称。&nbsp;<br /><span style="color: #ff0000;"><code>typename</code></span>：必选。要创建的对象的类型或类。&nbsp;<br /><span style="color: #ff0000;"><code>location</code></span>：可选。要在其中创建对象的网络服务器的名称。</p>
+<p><strong>备注</strong><br />自动化服务器至少提供一种对象。 例如，字处理应用程序可能会提供应用程序对象、文档对象和工具栏对象。</p>
+<p>你可以在 HKEY_CLASSES_ROOT 注册表项中标识宿主 PC 上的<code>&nbsp;<span style="color: #ff0000;">servername.typename&nbsp;</span></code>值。 例如，下面是可在此处找到的几个值示例，具体取决于安装的程序：</p>
+<ol>
+<li>
+<p>Excel.Application</p>
+
+
+
+</li>
+<li>
+<p>Excel.Chart</p>
+
+
+
+</li>
+<li>
+<p>Scripting.FileSystemObject</p>
+
+
+
+</li>
+<li>
+<p>WScript.Shell</p>
+
+
+
+</li>
+<li>
+<p>Word.Document</p>
+
+
+
+</li>
+
+
+
+</ol>
+<blockquote>
+<p>注意：<span style="color: #ff0000;"><code>ActiveX</code>&nbsp;</span>对象可能存在安全问题。 若要使用 ActiveXObject，你可能需要在相关安全区域的 Internet Explorer 中调整安全设置。 例如，对于本地 Intranet 区域，通常需要将自定义设置更改为&ldquo;<span style="color: #ff0000;"><code>对没有标记为安全的 ActiveX 控件进行初始化和脚本运行</code></span>&rdquo;。</p>
+
+
+
+</blockquote>
+<p>若要创建自动化对象，请将新的 ActiveXObject 分配给对象变量：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">var</span> ExcelApp = <span style="color: #0000ff;">new</span> ActiveXObject("Excel.Application"<span style="color: #000000;">);
+</span><span style="color: #0000ff;">var</span> ExcelSheet = <span style="color: #0000ff;">new</span> ActiveXObject("Excel.Sheet"); </pre>
+</div>
+<p>此代码启动创建对象的应用程序（在此示例中，为 Microsoft Excel 工作表）。 在创建某个对象后，可在代码中使用已定义的对象变量引用该对象。 在下面的示例中，使用对象变量 ExcelSheet 和其他 Excel 对象（包括应用程序对象和 ActiveSheet.Cells 集合）来访问新对象的属性和方法。</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008000;">//</span><span style="color: #008000;"> Make Excel visible through the Application object.</span>
+ExcelSheet.Application.Visible = <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> Place some text in the first cell of the sheet.</span>
+ExcelSheet.ActiveSheet.Cells(1,1).Value = "This is column A, row 1"<span style="color: #000000;">;
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> Save the sheet.</span>
+ExcelSheet.SaveAs("C:\\TEST.XLS"<span style="color: #000000;">);
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> Close Excel with the Quit method on the Application object.</span>
+ExcelSheet.Application.Quit();</pre>
+</div>
+<p><strong>要求</strong><br />在以下文档模式中受支持：Quirks、Internet Explorer 6 标准、Internet Explorer 7 标准、Internet Explorer 8 标准、Internet Explorer 9 标准、Internet Explorer 10 标准和 Internet Explorer 11 标准。 在 Windows 8.x 应用商店应用中不受支持。</p>
+<h2 id="articleHeader1">FileSystemObject 对象</h2>
+<p>在IE浏览器中实现文件的操作功能，还得需要<span style="color: #ff0000;"><code>FileSystemobject</code></span>对象。<br />使用<span style="color: #ff0000;"><code>FileSystemObject</code></span>&nbsp;对象进行编程很简单，一般要经过如下的步骤： 创建<span style="color: #ff0000;"><code>FileSystemObject</code></span>对象、应用相关方法、访问对象相关属性 。</p>
+<h4>创建FileSystemObject对象</h4>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">var</span> fso = <span style="color: #0000ff;">new</span> ActiveXObject("Scripting.FileSystemObject");</pre>
+</div>
+<p>上述代码执行后，fso就成为一个FileSystemObject对象实例。</p>
+<h4>应用相关方法</h4>
+<p>创建对象实例后，就可以使用对象的相关方法了。比如，使用<code>CreateTextFile</code>方法创建一个文本文件：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">var</span> fso = <span style="color: #0000ff;">new</span> ActiveXObject("Scripting.FileSystemObject"<span style="color: #000000;">);  
+</span><span style="color: #0000ff;">var</span> f1 = fso.createtextfile("c:\myjstest.txt",<span style="color: #0000ff;">true</span>");  </pre>
+</div>
+<h4>访问对象相关属性</h4>
+<p>要访问对象的相关属性，首先要建立指向对象的句柄，这就要通过get系列方法实现：<span style="color: #ff0000;"><code>GetDrive</code></span>负责获取驱动器信息，<span style="color: #ff0000;"><code>GetFolder</code></span>负责获取文件夹信息，<span style="color: #ff0000;"><code>GetFile</code></span>负责获取文件信息。比如，指向下面的代码后，f1就成为指向文件c: est.txt的句柄：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">var</span> fso = <span style="color: #0000ff;">new</span> ActiveXObject("Scripting.FileSystemObject"<span style="color: #000000;">);  
+</span><span style="color: #0000ff;">var</span> f1 = fso.GetFile("c:\myjstest.txt");  </pre>
+</div>
+<p>然后，使用f1访问对象的相关属性。比如：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">var</span> fso = <span style="color: #0000ff;">new</span> ActiveXObject("Scripting.FileSystemObject"<span style="color: #000000;">);  
+</span><span style="color: #0000ff;">var</span> f1 = fso.GetFile("c:\myjstest.txt"<span style="color: #000000;">);  
+alert(</span>"File last modified: " + f1.DateLastModified); </pre>
+</div>
+<p>但有一点请注意：对于使用create方法建立的对象，就不必再使用get方法获取对象句柄了，这时直接使用create方法建立的句柄名称就可以：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">var</span> fso = <span style="color: #0000ff;">new</span> ActiveXObject("Scripting.FileSystemObject"<span style="color: #000000;">);  
+</span><span style="color: #0000ff;">var</span> f1 = fso.createtextfile("c:\myjstest.txt",<span style="color: #0000ff;">true</span>"<span style="color: #000000;">);  
+alert(</span>"File last modified: " + f1.DateLastModified);  </pre>
+</div>
+<h2 id="articleHeader2">实例</h2>
+<h3 id="articleHeader3">1.获取上传文件的大小</h3>
+<p>html代码：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">input </span><span style="color: #ff0000;">type</span><span style="color: #0000ff;">="file"</span><span style="color: #ff0000;"> id</span><span style="color: #0000ff;">="filePath"</span><span style="color: #ff0000;"> onchange</span><span style="color: #0000ff;">="getFileSize(this)"</span><span style="color: #0000ff;">/&gt;</span></pre>
+</div>
+<p>js代码：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008000;">//</span><span style="color: #008000;">兼容IE9低版本获取文件的大小</span>
+<span style="color: #0000ff;">function</span><span style="color: #000000;"> getFileSize(obj){
+    </span><span style="color: #0000ff;">var</span><span style="color: #000000;"> filesize;
+    </span><span style="color: #0000ff;">if</span><span style="color: #000000;">(obj.files){
+        filesize </span>= obj.files[0<span style="color: #000000;">].size;
+    }</span><span style="color: #0000ff;">else</span><span style="color: #000000;">{
+        </span><span style="color: #0000ff;">try</span><span style="color: #000000;">{
+            </span><span style="color: #0000ff;">var</span><span style="color: #000000;"> path,fso; 
+            path </span>= document.getElementById('filePath'<span style="color: #000000;">).value;
+            fso </span>= <span style="color: #0000ff;">new</span> ActiveXObject("Scripting.FileSystemObject"<span style="color: #000000;">); 
+            filesize </span>=<span style="color: #000000;"> fso.GetFile(path).size; 
+        }
+        </span><span style="color: #0000ff;">catch</span><span style="color: #000000;">(e){
+            </span><span style="color: #008000;">//</span><span style="color: #008000;">在IE9及低版本浏览器，如果不容许ActiveX控件与页面交互，点击了否，就无法获取size</span>
+            console.log(e.message); <span style="color: #008000;">//</span><span style="color: #008000;">Automation 服务器不能创建对象</span>
+            filesize = 'error'; <span style="color: #008000;">//</span><span style="color: #008000;">无法获取</span>
+<span style="color: #000000;">        }
+    }
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> filesize;
+}</span></pre>
+</div>
+<h3 id="articleHeader4">2.限制上传文件的类型</h3>
+<p>如果是高版本浏览器，一般在HTML代码中写就能实现，如：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">input </span><span style="color: #ff0000;">type</span><span style="color: #0000ff;">="file"</span><span style="color: #ff0000;"> name</span><span style="color: #0000ff;">="filePath"</span><span style="color: #ff0000;"> accept</span><span style="color: #0000ff;">=".jpg,.jpeg,.doc,.docxs,.pdf"</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+<p>如果限制上传文件为图片类型，如下：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">input </span><span style="color: #ff0000;">type</span><span style="color: #0000ff;">="file"</span><span style="color: #ff0000;"> class</span><span style="color: #0000ff;">="file"</span><span style="color: #ff0000;"> value</span><span style="color: #0000ff;">="上传"</span><span style="color: #ff0000;"> accept</span><span style="color: #0000ff;">="image/*"</span><span style="color: #0000ff;">/&gt;</span></pre>
+</div>
+<p>但是在其它低版本浏览器就不管用了，需要js来判断。<br />html代码：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">input </span><span style="color: #ff0000;">type</span><span style="color: #0000ff;">="file"</span><span style="color: #ff0000;"> id</span><span style="color: #0000ff;">="filePath"</span><span style="color: #ff0000;"> onchange</span><span style="color: #0000ff;">="limitTypes()"</span><span style="color: #0000ff;">/&gt;</span></pre>
+</div>
+<p>js代码：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008000;">/*</span><span style="color: #008000;"> 通过扩展名，检验文件格式。
+ *@param filePath{string} 文件路径
+ *@param acceptFormat{Array} 允许的文件类型
+ *@result 返回值{Boolen}：true or false
+ </span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">function</span><span style="color: #000000;"> checkFormat(filePath,acceptFormat){
+    </span><span style="color: #0000ff;">var</span> resultBool= <span style="color: #0000ff;">false</span><span style="color: #000000;">,
+        ex </span>= filePath.substring(filePath.lastIndexOf('.') + 1<span style="color: #000000;">);
+        ex </span>=<span style="color: #000000;"> ex.toLowerCase();
+    </span><span style="color: #0000ff;">for</span>(<span style="color: #0000ff;">var</span> i = 0; i &lt; acceptFormat.length; i++<span style="color: #000000;">){
+    　　</span><span style="color: #0000ff;">if</span>(acceptFormat[i] ==<span style="color: #000000;"> ex){
+            resultBool </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+            </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+    　　}
+    }
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> resultBool;
+};
+        
+</span><span style="color: #0000ff;">function</span><span style="color: #000000;"> limitTypes(){
+    </span><span style="color: #0000ff;">var</span> obj = document.getElementById('filePath'<span style="color: #000000;">);
+    </span><span style="color: #0000ff;">var</span> path =<span style="color: #000000;"> obj.value;
+    </span><span style="color: #0000ff;">var</span> result = checkFormat(path,['bmp','jpg','jpeg','png'<span style="color: #000000;">]);
+    </span><span style="color: #0000ff;">if</span>(!<span style="color: #000000;">result){
+        alert(</span>'上传类型错误，请重新上传'<span style="color: #000000;">);
+        obj.value </span>= ''<span style="color: #000000;">;
+    }
+}</span></pre>
+</div>
+<blockquote>
+<p>注：当然这个实例2在这儿没有用到上面的知识，只是根据实例1联想到了。</p>
+</blockquote>
+<h2>参考</h2>
+<p>ActiveXObject 对象 (JavaScript)：<a href="https://msdn.microsoft.com/library/7sw4ddf8(v=vs.94).aspx" target="_blank">https://msdn.microsoft.com/library/7sw4ddf8(v=vs.94).aspx</a></p>
+<p>JS、ActiveXObject、Scripting.FileSystemObject：<a href="http://www.cnblogs.com/dingjiaoyang/p/5831056.html" target="_blank">http://www.cnblogs.com/dingjiaoyang/p/5831056.html</a></p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+		</div>
+		<div class = "postDesc">posted @ <span id="post-date">2017-07-28 23:26</span> <a href='http://www.cnblogs.com/moqiutao/'>风雨后见彩虹</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>)  <a href ="https://i.cnblogs.com/EditPosts.aspx?postid=7253056" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(7253056);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=172908,cb_entryId=7253056,cb_blogApp=currentBlogApp,cb_blogUserGuid='bd35e4b2-fd6e-e311-8d02-90b11c0b17d6',cb_entryCreatedDate='2017/7/28 23:26:00';loadViewCount(cb_entryId);var cb_postType=1;</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='cnblogs_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<div id='cnblogs_c2' class='c_ad_block'></div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright &copy;2018 风雨后见彩虹
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+<!--PageEndHtml Block Begin-->
+<style>
+#footer{border-top:0; color: #666;margin-top:0;}
+</style>
+<style type="text/css">
+	.article-btm{position:fixed;right:10px;bottom:10px;z-index:99999}
+	.article-btm-line{background-color: #3dbb2b;width:50px;height:50px;position:relative;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;cursor:pointer;margin-top: 5px;}
+	.article-btm-line .ico{position:absolute;left:50%;margin-left:-18px;top:50%;margin-top:-18px;width:36px;height:36px;background-repeat:no-repeat;background-repeat:no-repeat;background: url(http://images.cnblogs.com/cnblogs_com/moqiutao/740438/o_o_o_article-btm-line.png) 0 0 no-repeat;overflow: hidden;}
+	.article-btm-line .ico-directory{
+	background-position: 0 0;
+	-webkit-animation: ani-ico 6s linear 1s 4;
+	animation: ani-ico 6s linear 1s 4;
+	}
+	.article-btm-line .ico-bubble{
+	background-position: 0 -36px;
+	-webkit-animation: ani-ico 6s linear 1.5s 4;
+	animation: ani-ico 6s linear 1.5s 4;
+	}
+	.article-btm-line .ico-star{
+	background-position: 0 -72px;
+	-webkit-animation: ani-ico 6s linear 2s 4;
+	animation: ani-ico 6s linear 2s 4;
+	}
+	.article-btm-line .ico-move-up{
+	background-position: 0 -108px;
+	-webkit-animation: ani-ico 6s linear 2.5s 4;
+	animation: ani-ico 6s linear 2.5s 4;
+	}
+	.article-btm-line .ico-move-down{
+	background-position: 0 -144px;
+	-webkit-animation: ani-ico 6s linear 3s 4;
+	animation: ani-ico 6s linear 3s 4;
+	}
+	@-webkit-keyframes ani-ico {
+	    0% { -webkit-transform: rotate(0deg);}
+	    0.5% { -webkit-transform: rotate(-15deg);}
+	    1% { -webkit-transform: rotate(0);}
+	    1.5% { -webkit-transform: rotate(15deg);}
+	    2% { -webkit-transform: rotate(0);}
+	    2.5% { -webkit-transform: rotate(-15deg);}
+	    3% { -webkit-transform: rotate(0);}
+	    3.5% { -webkit-transform: rotate(15deg);}
+	    4% { -webkit-transform: rotate(0);}
+	    100% { -webkit-transform: rotate(0);}
+	}
+	@keyframes ani-ico {
+	    0% { transform: rotate(0deg);}
+	    0.5% { transform: rotate(-15deg);}
+	    1% { transform: rotate(0);}
+	    1.5% { transform: rotate(15deg);}
+	    2% { transform: rotate(0);}
+	    2.5% { transform: rotate(-15deg);}
+	    3% { transform: rotate(0);}
+	    3.5% { transform: rotate(15deg);}
+	    4% { transform: rotate(0);}
+	    100% { transform: rotate(0);}
+	}
+	
+	.article-btm-line:hover{background-color: #3c6f1d;-webkit-transition:background-color .2s linear;-moz-transition:background-color .2s linear;-ms-transition:background-color .2s linear;-o-transition:background-color .2s linear;transition:background-color .2s linear}
+	.article-btm-line:hover .txt{
+	display: block;
+	-webkit-animation: ani-ico-txt .2s linear 1 forwards;
+	animation: ani-ico-txt .2s linear 1 forwards;
+	}
+	@-webkit-keyframes ani-ico-txt {
+	    0% { opacity: .8;-webkit-transform: translate(50px, 0);}
+	    100% { opacity: 1;-webkit-transform: translate(5px, 0);}
+	}
+	@keyframes ani-ico-txt {
+	    0% { opacity: .8;transform: translate(50px, 0);}
+	    100% { opacity: 1;transform: translate(5px, 0);}
+	}
+	
+	.article-btm-line .txt{display: none;position:absolute;height:50px;line-height:50px;padding:0 15px 0 10px;white-space:nowrap;top:50%;margin-top:-25px;right:50px;color:#fff;-webkit-border-radius:5px 0 0 5px;-moz-border-radius:5px 0 0 5px;border-radius:5px 0 0 5px;background-color:#3C6F1D;opacity: 0;}
+</style>
+
+<style>
+.reward-btn-info {
+    width: 75pt;
+    border-radius: 5px;
+    background-color: #4baa1b;
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+    line-height: 40px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+.reward-btn-info:hover,.reward-btn-info:active{
+   background-color:#390;
+}
+
+.reward-wrap-con {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    display: none;
+    width: 600px;
+    height: 360px;
+    border-radius: 0;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 0 0 125pc rgba(0,0,0,.5);
+    transform: translate(-50%,-50%);
+   z-index:999999;
+}
+.reward-btn-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px 20px;
+    color: #999;
+    font-size: 30px;
+    cursor: pointer;
+    transform: rotate(45deg);
+}
+#cnblogs_post_body .reward-wrap-con h2 {
+    margin: 10px 0;
+    color: #666;
+    text-align: center;
+    font-weight: bold;
+    font-size: 21px;
+   border-bottom:0;
+}
+.reward-wrap-con .wechat, .reward-wrap-con .zhifubao {
+    position: relative;
+    float: left;
+    box-sizing: border-box;
+    padding: 10px;
+    width: 15pc;
+    height: 15pc;
+    border: 5px solid #ff7300;
+    border-radius: 10px;
+}
+
+.reward-wrap-con .wechat img,.reward-wrap-con .zhifubao img{
+	width:210px;
+	height:210px;
+}
+.wechat, .zhifubao {
+    margin-left: 40px;
+}
+.wechat:after, .zhifubao:after {
+    position: absolute;
+    top: 220px;
+    left: 50px;
+    padding: 0 10px;
+    width: 90pt;
+    background: #fff;
+    color: #666;
+    content: "微信，扫一扫";
+    text-align: center;
+    font-size: 1pc;
+}
+.zhifubao:after {
+    content: "支付宝，扫一扫";
+}
+</style>
+<script type="text/javascript">
+   $(function(){
+     var tttString='<div class="content">'+
+		'<div>作者：<a href="http://www.cnblogs.com/moqiutao/" target="_blank">风雨后见彩虹</a></div>'+
+                 '<div>github：<a href="https://github.com/hxlmqtily1314" target="_blank">https://github.com/hxlmqtily1314</a></div>'+
+			'<div>如果觉得文章写得不错或对您有用，请随意打赏。点击文章右下角<span style="color:red;font-weight:bold;">“喜欢”</span>二字，您的支持是我最大的鼓励</div>'+
+			 '<div class="reward-btn-info">打赏支持</div>'+
+		'</div>';
+  
+var rewardCon = '<div class="reward-wrap-con">'+
+	                    '<div class="reward-btn-close">+</div>'+
+	                    '<h2>(^_^)打赏作者喝个咖啡(^_^)</h2>'+
+	                    '<div class="wechat"><img src="https://files.cnblogs.com/files/moqiutao/m_weixin.gif" alt="微信支付"></div>'+
+	                    '<div class="zhifubao"><img src="https://files.cnblogs.com/files/moqiutao/m_zhifubao.gif" alt="支付宝支付">'+
+                            '</div>'+
+	                '</div>';
+	
+$("#cnblogs_post_body").append(rewardCon);
+
+var article_btm='<div class="article-btm">'+
+	'<div class="article-btm-line" id="showdirectory">'+            
+        '<div class="ico ico-directory showdirectoryBtn"></div>'+
+        '<div class="txt showdirectory">显示目录</div>'+         
+    '</div>'+
+    '<div class="article-btm-line">'+            
+        '<div class="ico ico-star" onclick="AddToWz(cb_entryId)"></div>'+
+        '<div class="txt" onclick="AddToWz(cb_entryId)">我要收藏</div>'+         
+    '</div>'+
+    '<div class="article-btm-line">'+          
+        '<div class="ico ico-move-up" id="totop"></div>'+
+        '<div class="txt" id="totop">返回顶部</div>'+
+    '</div>'+
+    '<div class="article-btm-line">'+          
+        '<div class="ico ico-move-down" id="toBottom"></div>'+
+        '<div class="txt" id="toBottom">跳到底部</div>'+
+    '</div>'+
+'</div>';
+    $(".buryit").hide();
+     $("#MySignature").show();
+     $("#MySignature").append(tttString);
+   	$("#MySignature").append(article_btm);
+ 	var totop = $('#totop');
+    $(totop).on("click",function(){
+        $('html, body').animate({scrollTop:0}, 500); return false;
+    });
+
+    var toBottom = $('#toBottom');
+    $(toBottom).on("click",function(){
+        var scrollBottom = $(document).height() - $(window).height() 
+        $('html, body').animate({scrollTop:scrollBottom}, 500); return false;
+    });
+   
+
+   $('.reward-btn-info').on('click', function(event) {
+	 $('.reward-wrap-con').fadeIn(300);
+  });
+
+  $('.reward-btn-close').on('click', function(event) {
+	 $('.reward-wrap-con').fadeOut(300);
+ });
+
+ if(!$('#sideBar .parentsDiv').length){
+
+    $("#showdirectory").remove();
+}
+ $('#showdirectory').on('click',function(){
+	var wT = $(window).scrollTop();
+	if($(this).hasClass('current')){
+		$(this).removeClass('current');
+		$(this).find('.showdirectory').html('显示目录');
+		$('#sideBar .directoryDiv').hide();
+		$("#sideBarMain").show();
+	}else{
+		$(this).addClass('current');
+		$(this).find('.showdirectory').html('隐藏目录');
+		if(wT > 80){
+			$('#sideBar .directoryDiv').show();
+			$("#sideBarMain").hide();
+		}else{
+			$('#sideBar .directoryDiv').hide();
+			$("#sideBarMain").show();
+		}
+	}
+ });
+
+});
+
+</script>
+<!--PageEndHtml Block End-->
+</body>
+</html>

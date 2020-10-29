@@ -1,0 +1,718 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" dir="ltr">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>ImageMagick简介、GraphicsMagick、命令行使用示例 - 技术博客 - ITeye技术网站</title>
+    <meta name="description" content="  ImageMagick资料  ----------------------------------------------------------------------------  ImageMagick官网  ImageMagick Identify 命令行工具（官网）  ImageMagick 程序接口文档   ImageMagick使用示例(非常好的示例)     GraphicsMa ..." />
+    <meta name="keywords" content="ImageMagick, GraphicsMagick, 图片处理 ImageMagick简介、GraphicsMagick、命令行使用示例" />
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+    <link rel="search" type="application/opensearchdescription+xml" href="/open_search.xml" title="ITeye" />
+    <link href="/rss" rel="alternate" title="技术博客" type="application/rss+xml" />
+    <link href="http://www.iteye.com/stylesheets/blog.css?1480562553" media="screen" rel="stylesheet" type="text/css" />
+<link href="http://www.iteye.com/stylesheets/themes/blog/blue.css?1448702469" media="screen" rel="stylesheet" type="text/css" />
+    <script src="http://www.iteye.com/javascripts/application.js?1448702469" type="text/javascript"></script>    
+    <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-535605-1']);
+  _gaq.push(['_setDomainName', 'iteye.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+      <link href="http://www.iteye.com/javascripts/syntaxhighlighter/SyntaxHighlighter.css?1448702469" media="screen" rel="stylesheet" type="text/css" />
+  <script src="http://www.iteye.com/javascripts/syntaxhighlighter/shCoreCommon.js?1448702469" type="text/javascript"></script>
+<script src="http://www.iteye.com/javascripts/hotkey.js?1448702469" type="text/javascript"></script>
+  <script src="http://www.iteye.com/javascripts/code_favorites.js?1448702469" type="text/javascript"></script>
+<script src="http://www.iteye.com/javascripts/weiboshare.js?1448702469" type="text/javascript"></script>
+  <script>
+		var _hmt = _hmt || [];
+		(function() {
+		 var hm = document.createElement("script");
+		 hm.src = "//hm.baidu.com/hm.js?e19a8b00cf63f716d774540875007664";
+		 var s = document.getElementsByTagName("script")[0]; 
+		 s.parentNode.insertBefore(hm, s);
+		})();
+	</script>
+    
+  </head>
+  <body>
+    <div id="header">
+	      <div id="blog_site_nav">
+  <a href="http://www.iteye.com/" class="homepage">首页</a>
+  <a href="http://www.iteye.com/news">资讯</a>
+  <a href="http://www.iteye.com/magazines">精华</a>
+  <a href="http://www.iteye.com/forums">论坛</a>
+  <a href="http://www.iteye.com/ask">问答</a>
+  <a href="http://www.iteye.com/blogs">博客</a>
+  <a href="http://www.iteye.com/blogs/subjects">专栏</a>
+  <a href="http://www.iteye.com/groups">群组</a>
+  <a href="#" onclick="return false;" id="msna"><u>更多</u> <small>▼</small></a>
+  <div class="quick_menu" style="display:none;">
+    <a target="_blank" href="http://job.iteye.com/iteye">知识库</a>
+    <a href="http://www.iteye.com/search">搜索</a>
+  </div>
+</div>
+
+	      <div id="user_nav">
+      <a href="/login" class="welcome" title="登录">您还未登录 !</a>
+    <a href="/login">登录</a>
+    <a href="/signup" class="nobg">注册</a>
+  </div>
+
+	    
+    </div>
+
+    <div id="page">
+        <div id="branding" class="clearfix" style="overflow: hidden;background: none;padding:0 0 2px;">
+        	<ins data-revive-zoneid="184" data-revive-id="8c38e720de1c90a6f6ff52f3f89c4d57"></ins>
+        </div>
+      <div id="branding" class="clearfix">
+        <div id="blog_name">
+          <h1><a href="/">技术博客</a></h1>
+        </div>
+        <div id='fd'></div>
+        <div id="blog_navbar">
+          <ul>
+            <li class='blog_navbar_for'><a href="http://elf8848.iteye.com"><strong>博客</strong></a></li>
+            <li ><a href="/weibo">微博</a></li>
+            <li ><a href="/album">相册</a></li>
+            <li ><a href="/link">收藏</a></li>
+            <li ><a href="/blog/guest_book">留言</a></li>
+            <li ><a href="/blog/profile">关于我</a></li>
+          </ul>
+    
+          <div class="search">
+            <form action="/blog/search" method="get">
+              <input class="search_text" id="query" name="query" style="margin-left: 10px;width: 110px;" type="text" value="" />
+              <input class="submit_search" type="submit" value="" />
+            </form>
+          </div> 
+          <div id="fd"></div>         
+        </div>
+      </div>
+      
+      <div id="content" class="clearfix">
+        <div id="main">
+          
+
+
+
+          
+
+
+<div class="h-entry" style='display:none'>
+  <a href="http://elf8848.iteye.com" class="p-author" target="_blank">elf8848</a>
+</div>
+
+
+<div class="blog_main">
+  <div class="blog_title">
+    <h3>
+      <a href="/blog/382528">ImageMagick简介、GraphicsMagick、命令行使用示例</a>
+      <em class="actions">      </em>
+    </h3>
+    <ul class='blog_categories'><strong>博客分类：</strong> <li><a href="/category/178059">图像处理技术</a></li> </ul>
+        <div class='news_tag'><a href="http://www.iteye.com/blogs/tag/ImageMagick">ImageMagick</a><a href="http://www.iteye.com/blogs/tag/GraphicsMagick">GraphicsMagick</a><a href="http://www.iteye.com/blogs/tag/%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86">图片处理</a>&nbsp;</div>
+    	  
+    	
+    	
+  		
+      </div>
+
+  <div id="blog_content" class="blog_content">
+    <div class="iteye-blog-content-contain" style="font-size: 14px;">
+<p><strong>ImageMagick资料</strong></p>
+<p><span style="font-size: small;">----------------------------------------------------------------------------</span></p>
+<p style="padding-left: 30px;"><a target="_blank" href="http://www.imagemagick.org">ImageMagick官网</a></p>
+<p style="padding-left: 30px;"><a target="_blank" href="http://www.imagemagick.org/script/identify.php">ImageMagick Identify 命令行工具（官网）</a></p>
+<p style="padding-left: 30px;"><a target="_blank" href="/admin/blogs/382528/%20http:/www.imagemagick.org/api/MagickCore/">ImageMagick 程序接口文档 </a></p>
+<p style="padding-left: 30px;"><a target="_blank" href="http://www.netingcn.com/category/imagemagick">ImageMagick使用示例</a>(非常好的示例)</p>
+<p style="padding-left: 30px;"> </p>
+<p><strong>GraphicsMagick资料</strong></p>
+<p><span style="font-size: small;">----------------------------------------------------------------------------</span></p>
+<p style="padding-left: 30px;"><a target="_blank" href="http://www.graphicsmagick.org">GraphicsMagick官网</a> </p>
+<p style="padding-left: 30px;"><a target="_blank" href="http://www.graphicsmagick.org/programming.html">GraphicsMagick编程接口</a>  </p>
+<p style="padding-left: 30px;"><a target="_blank" href="http://www.imagemagick.org/api/MagickCore/">ImageMagick 程序接口  </a></p>
+<p style="padding-left: 30px;"><a target="_blank" href="http://sourceforge.net/projects/im4java/files/">Im4java 下载地址</a></p>
+<p style="padding-left: 30px;"><a target="_blank" href="http://javantsky.iteye.com/blog/747807">IM4JAVA+GraphicsMagick处理网站图片  </a></p>
+<p style="padding-left: 30px;"> </p>
+<p><strong>命令行参数，说明文档</strong></p>
+<p>-------------------------------------------------------------</p>
+<p><a target="_blank" href="http://www.graphicsmagick.org/GraphicsMagick.html">GraphicsMagick 命令行参数，说明文档</a><br><a target="_blank" href="http://www.imagemagick.org/script/command-line-tools.php">ImageMagick 命令行参数，说明文档</a></p>
+<p><strong>ImageMagick介绍</strong></p>
+<p><span style="font-size: small;">----------------------------------------------------------------------------</span></p>
+<p>      ImageMagick是一个免费的创建、编辑、合成图片的软件。它可以读取、转换、写入多种格式的图片。图片切割、颜色替换、各种效果的应用，图片的旋转、组合，文本，直线，多边形，椭圆，曲线，附加到图片伸展旋转。其全部源码开放，可以自由使用，复制，修改，发布。它遵守GPL许可协议。它可以运行于大多数的操作系统。</p>
+<p style="padding-left: 30px;">最为重要的是，ImageMagick的大多数功能的使用都来源于命令行工具。</p>
+<p style="padding-left: 30px;"> </p>
+<p><strong><strong>GraphicsMagick</strong>介绍</strong></p>
+<p><span style="font-size: small;">----------------------------------------------------------------------------</span></p>
+<p style="padding-left: 30px;"><span style="font-size: small;">GraphicsMagick是从 ImageMagick 5.5.2 分支出来的，但是现在他变得更稳定和优秀，GM更小更容易安装、GM更有效率、GM的手册非常丰富</span><span style="font-size: small;">GraphicsMagick的命令与</span>ImageMagick基本是一样的。</p>
+<p> </p>
+<p> </p>
+<p><strong>ImageMagick、</strong><strong><strong><strong>GraphicsMagick</strong></strong>的命令概览</strong></p>
+<p><span style="font-size: small;">----------------------------------------------------------------------------</span></p>
+<p style="padding-left: 60px;">[ convert | identify | mogrify | composite | montage | compare | display | animate | import | conjure ]</p>
+<p style="padding-left: 60px;"> </p>
+<p style="padding-left: 60px;">convert：转换图像格式和大小，模糊，裁剪，驱除污点，抖动，临近，图片上画图片，加入新图片，生成缩略图等。 <br>identify：描述一个或较多图像文件的格式和特性。 <br>mogrify：按规定尺寸***一个图像，模糊，裁剪，抖动等。Mogrify改写最初的图像文件然后写到一个不同的图像文件。 <br>composite：根据一个图片或多个图片组合生成图片。 <br>montage：创建一些分开的要素图像。在含有要素图像任意的装饰图片，如边框、结构、图片名称等。 <br>compare：在算术上和视觉上评估不同的图片***其它的改造图片。 <br>display：如果你拥有一个X server的系统，它可以按次序的显示图片 <br>animate：利用X server显示动画图片 <br>import：在X server或任何可见的窗口上输出图片文件。 你可以捕获单一窗口，整个的荧屏或任何荧屏的矩形部分。 <br>conjure：解释执行 MSL (Magick Scripting Language) 写的脚本。</p>
+<p><br><strong>示例一：综合操作</strong>（ImageMagick命令行）<span style="font-size: small;">----------------------------------------------------------------------------</span></p>
+<p> </p>
+<pre class="java" name="code">convert -crop 300x300+0+0 -resize 200x200 -colors 100 +profile "*" 1.jpg 1.png</pre>
+ <br><p> </p>
+<p style="padding-left: 30px;"><strong>处理过程解释：</strong></p>
+<p style="padding-left: 30px;">1、把当前目录1.jpg图片文件，从左上角(0,0)坐标为起点，裁剪一块300x300像素的部分。</p>
+<p style="padding-left: 30px;">2、然后把这部分缩小到200x200像素。</p>
+<p style="padding-left: 30px;">3、然后把颜色缩减到100色。<br>4、+profile "*"   ， 意味着在图片文件里不存储Exif信息，以减小图片体积。</p>
+<p style="padding-left: 30px;">5、最后生成1.png，保存在当前目录。</p>
+<p style="padding-left: 30px;"><br>注意：-resize会试图保留原图的原始长宽比例，因此不一定生成的图片和你指定的尺寸一定匹配，比如，如果2.jpg大小是400x200，所以如果用命令：convert 2.jpg -resize 100x100 2.png，那么生成的图片2.png的实际大小是100x50。</p>
+<p> </p>
+<p style="padding-left: 30px;"><strong>常用的参数用途说明：</strong><br>-crop 宽x高+起点横坐标+起点纵坐标：裁剪图 <br>-resize 宽x高!：改变尺寸，<strong>如果使用惊叹号，表示不保留视觉比例，强行改变尺寸匹配给定的宽和高</strong>；如果仅给定宽或者高，如“宽x”或“x高”形式的参数(“x高”与“宽x高”的效果是一样的)，则以已知参数为基准按比例改变尺寸。<br>-colors 颜色数：设定图片采用的颜色数，如果是生成png或gif图片应指定这个参数 <br>-quality 质量：设定jpeg图片输出质量，推荐采用80，此命令仅用于输出格式是jpg的情况，不应省略，省略的话默认质量是95，生成图片过大<br>+profile "*"：图片中不存储Exif信息，必须使用，否则生成图片过大</p>
+<p> </p>
+<p><strong>示例二：生成缩略图</strong>（缩小图片） （ImageMagick命令行）<span>----------------------------------------------------------------------------</span></p>
+<pre class="java" name="code">convert -sample 80x40 input.jpg output.jpg   (使用一个简单的算法生成缩略图，速度快，画质较低，适合生成100x100以下的图片)
+convert -resize 100x100 foo.jpg thumbnail.jpg （画质好）
+convert -resize 50%x50% foo.jpg thumbnail.jpg
+convert -resize 100x200 22.jpg(图片路径)   11.jpg(缩放后存放路径)   图片按比例缩放
+convert -resize 100x200\! 22.jpg(图片路径)   11.jpg(缩放后存放路径)   强制按给定的宽高缩放</pre>
+ 
+<p> </p>
+<p> </p>
+<p><strong>示例三：裁剪图片</strong>（ImageMagick命令行）<span style="font-size: small;">----------------------------------------------------------------------------</span></p>
+<p> </p>
+<pre class="java" name="code">convert -crop  100(长)x200(高)+10(x坐标)+10(y坐标)   22.jpg(源图片路径)   11.jpg(缩放后存放路径)  </pre>
+  <br><p> </p>
+<p><strong>示例四：旋转图像</strong>  （ImageMagick命令行）<span style="font-size: small;">----------------------------------------------------------------------------</span></p>
+<pre class="java" name="code">convert -rotate 90 input.jpg output.jpg</pre>
+ <br><strong>示例五：获取文件信息</strong> （ImageMagick命令行）<span style="font-size: small;">----------------------------------------------------------------------------</span><br><pre class="java" name="code">libtiff tiffinfo filename.tiff</pre>
+ <strong><br></strong>
+<p> </p>
+<p><strong>示例六：把图片变为黑白颜色</strong>（ImageMagick命令行）<span style="font-size: small;">----------------------------------------------------------------------------</span></p>
+<pre class="java" name="code">convert -monochrome foo.png bar.png</pre>
+ </div>
+<div class="iteye-blog-content-contain" style="font-size: 14px;">
+<strong>添加图片水印处理</strong>（ImageMagick命令行）<br>--------------------------------<br>假设把名为logo.gif的水印图标添加在原始图片（src.jpg）右下角，且水印的下边缘距原始图片10像素、右边缘距原始图片5像素。使用如下命令即可：<br><pre class="java" name="code">convert src.jpg logo.gif -gravity southeast -geometry +5+10 -composite dest.jpg</pre>
+ <br><p> </p>
+<p><strong>添加英文文字水印  </strong>（ImageMagick命令行）</p>
+<p>-----------------------------------------------------<br>convert  -fill white -pointsize 24 -draw "text 10,15 'lifesinger 2006' "  1.png  2.png</p>
+<p>文字坐标在：10x50的位置<br>可以用-font指定字体，这时需要安装Ghostscript支持。</p>
+<p>如果安装IM、GM时，没有安装Ghostscript字体，会默认使用Linux系统的字体，目录是：/usr/share/fonts/default/Type1/</p>
+<br><p><strong>添加中文文字水印</strong> （ImageMagick命令行）</p>
+<p>-----------------------------------------------------</p>
+<p>高版本的ImageMagick的方法</p>
+<p>-------------------</p>
+<p>convert -font C:\ImageMagick\font\fangzheng.ttf  -fill green -pointsize 40 -draw "text 10,50 '文字'" d:\bagImg\21.jpg d:\bagImg\22.jpg</p>
+<p>参数说明： -font C:\ImageMagick\font\fangzheng.ttf    是指明Windows字体文件。</p>
+<p>要高版本的ImageMagick同，在加中文文字水印时才不乱码。</p>
+<p> </p>
+<p> </p>
+<p>低版本的ImageMagick的方法</p>
+-------------------
+<p>存在中文的情况：假设存有信息的文件叫t.txt，字体文件是msyh.ttf。</p>
+<pre class="java" name="code">方法1：
+//把文件t.txt中的信息生成图片txt.png, -transparent white让图片的背景透明，-size x30设置图片的高度
+convert -transparent white -font msyh.ttf -fill black -pointsize 24 label:@t.txt txt.png
+//把txt.png合成到src.jpg上
+convert src.jpg txt.png -gravity southeast -geometry +10+5 -composite dest.jpg
+
+方法2：
+convert src.jpg -transparent white -font msyh.ttf -fill black -pointsize 24 -size x30 label:@t.txt -gravity southeast -geometry +10+5 -composite dest.jpg
+
+方法3：
+mogrify -font msyh.ttf -pointsize 24 -fill black -weight bolder -gravity southeast -annotate +20+20 @"t.txt" src.jpg</pre>
+说明：上述第一、二种方法都有瑕疵，第二种背景不能变成透明，第一种虽然生成的图片可以透明，但是合成到原始图上效果不是很理想，第三种是完全透明的，所以推进用第三种方式来操作。
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p><br><br><strong>GraphicsMagick图像处理系统使用方法</strong><br>-----------------------------------------------------<br>0. 显示图像文件详细信息<br>gm identify a.jpg<br> <br>1.更改当前目录下*.jpg的尺寸大小，并保存于目录.thumb里面<br>gm mogrify -output-directory .thumbs -resize 320x200 *.jpg<br> <br>2. 将三幅图像和并为一副图像<br>gm montage -mode concatenate -tile 3x1 image1.ppm image2.ppm image3.ppm concatenated.miff<br> <br>3. 显示图像<br>gm display 'vid:*.jpg'<br> <br>4. 格式转换<br>gm convert a.bmp a.jpg<br>gm convert a.bmp a.pdf（转换为pdf)<br> <br>5. 调整图像dpi和大小<br>gm convert -density 288 -geometry 25% image.gif image.gif<br>（缩小为原先的1／4，并且dpi为288）<br> <br>gm convert -resize 640x480 image.gif image.gif<br>（转换为640x480的图像)<br> <br>6. 在图像上添加文字<br>gm convert -font Arial -fill blue -pointsize 18 -draw "text 10,10 'your text here'" test.tif test.png<br> <br>7. 从gif文件中抽取第一帧<br>gm convert "Image.gif[0]" first.gif<br> <br>8. 建立gif图像<br>gm convert -delay 20 frame*.gif animation.gif<br>gm convert -loop 50 frame*.gif animation.gif<br>（让动画循环50次）<br> <br>gm convert -delay 20 frame1.gif -delay 10 frame2.gif -delay 5 frame3.gif animation.gif<br>（对每一帧手动指定延时）<br> <br>9. 截屏<br>gm import a.jpg<br>用鼠标点击所要截取的窗口，或者选择截屏区域，保存为a.jpg<br> <br>gm import -frame a.jpg<br>保留窗口的边框<br><br><strong>GraphicsMagick常用管理命令</strong><br>-----------------------------------------------------<br>查看版本后安装情况：gm identify -version<br>结果：：打印出信息<br><br>识别图片：gm identify  /Users/zhaorai/Pictures/照片/100CANON-1/IMG_4108.JPG<br>结果：/Users/zhaorai/Pictures/照片/100CANON-1/IMG_4108.JPG JPEG 3648x2736+0+0 DirectClass 8-bit 2.5M 0.000u 0:01<br><br>识别图片(高级)：gm identify  -verbose /Users/zhaorai/Desktop/4.png<br>结果：打印出很多信息。<br><br><br><strong>GraphicsMagick缩放比例的精准控制</strong><br>-----------------------------------------------------<br>原始图片是input.jpg，尺寸：160x120<br><br><strong>只缩小不放大</strong><br>gm convert input.jpg -resize "500x500&gt;" output_1.jpg<br>加了&gt;,表示只有当图片的宽与高，大于给定的宽与高时，才进行“缩小”操作。<br>生成的图片大小是：160x120，未进行操作<br>如果不加&gt;,会导致图片被比等放大。<br><br><strong>等比缩图</strong>  （缺点：产生白边）<br>gm convert input.jpg -thumbnail "100x100" output_1.jpg<br>生成的图片大小是：100x75<br><br><strong>非等比缩图</strong>，按给定的参数缩图（缺点：长宽比会变化）<br>gm convert input.jpg -thumbnail "100x100!" output_2.jpg<br>生成的图片大小是：100x100<br><br><strong>裁剪后保证等比缩图</strong> （缺点：裁剪了图片的一部分）<br>gm convert input.jpg -thumbnail "100x100^" -gravity center -extent 100x100 output_3.jpg<br>生成的图片大小是：100x100，还保证了比例。不过图片经过了裁剪，剪了图片左右两边才达到1:1<br><br><strong>填充后保证等比缩图</strong> （缺点：要填充颜色，和第一种方法基本一样）<br>gm convert input.jpg -thumbnail "100x100" -background gray -gravity center -extent 100x100 output_4.jpg<br>生成的图片大小是：100x100，还保证了比例，同时没有对图片进行任何裁剪，缺失的部分按指定颜色进行填充。<br><br><strong>裁剪、填充相结合</strong> （缺点：最差的方法）<br>gm convert input.jpg -thumbnail "10000@ -background gray -gravity center -extent 100x100 output_5.jpg<br>生成的图片大小是：100x100，这次保证了大小和比例，其中的10000就是100x100的乘积，同时在填充和裁剪之间做了一个平衡。<br><br></p>
+<p><strong>位深度32 转为24</strong></p>
+<p>IE6,7,8不支持显示“位深度32”的图片，但IE9、火狐、谷歌浏览器就可以显示。</p>
+<p>使用GM,把“位深度32”的图片转换为“位深度24”的图片</p>
+<p>输入图片zzz.jpg就是“位深度32”的图片，输出图片 zzz_out.jpg就是“位深度24”的图片</p>
+<p>gm convert -resize 100x100 -colorspace RGB zzz.jpg zzz_out.jpg</p>
+<p>转完后，图片的颜色会有轻微变化。</p>
+<p> </p>
+<p> </p>
+<p><strong>在浏览器上选择图片裁剪的坐标</strong></p>
+<p>=================================<br>如果想让用户手动裁剪头片的话，就是在浏览器上选择图片裁剪的坐标，<span style="color: #ff0000;">imgAreaSelect</span>是个好选择。<br>imgAreaSelect is a jQuery plugin for selecting a rectangular area of an image.<br>http://odyniec.net/projects/imgareaselect/<br><br><br></p>
+<p>======================其它内容=================================</p>
+<p>Jmagick锐化图片功能</p>
+<p>--------------------------------------------------<br>ImageInfo info = new ImageInfo(filepath+"pics.jpg");<br>MagickImage image = new MagickImage(info);<br>MagickImage sharpened = image.sharpenImage(1.0, 5.0);<br>sharpened.setFileName(filepath+"sharpened.jpg");<br>sharpened.writeImage(info);<br>主要是函数sharpenImage(double arg0, double arg1);<br>建议arg0=1.0 arg1=5.0<br>arg0为半径  arg1为阙值<br>这样做的目的：<br>明显会使图片变得清晰好看。</p>
+<p> </p>
+<p>JMagick 常用技巧</p>
+<p>--------------------------------------------</p>
+<p>ImageMagick中使用+profile "*"   删除图片中不存储附加信息.</p>
+<p style="padding-left: 30px;">JMagick中,使用MagickImage类上的profileImage("*", null)方法,删除图片中不存储附加信息. </p>
+<p style="padding-left: 30px;">删除图片中的ICC,ICM, IPTC,8bim等信息</p>
+<p>ImageMagick中使用-quality控制图片的品质,</p>
+<p style="padding-left: 30px;">JMagick中,使用ImageInfo类上的setQuality(80)方法,控制图片的品质</p>
+<p> </p>
+<p> 在Web应用(Resin,Tomcat)使用ImageMagick</p>
+<p>-----------------------------------------<br>如果要在Web应用(Resin,Tomcat)使用ImageMagick，</p>
+<p>需要再运行时加入参数： -Djmagick.systemclassloader=no</p>
+<p>或者在程序中写入：System.setProperty("jmagick.systemclassloader", "no");</p>
+<p> </p>
+</div>
+  </div>
+
+  
+
+  
+  <ins data-revive-zoneid="201" data-revive-id="8c38e720de1c90a6f6ff52f3f89c4d57"></ins>
+  
+
+  <div id="bottoms" class="clearfix">
+    
+    <div id="share_weibo">分享到：
+      <a data-type='sina' href="javascript:;" title="分享到新浪微博"><img src="/images/sina.jpg"></a>
+      <a data-type='qq' href="javascript:;" title="分享到腾讯微博"><img src="/images/tec.jpg"></a>
+    </div>
+  </div>
+
+  <div class="blog_nav">
+    <div class="pre_next">
+      <a href="/blog/383422" class="next" title="11 自己的JS调试工具 myLogger()对象">11 自己的JS调试工具 myLogger()对象</a>
+      |
+      <a href="/blog/382527" class="pre" title="Windows系统的net start\use\time\view\config\share命令详解">Windows系统的net start\use\time\view\co ...</a>
+    </div>
+  </div>
+  <div class="blog_bottom">
+    <ul>
+      <li>2009-05-09 14:11</li>
+      <li>浏览 47948</li>
+      <li><a href="#comments">评论(8)</a></li>
+      
+      
+      <li>分类:<a href="http://www.iteye.com/blogs/category/language">编程语言</a></li>      
+      <li class='last'><a href="http://www.iteye.com/wiki/blog/382528" target="_blank" class="more">相关推荐</a></li>
+    </ul>    
+  </div>
+  
+		    
+		
+<div class="boutique-curr-box blog_comment">
+	  <div class="boutique-curr clearfix">
+	    <h5 class="h3titles">参考知识库</h5>
+	    
+	    <dl class="dlnewlist">
+	    
+          <dd><a target="_blank" href="http://lib.csdn.net/base/javase"><img src="http://img.knowledge.csdn.net/upload/base/1453169124297_297.jpg" width="58" height="58" alt=""></a></dd>
+          <dt>
+              <a target="_blank" href="http://lib.csdn.net/base/javase" classs="title">Java SE知识库</a>
+              <span>
+                 <em>21185</em>&nbsp;&nbsp;关注 <i>|</i> <em>468</em>&nbsp;&nbsp;收录                  
+              </span>
+          </dt>
+      
+	    </dl>
+	    
+	    <dl class="dlnewlist">
+	    
+          <dd><a target="_blank" href="http://lib.csdn.net/base/wechat"><img src="http://img.knowledge.csdn.net/upload/base/1452500582376_376.jpg" width="58" height="58" alt=""></a></dd>
+          <dt>
+              <a target="_blank" href="http://lib.csdn.net/base/wechat" classs="title">微信开发知识库</a>
+              <span>
+                 <em>17582</em>&nbsp;&nbsp;关注 <i>|</i> <em>708</em>&nbsp;&nbsp;收录                  
+              </span>
+          </dt>
+      
+	    </dl>
+	    
+	    <dl class="dlnewlist">
+	    
+          <dd><a target="_blank" href="http://lib.csdn.net/base/reactnative"><img src="http://img.knowledge.csdn.net/upload/base/1473751990490_490.jpg" width="58" height="58" alt=""></a></dd>
+          <dt>
+              <a target="_blank" href="http://lib.csdn.net/base/reactnative" classs="title">React Native知识库</a>
+              <span>
+                 <em>5068</em>&nbsp;&nbsp;关注 <i>|</i> <em>1217</em>&nbsp;&nbsp;收录                  
+              </span>
+          </dt>
+      
+	    </dl>
+	    
+	    <dl class="dlnewlist">
+	    
+          <dd><a target="_blank" href="http://lib.csdn.net/base/css3"><img src="http://img.knowledge.csdn.net/upload/base/1478154582437_437.jpg" width="58" height="58" alt=""></a></dd>
+          <dt>
+              <a target="_blank" href="http://lib.csdn.net/base/css3" classs="title">CSS3知识库</a>
+              <span>
+                 <em>8848</em>&nbsp;&nbsp;关注 <i>|</i> <em>1733</em>&nbsp;&nbsp;收录                  
+              </span>
+          </dt>
+      
+	    </dl>
+	    
+	  </div>
+</div>
+ 		
+      
+  <div class="blog_comment">
+    <h5>评论</h5>
+    <a id="comments" name="comments"></a>
+    <div id="bc2368424">
+  <div class="comment_title">
+    8 楼
+    <a href='http://yanbingwei86.iteye.com' target='_blank' title='yanbingwei86'>yanbingwei86</a>
+    2015-03-06&nbsp;&nbsp;
+    
+    
+  </div>
+  <div class="comment_content">你好 请问个问题&nbsp; 如果去掉图片中的exif等不必要的信息，利用Jmagick-6.9 好像<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; tmpImage.profileImage("*", null);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; tmpImage.profileImage("EXIF", null);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; tmpImage.setImageProfile("EXIF",null);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; tmpImage.setImageProfile("*", null);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; tmpImage.setImageAttribute("comment", null);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; tmpImage.setImageAttribute("*",null);<br />都不行<br />怎么办<br /></div>
+</div>
+
+<div id="bc2356397">
+  <div class="comment_title">
+    7 楼
+    <a href='http://zuoguiyefengliu.iteye.com' target='_blank' title='zuoguiyefengliu'>zuoguiyefengliu</a>
+    2014-08-16&nbsp;&nbsp;
+    
+    
+  </div>
+  <div class="comment_content">加水印 乱码肿么办</div>
+</div>
+
+<div id="bc2325664">
+  <div class="comment_title">
+    6 楼
+    <a href='http://zjhfeng.iteye.com' target='_blank' title='zjhfeng'>zjhfeng</a>
+    2013-09-16&nbsp;&nbsp;
+    
+    
+  </div>
+  <div class="comment_content">生成缩略图的时候&nbsp; 怎么使小于缩略图大小的小图片不变大呀？<img src="/images/smiles/icon_wink.gif" /> </div>
+</div>
+
+<div id="bc2318238">
+  <div class="comment_title">
+    5 楼
+    <a href='http://xjl712.iteye.com' target='_blank' title='xjl712'>xjl712</a>
+    2013-07-11&nbsp;&nbsp;
+    
+    
+  </div>
+  <div class="comment_content">你好，请问下那怎么把加上的水印，再去掉呢</div>
+</div>
+
+<div id="bc2318042">
+  <div class="comment_title">
+    4 楼
+    <a href='http://elf8848.iteye.com' target='_blank' title='elf8848'>elf8848</a>
+    2013-07-10&nbsp;&nbsp;
+    
+    
+  </div>
+  <div class="comment_content"><div class="quote_title">netingcn 写道</div><div class="quote_div">哈哈，看到我的Blog被楼主引用，很欣慰~~<br /><a rel="nofollow" target="_blank" href="http://www.netingcn.com/category/imagemagick">http://www.netingcn.com/category/imagemagick</a>。这里面的例子都是我亲自测试过的</div><br />看到你的回复很是高兴，你的文章写的很好。<br /></div>
+</div>
+
+<div id="bc2317901">
+  <div class="comment_title">
+    3 楼
+    <a href='http://netingcn.iteye.com' target='_blank' title='netingcn'>netingcn</a>
+    2013-07-09&nbsp;&nbsp;
+    
+    
+  </div>
+  <div class="comment_content">哈哈，看到我的Blog被楼主引用，很欣慰~~<br /><a rel="nofollow" target="_blank" href="http://www.netingcn.com/category/imagemagick">http://www.netingcn.com/category/imagemagick</a>。这里面的例子都是我亲自测试过的</div>
+</div>
+
+<div id="bc2303677">
+  <div class="comment_title">
+    2 楼
+    <a href='http://elf8848.iteye.com' target='_blank' title='elf8848'>elf8848</a>
+    2013-03-13&nbsp;&nbsp;
+    
+    
+  </div>
+  <div class="comment_content"><div class="quote_title">yonge812 写道</div><div class="quote_div">请问用gm如何压缩gif图片？另外，用gm加+profile "*" 参数与用im加+profile "*"参数对jpg图片进行压缩，貌似后者的质量要好些，不知道为什么？请指教，谢谢！！</div><br />1、用GM 的resize参数，可压缩gif,并保持动画效果。<br />2、gm加+profile "*" 参数与用im加+profile "*"参数，是去Exif信息与质量无关。gm的-quality默认是75， im的-quality默认是xxx（忘记了，但高于75），所以你指定-quality参数就， 画质就一样了。</div>
+</div>
+
+<div id="bc2303644">
+  <div class="comment_title">
+    1 楼
+    <a href='http://yonge812.iteye.com' target='_blank' title='yonge812'>yonge812</a>
+    2013-03-13&nbsp;&nbsp;
+    
+    
+  </div>
+  <div class="comment_content">请问用gm如何压缩gif图片？另外，用gm加+profile "*" 参数与用im加+profile "*"参数对jpg图片进行压缩，貌似后者的质量要好些，不知道为什么？请指教，谢谢！！</div>
+</div>
+
+
+    
+    
+  </div>
+
+  <div class="blog_comment">
+    <h5>发表评论</h5>
+            <p style="text-align:center; margin-top:30px;margin-bottom:0px;"><a href="/login" style="background-color:white;"> <img src="/images/login_icon.png" style="vertical-align:middle; margin-right: 10px;" /></a><a href="/login">  您还没有登录,请您登录后再发表评论 </a></p>
+      </div>
+</div>
+
+
+<script type="text/javascript">
+  dp.SyntaxHighlighter.HighlightAll('code', true, true);
+
+  $$('#main .blog_content pre[name=code]').each(function(pre, index){ // blog content
+    var post_id = 382528;
+    var location = window.location;
+    source_url = location.protocol + "//" + location.host + location.pathname + location.search;
+    pre.writeAttribute('codeable_id', post_id);
+    pre.writeAttribute('codeable_type', "Blog");
+    pre.writeAttribute('source_url', source_url);
+    pre.writeAttribute('pre_index', index);
+    pre.writeAttribute('title', 'ImageMagick简介、GraphicsMagick、命令行使用示例');
+  });
+
+  fix_image_size($$('div.blog_content img'), 700);
+
+  function processComment() {
+    $$('#main .blog_comment > div').each(function(comment){// comment
+      var post_id = comment.id.substr(2);
+      $$("#"+comment.id+" pre[name=code]").each(function(pre, index){
+        var location = window.location;
+        source_url = location.protocol + "//" + location.host + location.pathname + location.search;
+        source_url += "#" + comment.id;
+        pre.writeAttribute('codeable_id', post_id);
+        pre.writeAttribute('codeable_type', "BlogComment");
+        pre.writeAttribute('source_url', source_url);
+        pre.writeAttribute('pre_index', index);
+        pre.writeAttribute('title', 'ImageMagick简介、GraphicsMagick、命令行使用示例');
+      });
+    });
+  }
+
+  function quote_comment(id) {
+    new Ajax.Request('/editor/quote', {
+      parameters: {'id':id, 'type':'BlogComment'},
+      onSuccess:function(response){editor.bbcode_editor.textarea.insertAfterSelection(response.responseText);
+        Element.scrollTo(editor.bbcode_editor.textarea.element);}
+    });
+  }
+
+  code_favorites_init();
+  processComment();
+  new WeiboShare({share_buttons: $('share_weibo'), img_scope: $('blog_content')});
+</script>
+
+
+
+
+        </div>
+
+        <div id="local">
+          <div class="local_top"></div>
+          <div id="blog_owner">
+  <div id="blog_owner_logo"><a href='http://elf8848.iteye.com'><img alt="elf8848的博客" class="logo" src="http://www.iteye.com/upload/logo/user/1116640/7f821be0-a0ab-3b24-bd64-12e861776249.jpg?1442120533" title="elf8848的博客: 技术博客" width="" /></a></div>
+  <div id="blog_owner_name">elf8848</div>
+</div>
+
+          <div id="blog_actions">
+            <ul>
+              <li>浏览: 4857382 次</li>
+              <li>性别: <img alt="Icon_minigender_1" src="http://www.iteye.com/images/icon_minigender_1.gif?1448702469" title="男" /></li>
+              <li>来自: 北京</li>
+              <li><img src='/images/status/offline.gif'/></li>
+              
+            </ul>
+          </div>
+          <div id="user_visits" class="clearfix">
+            <h5>最近访客 <span style='font-weight:normal;font-size:12px;padding-left:30px;'><a href="/blog/user_visits">更多访客&gt;&gt;</a></span></h5>
+            
+              <div class="user_visit">
+                <div class="logo"><a href='http://hj-liao.iteye.com' target='_blank'><img alt="hj_liao的博客" class="logo" src="http://www.iteye.com/images/user-logo-thumb.gif?1448702469" title="hj_liao的博客: " width="48px" /></a></div>
+                <div class="left"><a href='http://hj-liao.iteye.com' target='_blank' title='hj_liao'>hj_liao</a></div>
+              </div>
+            
+              <div class="user_visit">
+                <div class="logo"><a href='http://cning-cn.iteye.com' target='_blank'><img alt="cning_cn的博客" class="logo" src="http://www.iteye.com/upload/logo/user/1169987/e06761f0-4e59-3563-8ea2-84bfd3bc400f-thumb.jpg?1461670635" title="cning_cn的博客: 雨夜聆风" width="48px" /></a></div>
+                <div class="left"><a href='http://cning-cn.iteye.com' target='_blank' title='cning_cn'>cning_cn</a></div>
+              </div>
+            
+              <div class="user_visit">
+                <div class="logo"><a href='http://chen6581669.iteye.com' target='_blank'><img alt="chen6581669的博客" class="logo" src="http://www.iteye.com/images/user-logo-thumb.gif?1448702469" title="chen6581669的博客: " width="48px" /></a></div>
+                <div class="left"><a href='http://chen6581669.iteye.com' target='_blank' title='chen6581669'>chen6581669</a></div>
+              </div>
+            
+              <div class="user_visit">
+                <div class="logo"><a href='http://minjunping.iteye.com' target='_blank'><img alt="minjunping的博客" class="logo" src="http://www.iteye.com/images/user-logo-thumb.gif?1448702469" title="minjunping的博客: " width="48px" /></a></div>
+                <div class="left"><a href='http://minjunping.iteye.com' target='_blank' title='minjunping'>minjunping</a></div>
+              </div>
+            
+          </div>
+
+          
+
+                      <div id="blog_menu">
+              <h5>文章分类</h5>
+              <ul>
+                <li><a href="/">全部博客 (397)</a></li>
+                
+                  <li><a href="/category/202008">架构研究 (45)</a></li>
+                
+                  <li><a href="/category/123163">网络协议-TCP/HTTP (20)</a></li>
+                
+                  <li><a href="/category/57702">SPRING (23)</a></li>
+                
+                  <li><a href="/category/56526">HIBERNATE 3 (30)</a></li>
+                
+                  <li><a href="/category/57701">STRUTS 2 (20)</a></li>
+                
+                  <li><a href="/category/38460">Java/J2se (25)</a></li>
+                
+                  <li><a href="/category/123165">Servlet/Jsp (9)</a></li>
+                
+                  <li><a href="/category/59064">开发工具IDE (10)</a></li>
+                
+                  <li><a href="/category/64209">WEB服务器 (17)</a></li>
+                
+                  <li><a href="/category/63483">前端--Java Script (33)</a></li>
+                
+                  <li><a href="/category/43794">前端--CSS (7)</a></li>
+                
+                  <li><a href="/category/170175">OS--Linux (31)</a></li>
+                
+                  <li><a href="/category/202006">OS--MAC OS (20)</a></li>
+                
+                  <li><a href="/category/140965">MySQL数据库 (19)</a></li>
+                
+                  <li><a href="/category/57704">Oracle数据库 (11)</a></li>
+                
+                  <li><a href="/category/95558">项目管理工具 (12)</a></li>
+                
+                  <li><a href="/category/100669">数据报表技术 (4)</a></li>
+                
+                  <li><a href="/category/178059">图像处理技术 (10)</a></li>
+                
+                  <li><a href="/category/154359">其它综合技术 (13)</a></li>
+                
+                  <li><a href="/category/245387">权限管理 (1)</a></li>
+                
+                  <li><a href="/category/278993">MyBatis (1)</a></li>
+                
+                  <li><a href="/category/279049">网络安全 (6)</a></li>
+                
+                  <li><a href="/category/281637">IO (21)</a></li>
+                
+                  <li><a href="/category/287052">PostgreSQL (2)</a></li>
+                
+                  <li><a href="/category/293683">Eclipse RCP (1)</a></li>
+                
+                  <li><a href="/category/293779">GWT (1)</a></li>
+                
+                  <li><a href="/category/316525">算法 (3)</a></li>
+                
+                  <li><a href="/category/316797">Storm (2)</a></li>
+                
+                  <li><a href="/category/317818">zookeeper (3)</a></li>
+                
+                  <li><a href="/category/319360">消息 (1)</a></li>
+                
+              </ul>
+            </div>
+            <div id='month_blogs'>
+              <h5>社区版块</h5>
+              <ul>
+                <li><a href="/blog/news">我的资讯</a> (0)</li>
+                <li>
+                  <a href="/blog/post">我的论坛</a> (195)
+                </li>
+                <li><a href="/blog/answered_problems">我的问答</a> (46)</li>
+              </ul>
+            </div>
+            <div id="month_blogs">
+              <h5>存档分类</h5>
+              <ul>
+                
+                  <li><a href="/blog/monthblog/2015-09">2015-09</a> (1)</li>
+                
+                  <li><a href="/blog/monthblog/2015-06">2015-06</a> (1)</li>
+                
+                  <li><a href="/blog/monthblog/2015-01">2015-01</a> (1)</li>
+                
+                <li><a href="/blog/monthblog_more">更多存档...</a></li>
+              </ul>
+            </div>
+            
+            
+
+            <div id="guest_books">
+              <h5>最新评论</h5>
+              <ul>
+                
+                <li>
+                  <a href='http://983435101.iteye.com' target='_blank' title='983435101'>983435101</a>： 
+                   反反复复<br />
+                  <a href="/blog/626790#bc2396363">WEB打印的几种方案</a>
+                </li>
+                
+                <li>
+                  <a href='http://baiducctv5.iteye.com' target='_blank' title='baiducctv5'>baiducctv5</a>： 
+                   ...<br />
+                  <a href="/blog/184607#bc2396080">初识 Spring 框架，进入Spring的世界</a>
+                </li>
+                
+                <li>
+                  <a href='http://1093619789.iteye.com' target='_blank' title='纵观全局'>纵观全局</a>： 
+                  点赞，谢谢大哥<br />
+                  <a href="/blog/1871843#bc2395851">MyBatis insert 返回主键的方法</a>
+                </li>
+                
+                <li>
+                  <a href='http://3086264740.iteye.com' target='_blank' title='呵呵6666'>呵呵6666</a>： 
+                  不错！分享下分布式事务解决方案的效果演示（结合支付系统真实应用 ...<br />
+                  <a href="/blog/2067771#bc2394961">关于分布式系统的数据一致性问题</a>
+                </li>
+                
+                <li>
+                  <a href='http://g031581.iteye.com' target='_blank' title='g031581'>g031581</a>： 
+                     资料很全，感谢分享！<br />
+                  <a href="/blog/245559#bc2394788">JSTL标签  参考手册</a>
+                </li>
+                
+              </ul>
+            </div>
+
+            <div class="local_bottom"></div>
+          
+        </div>
+        <div style="margin-top: 10px;float: left;clear: left;">
+					<ins data-revive-zoneid="185" data-revive-id="8c38e720de1c90a6f6ff52f3f89c4d57"></ins>
+				</div>
+      </div>    
+
+      <div id="footer" class="clearfix">
+        <div id="copyright">
+          <hr/>
+          声明：ITeye文章版权属于作者，受法律保护。没有作者书面许可不得转载。若作者同意转载，必须以超链接形式标明文章原始出处和作者。<br />
+          &copy; 2003-2017 ITeye.com.   All rights reserved.  [ 京ICP证110151号  京公网安备110105010620 ]
+        </div>
+        <ins data-revive-zoneid="186" data-revive-id="8c38e720de1c90a6f6ff52f3f89c4d57"></ins>
+      </div>
+    </div>
+    <script type="text/javascript">
+  document.write("<img src='http://stat.iteye.com/?url="+ encodeURIComponent(document.location.href) + "&referrer=" + encodeURIComponent(document.referrer) + "&user_id=' width='0' height='0' />");
+</script>
+
+<script src="http://csdnimg.cn/pubfooter/js/tracking.js?version=20130923164150" type="text/javascript"></script>
+
+    
+    
+    <script language="javascript" type="text/javascript" src="http://ads.csdn.net/js/async_new.js"></script>
+<script src="http://c.csdnimg.cn/public/common/libs/jquery/jquery-1.11.1.min.js" type="text/javascript"></script>
+<script type="text/javascript">var $csdn_iteye_jq = jQuery.noConflict();// 解决jq与prototype.js命名空间冲突的问题</script>
+<script src="http://ads.csdn.net/js/tracking.js" type="text/javascript"></script>
+    
+	    
+	    <script src="http://www.iteye.com/javascripts/web-storage-cache.min.js?1461122561" type="text/javascript"></script>
+	    <script src="http://www.iteye.com/javascripts/replace.min.js?1464163001" type="text/javascript"></script>
+    
+    
+  </body>
+</html>

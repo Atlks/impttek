@@ -1,0 +1,33 @@
+
+
+Js前端框架体系::: AngularJS mvc 框架，dwr3 ajax框架 
+
+返回数据格式为json，规则兼容easyui的table列表数据格式
+
+{
+	"rows": [
+		{f1:'value11', f2:'value12'},
+		{f1:'value21', f2:'value22'}
+	],
+	"total":9
+	
+
+}
+
+说明：：rows 是行数据，
+total是总数量
+
+数据流向
+
+
+
+
+
+
+
+  
+
+    
+
+
+

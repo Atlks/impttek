@@ -1,0 +1,62 @@
+
+paip.日志中文编码原理问题本质解决python 
+
+默认的python日志编码仅仅gbk...保存utf8字符错误..输出到个eric5的控制台十默认好像十unicode的,要是有没显示出来的字符,大概十字体问题..调整eric5的字体走ok兰.
+
+#调用封装
+from log import *
+iniLog (r"c:\enPn2atiEnPh.log")      
+logx("xxx")
+
+#主要的代码 
+设置文件编码为utf8
+ handler = logging.FileHandler(logfile, "a",
+                              encoding = "UTF-8")
+设置默认日志文件
+iniLog(r"c:\pylog.log")   							  
+							  
+
+作者 老哇的爪子 Attilax 艾龙，  EMAIL:1466519819@qq.com
+转载请注明来源： http://blog.csdn.net/attilax
+
+#所有的代码
+
+
+import logging
+def iniLog(logfile):
+
+    log_format = '%(filename)s [%(asctime)s] [%(levelname)s] %(message)s'  
+    #logfile="c:\pythonlog_en2ati.log"
+    #jeig bsin cant suport utf encode
+    #logging.basicConfig(encode="utf-8" , encoding = "UTF-8", filename=logfile, format=log_format,datefmt='%Y-%m-%d %H:%M:%S %p',level=logging.DEBUG) 
+
+
+#todox jeig support utf8 encode
+    handler = logging.FileHandler(logfile, "a",
+                              encoding = "UTF-8")
+    formatter = logging.Formatter(log_format)
+    handler.setFormatter(formatter)
+    root_logger = logging.getLogger()
+    root_logger.addHandler(handler)
+    root_logger.setLevel(logging.INFO)
+
+
+
+
+#encoding = "UTF-8"
+    # 定义一个Handler打印INFO及以上级别的日志到sys.stderr  
+    console = logging.StreamHandler()  
+    console.setLevel(logging.INFO)  
+    # 设置日志打印格式  
+    formatter = logging.Formatter('%(name)-12s: %(levelname)-8s %(message)s')  
+    console.setFormatter(formatter)  
+    # 将定义好的console日志handler添加到root logger  
+    logging.getLogger('').addHandler(console)  
+
+
+    logging.info("--start loging")
+def xx():
+    print("")
+def logx(msg):    
+    logging.info("\n---"+msg)    
+iniLog(r"c:\pylog.log")    

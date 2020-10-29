@@ -1,0 +1,131 @@
+Atitit. 订单管理 收银单持久化 功能设计  基于ecshop订单结构
+
+
+11
+11
+11
+22
+22
+22
+22
+33
+33
+44
+44
+44
+44
+44
+4
+54.order_info  订单 数据结构
+参考备注
+
+
+Ecshop 的订单api
+
+生成订单 code by
+flow.php
+/*------------------------------------------------------ */
+//-- 完成所有订单操作，提交到数据库
+/*------------------------------------------------------ */
+elseif ($_REQUEST['step'] == 'done')
+{
+
+    /* 插入订单表 */
+    $error_no = 0;
+    do
+    {
+        $order['order_sn'] = get_order_sn(); //获取新订单号
+        $GLOBALS['db']->autoExecute($GLOBALS['ecs']->table('order_info'), $order, 'INSERT');
+相关文件路径
+D:\wamp\www\ecsx\includes\lib_order.php
+/**
+ * 取得订单信息
+ * @param   int     $order_id   订单id（如果order_id > 0 就按id查，否则按sn查）
+ * @param   string  $order_sn   订单号
+ * @return  array   订单信息（金额都有相应格式化的字段，前缀是formated_）
+ */
+取得订单信息 function order_info($order_id, $order_sn = '')
+
+/**
+ * 取得订单商品
+ * @param   int     $order_id   订单id
+ * @return  array   订单商品数组
+ */
+取得订单商品function order_goods($order_id)
+/**
+ * 取得订单总金额
+ * @param   int     $order_id   订单id
+ * @param   bool    $include_gift   是否包括赠品
+ * @return  float   订单总金额
+ */
+取得订单总金额  function order_amount($order_id, $include_gift = true)
+{
+    $sql = "SELECT SUM(goods_price * goods_number) " .
+            "FROM " . $GLOBALS['ecs']->table('order_goods') .
+            " WHERE order_id = '$order_id'";
+    if (!$include_gift)
+    {
+        $sql .= " AND is_gift = 0";
+    }
+
+    return floatval($GLOBALS['db']->getOne($sql));
+}
+
+
+/**
+ * 修改订单
+ * @param   int     $order_id   订单id
+ * @param   array   $order      key => value
+ * @return  bool
+ */
+修改订单 function update_order($order_id, $order)
+{
+    return $GLOBALS['db']->autoExecute($GLOBALS['ecs']->table('order_info'),
+        $order, 'UPDATE', "order_id = '$order_id'");
+}
+
+
+/**
+ * 订单退款order_refund(
+ * @param   array   $order          订单
+ * @param   int     $refund_type    退款方式 1 到帐户余额 2 到退款申请（先到余额，再申请提款） 3 不处理
+ * @param   string  $refund_note    退款说明
+ * @param   float   $refund_amount  退款金额（如果为0，取订单已付款金额）
+ * @return  bool
+ */
+function order_refund($order, $refund_type, $refund_note, $refund_amount = 0)
+{
+
+
+/**
+ * 合并订单merge_order
+ * @param   string  $from_order_sn  从订单号
+ * @param   string  $to_order_sn    主订单号
+ * @return  成功返回true，失败返回错误信息
+ */
+function merge_order($from_order_sn, $to_order_sn)
+
+
+/**
+ * 改变订单中商品库存change_order_goods_storage
+ * @param   int     $order_id   订单号
+ * @param   bool    $is_dec     是否减少库存
+ * @param   bool    $storage     减库存的时机，1，下订单时；0，发货时；
+ */
+function change_order_goods_storage($order_id, $is_dec = true, $storage = 0)
+
+
+Ati order api
+生成订单insert /save 
+来源于sql与orm的api继承。。
+高级功能
+错误的金额----  太小,太大的的数
+审核机制...(可以只使用在太小,太大金额或者别的异常的情形哈)
+
+
+参考
+ECSHOP 数据库结构说明 (适用版本v2.7.3).htm
+
+
+
+

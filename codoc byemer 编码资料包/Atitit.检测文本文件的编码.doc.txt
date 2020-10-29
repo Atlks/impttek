@@ -1,0 +1,23 @@
+Atitit.检测文本文件的编码
+
+
+不能使用load来检测编码..
+
+
+要是txt是 gbk的, 使用notepad++ load as utf8 三正常的...
+Load as gbk 却乱码了...
+
+
+Editplus就ok...
+
+
+不过.要是文件是utf8的.. Editplus  load as gbk 显示是正常的..所以,不能使用load来检测编码..
+
+使用convert来检测编码
+使用convert来检测编码..docu>>file encode >>convet encode  显示编码确认框..这个走十恰当的的编码...
+
+也可以使用notepad的另存为来检测..
+
+
+
+

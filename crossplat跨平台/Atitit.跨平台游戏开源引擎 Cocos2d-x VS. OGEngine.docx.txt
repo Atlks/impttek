@@ -1,0 +1,41 @@
+Atitit.跨平台游戏开源引擎 Cocos2d-x VS. OGEngine
+
+精灵，是构成游戏中活动体（比如，飞机、野兽等游戏人物）的最基本单元，任何一个活动体都可以由一个或多个精灵组合而成，每个精灵都是一个对象实例，它能够绘制自己、移动（更复杂的还可以旋转）等等基本动作。
+
+纹理Texture 和 BitmapTextureAtlas
+要绘制一个精灵sprite, 必须要加载其纹理Texture。纹理就是绘制在Sprite对象上的位图
+
+可以传入TiledTextureRegion的纹理以构造一个可以连续播放的精灵，但必须要先制作好一张动画序列图片，俗称Tiled图。而AnimateSprite（动画精灵）继承于TiledSprite,用来描述一些帧动画资源。
+AnimatedSprite的构造方法中需要的ITiledTextureRegion是Tiled而不是普通的TextureRegion，也就是说，是基于单帧动画资源的！
+
+
+  当精灵接收到游戏环境的时钟脉冲通知时，最常见的方法调用组合是：
+                theSprite.Erase() ;
+                theSprite.Move() ;
+                theSprite.Draw() ;
+    首先，精灵擦除自己，然后依据方向CompassDirections移动自己到新的位置，最后在新的位置绘制自己。
+    所以，当时钟脉冲连续不断的到来时，我们就可以看到精灵在移动了，通过我们的游戏操纵杆或键盘我们可以调用目标精灵的SetDirection方法来指定其要移动的方向。
+
+ 按钮精灵ButtonSprite
+和AnimateSprite类似，ButtonSprite的构造函数中需要的也是TiledTextureRegion,区别就是ButtonSprite分为3种状态，NORMAL,PRESSED,DISABLED，默认状态为NORMAL。按下的时候会显示第2帧动画，不可按时显示第3帧动画。
+创建ButtonSprite和往scene中添加方法：
+/** 创建精灵对象 */
+ButtonSprite bg2 = new ButtonSprite(100, 100, mSnapdragonTextureRegion, this.getVertexBufferObjectManager());
+/**在场景里面添加精灵*/
+this.attachChild(bg2);
+ButtonSprite添加触摸监听必须要先取消触摸阻塞，
+/** 取消触摸阻塞 */
+bg2.setIgnoreTouch(false);
+bg2.setOnClickListener(new OnClickListener() {
+        @Override
+        public void onClick(ButtonSprite pButtonSprite,
+                        float pTouchAreaLocalX, float pTouchAreaLocalY) {
+                // TODO Auto-generated method stub
+                Log.v("tag", "bg2");
+        }
+});
+
+Java的跨平台开源引擎显然是十分受欢迎
+OGEngine游戏开发之精灵(sprite) - OGEngine - 游戏开发者社区.htm
+游戏编程入门（1） －－ 精灵 ISprite - zhuweisky - 博客园.htm
+
