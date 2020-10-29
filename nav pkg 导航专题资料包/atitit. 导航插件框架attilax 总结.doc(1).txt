@@ -1,0 +1,13 @@
+Easyui
+Jqueryui  都没有导航控件。。
+有个menu控件。。。不能直接用作导航上。。
+
+导航的要求
+选中效果（圆角效果更好）
+通过cookoie方式记住or url参数
+Cookie的方式好。。
+
+圆角效果 border-radius: 4px;
+
+响应式
+

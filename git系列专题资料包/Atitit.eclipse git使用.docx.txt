@@ -1,0 +1,63 @@
+Atitit.eclipse git使用
+
+
+	1. Git vs svn	1
+	1.1. 直接记录快照，而非差异比较	1
+	1.2. Git的patch则不依附于branch，commit和commit之间的关系是一个GRAPH	3
+	1.3. hg 本地有更改的时候，可以直接 pull 远程代码，然后在自己当前更改的工作目录中进行归并，从而不创建额外的分支	3
+	1.4. 。git 在这种情况下，必须提交或者放弃自己的本地工作，然后 pull 远程代码，然后归并分支，也就是说，git 在这种情况下强制性创建分支。	3
+	1.5. 基于git的设计：每个clone都必须包含完整的目录树和完整的历史，否则不能跟踪原始仓库的进一步变化	3
+	2. 当然，git也有一些缺点，可能有些团队还是比较看重的：	4
+	2.1. User or create respon in parent folder of prj	4
+	3. Ｃｏｍｍｉｔ	4
+
+Git vs svn
+像svn一样commit即push完全是灾难
+Git need   add,commit,then push to remote svr.  
+hg commit 代码的时候，缺省就是当前所有更改。而 git 必须先 add 当前的修改，然后再commit。
+
+直接记录快照，而非差异比较
+Git 和其他版本控制系统的主要差别在于，Git 只关心文件数据的整体是否发生变化，而大多数其他系统则只关心文件内容的具体差异。这类系统（CVS，Subversion，Perforce，Bazaar 等等）每次记录有哪些文件作了更新，以及都更新了哪些行的什么内容，请看图 1-4。
+
+作者::  ★(attilax)>>>   绰号:老哇的爪子 （ 全名：：Attilax Akbar Al Rapanui 阿提拉克斯 阿克巴 阿尔 拉帕努伊 ） 汉字名：艾龙，  EMAIL:1466519819@qq.com
+转载请注明来源： http://blog.csdn.net/attilax
+
+Git 并不保存这些前后变化的差异数据。实际上，Git 更像是把变化的文件作快照后，记录在一个微型的文件系统中。每次提交更新时，它会纵览一遍所有文件的指纹信息并对文件作一快照，然后保存一个指向这次快照的索引。为提高性能，若文件没有变化，Git 不会再次保存，而只对上次保存的快照作一链接。Git 的工作方式就像图 1-5 所示。
+
+
+
+
+这是 Git 同其他系统的重要区别。它完全颠覆了传统版本控制的套路，并对各个环节的实现方式作了新的设计。Git 更像是个小型的文件系统，但它同时还提供了许多以此为基础的超强工具，而不只是一个简单的 VCS。
+
+。如果想要看当前版本的文件和一个月前的版本之间有何差异，Git 会取出一个月前的快照和当前文件作一次差异运算，而不用请求远程服务器来做这件事，或是把老版本的文件拉到本地来作比较。
+Git的patch则不依附于branch，commit和commit之间的关系是一个GRAPH
+
+拿CVS来比较的话，CVS的patch是基于branch的，patch和patch之间的关系是一个TREE。而Git的patch则不依附于branch，commit和commit之间的关系是一个GRAPH。用不同的路径串起Git里的commit，就可以形成不同的branch。
+这里说patch不依附于branch可能有些人不理解，提交patch的时候，不总是在某个开发分支上commit然后push的吗？不错，但是一个commit一旦提交了，就不再依附于原来的branch，而成为repository里的一个离散的点。
+Git里的所谓branch，只是在这个星罗密布的点阵里面，画一条串起若干commit的连线。
+hg 本地有更改的时候，可以直接 pull 远程代码，然后在自己当前更改的工作目录中进行归并，从而不创建额外的分支
+。git 在这种情况下，必须提交或者放弃自己的本地工作，然后 pull 远程代码，然后归并分支，也就是说，git 在这种情况下强制性创建分支。
+基于git的设计：每个clone都必须包含完整的目录树和完整的历史，否则不能跟踪原始仓库的进一步变化
+。具体来说，
+(1) 很难直接跟踪git仓库的某个子目录：必须clone整个仓库然后做subtree merge。而SVN则可以直接checkout/update某个子目录。
+(2) 每个版本之间变化都非常大时不适用git。比如说可以用svn去管理binary release的各个版本，客户端可以选择checkout哪个branch或者tag；但如果用git，就得先全clone到本地，这就疯了。
+当然，git也有一些缺点，可能有些团队还是比较看重的：
+
+1.目录级别的访问控制，让有的成员只能访问某一目录(通常是模块)；
+2.直观的版本号；
+3.部分检出一个目录，通常是一个模块/分支；
+
+User or create respon in parent folder of prj
+
+
+Create repos   ｗｏｒｋｓｐａｃｅ\.git
+
+
+Ｃｏｍｍｉｔ
+Ｆｉｒｓｔ  add to index
+Then commit..
+Bier yva file yao ni select l ..
+
+
+Git 的主要特点.html
+

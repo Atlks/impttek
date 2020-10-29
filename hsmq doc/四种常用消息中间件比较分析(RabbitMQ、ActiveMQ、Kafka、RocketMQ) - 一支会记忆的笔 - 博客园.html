@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="一、 消息队列 1. 分布式应用与集群的区别： 如果是一个业务被拆分成多个子业务部署在不同的服务器上，那就是分布式应用；如果是同一个业务部署在多台服务器上，那就是集群。 2. 系统间通信方式： 一种是" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>四种常用消息中间件比较分析(RabbitMQ、ActiveMQ、Kafka、RocketMQ) - 一支会记忆的笔 - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="//common.cnblogs.com/favicon.svg" type="image/svg+xml" />
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=eJQE8raBiZQaXXSaPTciUQCLTIh6ozn6FTo1VIJimsY" />
+    
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/JonaLin/custom.css?v=T7Q3IRLirxB2SbC3f12OenVPaEY=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/moonlightink/bundle-moonlightink-mobile.min.css?v=TxKHA3eAP6i0mfb9SjnacJnI6ci_26thDLU1mWiCVMM" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/JonaLin/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/JonaLin/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/JonaLin/wlwmanifest.xml" />
+    <script>
+        var currentBlogId = 521116;
+        var currentBlogApp = 'JonaLin';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'MoonlightInk';
+        var visitorUserId = '';
+    </script>
+        <script>
+            var currentPostDateAdded = '2020-04-10 03:25';
+        </script>
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=GDDxNTMu__UMoAAQQRU0L1SpIm25Aa4OuTxtHI5XsGc"></script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <!-- 添加页面放大和缩小功能按键 
+<div id="divExpandViewArea" onclick="$(‘#main_container‘).css({‘margin-left‘:‘-195px‘});$(‘#leftmenu‘).css({‘display‘:‘none‘});">扩大</div>
+<div id="divCollapseViewArea" onclick="$(‘#main_container‘).css({‘margin-left‘:‘0px‘});$(‘#leftmenu‘).css({‘display‘:‘block‘});">缩小</div> -->
+
+<!-- 博客页面脚添加Github链接或其他链接 -->
+<!-- 页面左上角 -->
+<a href="https://github.com/puguilin/" title="我的站点" target="_Blank" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 0; border: 0; left: 0; transform: scale(-1, 1);" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+<!-- 页面右上角 -->
+<a href="https://github.com/puguilin/SpringAll" title="我的github地址" target="_Blank" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#FD6C6C; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+<!-- 背景线条动画 -->
+<!--<script type="text/javascript" color="255, 20, 147" opacity='0.7' zIndex="3" count="199" src="https://files.cnblogs.com/files/JonaLin/canvas-nest2.js" defer></script> -->
+<script>
+    window.tctipConfig = {
+      staticPrefix: "http://static.tctip.com",
+      buttonImageId: 7,
+      buttonTip: "dashang",
+      list:{
+        alipay: {qrimg: "https://files-cdn.cnblogs.com/files/JonaLin/3.bmp"},
+        weixin:{qrimg: "https://files-cdn.cnblogs.com/files/JonaLin/1.bmp"}
+      }
+    };
+</script>
+<script src="https://files.cnblogs.com/files/hafiz/tctip.min.js" defer></script>
+<link type="text/css" rel="stylesheet" href="https://files.cnblogs.com/files/hafiz/myRewards.css">
+<link  type="text/css" rel="stylesheet" href="https://files.cnblogs.com/files/miangao/maodian.css">
+<link  type="text/css" rel="stylesheet" href="https://files.cnblogs.com/files/hafiz/feedback.css">
+<!--走马灯-->
+<div id="i1" style="color:blue;font-size:33px;padding:10px;">在各自岗位上尽职尽责，无需豪言壮语，默默行动会诠释一切。这世界，虽然没有绝对的公平，但是努力就会增加成功和变好的可能性！而这带着未知变量的可能性，就足以让我们普通人拼命去争取了。</div>
+
+<!-- 球球-->
+ <a class="qiuqiu" href="https://www.cnblogs.com/JonaLin/">
+	<img  border="0" src="https://images.cnblogs.com/cnblogs_com/Renyi-Fan/1188097/o_article2.gif" title="客官，想看我吗" >
+ </a>
+    <script>
+       function func(){
+           var tag = document.getElementById('i1');
+           var content = tag.innerText;
+           var f = content.charAt(0);
+           var l = content.substring(1,content.length);
+           var new_content = l + f;
+           tag.innerText = new_content;
+       }
+       setInterval('func()',600);
+    </script>
+<div>
+<!--复制正文文字时自动加版权
+
+<script language="javascript" type="text/javascript">
+jQuery(document).on('copy', function(e)
+{
+  var selected = window.getSelection();
+  var copyFooter = '<br>--------------------<br>著作权归作者所有。<br>' 
+                        + '商业转载请联系作者获得授权，非商业转载请注明出处。<br>'
+                        + '作者：一支会记忆的笔<br> 源地址：' + document.location.href
+                        + '<br>来源：博客园cnblogs<br>© 版权声明：本文为博主原创文章，转载请附上博文链接！';
+  var copyHolder = $('<div>', {html: selected + copyFooter, style: {position: 'absolute', left: '-99999px'}});
+
+  $('body').append(copyHolder);
+  selected.selectAllChildren( copyHolder[0] );
+  window.setTimeout(function() {
+      copyHolder.remove();
+  },0);
+});
+</script>-->
+<!-- 添加博客顶部博主信息-->
+<marquee><a href="#"><font color="red" size="8">欢迎来到~一支会记忆的笔~博客主页
+</marquee>
+<!--页首Html代码-->
+<!--<canvas id="c"></canvas>
+<script type="text/javascript" src="https://blog-static.cnblogs.com/files/Steven-Tim/hk01.js" defer ></script>-->
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/JonaLin/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/JonaLin/">一支会记忆的笔</a>
+</h1>
+<h2>
+在一瞬间有一千万种可能......
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/JonaLin/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E4%B8%80%E6%94%AF%E4%BC%9A%E8%AE%B0%E5%BF%86%E7%9A%84%E7%AC%94">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/JonaLin/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+432&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+33</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2 vertical-middle" href="https://www.cnblogs.com/JonaLin/p/12673779.html">
+    <span>四种常用消息中间件比较分析(RabbitMQ、ActiveMQ、Kafka、RocketMQ)</span>
+    
+
+
+</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body">
+    <p>&nbsp;</p>
+<h2>一、 消息队列</h2>
+<h3>  1. 分布式应用与集群的区别：</h3>
+<p>  　　 如果是<strong><span style="color: rgba(255, 0, 0, 1)">一个业务被拆分成多个子业务部署在不同的服务器上</span></strong>，那就是<strong><span style="color: rgba(255, 0, 0, 1)">分布式应用</span></strong>；如果是<strong><span style="color: rgba(255, 0, 0, 1)">同一个业务部署在多台服务器</span></strong>上，那就<strong><span style="color: rgba(255, 0, 0, 1)">是集群</span></strong>。</p>
+<h3>  2. 系统间通信方式：</h3>
+<p>  　　 一种是基于<strong><span style="color: rgba(255, 0, 0, 1)">远程过程调用的方式</span></strong>(如RPC调用)；另一种是基<strong><span style="color: rgba(255, 0, 0, 1)">于消息队列的方</span></strong>式。</p>
+<h3>二、RabbitMQ</h3>
+<h4>  1.RabbitMQ特点：</h4>
+<p>   RabbitMQ是一个由<strong><span style="color: rgba(255, 0, 0, 1)">Erlang语言开发</span></strong>的基于AMQP标准的<strong><span style="color: rgba(255, 0, 0, 1)">开源框架。</span></strong>RabbitMQ最初起源于金融系统，用于在分布式系统中存储转发消息，在<strong><span style="color: rgba(255, 0, 0, 1)">易用性、扩展性、高可用性等方面表现不俗</span></strong>。其<strong><span style="color: rgba(255, 0, 0, 1)">具体特点</span></strong>包括：</p>
+<p>　　　　可靠性&nbsp; &nbsp; <strong><span style="color: rgba(255, 0, 0, 1)">灵活的路由</span></strong>&nbsp; &nbsp; 支<strong><span style="color: rgba(255, 0, 0, 1)">持消息集群&nbsp; &nbsp;高可用性</span></strong><br>　　　　支持<strong><span style="color: rgba(255, 0, 0, 1)">多种协议</span></strong>  (除支持AMQP协议之外，还通过插件的方式支持其他消息队列协议，如STOMP、MQTT)<br>　　　　支持多语言客户端&nbsp; &nbsp;&nbsp;<strong><span style="color: rgba(255, 0, 0, 1)">提供跟踪机制</span></strong>&nbsp; &nbsp;提供管理界面<br>　　　　提供插件机制 （RabbitMQ提供了许多插件，也可以编写自己的插件）</p>
+<h4>  2. 总结：   </h4>
+<p>　　RabbitMQ最大的优势在于提供了比较灵活的消息<strong><span style="color: rgba(255, 0, 0, 1)">路由策略、高可用性、可靠性以及丰富的插件、多种平台支</span></strong>持和完善的文档。不过，由于AMQP协议本身导致它的实现比较重量，从而使得与其他MQ (比如Kafka) 对比其吞吐量处于下风。<br><br></p>
+<h3>三、ActiveMQ</h3>
+<h4>  1.ActiveMQ 特点：</h4>
+<p>   ActiveMQ是<strong><span style="color: rgba(255, 0, 0, 1)">由Apache出品的一款开源消息中间件</span></strong>，旨在为应用程序<strong><span style="color: rgba(255, 0, 0, 1)">提供高效、可扩展、稳定、安全的<span style="background-color: rgba(0, 204, 255, 1)">企业级</span>消息通信</span></strong>。ActiveMQ实现了JMS 1.1 并提供了<span style="color: rgba(255, 0, 0, 1)">很多附加的特性</span>，比如JMX管理、<strong><span style="color: rgba(255, 0, 0, 1)">主从管理、消息组通信、消息优先级、延迟接收消息、虚拟接收者、消息持久化、消息队列监控等</span></strong>。主要特性如下：</p>
+<p>　　<strong><span style="color: rgba(255, 0, 0, 1)">支持</span></strong>Java、C、C++、C#、Ruby、Perl、Python、PHP等<strong><span style="color: rgba(255, 0, 0, 1)">多种语言的客户端和协议</span></strong>，如OpenWire、STOMP、AMQP、MQTT协议。<br>　　<strong><span style="color: rgba(255, 0, 0, 1)">提供了</span></strong>像消<strong><span style="color: rgba(255, 0, 0, 1)">息组通信、消息优先级、延迟接收消息、虚拟接收者、消息持久化</span></strong>之类的<strong><span style="color: rgba(255, 0, 0, 1)">高级特性</span></strong>。<br>　　完全支持JMS 1.1 和 J2EE 1.4 规范 (包括持久化、分布式事务消息、事务)<br>　　支持Spring框架，ActiveMQ 可以通过Spring 的配置文件方式很容易嵌入Spring应用中。<br>　　通过了常见的J2EE服务器测试，比如TomEE、Geronimo、JBoss、GlassFish、WebLogic。<br>　　连接方式多样化，ActiveMQ 提供了<strong><span style="color: rgba(255, 0, 0, 1)">多种连接方式</span></strong>，例如 in-VM、TCP、SSL、NIO、UDP、多播、JGroups、JXTA。<br>　　支持通过使用JDBC 和 Journal 实现消息的快速持久化。<br>　　为高性能集群、客户端-服务器、点对点通信等场景而设计。<br>　　提供了技术和语言中立的REST API 接口。<br>　　支持以AJAX 方式调用 ActiveMQ。<br>　　可以作为内存中的JMS 提供者，非常适合 JMS 单元测试。</p>
+<h3>四、Kafka</h3>
+<h4>  1.Kafka 特点：</h4>
+<p>  　　 Kafka 最早是由LinkedIn 公司开发的一<strong><span style="color: rgba(255, 0, 0, 1)">种分布式的</span></strong>基于 <strong><span style="color: rgba(255, 0, 0, 1)">发布/订阅 的消息系</span></strong>统，后来成为 <strong><span style="color: rgba(255, 0, 0, 1)">Apache 的顶级项目</span></strong>。其<strong><span style="color: rgba(255, 0, 0, 1)">主要特点</span></strong>如下：</p>
+<p>　　　　　同时为发布和订阅提<strong><span style="color: rgba(255, 0, 0, 1)">供高吞吐量</span></strong>。&nbsp;(Kafka 的设计目标是以时间复杂度为 O(1) 的方式提供消息持久化能力的，即使对TB级别以上数据也能保证常数时间的访问性能，即使在非常廉价的商用机器上也能做到单机支持每秒 100K 条消息的传输)</p>
+<p>　　&nbsp; &nbsp;　　<strong><span style="color: rgba(255, 0, 0, 1)">消息持久化。</span></strong> (将消息持久化到磁盘，因此可用于批量消费，例如 ETL 以及实时应用程序。通过将数据持久化到硬盘以及复制可以防止数据丢失。)<br>　　　　　<strong><span style="color: rgba(255, 0, 0, 1)">分布式。&nbsp; &nbsp;&nbsp;</span></strong> (支持服务器间的消息分区及分布式消费，同时保证每个Partition 内的消息顺序传输。其内部的Producer、Broker 和 Consumer 都是分布式架构，这更易于向外扩展。)<br>　　&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<strong><span style="color: rgba(255, 0, 0, 1)">消费消息采用 Pull 模式</span></strong>。(消息被处理的状态是在 Consumer 端维护的，而不是由服务器端维护，Broker 无状态，Consumer 自己保存offet。)<br>　　&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<strong><span style="color: rgba(255, 0, 0, 1)">支持Online 和 Offline 场景</span></strong>，同时支持离线数据处理和实时数据处理。</p>
+<h3>五、RocketMQ</h3>
+<h4>  1.RocketMQ 特点：</h4>
+<p>  　　 RocketMQ是<strong><span style="color: rgba(255, 0, 0, 1)">阿里巴巴于2012年开源的</span></strong>分布式消息中间件，后来捐<span style="color: rgba(255, 0, 0, 1)">赠给 Apache软</span>件基金会，并于2017年9月25日成为Apache的顶级项目。作为经历过多次阿里巴巴“双11” 这种“超级工程”的洗礼并有稳定出色表现的国产中间件，以其<strong><span style="color: rgba(255, 0, 0, 1)">高性能、低延迟和高可靠等</span></strong>特性近年来被越来越多的国内企业所使用。其主<strong><span style="color: rgba(255, 0, 0, 1)">要特点如下</span></strong>：</p>
+<p>　　　　<strong><span style="color: rgba(255, 0, 0, 1)">具有</span><span style="color: rgba(255, 0, 0, 1)">灵活的可扩展性</span></strong>。 (RocketMQ 天然支持集群，其核心四大组件(NameServer、Broker、Producer、Consumer)的每一个都可以在没有单点故障的情况下进行水平扩展。)<br>　　　　<strong><span style="color: rgba(255, 0, 0, 1)">具有</span><span style="color: rgba(255, 0, 0, 1)">海量消息堆积能力</span></strong>。 (RocketMQ 采用零拷贝原理实现了超大量消息的堆积能力，据说单机已经可以支持亿级消息堆积，而且在堆积了这么多消息后依然保持写入低延迟)<br>　　　　<strong><span style="color: rgba(255, 0, 0, 1)">支</span><span style="color: rgba(255, 0, 0, 1)">持顺序消息</span></strong>。 (RocketMQ 可以保证消息消费者按照消息发送的顺序对消息进行消费。顺序消息分为全局有序消息和局部有序消息，一般推荐使用局部有序消息，即生产者通过将某一类消息按顺序发送至同一个队列中来实现。)<br>　　　　<strong><span style="color: rgba(255, 0, 0, 1)">支持多种消息过滤方式</span></strong>。 (消息过滤分为在服务器端过滤和在消费端过滤。在服务器端过滤时可以按照消息消费者的要求进行过滤，优点是减少了不必要的消息传输，缺点是增加了消息服务器的负担，实现相对复杂。消费端过滤则完全由具体应用自定义实现，这种方式更加灵活，缺点是很多无用的消息会被传输给消息消费者。)<br>　　　　<strong><span style="color: rgba(255, 0, 0, 1)">支持事务消息</span></strong>。 (RocketMQ 除支持普通消息、顺序消息之外，还支持事务消息，这个特性对于分布式事务来说提供了另一种解决思路。）<br>　　　　<strong><span style="color: rgba(255, 0, 0, 1)">支持回溯消费</span></strong>。 (回溯消费是指对于消费者已经消费成功的消息，由于业务需求需要重新消费。RocketMQ 支持按照时间回溯消费，时间维度精确到毫秒，可以向前回溯，也可以向后回溯。)<br><br></p>
+<h3>六、怎么保证数据不丢失</h3>
+<p><strong>queue&nbsp;<span style="color: rgba(255, 0, 0, 1)"> 点对点模式&nbsp;</span>&nbsp; 不存在数据丢失问题</strong></p>
+<p><strong>&nbsp; &nbsp; &nbsp;<span style="color: rgba(255, 0, 0, 1)">“负载均衡”模式，如果当前没有消费者，消息也不会丢弃</span>；如果有多个消费者，那么一条消息也只会发送给其中一个消费者，并且要求<span style="color: rgba(255, 0, 0, 1)">消费者ack信息<span style="color: rgba(0, 128, 0, 1)">ack确认机制</span></span>。</strong></p>
+<h4 id="1topics">Topics&nbsp;&nbsp;<strong><span style="color: rgba(255, 0, 0, 1)">发布订阅模式</span>&nbsp; &nbsp; 消息可能会丢失</strong></h4>
+<h4 class="title-article">ActiveMQ——消息持久化</h4>
+<p><strong>&nbsp;有了持久化机制，消<span style="color: rgba(255, 0, 0, 1)">息在发送后会首先持久化到对应的文件或数据表</span>中，在消息被消费后，再从这些文件或表中删除(对于持久化的主体消息不会删除)。</strong></p>
+<p><strong>　　<span style="color: rgba(255, 0, 0, 1)">“订阅-发布”模式，如果当前没有订阅者，消息将会被丢弃</span>。如果有多个订阅者，那么这些订阅者都会收到消息</strong></p>
+<p><strong>　　在发布订阅的时候 为每个订阅者设置一<span style="color: rgba(255, 0, 0, 1)">个唯一的订阅标识</span>&nbsp;</strong></p>
+<p><strong>在消息服务器<span style="color: rgba(255, 0, 0, 1)">启动时会先从持久化的媒介中读取之前未消费的消息</span>，并将读取到的消息发送给消息的订阅者或者消费者去消费，这样就不会出现消息的丢失，保证了消息的可靠性。</strong></p>
+<h2><strong>消息的可靠性通过三个方面保证——<span style="color: rgba(255, 0, 0, 1)">持久化、事务和签收。</span>这里说一下ActiveMQ中消息持久化的方式。　　</strong></h2>
+<p><strong>　　　　　　　　　　<img src="https://img2020.cnblogs.com/blog/1472972/202004/1472972-20200414141942291-1694087403.png" alt=""></strong></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h3>七、消息持久化的方式</h3>
+<p>&nbsp;<strong>ActiveMQ中主要有以下几种持久化的方式：具体可参考官网：<a href="http://activemq.apache.org/persistence" rel="nofollow">消息的持久化方式和方案选择</a></strong></p>
+<p>　　1️⃣<span style="color: rgba(255, 0, 0, 1)">AMQ Message Stroe</span>：基于<strong><span style="color: rgba(255, 0, 0, 1)">文件的存储方</span></strong>式，具有写入速度快和容易恢复的特点，消息存储在一个个文件中，文件的默认大小是32M，是之前的默认持久化方式，现在<span style="color: rgba(255, 0, 0, 1)">几乎不用</span>了<br>　　2️⃣<strong><span style="color: rgba(255, 0, 0, 1)">KahaDB</span></strong>：基<span style="color: rgba(255, 0, 0, 1)">于日志文件</span>的持久化方式，从Active5.4版本后作为默认的持久化方式，在activemq.xml文件中可以看到如下配置　　</p>
+<div class="cnblogs_code">
+<pre>&lt;persistenceAdapter&gt;
+    &lt;kahaDB directory="${activemq.data}/kahadb"/&gt;
+&lt;/persistenceAdapter&gt;</pre>
+</div>
+<p>&nbsp; 即<strong><span style="color: rgba(255, 0, 0, 1)">默认情</span></strong>况下会将消息持久化到activemq安装目录下<strong><span style="color: rgba(255, 0, 0, 1)">的/data/kahadb目录</span></strong>下，在该目录下有4个或5个文件，用来保存持久化的消息数据(db-n.log)和索引(db.data)等：数据会被追加到db-n.log文件中，当不再需要某一个db-n.log文件中的数据的时候，该log文件会被丢弃<br><strong>文件的作用介绍：</strong></p>
+<p>　　　　<strong><span style="color: rgba(255, 0, 0, 1)">db-&lt;n&gt;</span><span style="color: rgba(255, 0, 0, 1)">.log</span></strong>：KahaDB存储消息到预定义大小的数据记录文件中，文件命名为db-&lt;n&gt;.log，当数据文件已满时，会创建一个新的数据记录文件，n的值也会随之递增，文件名按照数字进行编号，如db-1.log、db-2.log、db-3.log、…当不再有引用道数据文件中的任何&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 消息时，文件会被删除或归档</p>
+<p>　　　　<strong><span style="color: rgba(255, 0, 0, 1)">db.data</span></strong>：该文件包含了持久化的BTree索引，索引了消息数据记录中的消息，他是消息的索引文件，本质上是B-Tree，使用B-Tree作为索引到db-n.log中找消息<br>    <strong><span style="color: rgba(255, 0, 0, 1)">db.free</span></strong>：当前db.data文件中有哪些页是空闲的，文件的具体内容是所有空闲页的ID<br>    <strong><span style="color: rgba(255, 0, 0, 1)">db.redo</span></strong>：用来进行消息恢复<br>    <strong><span style="color: rgba(255, 0, 0, 1)">lock</span></strong>：文件锁，表示当前获得KahaDB读写权限的broker<br>　　</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;3️⃣<strong><span style="color: rgba(255, 0, 0, 1)">JDBC消息存储</span></strong>：基于JDBC的消息存储，可借助于这种方式将消息持久化到Mysql等数据库中<br>  4️⃣<strong><span style="color: rgba(255, 0, 0, 1)">LevelDB消息存储</span></strong>：这种文件系统是从ActiveMQ5.8之后引进的，和KahaDB非常相似，也是基于文件的本地数据库存储形式，但是它提供了比KahaDB更快的持久性，它不是使用B-Tree索引日志，而是使用基于LevelDB的索引<br>  5️⃣<strong><span style="color: rgba(255, 0, 0, 1)">JDBC + ActiveMQ</span></strong>高速缓存：即JDBC Message store with ActiveMQ Journal，和JDBC的方式很相似，只不过是在持久化到的数据库和ActiveMQ服务器之间加了一层高速缓存</p>
+<p>JDBC方式的消息持久化步骤 由于ActiveMQ是基于Java语言开发的，因此我们可以直接在其项目的lib包下加入数据库驱动的jar包或者数据库连接池的jar包等。<br> <strong>1、将Mysql的驱动<span style="color: rgba(255, 0, 0, 1)">jar包加入到ActiveMQ的lib目</span>录下</strong></p>
+<p>　　　　　　<img src="https://img2020.cnblogs.com/blog/1472972/202004/1472972-20200414140927646-1258948264.png" alt=""></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;2、在<strong><span style="color: rgba(255, 0, 0, 1)">activemq.xml文件中配置数据源</span></strong>：activemq.xml类似于Spring的容器配置文件</p>
+<div class="cnblogs_code">
+<pre>&lt;bean id="mysql-ds" <span style="color: rgba(0, 0, 255, 1)">class</span>="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close"&gt; 
+    &lt;property name="driverClassName" value="com.mysql.jdbc.Driver"/&gt; 
+    &lt;property name="url" value="jdbc:mysql://192.168.2.143:3306/activemq?relaxAutoCommit=true"/&gt;
+    &lt;property name="username" value="root"/&gt;
+    &lt;property name="password" value="123456"/&gt;
+    &lt;property name="poolPreparedStatements" value="true"/&gt;
+&lt;/bean&gt;</pre>
+</div>
+<p>3、<strong><span style="color: rgba(255, 0, 0, 1)">修改消息的持久化方式</span></strong>：由<strong><span style="color: rgba(255, 0, 0, 1)">默认的KahaDB改为现在的JDBC的</span></strong>方式<br>  <strong>改之前：</strong></p>
+<div class="cnblogs_code">
+<pre>&lt;persistenceAdapter&gt;
+    &lt;kahaDB directory="${activemq.data}/kahadb"/&gt;
+&lt;/persistenceAdapter&gt;</pre>
+</div>
+<p><strong>改之后</strong>：注意数据源的名称要一致，<span style="color: rgba(255, 0, 0, 1)">createTablesOnStartup是说重启MQ服务后是否自动创建ActiveMQ相关的表</span>，一般设置为true</p>
+<div class="cnblogs_code">
+<pre>&lt;persistenceAdapter&gt;
+    &lt;jdbcPersistenceAdapter dataSource="#mysql-ds" createTablesOnStartup="true"/&gt;
+&lt;/persistenceAdapter&gt;</pre>
+</div>
+<p>4、在连接的数据库服务<strong><span style="color: rgba(255, 0, 0, 1)">器上创建使用的库</span></strong></p>
+<p>　　　　　　　　<img src="https://img2020.cnblogs.com/blog/1472972/202004/1472972-20200414141247417-337122017.png" alt=""></p>
+<p>5、配置好后，<strong><span style="color: rgba(255, 0, 0, 1)">重启MQ服务</span></strong>，会看到<strong><span style="color: rgba(255, 0, 0, 1)">数据库中多了3张表</span></strong>，这些表是ActiveMQ启动服务时创建的根ActiveMQ相关的表</p>
+<p>　　　　　　　　<img src="https://img2020.cnblogs.com/blog/1472972/202004/1472972-20200414141304843-1202262626.png" alt=""></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p> <strong><span style="color: rgba(255, 0, 0, 1)"> activemq_acks</span></strong>：该表记录的是主题订阅关系(<span style="color: rgba(255, 0, 0, 1)">消息签收者</span>)信息<br>  <strong><span style="color: rgba(255, 0, 0, 1)">activemq_msgs</span></strong>：该表记录的<strong><span style="color: rgba(255, 0, 0, 1)">是待消费的消息</span></strong>，该表中的消息一旦被消费则会被删除(主题类的消息不会被清除)<br>  <strong><span style="color: rgba(255, 0, 0, 1)">activemq_lock</span></strong>：在集<span style="color: rgba(255, 0, 0, 1)">群环境中才有用</span>，用于记录哪个Broker是当前的Master Broker</p>
+<p> <strong><span style="color: rgba(255, 0, 0, 1)">这样配置好后，一旦有消息产生就会在相应的表中看到记录：但队列中的消息一旦被消费就又会被删除</span></strong><br>　　　　<img src="https://img2020.cnblogs.com/blog/1472972/202004/1472972-20200414141558258-923211824.png" alt=""></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><strong><span style="color: rgba(255, 0, 0, 1)">配置JDBC持久化的高速缓存</span></strong>：仅有上面的配置，<span style="color: rgba(255, 0, 0, 1)">则消息生产者每次有消息需要持久化都会通过JDBC去调用数据库服务以持久化数据</span>，但像队列中的消息，大部分在消费后又需要清除，进行及其短暂的持久化意义不大，但却依然使JDBC频繁的和数据库进行交互，效率低下。<strong><span style="color: rgba(255, 0, 0, 1)">因此可以在ActiveMQ和数据库服务器之间加一层高速缓存</span></strong>，用来暂时缓存消息，<strong><span style="color: rgba(255, 0, 0, 1)">若队列中的消息长时间没有被消费时才进行持久化，这样就会大大减少ActiveMQ和数据库服务交互的次数，提高效率</span></strong>。举例来说：生产者生产了1000条消息，这1000条消息会保存到缓存文件journal文件中，如果消费者的消费速度很快，在journal文件还没有同步到数据库之前，消费者已经消费了900条，那么这时就只需要将剩余的100条同步即可，如果消费者消费的很慢，journal文件可以批量的将消息同步到数据库，大大减少了ActiveMQ和数据库服务器的交互次数。将持久化的方式改为如下方式：</p>
+<div class="cnblogs_code">
+<pre>&lt;persistenceFactory&gt;
+    &lt;<span style="color: rgba(0, 0, 0, 1)">journalPersistenceAdapterFactory 
+        journalLogFiles</span>="4"<span style="color: rgba(0, 0, 0, 1)">
+        journalLogFileSize</span>="32768"<span style="color: rgba(0, 0, 0, 1)">
+        useJournal</span>="true"<span style="color: rgba(0, 0, 0, 1)">
+        useQuickJournal</span>="true"<span style="color: rgba(0, 0, 0, 1)">
+        dataSource</span>="#mysql-ds"<span style="color: rgba(0, 0, 0, 1)">
+        dataDirectory</span>="activemq-data"
+    /&gt;
+&lt;/persistenceFactory&gt;</pre>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>来源于：<a href="https://blog.csdn.net/rubulai/article/details/97034214" target="_blank">传送门</a></p>
+<p>&nbsp;</p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-04-10 15:25</span>&nbsp;
+<a href="https://www.cnblogs.com/JonaLin/">一支会记忆的笔</a>&nbsp;
+阅读(<span id="post_view_count">485</span>)&nbsp;
+评论(<span id="post_comment_count">0</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12673779" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12673779);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 521116, cb_blogApp = 'JonaLin', cb_blogUserGuid = '18cf3699-0269-40cd-15f2-08d6074bee65';
+    var cb_entryId = 12673779, cb_entryCreatedDate = '2020-04-10 15:25', cb_postType = 1;
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id='div-gpt-ad-1592365906576-0' style='width: 300px; height: 250px;'></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id='div-gpt-ad-1592366332455-0' style='width: 468px; height: 60px;'></div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverT2();
+        deliverC1C2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 一支会记忆的笔
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script type="text/javascript">
+$(function(){
+    $('#blogTitle h1').addClass('bounceInLeft animated');
+    $('#blogTitle h2').addClass('bounceInRight animated');
+    // 删除反对按钮
+    $('.buryit').remove();
+    initCommentData();
+});
+function initCommentData() {
+    $('.feedbackItem').each(function() {
+        var text = $(this).find('.feedbackListSubtitle .layer').text();
+        // 将楼层信息放到data里面
+        // $(this).find('.blog_comment_body').attr('data-louceng', text.replace(/^#/g, ''));
+        if($(this).find('.feedbackListSubtitle .louzhu').length>0) $(this).addClass('myself');
+        var avatar = $(this).find('> .feedbackCon > span').html() || 'http://pic.cnitblog.com/face/sample_face.gif';
+        $(this).find('> .feedbackCon > .blog_comment_body').append('<img class="user-avatar" src="'+avatar+'"/>')
+    });
+}
+
+$(document).ajaxComplete(function(event, xhr, settings) {
+  // 监听获取评论ajax事件
+  if(settings.url.indexOf('/mvc/blog/GetComments.aspx') >= 0) {
+    initCommentData();
+  }
+});
+</script>
+<script src="https://files.cnblogs.com/files/hafiz/jquery-migrate-1.2.1.js"></script>
+<div id="scrollTop" style="display:none;">
+      <div class="level-2"></div>
+      <div class="level-3"></div>
+</div>
+<script src="https://files.cnblogs.com/files/hafiz/scroll2top.js"></script>
+<script type="text/javascript">
+    UI.global_search();
+    var uvOptions = {};
+    // !important
+    (function() {
+        initScrollTop();
+    })();
+</script>
+<script src="https://files.cnblogs.com/files/miangao/bootstrap.min.js"></script>
+<script type="text/javascript">
+$(function(){
+    $('#blogTitle h1').addClass('bounceInLeft animated');
+    $('#blogTitle h2').addClass('bounceInRight animated');
+    // 删除反对按钮
+    $('.buryit').remove();
+    initCommentData();
+});
+function initCommentData() {
+    $('.feedbackItem').each(function() {
+        var text = $(this).find('.feedbackListSubtitle .layer').text();
+        // 将楼层信息放到data里面
+        // $(this).find('.blog_comment_body').attr('data-louceng', text.replace(/^#/g, ''));
+        if($(this).find('.feedbackListSubtitle .louzhu').length>0) $(this).addClass('myself');
+        var avatar = $(this).find('> .feedbackCon > span').html() || 'http://pic.cnitblog.com/face/sample_face.gif';
+        $(this).find('> .feedbackCon > .blog_comment_body').append('<img class="user-avatar" src="'+avatar+'"/>')
+    });
+}
+
+$(document).ajaxComplete(function(event, xhr, settings) {
+  // 监听获取评论ajax事件
+  if(settings.url.indexOf('/mvc/blog/GetComments.aspx') >= 0) {
+    initCommentData();
+  }
+});
+</script>
+<!--返回顶部-->
+<span id="back-to-top"><a href="#top"><img src="https://images.cnblogs.com/cnblogs_com/JonaLin/1679856/t_200325030252%E5%9B%9E%E5%88%B0%E9%A1%B6%E9%83%A8.jpg?t=1585105393259" title="回到页首" style="width: 80px;height: 80px">返回顶部</a></span>
+
+
+<div>【学无止境<span id="footerTextIcon">❤️</span>谦卑而行】</div>
+
+    </div>
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?39b794a97f47c65b6b2e4e1741dcba38";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+</body>
+</html>

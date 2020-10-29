@@ -1,0 +1,32 @@
+Atitit.git的存储结构and 追踪
+
+Add index.js 2 index
+
+new
+D:\workspace\.git\objects\7f\4168d1e5c0931c50aeec12912f7057eae19777
+
+Modify
+D:\workspace\.git\index
+Add line  to record the file path..
+
+Jeig file sh bin file ...
+
+Commit
+
+D:\workspace\.git\logs\refs\heads\master  add a line
+
+d3b83200074d73267a174bf9a7321bc8f4788b93 80bdce773c73e7dff93eb057455de52f2fa7d432 Administrator <Administrator@AT6T5TKUVHGT0IG> 1459759922 +0800	commit: q422
+
+D:\workspace\.git\logs\HEAD yajong
+
+
+D:\workspace\.git\objects\ add lei 5g   folders
+Hto do yg file
+
+
+D:\workspace\.git\refs\heads\master  add a line
+80bdce773c73e7dff93eb057455de52f2fa7d432
+
+
+
+

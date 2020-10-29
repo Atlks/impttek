@@ -1,0 +1,11 @@
+cat_menu.html 文件修改方法(如图):
+
+	
+更改为：<a href="${cat.name }/search-cat-${cat.cat_id}.html" class="menu">${cat.name }</a>
+
+红线部分这两个同上
+
+Nav_menu.html文件修改方法如下：
+
+红线中的更改为<a href="${child.name!''}/${child.url!''}" )>${child.name!''}</a>
+

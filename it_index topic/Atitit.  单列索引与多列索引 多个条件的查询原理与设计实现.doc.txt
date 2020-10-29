@@ -1,0 +1,78 @@
+Atitit.  单列索引与多列索引 多个条件的查询原理与设计实现
+
+
+
+11
+11
+22
+22
+22
+33
+44
+44
+4
+
+MySQL只能使用一个索引
+
+那么，如果在firstname、lastname、age这三个列上分别创建单列索引，效果是否和创建一个firstname、lastname、 age的多列索引一样呢？答案是否定的，两者完全不同。当我们执行查询的时候，MySQL只能使用一个索引。如果你有三个单列的索引，MySQL会试图选择一个限制最严格的索引。但是，即使是限制最严格的单列索引，它的限制能力也肯定远远低于firstname、lastname、age这三个列上的多列索引。
+
+作者:: 老哇的爪子 Attilax 艾龙，  EMAIL:1466519819@qq.com
+转载请注明来源： http://blog.csdn.net/attilax
+
+
+
+最左前缀
+
+
+　　多列索引还有另外一个优点，它通过称为最左前缀（Leftmost Prefixing）的概念体现出来。继续考虑前面的例子，现在我们有一个firstname、lastname、age列上的多列索引，我们称这个索引为fname_lname_age。当搜索条件是以下各种列的组合时，MySQL将使用fname_lname_age索引：
+
+    * firstname，lastname，age
+    * firstname，lastname
+    * firstname 
+　　从另一方面理解，它相当于我们创建了(firstname，lastname，age)、(firstname，lastname)以及(firstname)这些列组合上的索引。
+
+
+
+ 一条 sql 可以使用多个索引
+
+mysql 的索引合并并不是什么新特性。早在 mysql5.0 版本就已经实现。之所以还写这篇博文，是因为好多人还一直保留着一条 sql 语句只能使用一个索引的错误观念。本文会通过一些示例来说明如何使用索引合并。
+
+
+什么是索引合并
+
+下面我们看下 mysql 文档中对索引合并的说明：
+The Index Merge method is used to retrieve rows with several range scans and to merge their results into one. The merge can produce unions, intersections, or unions-of-intersections of its underlying scans. This access method merges index scans from a single table; it does not merge scans across multiple tables.
+根据官方文档中的说明，我们可以了解到：
+
+索引合并是把几个索引的范围扫描合并成一个索引。
+
+
+索引合并的时候，会对索引进行并集，交集或者先交集再并集操作，以便合并成一个索引。
+
+
+这些需要合并的索引只能是一个表的。不能对多表进行索引合并。
+
+使用索引合并有啥收益
+
+简单的说，索引合并，让一条 sql 可以使用多个索引。对这些索引取交集，_å¹¶é_，或者先取交集再取并集。从而减少从数据表中取数据的次数，提高查询效率。
+
+
+在 explain 的 extra 字段中会以下几种：
+
+Using union 索引取并集
+
+
+Using sort_union 先对取出的数据按 rowid 排序，然后再取并集
+
+
+Using intersect 索引取交集
+
+
+具体的索引合并流程
+
+Referred、
+多个条件的查询建立索引是几个字段建立一个索引还是还每个字段定义为一个索引_-CSDN论坛-CSDN.NET-中国最大的IT技术社区.html
+
+
+MySQL 索引合并  一条 sql 可以使用多个索引-SOHU-DBA-微头条(wtoutiao.com).htm
+

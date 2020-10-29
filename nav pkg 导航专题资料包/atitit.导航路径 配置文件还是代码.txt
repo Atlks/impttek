@@ -1,0 +1,9 @@
+
+struts 是配置文件...默认.
+jsf  雅十..
+
+不过Tapestry 和 Wicket 走不一样...这两个框架都认为开发框架应该负责生成URL和页面渲染的顺序，而不是让开发者在xml配置告诉框架如何做。使用convention 约定大的配置..  to  page2.class>>>auto to  page2.jsp..
+
+注解>>>xml
+
+所以,还是代码黑头亳...

@@ -1,0 +1,19 @@
+
+
+#---cate
+idea
+lang level.  (dynamic ,4gl )
+frmwk level
+ide level
+hotdeploy...
+componetct &platform..
+
+#------
+webform>>>mvc
+groovy
+frmwk...
+ide tool
+
+
+
+

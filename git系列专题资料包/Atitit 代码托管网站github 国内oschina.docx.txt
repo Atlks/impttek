@@ -1,0 +1,13 @@
+Atitit 代码托管网站github 国内oschina ，csdn coding
+
+
+代码托管的巨大价值
+2008年4月在旧金山的一家咖啡馆，Chris Wanstrath, PJ Hyett与Tom Preston-Werner三位开发者创办了GitHub。2012 年7 月，硅谷最著名的风险投资基金Anderssen Horowitz 给GitHub 投资1 亿美元。2013年4月，GitHub用户数达到350万，托管项目达到600万，到2013 年12月在GitHub上托管的项目已经超过1000 万。
+
+
+土代码托管服务巨大需求
+GitHub风靡世界，他们曾经做过的一项统计显示，中国用户的人数排在世界第四位。2013年1月19日，GitHub网站关键字被中国屏蔽，无法从中国访问。这样屏蔽外国网站的事情在中国时有发生，且不说屏蔽事故，平时国内的网络访问GitHub也不是很通畅，另外GitHub的全英文界面也无法给国内的开发者提供很好的本土化体验。基于国内开发者遇到的这些问题，开源中国社区在2013年7月在阿里云上线了本土的GitHub:git@osc(git.oschina.net)。由于完全免费提供流畅的源代码托管服务，在没有进行任何宣传推广的情况下，截止到2014年6月，git@osc已经托管了超过11万个本土项目，其中大多数是已经在国内被广泛应用且流行起来的开源软件产品，比如JFinal、禅道、Koala等都选择了git@osc。另外一个国内知名开发者社区CSDN也发布了自己的CODE平台，还有GitCafe也提供类似的服务。
+
+
+github与国内coding,oschina相比，有哪些优势？ - GitHub - 知乎.html
+

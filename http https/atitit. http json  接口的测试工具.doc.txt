@@ -1,0 +1,42 @@
+atitit. http json  接口的最佳实践(2)-------测试工具总结..
+
+11
+22
+22
+22
+22
+22
+22
+22
+33
+33
+3
+简单的测试主要有几类工具可用：
+
+ff plugin   rest easy(recomm)
+
+curl 命令
+支持 POST 的浏览器插件
+直接浏览器 url 请求，仅适用于 Get 类 API，以下不做说明
+专用工具：不够简单，本文不详述
+浏览器插件Postman – REST Client （Chrome）//Advanced REST Client （Chrome）
+
+这是本文的重点。下面介绍 2 个使用量比较大的插件。
+由于 Push API 是复杂点的，所以以此为例。
+使用的基本思路
+1. 安装后在 Chrome 里找到 Web 应用；
+Chrome URL 栏上的路径是： chrome://apps/
+2. Basic Auth 部分的 username 对应 JPush app_key，password 对应 JPush master_secret ；
+3. Push API 使用 POST 方法；
+4. Content-Type 使用 “application/json”；
+5. 内容部分使用 RAW （原始内容），贴上待推送的 JSON 字符串。
+
+ff plugin   rest easy (recomm)
+
+
+
+rest client
+cant cstm  post  param
+only body
+
+

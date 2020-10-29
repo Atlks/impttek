@@ -1,0 +1,37 @@
+paip.索引优化---sql distict—order by 法 .doc
+原语句:
+
+select  SQL_NO_CACHE DISTINCT
+			 ( gaopinzi.HEZI),
+					LEFT (hezi, 1) AS lft,
+					RIGHT (hezi, 1) AS rit
+				FROM
+					gaopinzi  
+				WHERE 
+					LENGTH(hezi) = 6     
+
+		      limit 50000
+
+要7s中...网上说改用松散索引(复合索引) 会sbid fest...试了挂, 	gaopinzi  force index(`all`)  ,基本没效果..
+函数索引应该好用着了,走十MYSQL不跟ORACLE牙十,不自此..
+林吧,改为ORDER BY 形式..ONLY 0.3S
+
+
+select  SQL_NO_CACHE
+				max( gaopinzi.HEZI),
+					LEFT (hezi, 1) AS lft,
+					RIGHT (hezi, 1) AS rit
+				FROM
+					gaopinzi  
+				WHERE 
+					LENGTH(hezi) = 6
+ 
+      group by HEZI 
+
+		      limit 50000
+
+我的MYSQL VER是.5.0.45-community-nt
+
+参考:
+mysql的order by，group by和distinct优化 - tonyXf121的专栏 - 博客频道 - CSDN_NET
+
