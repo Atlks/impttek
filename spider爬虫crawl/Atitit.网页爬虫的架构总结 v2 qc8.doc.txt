@@ -1,0 +1,122 @@
+Atitit.网页爬虫的架构总结
+
+11
+11
+22
+22
+33
+33
+33
+33
+44
+44
+44
+4
+总数的结构..(接口方法)
+
+ 	public String exec( ) throws IOException     {
+ 
+		
+		fx=new filex(fileName);
+		int pages=getpage();
+		for(int i=1;i<=pages;i++)
+		{
+			if(i<pageStart)
+				continue;
+			try {
+				singlePage(i);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			
+		}
+		fx.close();
+
+获得页数
+getpage();
+跳页处理(接口方法)
+
+if(i<pageStart)
+				continue;
+
+单个的页面处理(接口方法)
+	 */
+	private void singlePage(int page) throws ConnEx, NoRztEx, ParseLsitEx {
+ 		String html = null;
+		try {
+			String api = (String) getCurPageUrl(page);
+			//http://www.czvv.com/k5bu6562Rp0c0cc0s0m0e0f0d0.html
+		 	websitex wc = new websitex();
+		 	wc.refer=" 
+			html = wc.WebpageContent(api, "utf-8", 15);
+		}   catch (Exception e) {
+			e.printStackTrace();
+			throw new ConnEx(e.getMessage());
+		}
+		//================trace
+		if (new File("C:\\traceOk").exists())
+			filex.save_safe(html, "c:\\rztTrace.html");
+	 
+		List li=getList(html);
+		
+	
+		for(Object obj:li)
+		{
+			try {
+				processItem(obj);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
+获得页面url	
+获得页面html	
+
+获得list
+	private List getList(String html) throws NoRztEx, ParseLsitEx {
+		try {
+			Document doc = null;
+		doc = Jsoup.parse(html);
+		Elements tabs = doc.getElementsByTag("ol");
+	 
+		return tabs;
+	} catch (Exception e) {
+		e.printStackTrace();
+	//	System.out.println("norzt:" + addr);
+		throw new ParseLsitEx("noRzt");
+	}
+	 
+ 
+	处理单个的数据条目
+	private void processItem(Object obj) {
+		Element item=(Element) obj;
+	  String name=	item.getElementsByClass("resultName").get(0).text();
+	  Element e=  item.getElementsByClass("l_r").get(0);
+	 String tel=e.child(0).text();
+	 String lyesyiren=e.child(1).text();
+	 String addr=e.child(2).text();
+	 
+		String line = name+","+tel+","+lyesyiren+","+addr;
+		fx.appendLine_flush_safe(line);
+		System.out.println( line);
+		
+	}
+调用
+
+	WebInfoX x=new WebInfoX();
+	x.fileName=args[0];// "c:\\r2.csv";
+	x.pages=Integer.parseInt(args[1]);
+	x.pageStart=Integer.parseInt(args[2]);;
+	
+	x.exec( );
+	System.out.println("--fi");
+
+	}
+
+
+日志的实现
+使用默认的console最简单的..或者使用queue+textarea....麻烦的
+参考
+paip.c++ qt 网页爬虫 的 网络编程 总结 - attilax的专栏 - 博客频道 - CSDN.NET.htm
+

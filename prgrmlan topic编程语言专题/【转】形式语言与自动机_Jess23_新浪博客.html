@@ -1,0 +1,684 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>【转】形式语言与自动机_Jess23_新浪博客</title>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8,chrome=1" />
+<meta name="renderer" content="webkit">
+<meta name="keywords" content="【转】形式语言与自动机_Jess23_新浪博客,Jess23,杂谈" />
+<meta name="description" content="【转】形式语言与自动机_Jess23_新浪博客,Jess23," />
+<meta http-equiv="mobile-agent" content="format=html5; url=http://blog.sina.cn/dpool/blog/s/blog_5388923c0100mpqq.html?vt=4">
+<meta http-equiv="mobile-agent" content="format=wml; url=http://blog.sina.cn/dpool/blog/ArtRead.php?nid=5388923c0100mpqq&vt=1">
+<!–[if lte IE 6]>
+<script type="text/javascript">
+try{
+document.execCommand("BackgroundImageCache", false, true);
+}catch(e){}
+</script>
+<![endif]–>
+<script type="text/javascript">
+window.staticTime=new Date().getTime();
+</script>
+<link rel="pingback" href="http://upload.move.blog.sina.com.cn/blog_rebuild/blog/xmlrpc.php" />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://upload.move.blog.sina.com.cn/blog_rebuild/blog/xmlrpc.php?rsd" />
+<link href="http://blog.sina.com.cn/blog_rebuild/blog/wlwmanifest.xml" type="application/wlwmanifest+xml" rel="wlwmanifest" />
+<link rel="alternate" type="application/rss+xml" href="http://blog.sina.com.cn/rss/1401459260.xml" title="RSS" />
+<link href="http://simg.sinajs.cn/blog7style/css/conf/blog/article.css" type="text/css" rel="stylesheet" /><link href="http://simg.sinajs.cn/blog7style/css/common/common.css" type="text/css" rel="stylesheet" /><link href="http://simg.sinajs.cn/blog7style/css/blog/blog.css" type="text/css" rel="stylesheet" /><link href="http://simg.sinajs.cn/blog7style/css/module/common/blog.css" type="text/css" rel="stylesheet" /><style id="tplstyle" type="text/css">@charset "utf-8";@import url("http://simg.sinajs.cn/blog7newtpl/css/3/3_9/t.css");
+</style>
+<style id="positionstyle"  type="text/css">
+.sinabloghead .blogtoparea{ left:165px;top:43%;}
+.sinabloghead .blognav{ left:120px;top:69%;}
+</style>
+<style id="bgtyle"  type="text/css">
+</style>
+<style id="headtyle"  type="text/css">
+</style>
+<style id="navtyle"  type="text/css">
+</style>
+<script type="text/javascript" src="http://d1.sina.com.cn/litong/zhitou/sspnew.js"></script></head>
+<body>
+<!--$sinatopbar-->
+<div style="z-index:512;" class="nsinatopbar">
+  <div style="position:absolute;left:0;top:0;" id="trayFlashConnetion"></div>
+  <div class="ntopbar_main"> 
+    <a id="login_bar_logo_link_350" href="http://blog.sina.com.cn" target="_blank"><img class="ntopbar_logo" src="http://simg.sinajs.cn/blog7style/images/common/topbar/topbar_logo.gif" width="100" alt="新浪博客"></a>
+    <div class="ntopbar_floatL">
+      <div class="ntopbar_search" id="traySearchBar"></div>
+	  <div class="ntopbar_ad" id="loginBarActivity" style="display:none;"></div>
+    </div>
+    <div class="ntopbar_loading"><img src="http://simg.sinajs.cn/blog7style/images/common/loading.gif">加载中…</div>
+  </div>
+</div>
+<!--$end sinatopbar-->
+
+<div class="sinabloga" id="sinabloga">
+	<div id="sinablogb" class="sinablogb">
+
+	   
+ <div id="sinablogHead" class="sinabloghead">
+     <div style="display: none;" id="headflash" class="headflash"></div>
+	   <div id="headarea" class="headarea">
+      <div id="blogTitle" class="blogtoparea">
+      <h1 id="blogname" class="blogtitle"><a href="http://blog.sina.com.cn/jess23"><span id="blognamespan">加载中...</span></a></h1>
+	  		
+					<div id="bloglink" class="bloglink"><a href="http://blog.sina.com.cn/jess23">http://blog.sina.com.cn/jess23</a>  <a onclick="return false;" class="CP_a_fuc" href="#" id="SubscribeNewRss">[<cite>订阅</cite>]</a><a class="CP_a_fuc" href="javascript:void(scope.pa_add.add('1401459260'));">[<cite>手机订阅</cite>]</a></div>
+      </div>
+      <div class="blognav" id="blognav">
+      			  <div id="blognavBg" class="blognavBg"></div> <div class="blognavInfo"> 
+		<span><a   href="http://blog.sina.com.cn/jess23">首页</a></span>
+      <span><a class="on" href="http://blog.sina.com.cn/s/articlelist_1401459260_0_1.html">博文目录</a></span>
+      <span><a href="http://photo.blog.sina.com.cn/jess23">图片</a></span>
+      <span class="last"><a  href="http://blog.sina.com.cn/s/profile_1401459260.html">关于我</a></span></div>
+      </div>      		      		 	
+      
+             <div class="autoskin" id="auto_skin">
+       </div>
+
+<div class="adsarea">
+     <a href="#"><div id="template_clone_pic" class="pic"></div></a>
+     <div id="template_clone_link" class="link wdc_HInf"></div>
+     <div id="template_clone_other" class="other"></div>        
+</div>
+    </div>
+    </div>
+    
+    <!--主题内容开始 -->
+    <div class="sinablogbody" id="sinablogbody">
+		
+	<!--第一列start-->
+    <div id="column_1" class="SG_colW21 SG_colFirst"><div class="SG_conn" id="module_901">
+    <div class="SG_connHead">
+            <span class="title" comp_title="个人资料">个人资料</span>
+            <span class="edit">
+                        </span>
+    </div>
+    <div class="SG_connBody">
+        <div class="info">
+                         
+            <div class="info_img" id="comp_901_head"><img src="http://simg.sinajs.cn/blog7style/images/common/sg_trans.gif" real_src ="http://p5.sinaimg.cn/1401459260/180/54601312794191" id="comp_901_head_image" width="180" height="180" alt="Jess23" title="Jess23" /></div>
+            
+            <div class="info_txt">
+              <div class="info_nm">
+                <img id="comp_901_online_icon" style="display:none;" class="SG_icon SG_icon1" src="http://simg.sinajs.cn/blog7style/images/common/sg_trans.gif" width="15" height="15" align="absmiddle" />
+                <span class="SG_txtb"><strong id="ownernick">Jess23                                </strong></span>
+                
+                <div class="clearit"></div>
+              </div>
+              <div class="info_btn1">
+                <a target="_blank" href="http://weibo.com/u/1401459260?source=blog" class="SG_aBtn SG_aBtn_ico"><cite><img class="SG_icon SG_icon51" src="http://simg.sinajs.cn/blog7style/images/common/sg_trans.gif" width="15" height="15" align="absmiddle" />微博</cite></a>
+                <div class="clearit"></div>
+              </div>
+    <div class="SG_j_linedot"></div>        <div class="info_locate" id = "info_locate_id">
+<div class="SG_j_linedot"></div>
+<div class="info_btn2">
+    <p>
+    <a href="javascript:void(0);" class="SG_aBtn " id="comp901_btn_invite"><cite >加好友</cite></a>
+    <a href="javascript:void(0);" class="SG_aBtn" id="comp901_btn_sendpaper"><cite >发纸条</cite></a>
+    </p>
+    <p>
+    <a href="http://blog.sina.com.cn/s/profile_1401459260.html#write" class="SG_aBtn"   id="comp901_btn_msninfo"><cite>写留言</cite></a>
+    <a href="#" onclick="return false;" class="SG_aBtn"  id="comp901_btn_follow"><cite onclick="Module.SeeState.add()">加关注</cite></a>
+    </p>
+    <div class="clearit"></div>
+</div>
+<div class="SG_j_linedot"></div>
+</div>
+                  <div class="info_list">     
+                                   <ul class="info_list1">
+                    <li><span class="SG_txtc">博客等级：</span><span id="comp_901_grade"><img src="http://simg.sinajs.cn/blog7style/images/common/sg_trans.gif" real_src="http://simg.sinajs.cn/blog7style/images/common/number/1.gif"  /><img src="http://simg.sinajs.cn/blog7style/images/common/sg_trans.gif" real_src="http://simg.sinajs.cn/blog7style/images/common/number/3.gif"  /></span></li>
+                    <li><span class="SG_txtc">博客积分：</span><span id="comp_901_score"><strong>0</strong></span></li>
+                    </ul>
+                    <ul class="info_list2">
+                    <li><span class="SG_txtc">博客访问：</span><span id="comp_901_pv"><strong>39,663</strong></span></li>
+                    <li><span class="SG_txtc">关注人气：</span><span id="comp_901_attention"><strong>12</strong></span></li>
+                    <li><span class="SG_txtc">获赠金笔：</span><strong id="comp_901_d_goldpen">0支</strong></li>
+                    <li><span class="SG_txtc">赠出金笔：</span><strong id="comp_901_r_goldpen">0支</strong></li>
+					<li class="lisp" id="comp_901_badge"><span class="SG_txtc">荣誉徽章：</span></li>
+                    </ul>
+                  </div>
+<div class="clearit"></div>
+    </div>
+    <div class="clearit"></div>
+</div>
+            </div>       
+            <div class="SG_connFoot"></div>
+</div>
+<div id="module_903" class="SG_conn ">
+    <div class="SG_connHead">
+    <span comp_title="相关博文" class="title">相关博文</span>
+    <span class="edit"> </span>
+    </div>
+    <div class="SG_connBody">
+    <div class="atcTitList relaList">        <ul class="">
+
+                <li class="SG_j_linedot1" style="display:none;">
+            <p id="atcTitLi_SLOT_41" class="atcTitCell_tit SG_dot" style="display:none">
+        </p>
+        </li>
+        <li class="SG_j_linedot1" style="display:none;">
+            <p id="atcTitLi_SLOT_42"  class="atcTitCell_tit SG_dot" style="display:none">
+        </p>
+        </li>
+        
+                	</ul>
+    <div class="atcTit_more"><span class="SG_more"><a href="http://blog.sina.com.cn/" target="_blank">更多&gt;&gt;</a></span></div></div>    </div>
+    <div class="SG_connFoot"></div>
+  </div>
+<div id="module_904_top_ad"></div>
+<div class="SG_conn " id="module_904">
+<div class="SG_connHead">
+<span class="title">推荐博文</span>
+</div>
+<div class="SG_connBody ">
+	<div class="atcTitList relaList">		<ul class="">
+			<li class="SG_j_linedot1"><p class="atcTitCell_tit SG_dot"><a suda-uatrack="key=blog_tjblog&value=h_tjblog" title="“亚洲最大高考工厂”，是逆袭还" target="_blank" href="http://blog.sina.com.cn/s/blog_53ff33bd0102xt3t.html?tj=2?tj=2">“亚洲最大高考工厂”，是逆袭还</a></p>
+        <p class="atcTitCell_nm"><a suda-uatrack="key=blog_tjblog&value=h_tjblog" target="_blank" href="http://blog.sina.com.cn/u/1409233853" class="SG_linkb"></a></p>
+		</li><li class="SG_j_linedot1"><p class="atcTitCell_tit SG_dot"><a suda-uatrack="key=blog_tjblog&value=h_tjblog" title="见一次救一次：郑州这警察的回答" target="_blank" href="http://blog.sina.com.cn/s/blog_537368000102xfek.html?tj=2?tj=2">见一次救一次：郑州这警察的回答</a></p>
+        <p class="atcTitCell_nm"><a suda-uatrack="key=blog_tjblog&value=h_tjblog" target="_blank" href="http://blog.sina.com.cn/u/1400072192" class="SG_linkb"></a></p>
+		</li><li class="SG_j_linedot1"><p class="atcTitCell_tit SG_dot"><a suda-uatrack="key=blog_tjblog&value=h_tjblog" title="高考前她从10楼跳了下去，从此" target="_blank" href="http://blog.sina.com.cn/s/blog_15f20fe440102xi1u.html?tj=2?tj=2">高考前她从10楼跳了下去，从此</a></p>
+        <p class="atcTitCell_nm"><a suda-uatrack="key=blog_tjblog&value=h_tjblog" target="_blank" href="http://blog.sina.com.cn/u/5890965060" class="SG_linkb"></a></p>
+		</li><li class="SG_j_linedot1"><p class="atcTitCell_tit SG_dot"><a suda-uatrack="key=blog_tjblog&value=h_tjblog" title="网络暴力之可怕——逼死人命" target="_blank" href="http://blog.sina.com.cn/s/blog_a773f2db0102y4ii.html?tj=2?tj=2">网络暴力之可怕——逼死人命</a></p>
+        <p class="atcTitCell_nm"><a suda-uatrack="key=blog_tjblog&value=h_tjblog" target="_blank" href="http://blog.sina.com.cn/u/2809393883" class="SG_linkb"></a></p>
+		</li><li class="SG_j_linedot1"><p class="atcTitCell_tit SG_dot"><a suda-uatrack="key=blog_tjblog&value=h_tjblog" title="钮文新：中国金融质量能否就此改" target="_blank" href="http://blog.sina.com.cn/s/blog_470dbd1d0102x5ul.html?tj=2?tj=2">钮文新：中国金融质量能否就此改</a></p>
+        <p class="atcTitCell_nm"><a suda-uatrack="key=blog_tjblog&value=h_tjblog" target="_blank" href="http://blog.sina.com.cn/u/1192082717" class="SG_linkb"></a></p>
+		</li><li class="SG_j_linedot1"><p class="atcTitCell_tit SG_dot"><a suda-uatrack="key=blog_tjblog&value=h_tjblog" title="浅谈美国失业保障金" target="_blank" href="http://blog.sina.com.cn/s/blog_67f297b00102y27d.html?tj=2?tj=2">浅谈美国失业保障金</a></p>
+        <p class="atcTitCell_nm"><a suda-uatrack="key=blog_tjblog&value=h_tjblog" target="_blank" href="http://blog.sina.com.cn/u/1743951792" class="SG_linkb"></a></p>
+		</li><li class="SG_j_linedot1"><p class="atcTitCell_tit SG_dot"><a suda-uatrack="key=blog_tjblog&value=h_tjblog" title="月入三万坐地铁三千，语不惊人死" target="_blank" href="http://blog.sina.com.cn/s/blog_49391b730102z4n0.html?tj=2?tj=2">月入三万坐地铁三千，语不惊人死</a></p>
+        <p class="atcTitCell_nm"><a suda-uatrack="key=blog_tjblog&value=h_tjblog" target="_blank" href="http://blog.sina.com.cn/u/1228479347" class="SG_linkb"></a></p>
+		</li><li class="SG_j_linedot1"><p class="atcTitCell_tit SG_dot"><a suda-uatrack="key=blog_tjblog&value=h_tjblog" title="租厂广告侵占警务宣传栏，牛皮癣" target="_blank" href="http://blog.sina.com.cn/s/blog_3f6b45090102xoi7.html?tj=2?tj=2">租厂广告侵占警务宣传栏，牛皮癣</a></p>
+        <p class="atcTitCell_nm"><a suda-uatrack="key=blog_tjblog&value=h_tjblog" target="_blank" href="http://blog.sina.com.cn/u/1063994633" class="SG_linkb"></a></p>
+		</li><li class="SG_j_linedot1"><p class="atcTitCell_tit SG_dot"><a suda-uatrack="key=blog_tjblog&value=h_tjblog" title="政客桃色事件让安倍成功转移视线" target="_blank" href="http://blog.sina.com.cn/s/blog_615fb6320102xerw.html?tj=2?tj=2">政客桃色事件让安倍成功转移视线</a></p>
+        <p class="atcTitCell_nm"><a suda-uatrack="key=blog_tjblog&value=h_tjblog" target="_blank" href="http://blog.sina.com.cn/u/1633662514" class="SG_linkb"></a></p>
+		</li><li class="SG_j_linedot1"><p class="atcTitCell_tit SG_dot"><a suda-uatrack="key=blog_tjblog&value=h_tjblog" title="消费正能量的“准考证丢失”谣言" target="_blank" href="http://blog.sina.com.cn/s/blog_5f9d87c80102wyyr.html?tj=2?tj=2">消费正能量的“准考证丢失”谣言</a></p>
+        <p class="atcTitCell_nm"><a suda-uatrack="key=blog_tjblog&value=h_tjblog" target="_blank" href="http://blog.sina.com.cn/u/1604159432" class="SG_linkb"></a></p>
+		</li>		</ul>
+		<div id="atcPicList">
+		</div>
+	<div class="atcTit_more"><span class="SG_more"><a target="_blank" href="http://blog.sina.com.cn/">查看更多</a>&gt;&gt;</span></div></div></div>
+<div class="SG_connFoot"></div>
+</div>
+        <div class="SG_conn" id="module_47"><div class="SG_connHead">
+                <span class="title" comp_title="谁看过这篇博文">谁看过这篇博文</span>
+                                <span class="edit"></span>
+            </div>
+            <div class="SG_connBody">
+            	<div class="wdtLoading"><img src="http://simg.sinajs.cn/blog7style/images/common/loading.gif" />加载中…</div>            </div>
+            <div class="SG_connFoot"></div>
+                  </div></div>
+	<!--第一列end-->
+	
+	<!--第二列start-->
+	<div id="column_2" class="SG_colW73">	
+<div id="module_920" class="SG_conn">
+	<div class="SG_connHead">
+	    <span comp_title="正文" class="title">正文</span>
+	    <span class="edit"><span id="articleFontManage" class="fontSize">字体大小：<a href="javascript:;" onclick="changeFontSize(2);return false;">大</a> <strong>中</strong> <a href="javascript:;" onclick="changeFontSize(0);return false;">小</a></span></span>
+	</div>
+    <div class="SG_connBody">
+<!--博文正文 begin -->
+	<div id="articlebody" class="artical" favMD5='{"5388923c0100mpqq":"c7573840540326841a60b32765de980b"}'>
+		<div class="articalTitle"> 
+			
+								<h2 id="t_5388923c0100mpqq" class="titName SG_txta">【转】形式语言与自动机</h2>
+			
+					<span class="time SG_txtc">(2009-08-11 13:30:01)</span><div class="turnBoxzz"><a href="javascript:;" class="SG_aBtn SG_aBtn_ico SG_turn"  action-type="reblog" action-data="{srcBlog:1, blogId:'5388923c0100mpqq'}"><cite><img class="SG_icon SG_icon111" src="http://simg.sinajs.cn/blog7style/images/common/sg_trans.gif" width="15" height="15" align="absmiddle">转载<em class="arrow">▼</em></cite></a></div>		</div>
+		<div class="articalTag" id="sina_keyword_ad_area">
+			<table>
+				<tr>
+					<td class="blog_tag">
+					<script>
+					var $tag='杂谈';
+					var $tag_code='06dd4d1b0dbe3bd44526b49b6ed678b1';
+					var $r_quote_bligid='5388923c0100mpqq';
+					var $worldcup='0';
+					var $worldcupball='0';
+					</script>
+											<span class="SG_txtb">标签：</span>
+																				<h3><a href="http://search.sina.com.cn/?c=blog&q=%D4%D3%CC%B8&by=tag" target="_blank">杂谈</a></h3>
+																</td>
+					<td class="blog_class">
+											<span class="SG_txtb">分类：</span>
+						<a target="_blank" href="http://blog.sina.com.cn/s/articlelist_1401459260_1_1.html">MSN搬家</a>
+										</td>
+				</tr>
+			</table>
+		</div>
+						<!-- 正文开始 -->
+		<div id="sina_keyword_ad_area2" class="articalContent   ">
+			<div>
+龙书写的比较长比较详细比较的云里雾里....百度搜了一下发现这一篇相对简单易懂，看完加注释转过来。貌似原文是个PPT，好乱。</DIV>
+<div>&nbsp;<wbr></DIV>
+<div>发现没有基础的我在看书的漫漫征途上极其的依赖百度和GOOGLE....山顶果然如James说的一样高</DIV>
+<div>&nbsp;<wbr></DIV>
+<div>原帖地址：<a HREF="http&#58;//hi.baidu.com/ecgql/blog/item/569a2ead591204084a36d609.html">http&#58;//hi.baidu.com/ecgql/blog/item/569a2ead591204084a36d609<wbr>.html</A></DIV>
+<div>&nbsp;<wbr></DIV>
+<div><strong><font SIZE="4">1,乔姆斯基的语言观</FONT></STRONG></DIV>
+<div><br />
+语言是客观世界的标签.<br />
+结构主义&#58;三个世界的关系,即语言世界,意识世界与客观世界.结构&#58;语言是一个变动的,有规则的结构.作为结构,具有整体性,可分割性和内含规则性.作为一个结构,一定是一个有规则的整体,在这个整体里一定包含有许许多多成分,这许许多多成分一定受到一套规则的支配而互相层层组合形成种种关系.其中成分与关系是整体结构的两大支柱.(陆俭明)<br />
+
+无论对语言描写的多么详细,都不能解决一个最根本的问题&#58;"语言是什么
+"人们对语言的本质仍然一无所知,人为什么会说话 人是怎样学会说话的 人的语言能力和语言知识是什么<br />
+从语言习得谈起——(言语—语言.语言能力-语言应用)语言能力天生,是人脑固有的.<br />
+普遍语法——代入不同的语言参数——得到不同的语言系统——生成不同语言系统中的所有的句子(普遍语法就是构成语言学习者"初始状态"的一组特性,条件和其他东西,是语言知识发展的基础.<br />
+
+排列组合&#58;"他刚来"三个字有六种组合方式,其中一种是正确的(符合语法的).语法规则类似组合规则<br />
+
+平面与圆(x-a)2+(y-b)2=c2
+排列组合应当满足一定的规则,这些规则可以用形式化的公式来表述.代入不同参数得到不同的语言系统.<br />
+有限的规则,无限的语言——生成<br />
+提出形式语法.在《句法结构》(1957)中乔姆斯基提出3种语法,有限状态语法,短语结构语法和转换语法.这里的转换是指从核心结构到非核心结构的转换,后续的转换是指从深层到表层的转换.<br />
+
+在系统设计中,我们常说的形式化就是指使用符号或者图形的方式对系统进行描述.当代著名逻辑学家鲍亨斯基认为&#58;"形式化方法是这样一种方法,它完全撇开符号本身的意义,而根据某些只涉及符号书面形态的转换规则来进行符号操作."在计算语言学中,我们借用形式化这个概念,是指将语言知识符号化或者图形化,而我们使用的这些符号或者图形,并不顾及它本身的意义,只需要利用它本身的形式和形式转换而已.那么,对语言知识形式化描述的意义是什么呢
+我们知道,对一个系统使用形式化的描述,能够使它变得更为直观,更为单一.自然语言是复杂的,并且充满了歧义.这给计算机处理自然语言带来了很大程度上的困难.为了解决这些困难,我么必须采用一种方法,使它能够合理的描述自然语言系统,并且又能够使自然语言系统变得单一和无歧义.形式化的方法无疑就是最佳的选择.形式化的基本特征是使它所描述得系统保持单一性,无岐义性和明确性.<br />
+
+形式化是表达语言学理论方面的一大进步,主要表现在&#58;容易检验,容易发现遗漏(因为可推理,也可计算).容易发现错误避免混淆.(前后概念都一致).</DIV>
+<div>&nbsp;<wbr></DIV>
+<div><strong>用形式化的方法来描写自然语言有哪些好处</STRONG></DIV>
+<div>
+1,避免混淆,如&#58;用自然语言描述语言规律-&gt;"动词"不是动词.用形式化的方法表示&#58;"动词V".</DIV>
+<div>2,避免重复,如语言中的第归现象&#58;"从前有个山,山上有个庙……"</DIV>
+<div>3,可计算,结构化的数据.</DIV>
+<div><br />
+<font SIZE="4"><strong>2,</STRONG></FONT><font SIZE="+0"><strong><font SIZE="4">定义形式语言</FONT></STRONG></FONT>
+<font SIZE="+0"><br /></FONT><br />
+<strong>一些概念</STRONG></DIV>
+<div><br />
+<strong>形式语言</STRONG>&#58;按一定规律构成的句子或符号串的有限或无限的集合.</DIV>
+<div><br />
+<strong>形式语言学</STRONG>&#58;也称代数语言学,它研究一般的抽象符号系统,运用形式模型对语言(包括人工语言和自然语言)进行理论上的分析和描写.</DIV>
+<div><br />
+<strong>形式文法</STRONG>&#58;是一种格式,用来说明什么句子在该语言中是合法的,并指明把词组合成短语和句子的规则.
+<font COLOR="#7030A0">(Jesse&#58;
+书中所说的“上下文无关文法(context-free grammar)”是形式文法的一种)</FONT></DIV>
+<div><br />
+描述语言有三种途径&#58;1,穷举2,文法 3,自动机
+其中文法是指的产生过程,而自动机是指的识别过程.一种语言,如果存在对它的识别过程,就一定存在对它的产生过程,反之亦然.<br />
+现行的形式语法系统是Chomsky于1959年为了描述自然语言而提出的一种理论模型</DIV>
+<div><br />
+<strong>如何严格的定义形式化的语言</STRONG><br />
+形式文法&#58;一个形式文法G由四个部分组成,可记作G=&#123;VN, VT,
+S , P &#125;,其中&#58;<br />
+VN&#58;称为文法G的非终结符号字母表,VN不出现在G所表示的语言集合的句子中; <font COLOR="#7030A0">(Jesse&#58;
+终结的意思应该是指“不可拆分的最小语义单元”的意思)<br /></FONT>VT&#58;称为文法G的终结符号字母表,G所表示的语言的句子由VT中的元素组成,VN
+∩VT = ;S &#58;代表句子符号,S∈VN .<br />
+P &#58;代表一组式子组成的集合,P
+中的式子具有如下形式&#58;α-&gt;β&nbsp;<wbr><font COLOR="#7030A0">(Jesse&#58; P就是书中的“产生式集合”)</FONT></DIV>
+<div><font COLOR="#7030A0">(Jesse&#58;
+S表示形式语言语法段的整体的一般、概括表示，自身是一个非终结符号)</FONT></DIV>
+<div><br />
+产生式需要满足下面的条件&#58;</DIV>
+<div>1)α可以是VN 和VT 上的任意字符串,但其中必须至少包含一个非终结符,并且不能是空字符;</DIV>
+<div>2)β可以是VN 和VT 上的任意字符串,也可以是空字符;</DIV>
+<div>3)P 中至少有一个产生式中的α得由S 来充当;</DIV>
+<div><br />
+<strong>形式语言的特点</STRONG><br />
+1,高度的抽象化(采用形式化的手段-专用符号,数学公式-来描述语言的结构关系,这种结构关系是抽象的)</DIV>
+<div>
+2,是一套演绎系统(形式语言本身的目的就是要用有限的规则来推导语言中无限的句子,提出形式语言的哲学基础也是想用演绎的方法来研究自然语言)</DIV>
+<div>3,具有算法的特点.(比如说句法分析中采用不同的算法来构造句子的句法推导树)</DIV>
+<div><br />
+<strong>实例</STRONG><br />
+设文法G0= (VN, VT, S, P ) ,其中VN = &#123;S, NP, VP, N, V
+&#125;, VT =
+&#123;写,学生,作业&#125;, P
+中产生式如下&#58;<br />
+1.S-&gt; NP VP<br />
+2.VP -&gt; VP NP<br />
+3.VP-&gt;V NP<br />
+4.NP -&gt; N<br />
+5.N -&gt;学生<br />
+6.N -&gt;作业<br />
+7.V -&gt;写<br />
+问题1&#58;该文法能产生哪些句子<br />
+问题2&#58;该文法产生&#58;学生写作业
+这样一个句子的产生过程是怎样的<br />
+1,产生步骤<br />
+S(起始)<br />
+NP VP (公式1)<br />
+N VP (公式4)<br />
+学生 VP (公式5)<br />
+学生 VP NP (公式2)<br />
+学生 V NP (公式3)<br />
+学生 写 NP (公式7)<br />
+学生 写 N (公式4)<br />
+学生 写 作业 (公式6)<br />
+2,树形图<font COLOR="#7030A0">(Jesse&#58;
+此处略，等我什么时候掌握了字符作图工具再补上吧。。。汗)</FONT><br />
+<br />
+这里所说的树,<br />
+是指若干节点所组成的集合,在两个节点之间用一条有向边加以连接(如M-&gt;N,m节点称为n节点的父亲,或直接前驱,n节点称为m节点的直接后续或子结点)<br />
+
+树形图能够很方便的描述层次结构关系.<br />
+该树形图也是文法G0的一种句法结构,这样一个句法结构实际上能够产生4个句子,其中3个(学生写学生 作业写学生
+作业写作业)我们认为是不合理的,这种不合理实际上表现在语义上,通常在语法上,我们还是认为它是正确的.<br />
+形式文法的作用可以从以下三个方面体现&#58;<br />
+1,生成&#58;一种形式文法能够产生它所表示的语言的全部句子.<br />
+2,判断&#58;一种形式文法能够判断一个字符串是否属于该文法所表示的语言中的句子.<br />
+3,分析&#58;通过文法产生式规则的推导,能够得到该文法所表示的语言的所有合法句子的句法结构树.</DIV>
+<div><br />
+<strong><font SIZE="2">自动机</FONT></STRONG><br />
+自动机的提出最早是为了解决数学中的一些难题的,1936年阿兰,图灵发表了一篇数学论文《论数字计算在决断难题中的应用》在这篇开创性的论文中,图灵给"可计算性"下了一个严格的定义,并提出了著名的"图灵机"的设想.图灵机并非一个机器,而是一种思想的模型.它可以用来计算所有想象得到的可计算的函数.<br />
+
+自动机举例 <font COLOR="#7030A0">(Jesse&#58;
+自动机这一段因为这个图的缺失比较混乱)</FONT><br />
+q0<br />
+q1<br />
+q2<br />
+N<br />
+N<br />
+N<br />
+V<br />
+ε<br />
+q0到q2为所存在的状态, q0为起始状态, q2表示<br />
+结束状态.状态之间的转换用有方向的弧线表示,<br />
+弧线上面的字母表示在当前状态下接受的输入,<br />
+ε表示无条件的输入,即输入为空的时候状态的转换<br />
+上述自动机能接受什么样的输入呢 我们可以看出,类似&#58;<br />
+N+V<br />
+N+V+N<br />
+N+N+……+V<br />
+N+V+N+……+N<br />
+等等,都是该自动机的合法输入.因此,该自动机能够识别上述句型.<br />
+<strong>形式文法与自动机的关系&#58;</STRONG>形式文法是从生成的角度来描述语言的,而自动机是从识别的角度来描述语言的.对某种语言来说,如果存在一个该语言的生成过程,就一定存在一个对于它的识别过程.就描述语言来讲,形式语言和自动机是统一的.</DIV>
+<div><br />
+<strong>形式文法分类</STRONG><br />
+<div><font FACE="Arial" SIZE="4"><span STYLE="font-size&#58;14px;line-height&#58;24px">　　某些类型的文法及其产生的语言得到了细致的研究并被单独命名。最常见的文法的分类系统是诺姆·乔姆斯基于1950年发展的乔姆斯基谱系，这个分类谱系把所有的文法分成四种类型：即0型、1型、2型和3型，又可以分别称为无限制文法、上下文相关文法、上下文无关文法和正规文法。任何语言都可以由无限制文法来表达，馀下的三类文法对应的语言类分别是递归可枚举语言、上下文无关语言和正规语言。这四种文法类型依次拥有越来越严格的产生式规则，同时文法所能表达的语言也越来越少。尽管表达能力比无限制文法和上下文相关文法要弱，但由于能高效率的实现，四类文法中最重要的是上下文无关文法和正规文法。例如对上下文无关语言存在算法可以生成高效率的LL
+分析器和LR 分析器。&nbsp;<wbr></SPAN></FONT></DIV>
+<div><br /></DIV>
+<div>　　<b>0型文法 (短语结构文法，PSG）</B></DIV>
+<div>
+　　设G=（VN，VT，P，S），如果它的每个产生式α→β是这样一种结构：α∈(VN∪VT)*且至少含有一个非终结符，而β∈(VN∪VT)*，则G是一个0型文法或短语结构文法,缩写为PSG。相应的语言称为0型语言或短语结构语言。一个非常重要的理论结果是：0型文法的能力相当于图灵机(Turing)。或者说，任何0型文语言都是递归可枚举的，反之，递归可枚举集必定是一个0型语言。0型文法是这几类文法中，限制最少的一个，所以我们在试题中见到的,至少是0型文法。</DIV>
+<div><br /></DIV>
+<div>　　<b>1型文法 （上下文有关/敏感文法，CSG</B><b>）</B></DIV>
+<div>
+　　1型文法也叫上下文有关文法，此文法对应于线性有界自动机。它是在0型文法的基础上每一个α→β,都有|β|&gt;=|α|。这里的|β|表示的是β的长度。</DIV>
+<div>　　注意：虽然要求|β|&gt;=|α|，但有一特例：α→ε也满足1型文法。</DIV>
+<div>
+　　如有A-&gt;Ba则|β|=2,|α|=1符合1型文法要求。反之,如aA-&gt;a，则不符合1型文法。</DIV>
+<div><br /></DIV>
+<div>　　<b>2型文法 （上下文无关文法，CFG）</B></DIV>
+<div>
+　　2型文法也叫上下文无关文法，它对应于下推自动机。2型文法是在1型文法的基础上,再满足：每一个α→β都有α是非终结符。如A-&gt;Ba,符合2型文法要求。</DIV>
+<div>
+　　如Ab-&gt;Bab虽然符合1型文法要求,但不符合2型文法要求，因为其α=Ab，而Ab不是一个非终结符。</DIV>
+<div><br /></DIV>
+<div>　　<b>3型文法 (正则文法/正规文法,RG)</B></DIV>
+<div>
+　　3型文法也叫正规文法，它对应于有限状态自动机。正规文法有多种等价的定义，我们可以用左线性文法或者右线性文法来等价地定义正规文法。左线性文法要求产生式的左侧只能包含一个非终结符号，产生式的右侧只能是空串、一个终结符号或者一个非终结符号後随一个终结符号。<font COLOR="#7030A0">(Jesse&#58;
+此处似乎有误，只要是能转换成正则表达式的，应该都是三型文法。如后面例子所示)</FONT>右线性文法要求产生式的左侧只能包含一个非终结符号，产生式的右侧只能是空串、一个终结符号或者一个终结符号後随一个非终结符号。
+它是在2型文法的基础上满足&#58;A→α|αB（右线性）或A→α|Bα（左线性）。</DIV>
+<div>
+　　如有：A-&gt;a,A-&gt;aB,B-&gt;a,B-&gt;cB，则符合3型文法的要求。但如果推导为&#58;A-&gt;ab,A-&gt;aB,B-&gt;a,B-&gt;cB或推导为&#58;A-&gt;a,A-&gt;Ba,B-&gt;a,B-&gt;cB则不符合3型方法的要求了。具体的说，例子A-&gt;ab,A-&gt;aB,B-&gt;a,B-&gt;cB中的A-&gt;ab不符合3型文法的定义,如果把后面的ab,改成“一个非终结符＋一个终结符”的形式（即为aB）就对了。例子A-&gt;a,A-&gt;Ba,B-&gt;a,B-&gt;cB中如果把B-&gt;cB改为B-&gt;Bc的形式就对了,因为A→α|αB（右线性）和A→α|Bα（左线性）两套规则不能同时出现在一个语法中,只能完全满足其中的一个,才能算3型文法。</DIV>
+<div>　　注意：上面例子中的大写字母表示的是非终结符,而小写字母表示的是终结符。</DIV>
+</DIV>
+<div><br /></DIV>
+<div>
+<strong>哪种文法适合自然语言处理</STRONG>&#58;0型文法和1型文法对于生成自然语言来讲,生成能力都过强.2型文法和3型文法又过弱.从理论上来讲,自然语言是上下文相关的.但是在实际的应用中,人们还是习惯利用上下文无关文法来分析和研究自然语言,这是因为,上下文无关文法具有良好的代数性,便于计算,也便于在计算机上实现.并且人们在程序语言的处理中,采用上下文无关文法已经取得了相当的成就,而程序语言从理论上来讲,也是属于上下文有关的.综合以上原因,在实际的研究或者应用中,基于上下文无关文法的理论要更多一些.<br />
+
+形式语言是抽象的,用在自然语言的处理中,形式语言还过于简单.但自然语言处理必须要借助形式语言理论中将语言作为符号来处理,建立一系列的生成和分析机制的思想.因此,许多语言学家提出的语法理论系统中,都是基于形式文法的.但又不完全跟形式文法等同.自然语言是复杂的,用简单的终结符和非终结符并不能完全描述自然语言中的各种层面的知识.因此在基于形式文法的基础上,还应该有一些语言知识的其他形式化表示方法.<br />
+
+练习<br />
+生成过程&#58;<br />
+1,周瑜打败了曹操<br />
+2,张教授写了一篇文章<br />
+<br />
+<font COLOR="#7030A0"><b>另外一个帖子里的一些讨论</B></FONT><br />
+omrhal&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>(慷慨的蟹)&nbsp;<wbr>&#58;<br />
+0型文法就是什么都不限制的文法，随便怎么变，所以又叫无限制文法。<br />
+1型文法就是上下文相关文法，比方说&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>@A#--&gt;@a#&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>只有在A上午上下文是@和#时才能转化为a<br />
+
+2型文法是上下文无关文法，每个产生式都是A--&gt;a不管上下文是什么。<br />
+3型文法是正则文法，分为左线性和右线性文法。如A--&gt;aB或A-&gt;a等。<br />
+
+所以正则文法包含于上下文无关文法。因为正则需要线性，而上下文无关不需要，比方说A--&gt;BaB就是上下文无关而不是正则文法。<br />
+
+上下文无关文法包含于上下文相关文法，因为所有上下文无关的文法都可以看做是上下文相关的，比方说A--&gt;BaB可以看作&amp;A&amp;--&gt;&amp;BaB&amp;(&amp;代表空字符就是那个E一样的东东，我打不出来)。<br />
+
+上下文相关文法包含于无限制文法，因为上下文相关文法无法生成空字符（E），而0型无限制嘛。<br />
+本人的理解，不一定正确<br />
+--------------------------------------------------------<br />
+<br />
+Lawrence444&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>(胖子)<br />
+正则文法总可以由一个DFA表示，反之，可以由一个DFA表示的文法都是正则的。<br />
+<br />
+上下文无关文法总可以由一个下推自动机表示，反之亦然。<br />
+<br />
+上下文有关文法总可以由一个非确定性图灵机表示，反之亦然。<br />
+<br />
+剩下的就是无限制的了<br />
+------------------------------------------------<br />
+<br />
+偶觉得Lawrence444(胖子)说的有点问题，四种文法对应的自动机应该是：<br />
+正则文法&lt;==&gt;DFA<br />
+上下文无关文法&lt;==&gt;PDA，即下推自动机<br />
+上下文相关文法&lt;==&gt;LBA,&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>即有界线性自动机<br />
+
+无限制文法&lt;==&gt;图灵机<br />
+<br />
+------------------------------------------------<br />
+<br />
+对于2型和3型之间的差别在哪里呢，谁能再说详细一点.<br />
+比如：<br />
+S-&gt;aaS|a是什么型的，为什么<br />
+S-&gt;aSb|ab是什么型的，为什么<br />
+s-&gt;SaS|b是什么型的，为什么<br />
+*****************<br />
+是有界线性自动机吗？我怎么好象没学过。<br />
+--------------------------------------------------------<br />
+<br />
+显然S-&gt;aaS|a是正则的，它可以转换为正则式S=(aa)*a<br />
+S-&gt;aSb|ab是上下文无关的 <font COLOR="#7030A0">(Jesse&#58;
+不能转换为正则表达式，s可以表示为m个a和n个b组成的串，但m=n)</FONT><br />
+S-&gt;SaS|b是正则的，可以转化为正则式S=b(ab)*<br /></DIV>
+<div>&nbsp;<wbr></DIV>
+<br />							
+		</div>
+						<!-- 正文结束 -->
+		<div id='share' class="shareUp">
+        	<div class="share SG_txtb">
+			分享： 
+			<div class="bshare-custom" style="display:inline;margin-left:5px;"><a title="分享到新浪微博" class="bshare-sinaminiblog" href="javascript:void(0);"></a><a title="分享到微信" class="bshare-weixin" href="javascript:void(0);"></a><a title="分享到QQ空间" class="bshare-qzone" href="javascript:void(0);"></a><a title="分享到豆瓣" class="bshare-douban" href="javascript:void(0);"></a><a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a>
+			</div>
+			</div>
+            <div class="up">
+	        	<div title="喜欢后让更多人看到" id="dbox_5388923c0100mpqq" class="upBox upBox_click" style="cursor: pointer;">
+	            	<p ti_title="【转】形式语言与自动机" id="dbox2_5388923c0100mpqq" class="count" ></p>
+	                <p class="link"><img width="15" height="15" align="absmiddle" src="http://simg.sinajs.cn/blog7style/images/common/sg_trans.gif" class="SG_icon SG_icon34">喜欢</p>
+	            </div>
+<!--
+                <div class="upBox upBox_add">
+                    <p class="count">0</p>
+                    <p class="link"><img width="20" height="16" align="absmiddle" title="推荐" src="http://simg.sinajs.cn/blog7style/images/common/sg_trans.gif" class="SG_icon SG_icon214">赠金笔</p>
+                </div>
+-->
+                                <div class="upBox upBox_add">
+                    <p class="count" id="goldPan-num">0</p>
+                    <p class="link" id="goldPan-give"><img class="SG_icon SG_icon214" src="http://simg.sinajs.cn/blog7style/images/common/sg_trans.gif" width="20" height="16" title="赠金笔" align="absmiddle">赠金笔</p>
+                </div>
+                
+	        </div>
+            <div class="clearit"></div>
+		</div>
+		<div class="articalInfo">
+			<!-- 分享到微博 {$t_blog} -->
+			<div class="IL">
+				阅读<span id="r_5388923c0100mpqq" class="SG_txtb"></span><em class="SG_txtb">┊</em> 
+				<a href="#commonComment">评论</a> <span id="c_5388923c0100mpqq" class="SG_txtb"></span><em class="SG_txtb">┊</em>				<a href="javascript:;" onclick="$articleManage('5388923c0100mpqq',5);return false;">收藏</a><span id="f_5388923c0100mpqq"  class="SG_txtb"></span>
+				<em class="SG_txtb">┊</em><a href="#" id="quote_set_sign" onclick="return false ;">转载</a><a  href="#" id="z_5388923c0100mpqq" onclick="return false ;" class="zznum"></a>				<span id="fn_【转】形式语言与自动机" class="SG_txtb"></span><em class="SG_txtb">┊</em>
+				<a onclick="return false;" href="javascript:;" ><cite id="d1_digg_5388923c0100mpqq">喜欢</cite></a><a id="d1_digg_down_5388923c0100mpqq" href="javascript:;" ><b>▼</b></a>
+									<em class="SG_txtb">┊</em><a href="http://blog.sina.com.cn/main_v5/ria/print.html?blog_id=blog_5388923c0100mpqq" target="_blank">打印</a><em class="SG_txtb">┊</em><a id="q_5388923c0100mpqq" onclick="report('5388923c0100mpqq');return false;" href="#">举报</a>
+											</div>
+			<div class="IR">
+				<table>
+					<tr>
+										</tr>
+									</table>
+			</div>
+		</div>
+		<div class="clearit"></div>
+		<div class="blogzz_zzlist borderc" id="blog_quote" style="display:none">加载中，请稍候......</div>
+		<div class="articalfrontback SG_j_linedot1 clearfix" id="new_nextprev_5388923c0100mpqq">
+							<div><span class="SG_txtb">前一篇：</span><a href="http://blog.sina.com.cn/s/blog_5388923c0100mpom.html">【转】完全用GNU/Linux工作，摈弃Windows低效率的工作方式</a></div>
+										<div><span class="SG_txtb">后一篇：</span><a href="http://blog.sina.com.cn/s/blog_5388923c0100mpqg.html">【转】Ubuntu如何卸载程序</a></div>
+					</div>
+		<div class="clearit"></div>
+							
+		<div id="loginFollow"></div>
+				<div class="allComm">
+			<div  class="allCommTit" >
+				<div class="SG_floatL">
+				    <strong>评论</strong>
+				    <span id="commAd_1" style="display:none;">
+				        <span style="margin-left:15px; width:220px; display:inline-block;"><a target="_blank" href="http://blog.sina.com.cn/lm/8/2009/0325/105340.html">重要提示：警惕虚假中奖信息</a></span>
+				    </span>
+				</div>
+				<div class="SG_floatR"><a class="CP_a_fuc" href="#post">[<cite>发评论</cite>]</a></div>
+			</div>
+			<ul id="article_comment_list" class="SG_cmp_revert"><!-- 循环始 --><li>评论加载中，请稍候...</li><!-- 循环终  --></ul>
+			<div class="clearit"></div>
+			<div class="myCommPages SG_j_linedot1">
+				<div class="SG_page" id="commentPaging" style="display:none;">
+					<ul class="SG_pages">
+					</ul>
+				</div>
+				<div class="clearit"></div>
+			</div>
+			<a name="post"></a>
+			<div class="writeComm">
+				<div class="allCommTit">
+					<div class="SG_floatL">
+					    <strong>发评论</strong>
+					    <span></span>
+					</div>
+					<div class="SG_floatR"></div>
+				</div>
+				<div class="wrCommTit">
+					<div class="SG_floatL" id="commentNick" style="display:none;"></div>
+				</div>
+				<div class="formTextarea">
+					<div style="float:left;" id="commonComment">
+					<iframe id="postCommentIframe"  frameborder="0" style="border:1px solid #C7C7C7;
+		height:158px;width:448px;maring-top:1px;background-color:white;" src="http://blog.sina.com.cn/main_v5/ria/blank2.html"></iframe>
+					<textarea id="commentArea" tabindex="1" style="display:none;"></textarea>
+					</div>
+					<div id="mobileComment" style="float:left;display:none;">
+						<textarea id="mbCommentTa" style="width:438px;height:150px;border:1px solid #C7C7C7;line-height:18px;padding:5px;"></textarea>
+					</div>
+					<div class="faceblk" id="faceWrap">
+						<div id="smilesSortShow" class="faceline1">
+						</div>
+						<ul id="smilesRecommended" class="faceline01"></ul>
+					</div>
+					<div class="clearit"></div>
+				</div>
+				<div class="formLogin">
+					<div class="SG_floatL"> 
+					<p id="commentlogin" style="display:none;"><span>登录名：</span><input type="text" style="width: 115px;" id="login_name" tabindex="2"/>   <span>密码：</span><input type="password" style="width: 115px;" id="login_pass" tabindex="3"/>   <a href="https://login.sina.com.cn/getpass.html" target="_blank">找回密码</a>   <a href="https://login.sina.com.cn/signup/signup.php?entry=blog&src=blogicp&srcuid=1401459260" target="_blank">注册</a>	<input type="checkbox" id="login_remember"/><label for="login_remember" style="display:inline-block;" title="建议在网吧/公用电脑上取消该选项">记住登录状态</label></p><p id="commentloginM" style="display:none;"><span>昵&nbsp;&nbsp;&nbsp;称：</span><input type="text" style="width: 115px;" id="comment_anonyous"  value="新浪网友"/ tabindex="2" disabled></p><p id="quote_comment_p"><!--<input type="checkbox" id="bb"> <label for="bb"><img height="18" align="absmiddle" width="18" title="" src="http://simg.sinajs.cn/blog7style/images/common/sg_trans.gif" class="SG_icon SG_icon110">分享到微博 <img height="15" align="absmiddle" width="15" title="新" src="http://simg.sinajs.cn/blog7style/images/common/sg_trans.gif" class="SG_icon SG_icon11"></label>&nbsp;&nbsp;&nbsp;--><input type="checkbox" id="cbCommentQuote" /><label for="cbCommentQuote">评论并转载此博文</label><img class="SG_icon SG_icon11" src="http://simg.sinajs.cn/blog7style/images/common/sg_trans.gif" width="15" height="15" title="新" align="absmiddle" /></p>
+					<p id="geetest-box" ></p>
+					</div>
+
+					<span style="display: none; color: rgb(153, 153, 153); margin-left: 10px;" id="login_remember_caution"></span>
+
+											<!--<div class="SG_floatR" id="anonymity_cont"><input type="checkbox" id="anonymity"/><label for="anonymity">匿名评论</label></div>-->
+									</div>
+				<div class="formBtn">
+					<a href="javascript:;" onclick="return false;" class="SG_aBtn" tabindex="5"><cite id="postcommentid">发评论</cite></a>
+					<p class="SG_txtc">以上网友发言只代表其个人观点，不代表新浪网的观点或立场。</p>
+				</div>
+			</div>
+		</div>
+				<div class="clearit"></div>
+		
+				<div class="articalfrontback articalfrontback2 clearfix">
+						  <div class="SG_floatL"><span class="SG_txtb">&lt;&nbsp;前一篇</span><a href="http://blog.sina.com.cn/s/blog_5388923c0100mpom.html">【转】完全用GNU/Linux工作，摈弃Windows低效率的工作方式</a></div>
+									  <div class="SG_floatR"><span class="SG_txtb">后一篇&nbsp;&gt;</span><a href="http://blog.sina.com.cn/s/blog_5388923c0100mpqg.html">【转】Ubuntu如何卸载程序</a></div>
+					</div>
+		<div class="clearit"></div>
+				
+	</div>
+	<!--博文正文 end -->
+		<script type="text/javascript">
+			var voteid="";
+		</script>
+
+            </div>       
+            <div class="SG_connFoot"></div>
+          </div>
+</div>
+	<!--第二列start-->
+	
+	<!--第三列start-->
+	<div id="column_3" class="SG_colWnone"><div style="width:0px;height:0.1px;margin:0px;">&nbsp;&nbsp;</div></div>
+	<!--第三列end-->
+
+	
+    </div>
+   <!--主题内容结束 -->
+  
+
+	<div id="diggerFla" style="position:absolute;left:0px;top:0px;width:0px"></div>
+    <div class="sinablogfooter" id="sinablogfooter"  style="position:relative;">
+      
+      <p class="SG_linka"><a href="http://help.sina.com.cn/" target="_blank">新浪BLOG意见反馈留言板</a>　<a href="javascript:;" onclick="window.open ('http://control.blog.sina.com.cn/admin/advice/impeach.php?url=http%3A//blog.sina.com.cn/s/blog_4cf7b4ec0100eudp.html%3Ftj%3D1', '','height=495, width=510, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=n o, status=no');">不良信息反馈</a>　电话：4006900000 提示音后按1键（按当地市话标准计费）　欢迎批评指正</p>
+   
+      <p class="SG_linka"><a href="http://corp.sina.com.cn/chn/" target="_blank">新浪简介</a> | <a href="http://corp.sina.com.cn/eng/" target="_blank">About Sina</a> | <a href="http://emarketing.sina.com.cn/" target="_blank">广告服务</a> | <a href="http://www.sina.com.cn/contactus.html" target="_blank">联系我们</a> | <a href="http://corp.sina.com.cn/chn/sina_job.html" target="_blank">招聘信息</a> | <a href="http://www.sina.com.cn/intro/lawfirm.shtml" target="_blank">网站律师</a> | <a href="http://english.sina.com" target="_blank">SINA English</a> | <a href="http://members.sina.com.cn/apply/" target="_blank">会员注册</a> | <a href="http://help.sina.com.cn/" target="_blank">产品答疑</a> </p>
+      <p class="copyright SG_linka"> Copyright &copy; 1996 - 2018 SINA Corporation,  All Rights Reserved</p>
+      <p class="SG_linka"> 新浪公司 <a href="http://www.sina.com.cn/intro/copyright.shtml" target="_blank">版权所有</a></p>
+	  <a href="http://www.bj.cyberpolice.cn/index.jsp"  target="_blank" class="gab_link"></a>
+    </div>
+  </div>
+</div>
+<div id="swfbox"></div>
+<script id="PVCOUNTER_FORIE" type="text/javascript"></script>
+</body>
+<script type="text/javascript">
+var scope = {
+    $newTray : 1,
+    $setDomain : true,
+    $uid : "1401459260",
+    $PRODUCT_NAME : "blog7",      //blog7photo,blog7icp
+    $pageid : "article",
+    $key :  "49768033efb13a08af43da8f87a69409",
+    $uhost : "jess23",
+    $ownerWTtype :"",
+    $private: {"pageset":0,"tj":0,"adver":0,"sms":0,"ad":0,"blogsize":0,"cms":0,"hidecms":0,"top":0,"invitationset":0,"p4p":0,"spamcms":0,"init7":0,"quote":0,"foot":0,"isprivate":"0","headpic":1,"t_sina":1401459260,"oauth_token":1,"oauth_token_secret":1,"uname":"\u66fe\u7ecf\u768423\u53f7","p_push_t":"1","p_get_t":"1","medal7":7},
+    $summary: "...  (来自 @头条博客)",
+    $is_photo_vip:0,
+		 $nClass:0,
+		 $articleid:"5388923c0100mpqq",
+		 $sort_id:117,
+		 $cate_id:"",
+		 $isCommentAllow:0,
+		 $album_pic:"",
+		 $pn_x_rank:0,
+		 $x_quote_c:"",
+		 $flag2008:"",
+		     component_lists:{"2":{"size":730,"list":[920]},"1":{"size":210,"list":[901,903,904,47]}},
+    formatInfo:1,
+    UserPic:[{"pid":"","repeat":"repeat-x","align-h":"center","align-v":"top","apply":"0"},{"pid":"","repeat":"repeat-x","align-h":"center","align-v":"top","apply":"0"},{"pid":"","repeat":"repeat-x","align-h":"center","align-v":"top","apply":"0"}],
+    UserBabyPic:{"photoX":0,"photoY":0,"photoURL":null,"angle":0,"zoom":0,"maskX":0,"maskY":0,"maskURL":null,"frameURL":null},
+    UserColor:1,
+    backgroundcolor:"rgb(248, 248, 248)",
+    tpl:"3_9",
+    reclist:0    };
+var $encrypt_code = "53a9a9ff6583dd2c112f579e6a834786";
+</script>
+
+<script type="text/javascript" src="http://sjs.sinajs.cn/blog7common/js/boot.js"></script>
+<script type="text/javascript">__load_js();</script>
+<script type="text/javascript">__render_page();</script>
+
+
+<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=b436f96b-ce3c-469f-93ca-9c0c406fcf10&amp;pophcol=2&amp;lang=zh"></script><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+<script type="text/javascript" charset="utf-8">
+        bShare.addEntry({pic: "", title:"分享自Jess23  《【转】形式语言与自动机》", summary:"...  (来自 @头条博客)"});
+     </script>
+
+<script type="text/javascript" src="http://sjs.sinajs.cn/xblogtheme/js/blog680-min.js"></script>
+<script type="text/javascript">
+        var slotArr = ['atcTitLi_SLOT_41', 'atcTitLi_SLOT_42','loginBarActivity']; //广告位id
+        var sourceArr = ['SLOT_41','SLOT_42','SLOT_43,SLOT_47,SLOT_48'];  //广告资源id
+        SinaBlog680.staticBox(slotArr, sourceArr);
+</script>
+</html>

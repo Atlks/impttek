@@ -1,0 +1,22 @@
+Atitit。动态调用java 语言作为脚本 beanshell
+
+BeanShell是一种脚本语言，一种完全符合java语法的java脚本语言，并且又拥有自己的一些语法和方法，beanShell是一种松散类型的脚本语言（这点和JS类似）。
+
+
+
+Beanshell是用Java写成的，一个小型的、免费的、可以下载的、嵌入式的Java源代码解释器，具有对象脚本语言特性。BeanShell执行标准Java语句和表达式，另外包括一些脚本命令和语法。它将脚本化对象看作简单闭包方法（simple method closure）来支持，就如同在Perl和JavaScript中的一样。　它具有以下的一些特点：使用Java反射API以提供Java语句和表达式的实时解释执行；可以透明地访问任何Java对象和API；可以在命令行模式、控制台模式、小程序模式和远程线程服务器模式等四种模式下面运行；与在应用程序中一样，可以在小程序中（Applet）正常运行（无需编译器或者类装载器）；非常精简的解释器jar文件大小为175k。
+ 
+BeanShell能理解标准的JAVA语句，表达式，和方法宣告。语句和表达式的内容可以是：变量，宣告，赋值，方法调用，循环，条件等。
+ 
+这使得BeanShell的表达力很强，相比bat，Linux的shell脚本等要灵活很多，唯一不足就是依赖jre环境。
+ 
+BeanShell除了Java语句、表达式等语法外，还有一些自己的语法，这使得BeanShell功能更为强大，但不是想象中三五分钟就能入手搞定的，至少熟悉这玩意需要两三天时间！
+ 
+BeanShell在工作流和一些系统脚本方面有突出的用处，你可以使用BeanShell代替特定操作系统的脚本，如bat、shell等。
+ 
+
+BeanShell目前最新版本是2.0b4，下载地址是：http://www.beanshell.org/bsh-2.0b4.jar，
+
+BeanShell简介 - Bona shen - 博客园.htm
+Beanshell 初体验 - 熔 岩 - 51CTO技术博客.htm
+

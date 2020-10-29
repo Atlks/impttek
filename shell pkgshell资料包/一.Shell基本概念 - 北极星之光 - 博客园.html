@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>一.Shell基本概念 - 北极星之光 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=-hy83QNg62d4qYibixJzxMJkbf1P9fTBlqv7SK5zVL01"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/coffee/bundle-coffee.css?v=NnZbvdgFaQNhu3t8P4Wsaz98sDQkgRt7Qxq2rzF0ZRU1"/>
+<link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/coffee/bundle-coffee-mobile.css?v=EhLLUe5NHsx18JODVZscd5ef3A8WbJHKTlTvuKQjsl01"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/beijixingzhiguang/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/beijixingzhiguang/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/beijixingzhiguang/wlwmanifest.xml"/>
+<script src="//common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+<script type="text/javascript">var currentBlogApp = 'beijixingzhiguang', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="/bundles/blog-common.js?v=d16NGD79qD3qnJt25hXDZ2sGoojamz2W5Rl4vT0CGVg1" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a id="lnkBlogLogo" href="http://www.cnblogs.com/beijixingzhiguang/"><img id="blogLogo" src="/Skins/custom/images/logo.gif" alt="返回主页" /></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/beijixingzhiguang/">北极星之光</a></h1>
+<h2></h2>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="navigator">
+			
+<ul id="navList">
+	<li><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+	<li><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/beijixingzhiguang/">首页</a></li>
+	<li><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+	<li><a id="blog_nav_contact" accesskey="9" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/%E5%8C%97%E6%9E%81%E6%98%9F%E4%B9%8B%E5%85%89">联系</a></li>
+	<li><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+	<li><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/beijixingzhiguang/rss">订阅</a>
+	<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/beijixingzhiguang/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a></li>
+</ul>
+
+
+			<div class="blogStats">
+				
+				<div id="blog_stats">
+<!--done-->
+随笔- 18&nbsp;
+文章- 0&nbsp;
+评论- 1&nbsp;
+</div>
+				
+			</div><!--end: blogStats -->
+		</div><!--end: navigator 博客导航栏 -->
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class = "post">
+		<h1 class = "postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/beijixingzhiguang/p/4331215.html">一.Shell基本概念</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body" class="blogpost-body"><div>
+<div>一.什么是Shell？</div>
+<div>&nbsp; &nbsp; &nbsp;&lt;一&gt;.Shell英文意思：壳；</div>
+<div>&nbsp; &nbsp; &nbsp;&lt;二&gt;.计算机中管理整个硬件的其实是操作系统的核心；核心是被保护的；</div>
+<div>&nbsp; &nbsp; &nbsp;&lt;三&gt;.计算机硬件，操作系统，Shell，用户之间的关系；</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1.我们知道计算机完成计算，存储，网络，多媒体等等功能，其最基本条件是：计算机有相应的硬件支持以及这些硬件能够被管理使用；而计算机中管理硬件的其实就是操作系统和以及硬件驱动的支持；</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2.而操作系统核心，其实就是一组程序，这组程序能够控制计算机的硬件以及管理系统活动；</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;3.更上一层，计算机不能够自动的说进行计算，播放视频，音乐等等；这些功能只有在用户进行有相关的命令请求发给操作系统的时候，相应的硬件才能进行工作。由于操作系统是管理计算机系统硬件的核心，因此这个核心应该被保护，用户不能随随便便的对操作系统进行操作，因为不当的操作可能造成整个计算机硬件系统的崩溃。</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;4.所以，就为操作系统做一层壳，来保护操作系统。而这层壳（Shell），是经过定义以及验证的，规定好的，用户的操作不会对计算机的硬件系统造成破坏。并且，通过Shell输入的命令，能够正确的被解析并传达到操作系统，而保证了相应的命令请求能够正确实施。</div>
+<div>关系图：&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;</div>
+<div>&nbsp; &nbsp;&nbsp; <img src="https://images0.cnblogs.com/blog2015/536176/201503/112254249029164.png" alt="" /></div>
+<div>&nbsp; &nbsp; &nbsp;&lt;四&gt;. 可以这样理解Shell：</div>
+<div>&nbsp; &nbsp; &nbsp; Shell是一个应用程序；Shell定义了一系列的命令，用户输入这些命令之后，Shell能够解析，并调用正确的操作系统的具体功能；并且，用户输入的这些命令可以先高级编程语言一样，有变量和参数，以及有控制结构，所以说，Shell即是一种<a href="http://baike.baidu.com/view/128511.htm" target="_blank">程序设计语言</a>。作为命令语言，它交互式解释和执行用户输入的命令或者自动地解释和执行预先设定好的一连串的命令；作为<a href="http://baike.baidu.com/view/128511.htm" target="_blank">程序设计语言</a>，它定义了各种<a href="http://baike.baidu.com/view/296689.htm" target="_blank">变量</a>和参数，并具有的控制结构，包括循环和分支，也就是Shell Script。</div>
+&nbsp; &nbsp;1.Shell是一种命令解释器，能够解释用户输入命令并且调用操作系统功能；
+<div>&nbsp; &nbsp;2.Sehll是用户与操作系统之间的接口，桥梁；即保护了操作系统核心也为用户操作操作系统以及获取功能提供了条件；</div>
+<div>&nbsp; &nbsp;3.Shell 提供的命令能够像命令一样一条条的输入，执行；也可以像程序设计语言一样的编写逻辑进行执行。所以Shell是一种程序设计语言；<br />
+<div>&nbsp; &nbsp;4.shell提供了你与<a href="http://baike.baidu.com/view/880.htm" target="_blank">操作系统</a>之间通讯的方式。有两种：</div>
+<div>&nbsp; &nbsp; &nbsp;a.<strong>交互方式：</strong>（从键盘输入，并且可以立即得到响应)其实就是一次输入一条命令；</div>
+<div><strong>&nbsp; &nbsp; &nbsp;b.非交互</strong>方式<strong>：</strong>以<strong>shell script</strong>执行。shell script是放在文件中的一串shell和<a href="http://baike.baidu.com/view/880.htm" target="_blank">操作系统</a>命令，它们可以被重复使用。本质上，shell script是命令行命令简单的组合到一个文件里面。 在这种模式下，shell不与你进行交互，而是读取存放在文件中的命令，并且执行它们。当它读到文件的结尾，shell也就终止了。</div>
+<div>二.什么是bash?</div>
+<div>&nbsp; &nbsp; 1.Shell类型</div>
+<div>&nbsp; &nbsp; &nbsp;shell的类型</div>
+<div>&nbsp; &nbsp; &nbsp;在<a href="http://baike.baidu.com/view/8095.htm" target="_blank">UNIX</a>中主要有：</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bourne shell （包括 sh,ksh,and bash)</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bourne shell ( sh)</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Korn shell ( ksh)</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bourne Again shell ( bash)</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;POSIX shell ( sh)</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C shell （包括 csh and tcsh)</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C shell ( csh)</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TENEX/TOPS C shell ( tcsh)</div>
+<div>&nbsp; 2.最常见的是：bash;所以，bash是Shell的一种；</div>
+<div>三.什么是Shell Script?</div>
+<div>&nbsp; &nbsp; &nbsp;shell script 是利用 shell 的功能所寫的一個『程式 (program)』，這個程式是使用純文字檔，將一些 shell 的語法與指令(含外部指令)寫在裡面， 搭配正規表示法、管線命令與資料流重導向等功能，以達到我們所想要的處理目的。</div>
+<div>&nbsp; &nbsp; &nbsp; shell script 就像是早期 DOS 年代的批处理 (.bat) ，最簡單的功能就是將許多指令彙整寫在一起， 讓使用者很輕易的就能夠 one touch 的方法去處理複雜的動作 (<strong>執行一個檔案 "shell script" ，就能夠一次執行多個指令</strong>)。 而且 shell script 更提供陣列、迴圈、條件與邏輯判斷等重要功能，讓使用者也可以直接以 shell 來撰寫程式。</div>
+<div>&nbsp;&nbsp;</div>
+
+</div>
+
+</div></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+		</div>
+		<div class = "postDesc">posted @ <span id="post-date">2015-03-11 22:55</span> <a href='http://www.cnblogs.com/beijixingzhiguang/'>北极星之光</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>)  <a href ="https://i.cnblogs.com/EditPosts.aspx?postid=4331215" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(4331215);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=153700,cb_entryId=4331215,cb_blogApp=currentBlogApp,cb_blogUserGuid='90365612-4ace-e211-8d02-90b11c0b17d6',cb_entryCreatedDate='2015/3/11 22:55:00';loadViewCount(cb_entryId);var cb_postType=1;</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='cnblogs_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<div id='cnblogs_c2' class='c_ad_block'></div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="calendar"><div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script></div>
+			
+			<DIV id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</DIV>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright &copy;2018 北极星之光
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+</body>
+</html>

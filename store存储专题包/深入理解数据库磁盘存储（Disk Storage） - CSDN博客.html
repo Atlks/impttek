@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="canonical" href="https://blog.csdn.net/idber/article/details/8087473"/> 
+    <script type="text/javascript">
+        var username = "idber";
+        var _blogger = username;
+        var blog_address = "https://blog.csdn.net/idber";
+        var static_host = "https://csdnimg.cn/release/phoenix/";
+        var currentUserName = "attilax"; 
+        var fileName = '8087473';
+        var commentscount = 7;
+        var islock = false;
+        window.quickReplyflag = true;
+        var totalFloor = 7;
+        var isBole = false;
+        var isDigg = false;
+        var isExpert = false;
+        var isAdm = false;
+        var baiduKey = "%E5%A6%82%E6%9E%9C%E5%90%91%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BC%A0%E5%85%A5%E5%A4%A7%E6%96%87%E4%BB%B6%2C%E9%82%A3%E6%96%87%E4%BB%B6%E6%98%AF%E5%AD%98%E5%9C%A8%E5%86%85%E5%AD%98%E8%BF%98%E6%98%AF%E7%A3%81%E7%9B%98%3F%E5%A6%82%E6%9E%9C%E6%98%AF%E7%A3%81%E7%9B%98%2C%E6%98%AF%E5%9C%A8%E5%93%AA%E4%B8%AA%E7%9B%98%3F";
+        var needInsertBaidu = false;
+        var isShowAds = true;
+        var ChannelId = 6;
+    </script>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="referrer" content="always">
+    <script src="https://csdnimg.cn/public/common/libs/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://csdnimg.cn/public/static/css/avatar.css">
+                <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/production/main-f869aa95a4.css">
+          <link rel="stylesheet" href="https://csdnimg.cn/public/common/toolbar/content_toolbar_css/content_toolbar.css">
+
+    <script src="https://csdnimg.cn/rabbit/exposure-click/main-1.0.5.js"></script>
+    <script type="text/javascript" src="https://csdnimg.cn/pubfooter/js/tracking-1.0.2.js" charset="utf-8"></script>
+    <script type="text/javascript" src="https://csdnimg.cn/release/phoenix/production/main-e96db8abdf.js"></script>
+
+    <script src="https://dup.baidustatic.com/js/ds.js"></script>
+    <script type="text/javascript">
+        // Traffic Stats of the entire Web site By baidu
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?6bcd52f51e9b3dce32bec4a3997715ac";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+        // Traffic Stats of the entire Web site By baidu end
+    </script>
+    <meta name="description" content="数据库管理系统将数据存储在磁盘、磁带以及其他的裸设备上，虽然这些设备的访问速度相比内存慢很多，但其非易失性和大容量的特点使他们成为数据存储的不二之选。
+本文主要讨论大型数据库产品的磁盘存储内部结构，这对于深入理解数据库各种数据结构具有至关重要的作用。
+数据库磁盘存储的体系结构
+
+
+以上两图分别展示了存储器分级结构以及磁盘内部物理结构，不是本文重点，不赘述。需要强调的是：一次完整的输入输出" />
+    <meta name="keywords" content="db2,DB2" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+    <meta name="shenma-site-verification" content="5a59773ab8077d4a62bf469ab966a63b_1497598848">
+    <title>深入理解数据库磁盘存储（Disk Storage） - CSDN博客</title>
+    <link href="https://csdnimg.cn/public/favicon.ico" rel="SHORTCUT ICON">
+              <script src="https://csdnimg.cn/search/baidu_search-1.1.2.js?v=201802071056&autorun=true&install=true&keyword=%E5%A6%82%E6%9E%9C%E5%90%91%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BC%A0%E5%85%A5%E5%A4%A7%E6%96%87%E4%BB%B6%2C%E9%82%A3%E6%96%87%E4%BB%B6%E6%98%AF%E5%AD%98%E5%9C%A8%E5%86%85%E5%AD%98%E8%BF%98%E6%98%AF%E7%A3%81%E7%9B%98%3F%E5%A6%82%E6%9E%9C%E6%98%AF%E7%A3%81%E7%9B%98%2C%E6%98%AF%E5%9C%A8%E5%93%AA%E4%B8%AA%E7%9B%98%3F"  type="text/javascript"></script>
+                      <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/production/htmledit_views-0a60691e80.css">
+            <style>
+            .MathJax, .MathJax_Message, .MathJax_Preview{
+                display: none
+            }
+      </style>
+</head>
+<body>
+<script id="toolbar-tpl-scriptId" prod="download" skin="black" src="https://csdnimg.cn/public/common/toolbar/js/content_toolbar.js" type="text/javascript" domain="https://blog.csdn.net/"></script>
+<div class="container clearfix">
+  <main>
+    <div style="display:none;">
+      <img src="" onerror='setTimeout(function(){if(!/(csdn.net|iteye.com|baiducontent.com|googleusercontent.com|360webcache.com|sogoucdn.com|bingj.com|baidu.com)$/.test(window.location.hostname)){window.location.href="\x68\x74\x74\x70\x73\x3a\x2f\x2f\x77\x77\x77\x2e\x63\x73\x64\x6e\x2e\x6e\x65\x74"}},3000);'>
+    </div>
+    <article>
+        <h1 class="csdn_top">深入理解数据库磁盘存储（Disk Storage）</h1>
+        <div class="article_bar clearfix">
+            <div class="artical_tag">
+                <span class="original">
+                原创                </span>
+                <span class="time">2012年10月18日 21:21:04</span>
+            </div>
+
+            <ul class="article_tags clearfix csdn-tracking-statistics tracking-click" data-mod="popu_377" >
+                <li class="tit">标签：</li>
+
+<!--          [startarticletags]-->
+                                                            <li><a href="http://so.csdn.net/so/search/s.do?q=db2&t=blog" target="_blank">db2</a> <span>/</span></li>
+                                            <li><a href="http://so.csdn.net/so/search/s.do?q=DB2&t=blog" target="_blank">DB2</a> <span>/</span></li>
+                                            <li><a href="http://so.csdn.net/so/search/s.do?q=Disk Storage&t=blog" target="_blank">Disk Storage</a> <span>/</span></li>
+                                            <li><a href="http://so.csdn.net/so/search/s.do?q=数据库&t=blog" target="_blank">数据库</a> <span>/</span></li>
+                                            <li><a href="http://so.csdn.net/so/search/s.do?q=磁盘存储&t=blog" target="_blank">磁盘存储</a> <span>/</span></li>
+                                    <!--          [endarticletags]-->
+            </ul>
+            <ul class="right_bar">
+                <li><button class="btn-noborder"><i class="icon iconfont icon-read"></i><span class="txt">25997</span></button></li>
+                <li class="edit">
+                    <a class="btn-noborder" href="" >
+                        <i class="icon iconfont icon-bianji"></i><span class="txt">编辑</span>
+                    </a>
+                </li>
+                <li class="del">
+                    <a class="btn-noborder" onclick="javascript:deleteArticle(fileName);return false;">
+                        <i class="icon iconfont icon-shanchu"></i><span class="txt">删除</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div id="article_content" class="article_content csdn-tracking-statistics tracking-click" data-mod="popu_519" data-dsm="post">
+                            <div class="htmledit_views">
+                        
+<p><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">数据库管理系统将数据存储在磁盘、磁带以及其他的裸设备上，虽然这些设备的访问速度相比内存慢很多，但其非易失性和大容量的特点使他们成为数据存储的不二之选。</span></span></p>
+<p><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">本文主要讨论大型数据库产品的磁盘存储内部结构，这对于深入理解数据库各种数据结构具有至关重要的作用。</span></span></p>
+<p><span style="font-family:'Microsoft YaHei';font-size:24px;color:#3366ff;">数据库磁盘存储的体系结构</span></p>
+<p><span style="font-family:'Microsoft YaHei';font-size:14px;"><img src="http://img.my.csdn.net/uploads/201210/18/1350523988_1615.png" width="400" height="350" alt="" /><img src="http://img.my.csdn.net/uploads/201210/18/1350524012_9824.gif" width="400" height="350" alt="" /><br /></span></p>
+<p><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">以上两图分别展示了存储器分级结构以及磁盘内部物理结构，不是本文重点，不赘述。需要强调的是：一<span style="color:rgb(255,153,0);">次完整的输入输出（IO）操作的时间=磁盘轴旋转时间（旋转延迟）+磁盘臂移动时间（寻道时间）+数据传输时间。</span>三者所需时间的平均经验值为：0.004秒、0.008秒和0.0005秒。所以，<span style="color:rgb(255,153,0);">一次完整的IO时间的经验值是0.0125秒，即1/80秒。</span></span></span></p>
+<p><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">对于大型数据库而言，即便是这极短暂的0.0125秒，频繁的IO操作会将这微不足道的时间累积得非常可观，因此磁盘存储的优化对于数据库效率的提升是非常必要和重要的。不同的数据库产品的磁盘存储内部实现是不同的，本文只讨论Oracle、DB2大型数据库产品，二者细节上虽有不同，但结构大体上是一样的。</span></span></p>
+<p><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">Oracle和DB2数据库的存储模型如图：</span></span></p>
+<p><span style="font-family:'Microsoft YaHei';font-size:14px;"><img src="http://img.my.csdn.net/uploads/201210/18/1350527183_7238.png" alt="" /><br /></span></p>
+<p><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">可以看出，数据库中的数据都存储在表空间中。表空间即是管理将逻辑数据库设计映射到操作系统物理存储中的一个数据库对象，用于指明数据的物理位置。关于表空间，以后再讨论。</span></span></p>
+<p><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">Oracle数据库磁盘存储的逻辑结构为：<span style="color:#ff9900;">一个数据库（Database）对应多个表空间（Tablespace），一个表空间对应多个段（Segment），一个段对应多个区（Extent），一个区对应多个数据块（Data Block），真正的数据就保存在数据块中</span>。这里有以下几点需要说明：</span></span></p>
+<p><span style="font-family:'Microsoft YaHei';color:rgb(0,153,0);"><span style="font-size:12px;">1.Oracle中一个数据块的大小默认是2KB（支持2KB,4KB,8KB，16KB,32KB），而DB2中则默认是4KB（支持4KB,8KB,16KB,32KB）；</span></span></p>
+<p><span style="font-family:'Microsoft YaHei';color:rgb(0,153,0);"><span style="font-size:12px;">2.Oracle中有段（Segment）的概念，而DB2中没有这一概念，表空间直接是各个容器（数据文件）中的区（Extent）组成，不过也还是有一个很弱化的Extent组概念。下面提到的关于Segment的内容则全部是针对Oracle的；</span></span></p>
+<p><span style="font-family:'Microsoft YaHei';color:rgb(0,153,0);"><span style="font-size:12px;">3.Oracle中的数据块称为Oracle Block，而DB2中则直接称为Data Page（数据页）。</span></span></p>
+<p><span style="font-family:'Microsoft YaHei';color:rgb(0,153,0);"><span style="font-size:12px;">4.Oracle中的Extent称为区，而DB2中则称为扩展数据块。为方便阅读，本文中统称为区。</span></span></p>
+<p><span style="font-family:'Microsoft YaHei';font-size:14px;"><img src="http://img.my.csdn.net/uploads/201210/18/1350536911_8004.jpg" alt="" /></span></p>
+<p><span style="font-family:'Microsoft YaHei';font-size:14px;"><span style="font-family:'Microsoft YaHei';">                                 Oracle磁盘存储逻辑结构</span></span></p>
+<p><span style="font-family:'Microsoft YaHei';font-size:14px;"><span style="font-family:'Microsoft YaHei';"><br /></span></span></p>
+<p><span style="font-family:'Microsoft YaHei';font-size:14px;"><span style="font-family:'Microsoft YaHei';">  </span><img src="http://img.my.csdn.net/uploads/201210/18/1350541113_3820.jpg" alt="" /></span></p>
+<p><span style="font-family:'Microsoft YaHei';font-size:14px;">                                           </span><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">DB2磁盘存储逻辑结构</span></span></p>
+<p><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">要注意：这里的表空间，段，区，数据块（页）全部都是数据库中的逻辑概念，并不是物理存在的，那么数据库磁盘存储的逻辑结构如何映射到操作系统磁盘存储的物理结构中呢？</span></span></p>
+<p><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">先来看看表空间的物理映射。表空间在操作系统上是由容器（Container）承载的，<span style="color:#ff9900;">对于系统管理表空间（SMS）【注意：Oracle不存在系统管理表空间，其表空间全部都是数据库管理的】，其唯一的容器是文件目录；而对于数据库管理表空间，其容器则是文件或者裸设备（比如磁带、磁盘柜）</span>。这里我们不讨论系统管理表空间，只关注数据库管理表空间下的数据库磁盘存储。由于数据库对于文件和裸设备这两种容器操作上是同等对待的，所以以文件容器为例进行讨论。文件容器本身是一个由DMS表空间使用的预分配大小的文件，一个表空间可以有多个文件容器，即有多个数据文件。也就是说：<span style="color:#ff9900;">一个逻辑上的表空间映射为多个物理上的数据文件。</span></span></span></p>
+<p><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">再来讨论数据块（页）的物理映射。我们知道，物理结构上，操作系统中的文件是由多个操作系统的块（Block）组成的（Linux，Unix系统的块大小为512B，而Windows系统的块大小为1KB），而上面说了，数据库中的数据是以数据块（页）为单位存放的，，那么数据库中的数据块（页）和操作系统的块是什么关系呢？事实上，<span style="color:rgb(255,153,0);">若干个操作系统块组成一个数据库的数据块（页）</span>。对应区（extent）和段（segment）的映射并没有物理单位与之对应，而是在一个数据文件中会包含多个段，<span style="color:rgb(255,153,0);">每个段里又包含多个区（每个段中的区的个数不一定是一样的；DB2中数据文件中直接以区为单位，没有段的概念），每个区包含若干数据块（每个区中数据块的数量也不一定一样）。另外，和表空间一样，段也是可以跨文件的，即一个段可以由不同文件中的区所组成。</span></span></span></p>
+<p><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">数据库磁盘存储的逻辑/物理映射图解如下（DB2中没有Segment这一层）：</span></span></p>
+<p><span style="font-family:'Microsoft YaHei';font-size:14px;"><img src="http://img.my.csdn.net/uploads/201210/18/1350530074_2251.png" alt="" /><br /></span></p>
+<p><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">关于这些逻辑单位的具体讨论以后再说。现在只需要了解大体的体系结构。通过上面的介绍可以看到，数据库管理的表空间自成一体，具有平台无关性，俨然是一个小型的独立文件系统了。</span></span></p>
+<p><span style="font-family:'Microsoft YaHei';font-size:24px;color:#3366ff;">数据库磁盘存储的内部实现</span></p>
+<p><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">了解了磁盘存储的体系结构，再来看一看数据库系统中，数据具体是如何进行存储的。</span></span></p>
+<p><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">当创建一张表（Table）的时候，会为其指定表空间，一旦表成功创建，数据库系统就要为表提供磁盘空间。</span></span></p>
+<p><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">Oracle数据库会自动为一张表分配一个Segment（段），这个Segment称为Data Segment（数据段）【注：<span style="color:#ff9900;">一张表只能被分配一个数据段</span>。Oracle一共有四种类型的段，分别是Data Segment（数据段），Index Segment（索引段），Rollback Segment（回滚段）和Temp
+ Segment（临时段）】。当为表分配的数据段全部写满的时候，数据库管理系统会为这个数据段增加新的区（Extent），也就是说，数据段空间分配完后并不是需要多少空间就为段增加多少空间，也不是直接在区中增加数据块，而是一次性增加一个Extent（这样做避免了频繁的Segment扩容），<span style="color:#ff9900;">Extent是空间分配的最小单位</span>，而且Extent在表空间中的各个容器上是均衡分配的。另外，<span style="color:#ff9900;">数据块（页）是最小的存储单位，也即最小的I/O单位</span>，所有数据都是按块（页）存储，读出的时候也是直接将整个数据块（页）读入内存中的。至于DB2，其方案与Oracle基本相同，所不同的是没有Segment分配的问题。</span></span></p>
+<p><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">我们以DB2为例，看看数据存储具体是怎样的。【参考牛新庄：深入解析DB2】</span></span></p>
+<p><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">一个DMS表空间可以有多个容器（文件或裸设备），<span style="color:rgb(255,153,0);">DB2将Extent均衡的写到各个容器上</span>。即当需要请求一个Extent时，数据库管理器这个Extent分配到下一个容器上。这种方案保证了各容器的均衡利用，提高了并行访问效率。如左图：</span></span></p>
+<p><img src="http://img.my.csdn.net/uploads/201210/18/1350541833_2829.gif" alt="" style="font-family:'Microsoft YaHei';font-size:14px;" /></p>
+<p><span style="font-family:'Microsoft YaHei';">                                         表空间容器均衡写</span><br /></p>
+<p><span style="font-family:'Microsoft YaHei';"><br /></span></p>
+<p><img src="http://img.my.csdn.net/uploads/201210/18/1350543622_9041.jpg" alt="" style="font-family:'Microsoft YaHei';font-size:14px;" /></p>
+<p></p>
+<p>                     <span style="font-family:'Microsoft YaHei';"> 表空间容器，Extent，数据页和表空间之间的关系</span></p>
+<p><span style="font-family:'Microsoft YaHei';"><br /></span></p>
+<p><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">新建一个称为HUMANRES的DMS表空间，其Extent大小为2个Page（即数据块），每个Page大小为4KB。表空间有4个容器，每个容器内有少量已分配的Extent：表空间中DEPARTMENT和EMPLOYEE表中都占用了7个Page，按照上面介绍的分配规则，这两个表中的数据都会写到四个不同的容器中（7个Page需要分配4个Extent，每个Extent依次分配到各个容器中），另外，一个Extent只能由一个表所写，即便表数据不能完全利用Extent中的空间，Extent中的空闲空间也只能空着，不能继续写入其他表中的数据（这是由Extent是空间最小分配单位决定的）。如右图。</span></span></p>
+<p><span style="font-family:'Microsoft YaHei';font-size:24px;color:#3366ff;">数据块（页）存储</span></p>
+<p><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">下面进一步深入，分析一下数据库磁盘存储最小单元数据块（Data Block or Data Page）内的具体结构是怎样的。对于Oracle和DB2，二者的数据块结构是不同的。以下分别讨论。至于其他的数据库产品，不在讨论之列。</span></span></p>
+<p><span style="font-family:'Microsoft YaHei';font-size:18px;color:#999900;">Oracle数据库的数据块（Data Block）结构及相关特性</span></p>
+<p><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">（参照：<a href="http://docs.oracle.com/cd/B28359_01/server.111/b28318/logical.htm">http://docs.oracle.com/cd/B28359_01/server.111/b28318/logical.htm</a>）</span></span></p>
+<p><span style="font-family:'Microsoft YaHei';color:rgb(255,153,255);"><span style="font-size:12px;">数据块格式</span></span></p>
+<div><span style="color:rgb(0,0,0);"><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">Oracle 数据块的格式无论是表、索引还是cluster 数据，格式都是很类似的，如图：</span></span></span></div>
+<p></p>
+<p><span style="font-family:'Microsoft YaHei';font-size:14px;"><img src="http://img.my.csdn.net/uploads/201210/18/1350547686_8746.gif" alt="" /><br /></span></p>
+<p><span style="font-family:'Microsoft YaHei';color:rgb(153,153,255);"><span style="font-size:12px;">公共和变量块头( Common and Variable Header)</span></span></p>
+<div><span style="color:rgb(0,0,0);"><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">头部包含了通用块信息，例如块的地址和段的类型 ( 例如表或者索引 )</span></span></span>
+<div><span style="font-family:'Microsoft YaHei';color:rgb(153,153,255);"><span style="font-size:12px;">表目录（Table Directory）</span></span>
+<div><span style="color:rgb(0,0,0);"><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">这部分信息包含了在这个块中该表或该索引的相关信息。</span></span></span>
+<div><span style="font-family:'Microsoft YaHei';color:rgb(153,153,255);"><span style="font-size:12px;">行目录（Row Directory）</span></span>
+<div><span style="color:rgb(0,0,0);"><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">这部分包含了数据块中的实际行的信息 ( 包括行数据区域中每行的地址 ) ，一旦数据块头部的这个行目录的空间被分配了，那么即使该行删除了，这段空间仍然不能回收。</span></span></span>
+<div><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;"><span style="color:rgb(0,0,0);">因此一个当前为空的数据块，</span>此区域包含数据块中存储的数据行的信息（每个数据行片断（ row piece ） 在行数据区（ row data area ）中的地址）。 [ 一个数据块中可能保存一个完整的数据行，也可能只保存数据行的一部分 ，所以文中使用 row piece] 。只有在数据块中插入（
+ insert ）新数据时，行目录区空间才会被重新利用。</span></span>
+<div>
+<div><span style="font-family:'Microsoft YaHei';color:rgb(153,153,255);"><span style="font-size:12px;">头部信息区（Overhead ）</span></span>
+<div><span style="color:rgb(0,0,0);"><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">块头（ header/Common and Variable ），表目录（ Table Directory ），行目录（ Row Directory ）这三部分合称为头部信息区（ Overhead ）。头部信息区不存放数据，它存放的整个块的信息。头部信息区的大小是可变的。一般来说，头部信息区的大小介于
+ 84 字节（ bytes ）到 107 字节（ bytes ）之间。</span></span></span>
+<div><span style="font-family:'Microsoft YaHei';color:rgb(153,153,255);"><span style="font-size:12px;">可用空间（Free Space）</span></span>
+<div><span style="color:rgb(0,0,0);"><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">可用空间是一个块中未使用的区域，这片区域用于新行的插入和已经存在的行的更新。可用空间也包含事务条目，当每一次 insert 、 update 、 delete 、 select ..for update 语句访问块中一行或多行数据，将会请求一条事务条目，事务条目的请求空间与操作系统相关，在多数操作系统中大约所需
+ 23 个字节。</span></span></span>
+<div><span style="font-family:'Microsoft YaHei';color:rgb(153,153,255);"><span style="font-size:12px;">行数据（Row Data）</span></span>
+<div><span style="color:rgb(0,0,0);"><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">这部数据块包含了表或索引的数据，行也可能跨数据块，这也就是行迁移现象。</span></span></span></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div><span style="color:rgb(0,0,0);"><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;"><br /></span></span></span></div>
+<div><span style="font-family:'Microsoft YaHei';"><span style="color:#ff99ff;"><span style="font-size:12px;">可用空间管理(Free Space Management)</span></span></span>
+<div><span style="color:rgb(0,0,0);"><span style="font-size:12px;">可用空间可能是自动或人工管理。</span></span>
+<div><span style="color:rgb(0,0,0);"><span style="font-size:12px;">可用空间是由 Oracle 内部的段自动管理的，段内的可用 / 已用空间用位图来跟踪。自动段空间管理提供了以下好处：</span></span>
+<div><span style="color:rgb(0,0,0);"><span style="font-size:12px;">l  使用便捷</span></span>
+<div><span style="color:rgb(0,0,0);"><span style="font-size:12px;">l  更好的空间利用率，特别是那些行大小变化很大的对象</span></span>
+<div><span style="color:rgb(0,0,0);"><span style="font-size:12px;">l  并发访问的动态调整</span></span>
+<div><span style="color:rgb(0,0,0);"><span style="font-size:12px;">l  性能 / 空间的平衡</span></span>
+<div><span style="color:rgb(0,0,0);"><span style="font-size:12px;">数据块可用空间的利用和压缩</span></span>
+<div><span style="color:rgb(0,0,0);"><span style="font-size:12px;">Delete 和 update( 把原值变小 ) 可增加数据块的可用空间。在以下情况下 insert 语句才能有效地利用已释放的空间。</span></span>
+<div><span style="color:rgb(0,0,0);"><span style="font-size:12px;">假如 insert 语句在同一个事务中，而 insert 前面的语句刚好释放了相应的空间，这时候 insert 语句可以利用该空间</span></span>
+<div><span style="color:rgb(0,0,0);"><span style="font-size:12px;">假如 insert 语句与释放空间的语句不在同一个事务中，那么只有当其他事务提交后并且刚好需要空间的时候， insert 语句才能利用该空间。</span></span>
+<div style="color:rgb(0,0,0);"><span style="color:rgb(0,0,0);"><span style="font-size:12px;">释放的空间也可能不是连续的，只有当 以下两个条件都满足的时候， Oracle 才会合并和压缩数据块的可用空间。</span></span></div>
+<div><span style="font-size:12px;">1 一个 insert 或 update 语句试图使用足够空间创建新行的时候；</span></div>
+<div><span style="font-size:12px;">2 自由空间是分散的以至于不能插入毗邻空间的时候；</span></div>
+<div><span style="font-size:12px;">这就是所谓的“块重组（Block Reorganization）”。事实上，Oracle和DB2在对待碎片空间上的策略是一致的，即：行数据被删除后，该空间空置，当块空间不足时进行重组。而其他数据库的策略是行数据删除后，其他行数据顺移以保证可用空间是连续的。显然，这种做法影响数据库效率。<br /></span>
+<div><span style="color:rgb(0,0,0);"><span style="font-size:12px;"> </span></span>
+<div><span style="color:#ff99ff;"><span style="font-size:12px;">行链接和行迁移（Row Chaining and Migrating ）</span></span></div>
+<div>
+<div><span style="color:rgb(0,0,0);"><span style="font-size:12px;">行链接（ Row Chaining ）：如果我们往数据库中插入（ INSERT ）一行数据，这行数据很大，以至于一个数据块存不下一整行， Oracle 就会把一行数据分作几段存在几个数据块中，这个过程叫行链接（ Row Chaining ）。</span></span>
+<div style="color:rgb(0,0,0);"><span style="color:rgb(0,0,0);"><span style="font-size:12px;">如果一行数据是普通行，这行数据能够存放在一个数据块中；如果一行数据是链接行，这行数据存放在多个数据块中。</span></span></div>
+<div><span style="font-size:12px;">行链接又称为行跨页，<span style="color:#ff9900;">Oracle允许行跨页，但DB2是不允许的。</span></span></div>
+<div><span style="color:#ff9900;"><span style="font-size:12px;"><img src="http://img.my.csdn.net/uploads/201210/18/1350567124_2579.jpg" alt="" /><br /></span></span>
+<div><span style="color:rgb(0,0,0);"><span style="font-size:12px;">行迁移 (Row Migrating) ：数据块中存在一条记录，用户执行 UPDATE 更新这条记录，这个 UPDATE 操作使这条记录变长，这时候， Oracle 在这个数据块中进行查找，但是找不到能够容纳下这条记录的空间，无奈之下， Oracle 只能把整行数据移到一个新的数据块。原来的数据块中保留一个“指针”，这个“ 指针”指向新的数据块。被移动的这条记录的 ROWID 保持不变。</span></span>
+<div style="color:rgb(0,0,0);"><span style="color:rgb(0,0,0);"><span style="font-size:12px;"><img src="http://img.my.csdn.net/uploads/201210/18/1350567190_5219.jpg" alt="" /> </span></span></div>
+<div style="color:rgb(0,0,0);"><span style="color:rgb(0,0,0);"><span style="font-size:12px;"><br /></span></span></div>
+<div><span style="font-size:12px;"><span style="color:#ff99ff;">PCTFREE和PCTUSED</span><br /></span>
+<div style="color:rgb(0,0,0);"><span style="color:rgb(0,0,0);"><span style="font-size:12px;">PCTFREE 参数用于指定块中必须保留的最小空闲空间百分例。之所以要预留这样的空间，是因为 UPDATE 时，需要这些空间。如果 UPDATE 时，没有空余空间， Oracle 就会分配一个新的块，这会产生行迁移（ Row Migrating ），进行空间预留能够一定程度上保证数据库访问效率。</span></span>
+<div><span style="color:rgb(0,0,0);"><span style="font-size:12px;">PCTUSED 也是用于设置一个百分比，当块中已使用的空间的比例小于这个百分比的时候，这个块才被标识为有效状态。只有有效的块才被允许插入数据。</span></span></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div style="color:rgb(0,0,0);"><span style="color:rgb(0,0,0);"><span style="font-size:12px;">PCTFREE和PCTUSED作用示意图如下：</span></span></div>
+<div style="color:rgb(0,0,0);"><span style="color:rgb(0,0,0);"><img src="http://img.my.csdn.net/uploads/201210/18/1350549239_8418.png" width="700" height="700" alt="" /><br /></span></div>
+<br /></div>
+<span style="font-family:'Microsoft YaHei';"><span style="font-size:18px;color:#999900;">DB2数据库的数据页（Data Page）结构及相关特性</span><br /></span>
+<p></p>
+<p></p>
+<p><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">（参照：<a href="http://docs.oracle.com/cd/B28359_01/server.111/b28318/logical.htm"></a><a href="http://pic.dhe.ibm.com/infocenter/db2luw/v9r7/index.jsp?topic=%2Fcom.ibm.db2.luw.admin.perf.doc%2Fdoc%2Fc0007337.html">http://pic.dhe.ibm.com/infocenter/db2luw/v9r7/index.jsp?topic=%2Fcom.ibm.db2.luw.admin.perf.doc%2Fdoc%2Fc0007337.html</a>）</span></span></p>
+<p><span style="font-family:'Microsoft YaHei';color:rgb(255,153,255);"><span style="font-size:12px;">数据页格式</span></span></p>
+<span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;"><img src="http://img.my.csdn.net/uploads/201210/18/1350556440_8215.gif" alt="" /></span></span>
+<p></p>
+<p class="shortdesc"><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">在标准表中，数据在逻辑上按数据页的列表进行组织。这些数据页根据表空间的Extent大小在逻辑上分组到一起。这个Extent组类似于Oracle中的Segment，但Extent组没有Segment那样的强制概念。</span></span></p>
+<p class="shortdesc"><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">每个数据页都具有相同的格式。每一页的最前面都是页头，后面跟着槽（Slot）目录，然后是可用空间和记录。</span></span></p>
+<p class="shortdesc"><span style="font-family:'Microsoft YaHei';color:rgb(153,153,255);"><span style="font-size:12px;">页头（Header）</span></span></p>
+<p class="shortdesc"><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">用于存放BPS HEADER和一些页的信息字段，其中BPS HEADER占48字节，整个页头大概占91个字节。</span></span></p>
+<p class="shortdesc"><span style="font-family:'Microsoft YaHei';color:rgb(153,153,255);"><span style="font-size:12px;">槽目录（Slot Directory）</span></span></p>
+<p class="shortdesc"><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">槽目录类似Oracle的数据块中的行目录，槽目录中的每个条目都与该页中的一个记录相对应。槽目录中的条目代表记录开始位置在数据页中的字节偏移。值为 -1 的条目与已删除的记录相对应。</span></span></p>
+<p class="shortdesc"><span style="font-family:'Microsoft YaHei';color:rgb(153,153,255);"><span style="font-size:12px;">可用空间（Free Space）</span></span></p>
+<p class="shortdesc"><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">DB2可用空间严格来说包括通常意义上的常规可用空间和嵌入的可用空间。其中常规可用空间可用直接存储数据，而嵌入的可用空间通常是记录被删除后产生的碎片空间，不能直接使用，只有当页重组后合并到常规可用空间后才能被使用，这一点和Oracle类似。</span></span></p>
+<p class="shortdesc"><span style="font-family:'Microsoft YaHei';color:rgb(153,153,255);"><span style="font-size:12px;">记录（Record）</span></span></p>
+<p class="shortdesc"><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">已经存储了数据的空间，类似于Oracle中的行数据。即表中的行存放于页面中成为记录。根据数据页大小以及记录大小的不同，每个数据页中包含的记录数（即行数据数）也会有所变化。大多数页仅包含用户记录（即普通的数据库数据）。但是，少数页包含由数据服务器用于管理表的特殊内部记录。例如，在标准表中，每 500 个数据页就有一个可用空间控制记录（FSCR）。这些记录用于映射后续每
+ 500 个数据页（直到下一个 FSCR 为止）中可供新记录使用的可用空间。另外，在DB2 V9之前，每个数据页最多可以存放255条记录，而DB2 V9之后，每个数据页理论上可以存放65000条记录（与RID有关，暂不讨论），但实际上受限于数据页大小，每个数据页大概能存放2300多条记录。</span></span></p>
+<p class="shortdesc"><span style="font-family:'Microsoft YaHei';color:rgb(255,153,255);"><span style="font-size:12px;">行链接和行迁移</span></span></p>
+<p class="shortdesc"><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">DB2是不允许行（记录）跨页的，即不允许行链接。但是允许行迁移（DB2中又称为行溢出），</span></span></p>
+<p class="shortdesc"><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;"><span style="font-family:'Microsoft YaHei';">当表中存在变长数据类型时，容易发生行溢出现象，行溢出有时也叫行迁移，它表示当我们更新变长数据类型的字段时，</span><span style="font-family:'Microsoft YaHei';color:rgb(255,153,0);">由于更新的数据长度比原数据长，以至于当前的数据页无法存放整行数据时，就需要把这行数据存放到一个新的数据页，并在原来的数据页内存放该行新位置的指针以指向新行位置，被移动的数据的RID（RID以后讨论）保持不变</span><span style="font-family:'Microsoft YaHei';">。显然，如果大规模出现行迁移的现象，那么必然会对数据库访问的效率产生严重影响（I/O大幅增加），</span><span style="font-family:'Microsoft YaHei';color:rgb(255,153,0);">如果表中发现大量行迁移现象，建议进行重组（REORG）操作</span><span style="font-family:'Microsoft YaHei';">，重新规划数据存储位置消除行溢出。</span><br /></span></span></p>
+<p class="shortdesc"><span style="font-family:'Microsoft YaHei';"><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;"><img src="http://img.my.csdn.net/uploads/201210/18/1350564819_1792.png" alt="" style="font-family:'Microsoft YaHei';" /></span><br /></span></span></p>
+<p class="shortdesc"><span style="font-family:'Microsoft YaHei';"><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;"><br /></span></span></span></p>
+<p class="shortdesc"><span style="font-family:'Microsoft YaHei';"><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">对应DB2数据页还需要强调的一点是：DB2的数据页和Oracle数据块一样，也有PCTFREE和PCTUSED的概念，其含义与作用也大致相同，不赘述。</span></span></span></p>
+<p class="shortdesc"><span style="font-family:'Microsoft YaHei';"><span style="font-size:14px;"><br /></span></span></p>
+<p class="shortdesc"><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">另外可以看到，Oracle的数据块结构和DB2的数据页结构是非常相似的。还有一点，<span style="color:rgb(255,153,0);">二者的行数据都是从高位开始向低位写，而行目录则是由低位向高位写</span>，为什么要这样呢？因为数据的插入是一个两头写的过程，既要将数据写入到可用空间中成为行数据或记录，又要更新头部后面的行目录或槽目录，如果同侧写不利于空间的扩展。下图是一个直观图：</span></span></p>
+<p class="shortdesc"><span style="font-family:'Microsoft YaHei';font-size:14px;"><img src="http://img.my.csdn.net/uploads/201210/18/1350559182_4203.png" alt="" /><br /></span></p>
+<p class="shortdesc"><span style="font-family:'Microsoft YaHei';font-size:14px;"><br /></span></p>
+<span style="font-family:'Microsoft YaHei';font-size:24px;color:#3333ff;">数据行结构</span>
+<p><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">现在对数据块（页）的具体结构已经有了一个大概的了解，那么表中的一行数据是怎样以行数据（记录）的形式保存在数据块（页）中的呢？这个问题看似简单，实际上，一个数据行（记录，即上图中的Row）的结构是非常复杂的，这里以ＤB2中数据行的结构为例。如图：</span></span></p>
+<p><span style="font-family:'Microsoft YaHei';font-size:14px;"><img src="http://img.my.csdn.net/uploads/201210/18/1350565783_8021.png" alt="" /><br /></span></p>
+<p><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">各参数解释如下：</span></span></p>
+<p><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;"><img src="http://img.my.csdn.net/uploads/201210/18/1350560395_9914.png" alt="" /><br /></span></span></p>
+<p><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">可以看到，当元组（即表中的行）中存在变长列的时候，不管该列位于什么位置，在数据行（记录）中都被挪到最后面存储，而定长列则顺序存储。</span></span></p>
+<p><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">【注：表的属性列在定义的时候指定了数据类型，有的数据类型是变长的，比如varchar，其大小随实际值的变化而变化，有的列数据类型的定长的，比如int为32位，物理该列上的实际值是多少，都占用4个字节。一旦列中出现变长数据类型的列，则该元组为变长元组。】</span></span></p>
+<p><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">下图是状态位A的每一位的含义（1个字节=8位），状态位B是未使用的。</span></span></p>
+<p><span style="font-family:'Microsoft YaHei';font-size:14px;"><img src="http://img.my.csdn.net/uploads/201210/18/1350560943_1441.png" alt="" /><br /></span></p>
+<p><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">下面看看一个定长的元组（行）在数据行（记录）中具体是如何存放的：</span></span></p>
+<p><span style="font-family:'Microsoft YaHei';font-size:14px;"><img src="http://img.my.csdn.net/uploads/201210/18/1350561244_8801.png" alt="" /><br /></span></p>
+<p><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">有些复杂，将此图与前面贴的结构图对照着看。【注意：<span style="color:rgb(255,153,0);">所有数据在数据页的数据行（记录）中都是以十六进制存放的，且为逆序存放</span>】</span></span></p>
+<p><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">下面是变长的元组（行）在数据行（记录）中具体存放方式，与定长元组的存放方式大同小异：</span><br /></span></p>
+<p><span style="font-family:'Microsoft YaHei';font-size:14px;"><img src="http://img.my.csdn.net/uploads/201210/18/1350561779_7822.png" alt="" /><br /></span></p>
+<p><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;"><span style="color:rgb(255,153,0);">对于含大对象数据类型的元组，其<span style="font-family:'Microsoft YaHei';">大对象</span>数据并不与数据行存放在一起，而是与数据行分开放置于数据库的不同页中，在该元组（行）的数据行中存放一个指向该<span style="font-family:'Microsoft YaHei';"><span style="font-family:'Microsoft YaHei';">大对象</span></span>的指针</span>。如图：</span></span></p>
+<p><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;"><img src="http://img.my.csdn.net/uploads/201210/18/1350564268_1223.png" alt="" /></span></span></p>
+<p><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;"><br /></span></span></p>
+<p><span style="font-family:'Microsoft YaHei';"><span style="font-size:12px;">以上就是数据库系统磁盘存储内部结构的大致内容了。  </span></span></p>
+<p><br /></p>
+                </div>
+                    </div>
+        <script>
+        $(".MathJax").remove();
+        </script>
+    </article>
+      <div class="readall_box csdn-tracking-statistics tracking-click" data-mod="popu_376">
+          <div class="read_more_mask"></div>
+          <a class="btn btn-large btn-gray-fred read_more_btn" target="_self">阅读全文</a>
+      </div>
+      <div class="article_copyright">
+
+              </div>
+      <ul class="article_collect clearfix csdn-tracking-statistics tracking-click"  data-mod="popu_378">
+          <li class="tit">本文已收录于以下专栏：</li>
+<!--          [startarticlecolumns]-->
+                                <!--          [endarticlecolumns]-->
+      </ul>
+      <div class="edu_promotion" style="margin: 16px 0;display:none;"></div>
+      <div class="comment_box clearfix" id="comments">
+          <div id="comment_form">
+              <div id="commentsbmitarear">
+                                  <div class="comment_area clearfix">
+                      <div class="userimg">
+                        <a href="https://my.csdn.net/attilax">
+                          <img src="https://avatar.csdn.net/3/9/1/3_attilax.jpg">
+                        </a>
+                      </div>
+
+                      <form action="https://blog.csdn.net/idber/phoenix/comment/submit?id=8087473" method="post" onsubmit="return subform(this);" id="commentform">
+                          <textarea class="comment_content" name="comment_content" id="comment_content" placeholder="写下你的评论…"></textarea>
+                          <div class="bot_bar clearfix">
+                              <div id="ubbtools" class="add_code">
+                                  <a href="#insertcode" code="code" target="_self"><i class="icon iconfont icon-daima"></i></a>
+                              </div>
+
+                              <input type="hidden" id="comment_replyId" name="comment_replyId">
+                              <input type="hidden" id="comment_userId" name="comment_userId" value="">
+                              <input type="hidden" id="commentId" name="commentId" value="">
+                              <input type="submit" class="btn btn-redborder" value="发表评论">
+                              <span id="tip_comment" class="tip">
+                              <div style="display: none;" class="csdn-tracking-statistics tracking-click" data-mod="popu_384"><a href="#" target="_blank" class="comment_area_btn">发表评论</a></div>
+
+                              <div id="lang_list" code="code">
+                                  <a href="#html" style="width:95px;" class="long_name" target="_self">HTML/XML</a>
+                                  <a href="#objc" style="width:95px;" class="long_name" target="_self">objective-c</a>
+                                  <a href="#delphi" style="width:58px;" class="zhong_name" target="_self">Delphi</a>
+                                  <a href="#ruby" class="zhong_name" target="_self">Ruby</a>
+                                  <a href="#php" target="_self">PHP</a>
+                                  <a href="#csharp" class="duan_name" target="_self">C#</a>
+                                  <a style=" border-right: none;" href="#cpp" class="duan_name" target="_self">C++</a>
+                                  <a style=" border-bottom:none;width:95px;" href="#javascript" class="long_name" target="_self">JavaScript</a>
+                                  <a style=" border-bottom:none;width:95px;" href="#vb" class="long_name" target="_self">Visual Basic</a>
+                                  <a style=" border-bottom:none;" href="#python" class="zhong_name" target="_self">Python</a>
+                                  <a style=" border-bottom:none;" href="#java" class="zhong_name" target="_self">Java</a>
+                                  <a style="border-bottom:none;" href="#css" class="duan_name" target="_self">CSS</a>
+                                  <a style="border-bottom:none;" href="#sql" class="duan_name" target="_self">SQL</a>
+                                  <a style="border:none; " href="#plain" class="duan_name" target="_self">其它</a>
+                                  <span class="arrb"></span>
+                              </div>
+                          </div>
+                      </form>
+                  </div>
+                              </div>
+          </div>
+      </div>
+      <div class="comment_li_outbox">
+          <div id="comment_list"></div>
+      </div>
+
+      <div class="more_comment">
+          <div id="comment_bar" class="trackgin-ad" data-mod="popu_385"></div>
+      </div>
+
+      <!-- <h3 class="recommend_tit" id="related">相关文章推荐</h3> -->
+      <div class="recommend_list clearfix" id="rasss">
+                                          <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/think77/article/details/5240"  target="_blank" strategy="EduRecommendInPriority_0">
+                    <dd>
+                        <h2>MFC编程中“占位符和动态创建”技巧的应用</h2>
+                        <div class="summary">
+                             刘勇  夏安邦       在MFC编程中，“占位符和动态创建”技巧的应用是十分广泛的，虽然在有些编程书籍和文章中有所涉及，但缺乏系统的介绍和必要的总结，给应用带来不便。本文将对这方面的编程技巧进行...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/3/0/8/3_think77.jpg" alt="think77" title="think77"></li>
+                            <li class="user_name">think77</li>
+                            <li class="time">2001-01-06 16:43:00</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>748</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/m0_38094687/article/details/72859079"  target="_blank" strategy="BlogCommendFromBaidu_1">
+                    <dd>
+                        <h2>数据库磁盘</h2>
+                        <div class="summary">
+                            RAID0的优点：最快的读写性能，如果每块硬盘据都会丢失，大部分的控制器都是通过软件实现的，所以效能并不好。拥有独立的控制器性能将会更好。
+
+
+RAID0的缺点：任何一块硬盘出现故障所有的数
+...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/5/4/E/3_m0_38094687.jpg" alt="m0_38094687" title="m0_38094687"></li>
+                            <li class="user_name">m0_38094687</li>
+                            <li class="time">2017-06-04 15:08:13</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>223</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                          <dl class="">
+            <script>
+            (function() {
+              var s = "_" + Math.random().toString(36).slice(2);
+              document.write('<div id="' + s + '"></div>');
+              (window.slotbydup=window.slotbydup || []).push({
+                id: '4765209',
+                container: s,
+                size: '808,120',
+                display: 'inlay-fix'
+              });
+            })();
+            </script>
+          </dl>
+                                        <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/qq_17612199/article/details/52193776"  target="_blank" strategy="BlogCommendFromBaidu_2">
+                    <dd>
+                        <h2>磁盘和内存选择B树和红黑树的原因</h2>
+                        <div class="summary">
+                            数据均在叶子节点，相邻的节点靠近，可减少殉职空间
+按块选址
+空间可浪费...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/8/F/0/3_qq_17612199.jpg" alt="qq_17612199" title="qq_17612199"></li>
+                            <li class="user_name">qq_17612199</li>
+                            <li class="time">2016-08-12 17:35:56</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>757</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/winder9898/article/details/51939992"  target="_blank" strategy="BlogCommendFromBaidu_3">
+                    <dd>
+                        <h2>结构决定性能 机械硬盘的存储原理</h2>
+                        <div class="summary">
+                            结构决定性能 机械硬盘的存储原理
+
+    现在我们来看下机械硬盘的存储原理，只有理解了存储原理，我们才能够更好的理解机械硬盘的优势与劣势。
+
+
+硬盘构造
+
+    我们可以将机械硬盘的...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/C/F/7/3_winder9898.jpg" alt="winder9898" title="winder9898"></li>
+                            <li class="user_name">winder9898</li>
+                            <li class="time">2016-07-18 10:43:56</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>551</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/haiross/article/details/17240455"  target="_blank" strategy="BlogCommendFromBaidu_4">
+                    <dd>
+                        <h2>block 内部结构分解</h2>
+                        <div class="summary">
+                            分类： 
+Oracle 管理 2011-06-28 10:37 590人阅读 
+评论(0)
+收藏 
+举报 
+headeroraclebuffertablelayerobject
+
+Ora...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/1/A/D/3_haiross.jpg" alt="haiross" title="haiross"></li>
+                            <li class="user_name">haiross</li>
+                            <li class="time">2013-12-10 10:29:40</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>1328</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/smithereensman/article/details/51320499"  target="_blank" strategy="BlogCommendFromBaidu_5">
+                    <dd>
+                        <h2>linux命令--查看硬盘信息（磁盘阵列模式下）</h2>
+                        <div class="summary">
+                            如果服务器有做磁盘阵列，那么运行fdisk -l或者smartctl –all /dev/sda，得不到你要的磁盘信息。[root@localhost /]# fdisk -lWARNING: GPT...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/0/0/8/3_smithereensman.jpg" alt="smithereensman" title="smithereensman"></li>
+                            <li class="user_name">smithereensman</li>
+                            <li class="time">2016-05-05 10:03:27</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>13129</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/vbsourcecode/article/details/8590511"  target="_blank" strategy="BlogCommendFromBaidu_6">
+                    <dd>
+                        <h2>硬盘的数据结构</h2>
+                        <div class="summary">
+                            硬盘的数据结构 
+
+
+1．MBR区 
+
+　　MBR(Main Boot Record 主引导记录区)位于整个硬盘的0磁道0柱面1扇区。不过，在总共512字节的主引导扇区中，MBR只占用了其中的446...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/C/9/A/3_vbsourcecode.jpg" alt="vbsourcecode" title="vbsourcecode"></li>
+                            <li class="user_name">vbsourcecode</li>
+                            <li class="time">2013-02-19 11:43:23</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>1779</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/sundacheng1989/article/details/11647441"  target="_blank" strategy="BlogCommendFromBaidu_7">
+                    <dd>
+                        <h2>多线程中Local Store Slot(本地存储槽)</h2>
+                        <div class="summary">
+                            在Java中有一种ThreadLocal机制，为每一个使用该变量的线程都提供一个变量值的副本，是每一个线程都可以独立地改变自己的副本，而不会和其它线程的副本冲突。从线程的角度看，就好像每一个线程都完全...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/1/D/0/3_sundacheng1989.jpg" alt="sundacheng1989" title="sundacheng1989"></li>
+                            <li class="user_name">sundacheng1989</li>
+                            <li class="time">2013-09-13 15:47:11</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>2591</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/yuan22003/article/details/6714118"  target="_blank" strategy="BlogCommendFromBaidu_8">
+                    <dd>
+                        <h2>table/segment/extent/block之间关系</h2>
+                        <div class="summary">
+                            这些都是Oracle存储的逻辑结构。
+BLOCK是Oracle存储的最基本单位，由DB_BLOCK_SIZE制定，通常为8KB，也可以定义为2KB,4KB,16KB,32KB,64KB等，磁盘最小存...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/A/E/6/3_yuan22003.jpg" alt="yuan22003" title="yuan22003"></li>
+                            <li class="user_name">yuan22003</li>
+                            <li class="time">2011-08-24 10:58:54</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>6214</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/Echo_Ana/article/details/53969015"  target="_blank" strategy="BlogCommendFromBaidu_9">
+                    <dd>
+                        <h2>文件系统和数据库存储数据的联系和区别</h2>
+                        <div class="summary">
+                            ﻿﻿
+
+其区别在于：
+
+(1)
+
+文件系统用文件将数据长期保存在外存上，数
+
+据库系统用数据库统一存储数据。
+
+(2)
+
+文件系统中的程序和数据有一
+
+定的联系，数据库系统...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/7/2/A/3_echo_ana.jpg" alt="Echo_Ana" title="Echo_Ana"></li>
+                            <li class="user_name">Echo_Ana</li>
+                            <li class="time">2017-01-01 22:54:59</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>2781</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                              </div>
+  </main>
+<aside>
+    <div class="right_box user_info">
+    <dl class="inf_bar clearfix">
+        <dt class="csdn-tracking-statistics tracking-click" data-mod="popu_381">
+                <a href="https://blog.csdn.net/idber" target="_blank">
+                    <img src="https://avatar.csdn.net/C/3/2/3_idber.jpg" class="avatar_pic">
+        </a>
+      </dt><dd>
+            <h3 class="csdn-tracking-statistics tracking-click"  data-mod="popu_380"><a href="https://blog.csdn.net/idber" target="_blank" id="uid">idber</a></h3>
+            <div class="medals" title="">
+                      </div>
+                        <span  class="csdn-tracking-statistics tracking-click" data-mod="popu_379"><a class="btn btn-redborder-small "  id="span_add_follow" target="_self">关注</a></span>
+                    </dd>
+    </dl>
+    <div class="inf_number_box clearfix">
+        <dl title="17">
+            <dt>原创</dt>
+            <dd>17</dd>
+        </dl>
+        <dl title="109">
+            <dt>粉丝</dt>
+            <dd id='fan'>109</dd>
+        </dl>
+        <dl title="5">
+            <dt>喜欢</dt>
+            <dd>5</dd>
+        </dl>
+        <dl title="66">
+          <dt>评论</dt>
+          <dd>66</dd>
+        </dl>
+    </div>
+
+</div>
+<div class="interflow clearfix">
+      <div class="grade gradeAndbadge gradewidths">
+      <span>等级：</span>
+      <div>
+        <a href="https://blog.csdn.net/home/help.html#level" title="4级,点击查看等级说明" target="_blank">
+          <img class="grade-img" src="https://csdnimg.cn/jifen/images/xunzhang/jianzhang/blog4.png" alt="4级,点击查看等级说明">
+        </a>
+      </div>
+    </div>
+    <div class="gradeAndbadge gradewidths" title="286617">
+        <span>访问量：</span>
+        <span class="num odd-overhidden">28万+</span>
+    </div>
+
+    <div class="gradeAndbadge gradewidths" title="1996">
+      <span>积分：</span>
+      <span  class="num odd-overhidden">1996</span>
+    </div>
+    <div class="gradeAndbadge gradewidths" title="24071">
+        <span>排名：</span>
+        <span class="num odd-overhidden">2万+</span>
+    </div>
+
+</div>
+<script type="text/javascript">
+  // 判断并设置用户名位置，没有博客专家与关注按钮时，用户名居中
+  $medals_children = $('.medals').children().length;
+  $span_add_follow = $('#span_add_follow').length;
+  if($medals_children === 0 && $span_add_follow === 0){
+    $('.inf_bar dd').css('vertical-align','10px')
+  }
+</script>          <div class="extension_other csdn-tracking-statistics tracking-click" data-mod="popu_389">
+          <!--u3032528-->
+        <div class="flashrecommend">
+                        <script type="text/javascript" src="//cee1.iteye.com/bwocoltly.js"></script>
+                    </div>
+      </div>
+            <div class="writings">
+      <div class="public_signal clearfix">
+        <h3>博主最新文章</h3>
+        <a href="https://blog.csdn.net/idber" target="_blank" class="more"><span>更多文章</span></a>
+      </div>
+        <ul class="inf_list clearfix csdn-tracking-statistics tracking-click" data-mod="popu_382">
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/idber/article/details/40425697" target="_blank">Python3 多线程下载代码</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/idber/article/details/40378231" target="_blank">Ubuntu 14.04 (32位)上搭建Hadoop 2.5.1单机和伪分布式环境</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/idber/article/details/40209209" target="_blank">解决KDE桌面环境下Eclipse崩溃的问题--让Eclipse使用特定的GTK2主题运行</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/idber/article/details/40076821" target="_blank">Ubuntu 14.04下搭建Python3.4 + PyQt5.3.2 + Eric6.0开发平台</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/idber/article/details/9039857" target="_blank">Ubuntu 12.04(32位)安装Oracle 11g(32位)全过程以及几乎所有问题的解决办法</a>
+            </li>
+                    </ul>
+    </div>
+                <div class="user-hotArticle sort ClassSort">
+            <h3>文章分类</h3>
+            <ul class="hotArticle-list sort-list ClassSort-list">
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/idber/article/category/1251386" class="odd-overhidden floatL">DB2</a>
+                        <div class="read list-left floatR"><span>15篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/idber/article/category/1251388" class="odd-overhidden floatL">数据库开发</a>
+                        <div class="read list-left floatR"><span>2篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/idber/article/category/1251389" class="odd-overhidden floatL">数据库理论</a>
+                        <div class="read list-left floatR"><span>11篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/idber/article/category/1251390" class="odd-overhidden floatL">数据库管理</a>
+                        <div class="read list-left floatR"><span>12篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/idber/article/category/1443683" class="odd-overhidden floatL">Linux Ubuntu Oracle</a>
+                        <div class="read list-left floatR"><span>4篇</span></div>
+                    </li>
+                            </ul>
+            <div class="unfold-btn">
+              <span>展开</span><i class="icon iconfont icon-xiajiantou"></i>
+            </div>
+        </div>
+    <!--    [StartShowSelfColumn]-->
+    <!--    [EndShowSelfColumn]-->
+            <div class="user-hotArticle sort timeSort">
+          <h3>文章存档</h3>
+          <ul class="hotArticle-list timeSort-list">
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/idber/article/month/2014/10" class="odd-overhidden floatL">2014年10月</a>
+                  <div class="read list-left floatR"><span>4篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/idber/article/month/2013/06" class="odd-overhidden floatL">2013年6月</a>
+                  <div class="read list-left floatR"><span>1篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/idber/article/month/2012/11" class="odd-overhidden floatL">2012年11月</a>
+                  <div class="read list-left floatR"><span>9篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/idber/article/month/2012/10" class="odd-overhidden floatL">2012年10月</a>
+                  <div class="read list-left floatR"><span>9篇</span></div>
+                </li>
+                      </ul>
+          <div class="unfold-btn">
+            <span>展开</span><i class="icon iconfont icon-xiajiantou"></i>
+          </div>
+        </div>
+            <div class="user-hotArticle">
+        <h3>博主热门文章</h3>
+        <ul class="hotArticle-list csdn-tracking-statistics tracking-click" data-mod="popu_521">
+<!--        [StartHotArticles]-->
+                            <li>
+                    <a href="https://blog.csdn.net/idber/article/details/40076821">Ubuntu 14.04下搭建Python3.4 + PyQt5.3.2 + Eric6.0开发平台</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>45461</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/idber/article/details/9039857">Ubuntu 12.04(32位)安装Oracle 11g(32位)全过程以及几乎所有问题的解决办法</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>42077</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/idber/article/details/8092919">深入理解DB2表空间（Tablespace）</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>33740</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/idber/article/details/8096941">深入理解DB2索引（Index）</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>28949</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/idber/article/details/8087473">深入理解数据库磁盘存储（Disk Storage）</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>25986</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/idber/article/details/8095975">深入理解DB2缓冲池（BufferPool）</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>12918</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/idber/article/details/8109522">由浅入深理解索引的实现</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>11760</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/idber/article/details/8114711">Linux（Ubuntu）环境下安装DB2 V10和Data Studio V3图文详解</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>11396</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/idber/article/details/8149053">静态SQL和动态SQL</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>8704</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/idber/article/details/8148604">使用Explain分析SQL</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>8307</span></div>
+                </li>
+            <!--        [EndHotArticles]-->
+        </ul>
+    </div>
+    
+<!--    [startcustom]-->
+    <!--    [endcustom]-->
+  <div class="fixRight_box" style="height:256px">
+    <div class="fixRight">
+                    <!--u3163270-->
+                        <script type="text/javascript" src="//cee1.iteye.com/avneunkwb.js"></script>
+                          <div class="persion_article"></div>
+    </div>
+  </div>
+</aside>
+</div>
+
+<div class="left_fixed">
+    <div class="left_show_button">
+        <span>
+          <i class="icon iconfont icon-youjiantou"></i>
+        </span>
+    </div>
+    <ul class="left_menu" id="share_box">
+        <li>
+            <button class="left-fixed-btn btn-like csdn-tracking-statistics tracking-click" data-mod="popu_373" target="_self" title="点赞">
+                <a href="javascript:void(0);" class="iconbox border_red" ><i class="icon iconfont icon-dianzan"></i></a>
+                <a class="txt" href="javascript:void(0);">4</a>
+            </button>
+        </li>
+        <li id="blog_artical_directory">
+            <button class="left-fixed-btn left_menu_btn csdn-tracking-statistics tracking-click" data-mod="popu_372" target="_self" title="目录">
+                <a href="javascript:void(0);" class="iconbox border_black" ><i class="icon iconfont icon-mulu"></i></a>
+            </button>
+        </li>
+        <li class="menu_con">
+            <div class="list_father">
+                <div class="arr_box">
+                    <button class="btn-noborder arr-btn scroll-down  left_scroll_down"><i class="icon iconfont icon-xiajiantou"></i></button>
+                    <button class="btn-noborder arr-btn scroll-up left_scroll_top"><i class="icon iconfont icon-shangjiantou"></i></button>
+                </div>
+                <div class="arr"></div>
+                <div id="csdnBlogDir"></div>
+            </div>
+        </li>
+        <!--        <li>-->
+        <!--            <button class="left-fixed-btn btn-like tracking-ad" data-mod="popu_373" target="_self">-->
+        <!--                <span class="iconbox border_red"><i class="icon iconfont icon-xihuan-"></i></span>-->
+        <!--                <span class="txt">喜欢</span>-->
+        <!--                <span class="untxt">取消喜欢</span>-->
+        <!--            </button>-->
+        <!--        </li>-->
+        <li>
+            <button class="left-fixed-btn csdn-tracking-statistics tracking-click" data-mod="popu_374"  id="com-quick-collect" target="_self" title="收藏">
+                <a href="javascript:void(0);" class="iconbox border_purple" ><i class="icon iconfont icon-shoucang"></i></a>
+            </button>
+        </li>
+        <li>
+            <button class="left-fixed-btn btn-pinglun csdn-tracking-statistics tracking-click" data-mod="popu_544" title="评论">
+                <a href="javascript:void(0);" class="iconbox border_purple" ><i class="icon iconfont icon-pinglun"></i></a>
+            </button>
+        </li>
+        <li class="bdsharebuttonbox csdn-tracking-statistics tracking-click" data-mod="popu_172">
+            <a class="bds_tsina outside left-fixed-btn" data-cmd="tsina" title="分享到新浪微博"></a>
+            <span class="iconbox border_red2"><i class="icon iconfont icon-xinlang"></i></span>
+        </li>
+        <li class="bdsharebuttonbox csdn-tracking-statistics tracking-click" data-mod="popu_172">
+            <a class="bds_weixin outside left-fixed-btn" data-cmd="weixin" title="分享到微信"></a>
+            <span class="iconbox border_green"><i class="icon iconfont icon-weixin"></i></span>
+        </li>
+        <li class="bdsharebuttonbox csdn-tracking-statistics tracking-click" data-mod="popu_172">
+            <a class="bds_qzone outside left-fixed-btn" data-cmd="qzone" title="分享到QQ空间"></a>
+            <span class="iconbox border_blue"><i class="icon iconfont icon-QQ"></i></span>
+        </li>
+        <li id="share_box">
+
+            <div class="bdsharebuttonbox csdn-tracking-statistics tracking-click" data-mod="popu_172">
+
+
+
+            </div>
+        </li>
+    </ul>
+</div>
+<div id="pop_win"></div>
+<div id="popup_mask"></div>
+<div class="pop_CA_cover" ></div>
+<div class="pop pop_CA" >
+    <div class="CA_header">
+        收藏助手
+        <span class="cancel_icon"  id="fapancle" ></span>
+    </div>
+    <iframe src="" id="collectIframe" frameborder="0" width="100%" height="360"  scrolling="no" ></iframe>
+</div>
+<!--举报-->
+<div id="report_dialog" style="top: 250px; left: 343.5px;"><div id="panel_report">
+    <div class="panel_head">不良信息举报</div>
+    <form method="post" id="frmReport" class="panel_body">
+        <table border="0" cellpadding="0" cellspacing="4" class="pop_table">
+            <tbody><tr><td colspan="2">您举报文章：<a href="https://blog.csdn.net/idber/article/details/8087473" target="_blank">深入理解数据库磁盘存储（Disk Storage）</a></td></tr>
+            <tr>
+                <th style="width:60px;">举报原因：</th>
+                <td id="panel_reporttype">
+                    <label><input type="radio" class="report_type" id="report_sex" name="report_type" value="1">色情</label>
+                    <label><input type="radio" class="report_type" id="report_Politics" name="report_type" value="2">政治</label>
+                    <label><input type="radio" class="report_type" id="report_copy" name="report_type" value="3">抄袭</label>
+                    <label><input type="radio" class="report_type" id="report_ad" name="report_type" value="4">广告</label>
+                    <label><input type="radio" class="report_type" id="report_want" name="report_type" value="5">招聘</label>
+                    <label><input type="radio" class="report_type" id="report_call" name="report_type" value="6">骂人</label>
+                    <br>
+                    <label><input type="radio" class="report_type" id="report_other" name="report_type" value="7">其他</label>
+                    <input type="text" name="report_other_content" id="report_other_content" maxlength="30" style="display: none;">
+                </td>
+            </tr>
+            <tr id="panel_originalurl" style="display: none;">
+                <th>原文地址：</th>
+                <td>
+                    <input id="originalurl" value="http://" name="originalurl" type="text" style="width: 90%;">
+                </td>
+            </tr>
+            <tr>
+                <th id="sp_reason">原因补充：</th>
+                <td>
+                    <textarea id="report_description" style="width: 300px;" rows="3" name="report_description"></textarea>
+                    <p id="sp_n" style="color:#999;margin:0px;padding:0px;">(最多只允许输入30个字)</p>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input id="btnSubmitReport" name="submit" type="image" align="middle" class="btn_1" src="https://csdnimg.cn/release/phoenix/images/btn_submit.jpg">
+                    <span style="padding-left:20px;"></span>
+                    <img id="btnCloseReportDialog" src="https://csdnimg.cn/release/phoenix/images/btn_cancel.jpg" align="middle">
+                    <div id="error" style="color: Red">
+                    </div>
+                </td>
+            </tr>
+            </tbody></table>
+    </form>
+</div>
+    <script language="javascript" type="text/javascript">
+        var isComment=0;
+        //显示隐藏地址
+        $(function () {
+          console.log("version:phoenix");
+            if(isComment){
+                $("#report_description").attr("disabled",true);
+                $("#sp_n").hide();
+                $("#sp_reason").html("评论内容：");
+            }
+            $(".report_type").click(function () {
+                $("#panel_originalurl,#report_other_content").hide();
+                switch ($(this).val()) {
+                    case '3':
+                        $("#panel_originalurl").show();
+                        $("#originalurl").focus();
+                        break;
+                    case '7':
+                        if(isComment){
+                            $("#report_other_content").show().focus();
+                        }
+                        break;
+                }
+
+            });
+
+            $("#frmReport").submit(function () {
+                if (!currentUserName) {
+
+                    if (confirm("您的操作必须登录，是否登录？")) {
+                        location.href = "https://passport.csdn.net/account/login?from=" + encodeURIComponent(location.href);
+                        return false;
+                    }
+                    return false;
+                }
+
+                var reportType = $("input[name=report_type]:checked").val();
+                if(!reportType){
+                    alert("请选择举报原因！");
+                    return false;
+                }
+                var otherInfo = "";
+                switch (reportType) {
+                    case '3':
+                        otherInfo = $("#originalurl").val();
+                        if (otherInfo == ""||otherInfo=="http://") {
+                            alert("举报抄袭必须提供原创文章地址！");
+                            $("#originalurl").focus();
+                            return false;
+                        } else if(!checkeURL(otherInfo)) {
+                            alert("请输入正确的原创文章地址！");
+                            $("#originalurl").focus();
+                            return false;
+                        }
+                        break;
+                    case '7':
+                        otherInfo = $("#report_other_content").val();
+                        if (isComment && !otherInfo) {
+                            alert("请填写举报的具体原因！");
+                            $("#report_other_content").focus();
+                            return false;
+                        }
+                        if(!isComment){
+                            if(!$("#report_description").val()){
+                                alert("请填写举报的具体原因！");
+                                $("#report_description").focus();
+                                return false;
+                            }
+                        }
+                        break;
+                }
+                if(!isComment){
+                    if($("#report_description").val().length>30){
+                        alert("举报原因最多只允许输入30个字！");
+                        return false;
+                    }
+                }
+	            nowTime = {
+		            year: new Date().getFullYear(),
+		            month: parseInt(new Date().getMonth())+1,
+		            day: new Date().getDate(),
+		            hours: parseInt(new Date().getHours())+1,
+		            minutes: parseInt(new Date().getMinutes())+1,
+		            seconds: parseInt(new Date().getSeconds())+1
+	            };
+	            var data = {
+		            articleId: fileName,
+		            commentId: 0,
+		            reportType: reportType,
+		            originalurl: $("#originalurl").val(),
+		            report_other_content: $("#report_other_content").val(),
+		            report_description: $("#report_description").val(),
+		            currentUserName: currentUserName,
+		            updatetime: nowTime.year+'/'+nowTime.month+'/'+nowTime.day+' '+ nowTime.hours+':'+nowTime.minutes+':'+seconds,
+		            blogUser: username
+	            };
+	            if(!isComment){//如果是举报文章
+		            data.report_other_content = data.report_description;
+		            // data.report_description = "1. 神经网络这是一个常见的神经网络的图：这是一个常见的三层神经网络的基本构成，Layer L1是输入层，Layer L2是隐含层";
+	            }
+
+	            $.post(blog_address + "/common/report?id="+fileName+"&t=2", data, function (data) {
+		            if (data.result == 1){
+			            SetError("感谢您的举报，我们会尽快审核！");
+		            }else{
+			            if (data.content) alert(data.content);
+		            }
+
+	            });
+                return false;
+            });
+
+            $("#btnCloseReportDialog").click(function () {
+                CloseDiv();
+            });
+
+        });
+
+        //提示后关闭方法
+        function SetError(error) {
+            $("#btnCloseReportDialog").trigger("click");
+            alert(error);
+            CloseDiv();
+        }
+
+        //关闭方法
+        function CloseDiv() {
+
+            $.removeMask();
+            $("#report_dialog").hide();
+            return false;
+        }
+
+        //验证url
+        function checkeURL(url){
+            return /^http(s)?:\/\/([\w-]+\.)+[\w-]+/i.test(url);
+        }
+    </script>
+</div>
+<!--  fixme 后期清理掉  -->
+<div id="a52b5334d" style="width: 1px; height: 1px; display: none;">
+    <script id="adJs52b5334"></script>
+    <script>document.getElementById("adJs52b5334").src = "https://ads.csdn.net/js/opt/52b5334.js?t=" + Math.random();</script>
+</div>
+<script type="text/javascript" src="https://static-blog.csdn.net/mdeditor/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            linebreaks: { automatic: true, width: "94%container" },
+            imageFont: null
+        }
+    });
+</script>
+<!-- <script type="text/javascript" src="https://passport.csdn.net/content/loginbox/login.js"></script> -->
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'https://csdnimg.cn/static/api/js/share.js?v=89860594'];</script>
+<script type="text/javascript" >
+    if($(".article_collect li").length==1){$(".article_collect").hide();}
+    if($(".article_tags li").length==1){$(".article_tags").hide();}
+    $(".edit a").attr("href","https://mp.csdn.net/postedit/"+fileName);
+    $.each($(".edu_li a"),function(){$(this).attr("href",$(this).attr("href").replace("blog7","blog9"))});
+    new CNick('#uid').showNickname();
+
+    if($("#fan").html()=="")
+    {
+	    $("#fan").html(0);
+    }
+</script>
+<script src="https://csdnimg.cn/public/common/append_mark/appendMark.min.js?v=5.00.43" type="text/javascript"></script>
+<script type="text/javascript">
+    appendMark($('.recommend_list').children('a').find('dt'),$('.extension_other'),$('.yd_a_d_feed_cla'))
+</script>
+<script src='https://csdnimg.cn/pubfooter/js/publib_footer-1.0.3.js?v201804111810' data-isfootertrack="false"></script>
+<script src='https://csdnimg.cn/public/common/gotop/js/goTop-v1.0.min.js?v201803151422'></script>
+<script>
+    GoTop({
+        right: 8,
+        hasReport: true,
+        reportFun: function() {
+            $.createMask();
+            var r = blog_address + "/common/report?id=" + fileName + "&t=" + 2;
+            if (3 == 2) {
+                var s = n.parentNode.parentNode.parentNode.getAttribute("floor");
+                r += "&floor=" + s
+            }
+            var i = (document.documentElement.clientHeight - 400) / 2 + (document.documentElement.scrollTop || document.body.scrollTop),
+                a = (document.documentElement.clientWidth - 400) / 2;
+
+            $("#report_dialog").load(r).css({
+                //top: i + "px",
+                top: '20%',
+                left: a
+            }).show()
+        }
+    })
+</script>
+<script src="https://dup.baidustatic.com/js/os.js"></script>
+
+<div id="loginWrap"></div>
+<div id="dlMask"></div>
+</body>

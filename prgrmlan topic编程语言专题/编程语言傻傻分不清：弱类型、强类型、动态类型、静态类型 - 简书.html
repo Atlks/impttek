@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<!--[if IE 6]><html class="ie lt-ie8"><![endif]-->
+<!--[if IE 7]><html class="ie lt-ie8"><![endif]-->
+<!--[if IE 8]><html class="ie ie8"><![endif]-->
+<!--[if IE 9]><html class="ie ie9"><![endif]-->
+<!--[if !IE]><!--> <html> <!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+
+  <!-- Start of Baidu Transcode -->
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta name="applicable-device" content="pc,mobile">
+  <meta name="MobileOptimized" content="width"/>
+  <meta name="HandheldFriendly" content="true"/>
+  <meta name="mobile-agent" content="format=html5;url=https://www.jianshu.com/p/336f19772046">
+  <!-- End of Baidu Transcode -->
+
+    <meta name="description"  content="有时候去面试，像iOS开发岗位，面试官会顺着运行时和动态性往下问，如果你不知编程语言的一些基本知识就懵逼了！作为一个开发者，你连弱类型、强类型、动态类型、静态类型语言傻傻分不清吗？ 这篇文章综合介绍了四种分类，特别地，为了方便大家快速有效的学习，笔者尝试用思维导图的办法描述编程语言的区别。一般来讲，看第一个图就够了。但如果你想更深入地了解，也可以参考下面的文字表述。 一、看图区别编程语言 作...">
+
+  <meta name="360-site-verification" content="604a14b53c6b871206001285921e81d8" />
+  <meta property="wb:webmaster" content="294ec9de89e7fadb" />
+  <meta property="qc:admins" content="104102651453316562112116375" />
+  <meta property="qc:admins" content="11635613706305617" />
+  <meta property="qc:admins" content="1163561616621163056375" />
+  <meta name="google-site-verification" content="cV4-qkUJZR6gmFeajx_UyPe47GW9vY6cnCrYtCHYNh4" />
+  <meta name="google-site-verification" content="HF7lfF8YEGs1qtCE-kPml8Z469e2RHhGajy6JPVy5XI" />
+  <meta http-equiv="mobile-agent" content="format=html5; url=https://www.jianshu.com/p/336f19772046">
+
+  <!-- Apple -->
+  <meta name="apple-mobile-web-app-title" content="简书">
+
+    <!--  Meta for Smart App Banner -->
+  <meta name="apple-itunes-app" content="app-id=888237539, app-argument=jianshu://notes/6135448">
+  <!-- End -->
+
+  <!--  Meta for Twitter Card -->
+  <meta content="summary" property="twitter:card">
+  <meta content="@jianshucom" property="twitter:site">
+  <meta content="编程语言傻傻分不清：弱类型、强类型、动态类型、静态类型" property="twitter:title">
+  <meta content="有时候去面试，像iOS开发岗位，面试官会顺着运行时和动态性往下问，如果你不知编程语言的一些基本知识就懵逼了！作为一个开发者，你连弱类型、强类型、动态类型、静态类型语言傻傻分不..." property="twitter:description">
+  <meta content="https://www.jianshu.com/p/336f19772046" property="twitter:url">
+  <!-- End -->
+
+  <!--  Meta for OpenGraph -->
+  <meta property="fb:app_id" content="865829053512461">
+  <meta property="og:site_name" content="简书">
+  <meta property="og:title" content="编程语言傻傻分不清：弱类型、强类型、动态类型、静态类型">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.jianshu.com/p/336f19772046">
+  <meta property="og:description" content="有时候去面试，像iOS开发岗位，面试官会顺着运行时和动态性往下问，如果你不知编程语言的一些基本知识就懵逼了！作为一个开发者，你连弱类型、强类型、动态类型、静态类型语言傻傻分不清吗？ 这篇文章综合...">
+  <!-- End -->
+
+  <!--  Meta for Facebook Applinks -->
+  <meta property="al:ios:url" content="jianshu://notes/6135448" />
+  <meta property="al:ios:app_store_id" content="888237539" />
+  <meta property="al:ios:app_name" content="简书" />
+
+  <meta property="al:android:url" content="jianshu://notes/6135448" />
+  <meta property="al:android:package" content="com.jianshu.haruki" />
+  <meta property="al:android:app_name" content="简书" />
+  <!-- End -->
+
+
+    <title>编程语言傻傻分不清：弱类型、强类型、动态类型、静态类型 - 简书</title>
+
+  <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="jQr3ZFEePp7WwGwn19XKEPr9qL8YHo0NRocnHq8QTT/YWDsEpONMm6Sc0x7m1vALjQDJd2kKyFiaEHHKt/sAlQ==" />
+
+  <link rel="stylesheet" media="all" href="//cdn2.jianshu.io/assets/web-2b26d78a4d3c053b7b1c.css" />
+  
+  <link rel="stylesheet" media="all" href="//cdn2.jianshu.io/assets/web/pages/notes/show/entry-5428969bbd50326930bb.css" />
+
+  <link href="//cdn2.jianshu.io/assets/favicons/favicon-e743bfb1821442341c3ab15bdbe804f7ad97676bd07a770ccc9483473aa76f06.ico" rel="shortcut icon" type="image/x-icon">
+      <link rel="apple-touch-icon-precomposed" href="//cdn2.jianshu.io/assets/apple-touch-icons/57-a6f1f1ee62ace44f6dc2f6a08575abd3c3b163288881c78dd8d75247682a4b27.png" sizes="57x57" />
+      <link rel="apple-touch-icon-precomposed" href="//cdn2.jianshu.io/assets/apple-touch-icons/72-fb9834bcfce738fd7b9c5e31363e79443e09a81a8e931170b58bc815387c1562.png" sizes="72x72" />
+      <link rel="apple-touch-icon-precomposed" href="//cdn2.jianshu.io/assets/apple-touch-icons/76-49d88e539ff2489475d603994988d871219141ecaa0b1a7a9a1914f4fe3182d6.png" sizes="76x76" />
+      <link rel="apple-touch-icon-precomposed" href="//cdn2.jianshu.io/assets/apple-touch-icons/114-24252fe693524ed3a9d0905e49bff3cbd0228f25a320aa09053c2ebb4955de97.png" sizes="114x114" />
+      <link rel="apple-touch-icon-precomposed" href="//cdn2.jianshu.io/assets/apple-touch-icons/120-1bb7371f5e87f93ce780a5f1a05ff1b176828ee0d1d130e768575918a2e05834.png" sizes="120x120" />
+      <link rel="apple-touch-icon-precomposed" href="//cdn2.jianshu.io/assets/apple-touch-icons/152-bf209460fc1c17bfd3e2b84c8e758bc11ca3e570fd411c3bbd84149b97453b99.png" sizes="152x152" />
+
+  <!-- Start of 访问统计 -->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?0c0e9d9b1e7d617b3e6842e85b9fb068";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+  <!-- End of 访问统计 -->
+</head>
+
+  <body lang="zh-CN" class="reader-black-font">
+    <!-- 全局顶部导航栏 -->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="width-limit">
+    <!-- 左上方 Logo -->
+    <a class="logo" href="/"><img src="//cdn2.jianshu.io/assets/web/nav-logo-4c7bbafe27adc892f3046e6978459bac.png" alt="Nav logo" /></a>
+
+    <!-- 右上角 -->
+      <!-- 登录显示写文章 -->
+      <a class="btn write-btn" target="_blank" href="/writer#/">
+        <i class="iconfont ic-write"></i>写文章
+</a>
+    <!-- 如果用户登录，显示下拉菜单 -->
+      <div class="user">
+        <div data-hover="dropdown">
+          <a class="avatar" href="/u/c2ba64d5cedc"><img src="//upload.jianshu.io/users/upload_avatars/1762376/c091b5eb478e?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120" alt="120" /></a>
+        </div>
+        <ul class="dropdown-menu">
+          <li>
+            <a href="/u/c2ba64d5cedc">
+              <i class="iconfont ic-navigation-profile"></i><span>我的主页</span>
+</a>          </li>
+          <li>
+            <!-- TODO bookmarks_path -->
+            <a href="/bookmarks">
+              <i class="iconfont ic-navigation-mark"></i><span>收藏的文章</span>
+</a>          </li>
+          <li>
+            <a href="/users/c2ba64d5cedc/liked_notes">
+              <i class="iconfont ic-navigation-like"></i><span>喜欢的文章</span>
+</a>          </li>
+          <li>
+            <a href="/my/paid_notes">
+              <i class="iconfont ic-paid"></i><span>已购内容</span>
+</a>          </li>
+          <li>
+            <a href="/wallet">
+              <i class="iconfont ic-navigation-wallet"></i><span>我的钱包</span>
+</a>          </li>
+          <li>
+            <a href="/settings">
+              <i class="iconfont ic-navigation-settings"></i><span>设置</span>
+</a>          </li>
+          <li>
+            <a href="/faqs">
+              <i class="iconfont ic-navigation-feedback"></i><span>帮助与反馈</span>
+</a>          </li>
+          <li>
+            <a rel="nofollow" data-method="delete" href="/sign_out">
+              <i class="iconfont ic-navigation-signout"></i><span>退出</span>
+</a>          </li>
+        </ul>
+      </div>
+
+    <div id="view-mode-ctrl">
+    </div>
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu" aria-expanded="false">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse" id="menu">
+        <ul class="nav navbar-nav">
+            <li class="tab ">
+              <a href="/">
+                <span class="menu-text">发现</span><i class="iconfont ic-navigation-discover menu-icon"></i>
+</a>            </li>
+            <li class="tab ">
+              <a href="/subscriptions">
+                <span class="menu-text">关注</span><i class="iconfont ic-navigation-follow menu-icon"></i>
+</a>            </li>
+            <li class="tab notification v-notification-dropdown-menu ">
+              <a class="notification-btn" href="/notifications" data-hover="dropdown">
+                <span class="menu-text">消息</span>
+                <i class="iconfont ic-navigation-notification menu-icon"></i>
+                <span class="badge"></span>
+              </a>
+            </li>
+          <li class="search">
+            <form target="_blank" action="/search" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="&#x2713;" />
+              <input type="text" name="q" id="q" value="" autocomplete="off" placeholder="搜索" class="search-input" />
+              <a class="search-btn" href="javascript:void(null)"><i class="iconfont ic-search"></i></a>
+</form>          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+    
+<div class="note">
+  <div class="post">
+    <div class="article">
+        <h1 class="title">编程语言傻傻分不清：弱类型、强类型、动态类型、静态类型</h1>
+
+        <!-- 作者区域 -->
+        <div class="author">
+          <a class="avatar" href="/u/508ba9810059">
+            <img src="//upload.jianshu.io/users/upload_avatars/1283539/34e9f4e9-c7e5-4323-aaf3-4b653bac87c1.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96" alt="96" />
+</a>          <div class="info">
+            <span class="name"><a href="/u/508ba9810059">陈满iOS</a></span>
+            <!-- 关注用户按钮 -->
+            <div props-data-classes="user-follow-button-header" data-author-follow-button></div>
+            <!-- 文章数据信息 -->
+            <div class="meta">
+              <!-- 如果文章更新时间大于发布时间，那么使用 tooltip 显示更新时间 -->
+                <span class="publish-time" data-toggle="tooltip" data-placement="bottom" title="最后编辑于 2017.12.04 04:54">2016.10.04 17:50*</span>
+              <span class="wordage">字数 2047</span>
+            </div>
+          </div>
+          <!-- 如果是当前作者，加入编辑按钮 -->
+        </div>
+
+
+        <!-- 文章内容 -->
+        <div data-note-content class="show-content">
+          <div class="show-content-free">
+            <blockquote><p>有时候去面试，像iOS开发岗位，面试官会顺着运行时和动态性往下问，如果你不知编程语言的一些基本知识就懵逼了！作为一个开发者，你连弱类型、强类型、动态类型、静态类型语言傻傻分不清吗？</p></blockquote><p>这篇文章综合介绍了四种分类，特别地，为了方便大家快速有效的学习，笔者尝试用思维导图的办法描述编程语言的区别。一般来讲，看第一个图就够了。但如果你想更深入地了解，也可以参考下面的文字表述。</p><hr><h1>一、看图区别编程语言</h1><p>作者：<a href="https://www.jianshu.com/users/508ba9810059/latest_articles" target="_blank">陈满iOS</a></p><p><br></p><div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 567px;">
+<div class="image-container-fill" style="padding-bottom: 81.04%;"></div>
+<div class="image-view" data-width="1825" data-height="1479"><img data-original-src="//upload-images.jianshu.io/upload_images/1283539-31968e5f19abed4b.jpg" data-original-width="1825" data-original-height="1479" data-original-format="image/jpeg" data-original-filesize="460277"></div>
+</div>
+<div class="image-caption"></div>
+</div><hr><h1>二、语法角度的文字表述</h1><p>作者：<a href="https://link.jianshu.com?t=http://www.zhihu.com/question/19918532/answer/23217475" target="_blank" rel="nofollow">Kaiye Chang</a></p><h4><b>1. 动态语言vs静态语言（动态类型语言vs静态类型语言）</b></h4><p>Static typing when possible, dynamic typing when needed</p><blockquote><p><b>型态系统</b>（type system）：程序中专门处理数据的系统，语言可以分为：</p></blockquote><p>动态型态系统（dynamically typed systems），例如Lisp，JavaScript，Tcl和Prolog</p><p>静态型态系统（statically typed systems），例如C++和Java</p><blockquote><p><b>静态型态系统</b>statically typed systems）可进一步分为：</p></blockquote><p>包含宣告型态（manifest type）语言，即每一个变量和函数的型态都清楚地宣告</p><p>type-inferred语言（例如MUMPS，ML）</p><h4><b>2. 四种语言分类及其区别</b></h4><blockquote><p><b>动态类型语言（Dynamically Typed Language）：</b><br></p></blockquote><p>运行期间才做数据类型检查的语言，即动态类型语言编程时，永远不用给任何变量指定数据类型。该语言会在第一次赋值给变量时，在内部将数据类型记录下来。</p><p>例如：ECMAScript(JavaScript)、Ruby、Python、VBScript、php</p><p>Python和Ruby就是典型动态类型语言，其他各种脚本语言如VBScript也多少属于动态类型语言</p><p>优点：方便阅读，不需要写非常多的类型相关的代码；</p><p>缺点：不方便调试，命名不规范时会造成读不懂，不利于理解等</p><blockquote><p><b>静态类型语言（Statically Typed Language）：</b></p></blockquote><p>编译期间做检查数据类型的语言，即写程序时要声明所有变量的数据类型，是固定的。使用数据之前，必须先声明数据类型（int ,float,double等）。相当于使用之前，首先要为它们分配好内存空间。</p><p>例如：C/C++是静态类型语言的典型代表，其他的静态类型语言还有C#、JAVA等</p><p>优点：结构非常规范，便于调试，方便类型安全</p><p>缺点：为此需要写更多类型相关代码，不便于阅读、不清晰明了</p><blockquote><p><b>强类型定义语言</b><b>（Explicit type conversion，强制数据类型定义语言，类型安全的语言）：</b></p></blockquote><p>一旦变量被指定某个数据类型，如果不经强制转换，即永远是此数据类型。</p><p>举例：若定义了一个整型变量a，若不进行显示转换，不能将a当作字符串类型处理</p><p>强类型语言是指需要进行变量/对象类型声明的语言，一般情况下需要编译执行。例如C/C++/Java/C#</p><blockquote><p><b>弱类型定义语言（Implicit type conversion，类型不安全的语言）：</b></p></blockquote><p>数据类型可以被忽略的语言。它与强类型定义语言相反, 一个变量可以赋不同数据类型的值。</p><p>举例：在VBScript中，可以将字符串 '12' 和整数 3 进行连接得到字符串 '123'，  然后可以把它看成整数 123，而不需要显示转换</p><p>例如PHP/ASP/Ruby/Python/Perl/ABAP/SQL/JavaScript/Unix Shell等</p><p>注意：强类型定义语言在速度上可能略逊色于弱类型定义语言，但是强类型定义语言带来的严谨性能够有效的避免许多错误。</p><h4>3. 分类小结</h4><blockquote><p><b>“语言是否动态”与“语言是否类型安全”之间是完全没有联系的！</b></p></blockquote><h4>4. 举例说明</h4><p>Python是动态语言，是强类型定义语言（类型安全的语言）;</p><p>VBScript是动态语言，是弱类型定义语言（类型不安全的语言）;</p><p>JAVA是静态语言，是强类型定义语言（类型安全的语言）</p><hr><h1>三、编译和运行角度的文字表述（与上述从语法角度来区别好像有区别）</h1><p>作者：<a href="https://link.jianshu.com?t=http://www.zhihu.com/question/19918532/answer/21647195" target="_blank" rel="nofollow">rainoftime</a></p><blockquote><p>类型系统的一些概念，众说纷纭，使用上也比较乱。有些东西，甚至不好严格定义。以下算学术界的一种相对“严格”的说法。</p></blockquote><h4><b>1.  先定义一些基础概念</b></h4><blockquote><p>Program Errors</p></blockquote><p><i>trapped errors</i>。导致程序终止执行，如除0，Java中数组越界访问</p><p><i>untrapped errors</i>。 出错后继续执行，但可能出现任意行为。如C里的缓冲区溢出、Jump到错误地址</p><blockquote><p>Forbidden Behaviours</p></blockquote><p>语言设计时，可以定义一组<i>forbidden behaviors</i>. 它必须包括所有untrapped errors, 但可能包含trapped errors.</p><blockquote><p>Well behaved、ill behaved</p></blockquote><p><i>well behaved</i>: 如果程序执行不可能出现forbidden behaviors, 则为<i>well behaved</i>。</p><p><i>ill behaved: 否则为ill behaved...</i></p><h4><b>2. 有了上面的概念，再讨论强、弱类型，静态、动态类型</b></h4><blockquote><p>强、弱类型</p></blockquote><p><i>强类型strongly typed</i>: 如果一种语言的所有程序都是well behaved——即不可能出现forbidden behaviors，则该语言为strongly typed。</p><p><i>弱类型weakly typed</i>: 否则为weakly typed。比如C语言的缓冲区溢出，属于trapped errors，即属于forbidden behaviors..故C是弱类型</p><p>前面的人也说了，弱类型语言，类型检查更不严格，如偏向于容忍隐式类型转换。譬如说C语言的int可以变成double。 这样的结果是：容易产生forbidden behaviours，所以是弱类型的</p><blockquote><p>动态、静态类型</p></blockquote><p><i>静态类型 statically</i>: 如果在编译时拒绝ill behaved程序，则是statically typed;</p><p><i>动态类型dynamiclly</i>: 如果在运行时拒绝ill behaviors, 则是dynamiclly typed。</p><h4><b>3. 误区</b></h4><p>大家觉得C语言要写int a, int b之类的，Python不用写(可以直接写a, b)，所以C是静态，Python是动态。这么理解是不够准确的。譬如Ocaml是静态类型的，但是也可以不用明确地写出来。。</p><p>Ocaml是<b>静态隐式类型</b></p><p>静态类型可以分为两种：</p><p>如果类型是语言语法的一部分，在是<b>explicitly typed显式类型；</b></p><p>如果类型通过编译时推导，是<b>implicity typed</b><b>隐式类型</b>, 比如ML和Haskell</p><h4><b>4.下面是些例子</b></h4><p>无类型： 汇编</p><p>弱类型、静态类型 ： C/C++</p><p>弱类型、动态类型检查： Perl/PHP</p><p>强类型、静态类型检查 ：Java/C#</p><p>强类型、动态类型检查 ：Python, Scheme</p><p>静态<b>显式</b>类型 ：Java/C</p><p>静态隐式类型 ：Ocaml, Haskell</p><blockquote><p>即，如下图</p></blockquote><div class="image-package">
+<div class="image-container" style="max-width: 500px; max-height: 337px;">
+<div class="image-container-fill" style="padding-bottom: 67.4%;"></div>
+<div class="image-view" data-width="500" data-height="337"><img data-original-src="//upload-images.jianshu.io/upload_images/1283539-1820df734cf34260.png" data-original-width="500" data-original-height="337" data-original-format="image/png" data-original-filesize="27698"></div>
+</div>
+<div class="image-caption"></div>
+</div><h4>5.补图</h4><p>补图：</p><div class="image-package">
+<div class="image-container" style="max-width: 325px; max-height: 238px;">
+<div class="image-container-fill" style="padding-bottom: 73.22999999999999%;"></div>
+<div class="image-view" data-width="325" data-height="238"><img data-original-src="//upload-images.jianshu.io/upload_images/1283539-38504ed8bdddf97f.png" data-original-width="325" data-original-height="238" data-original-format="image/png" data-original-filesize="9795"></div>
+</div>
+<div class="image-caption"></div>
+</div><p><br></p><p>红色区域外：well behaved （type soundness）</p><p>红色区域内：ill behaved</p><p>如果所有程序都是灰的，strongly typed</p><p>否则如果存在红色的程序，weakly typed</p><p>编译时排除红色程序，statically typed</p><p>运行时排除红色程序，dynamically typed</p><p>所有程序都在黄框以外，type safe</p><h1>四、结论</h1><p>那么问题来了，眼尖的人可能已经发现了，关于【强弱类型】，有两种截然不同的分类观：一个是从数据类型转换和语法角度，一个是编译和运行中操作不同的角度。</p><blockquote><p>前者认为C是强类型，后者认为C是弱类型，所以冲突了。那么，大神们认为哪种更准确？</p></blockquote>
+          </div>
+        </div>
+    </div>
+
+    <!-- 如果是付费文章，未购买，则显示购买按钮 -->
+
+    <!-- 连载目录项 -->
+
+    <!-- 如果是付费文章 -->
+      <!-- 如果是付费连载，已购买，且作者允许赞赏，则显示付费信息和赞赏 -->
+        <div data-vcomp="free-reward-panel"></div>
+
+      <div class="show-foot">
+        <a class="notebook" href="/nb/6404197">
+          <i class="iconfont ic-search-notebook"></i>
+          <span>OC基础(OC基础篇)</span>
+</a>        <div class="copyright" data-toggle="tooltip" data-html="true" data-original-title="转载请联系作者获得授权，并标注“简书作者”。">
+          © 著作权归作者所有
+        </div>
+        <div class="modal-wrap" data-report-note>
+          <a id="report-modal">举报文章</a>
+        </div>
+      </div>
+
+      <!-- 文章底部作者信息 -->
+        <div class="follow-detail">
+          <div class="info">
+            <a class="avatar" href="/u/508ba9810059">
+              <img src="//upload.jianshu.io/users/upload_avatars/1283539/34e9f4e9-c7e5-4323-aaf3-4b653bac87c1.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96" alt="96" />
+</a>            <div props-data-classes="user-follow-button-footer" data-author-follow-button></div>
+            <a class="title" href="/u/508ba9810059">陈满iOS</a>
+          </div>
+            <div class="signature">iOS Developer (个人网站http://limbank.com，掘金专栏https://juejin.im/user/59530ee95188250d841c9012/posts，学习交流: vip@limbank.com，联系微信:cimain)
+</div>
+        </div>
+
+    <div class="meta-bottom">
+      <div class="btn like-group"></div>
+      <div class="share-group">
+        <a class="share-circle" data-action="weixin-share" data-toggle="tooltip" data-original-title="分享到微信">
+          <i class="iconfont ic-wechat"></i>
+        </a>
+        <a class="share-circle" data-action="weibo-share" data-toggle="tooltip" href="javascript:void((function(s,d,e,r,l,p,t,z,c){var%20f=&#39;http://v.t.sina.com.cn/share/share.php?appkey=1881139527&#39;,u=z||d.location,p=[&#39;&amp;url=&#39;,e(u),&#39;&amp;title=&#39;,e(t||d.title),&#39;&amp;source=&#39;,e(r),&#39;&amp;sourceUrl=&#39;,e(l),&#39;&amp;content=&#39;,c||&#39;gb2312&#39;,&#39;&amp;pic=&#39;,e(p||&#39;&#39;)].join(&#39;&#39;);function%20a(){if(!window.open([f,p].join(&#39;&#39;),&#39;mb&#39;,[&#39;toolbar=0,status=0,resizable=1,width=440,height=430,left=&#39;,(s.width-440)/2,&#39;,top=&#39;,(s.height-430)/2].join(&#39;&#39;)))u.href=[f,p].join(&#39;&#39;);};if(/Firefox/.test(navigator.userAgent))setTimeout(a,0);else%20a();})(screen,document,encodeURIComponent,&#39;&#39;,&#39;&#39;,&#39;&#39;, &#39;推荐 @蒋匿 的文章《编程语言傻傻分不清：弱类型、强类型、动态类型、静态类型》（ 分享自 @简书 ）&#39;,&#39;https://www.jianshu.com/p/336f19772046?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=weibo&#39;,&#39;页面编码gb2312|utf-8默认gb2312&#39;));" data-original-title="分享到微博">
+          <i class="iconfont ic-weibo"></i>
+        </a>
+          <a class="share-circle" data-toggle="tooltip" href="http://cwb.assets.jianshu.io/notes/images/6135448/weibo/image_27ed6511ef76.jpg" target="_blank" data-original-title="下载长微博图片">
+            <i class="iconfont ic-picture"></i>
+          </a>
+        <a class="share-circle more-share" tabindex="0" data-toggle="popover" data-placement="top" data-html="true" data-trigger="focus" href="javascript:void(0);" data-content='
+          <ul class="share-list">
+            <li><a href="javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=&#39;+e(&#39;https://www.jianshu.com/p/336f19772046?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=qzone&#39;)+&#39;&amp;title=&#39;+e(&#39;推荐 陈满iOS 的文章《编程语言傻傻分不清：弱类型、强类型、动态类型、静态类型》&#39;),x=function(){if(!window.open(r,&#39;qzone&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=600,height=600&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();"><i class="social-icon-sprite social-icon-zone"></i><span>分享到QQ空间</span></a></li>
+            <li><a href="javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;https://twitter.com/share?url=&#39;+e(&#39;https://www.jianshu.com/p/336f19772046?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=twitter&#39;)+&#39;&amp;text=&#39;+e(&#39;推荐 陈满iOS 的文章《编程语言傻傻分不清：弱类型、强类型、动态类型、静态类型》（ 分享自 @jianshucom ）&#39;)+&#39;&amp;related=&#39;+e(&#39;jianshucom&#39;),x=function(){if(!window.open(r,&#39;twitter&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=600,height=600&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();"><i class="social-icon-sprite social-icon-twitter"></i><span>分享到Twitter</span></a></li>
+            <li><a href="javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;https://www.facebook.com/dialog/share?app_id=483126645039390&amp;display=popup&amp;href=https://www.jianshu.com/p/336f19772046?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=facebook&#39;,x=function(){if(!window.open(r,&#39;facebook&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();"><i class="social-icon-sprite social-icon-facebook"></i><span>分享到Facebook</span></a></li>
+            <li><a href="javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;https://plus.google.com/share?url=&#39;+e(&#39;https://www.jianshu.com/p/336f19772046?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=google_plus&#39;),x=function(){if(!window.open(r,&#39;google_plus&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();"><i class="social-icon-sprite social-icon-google"></i><span>分享到Google+</span></a></li>
+            <li><a href="javascript:void(function(){var d=document,e=encodeURIComponent,s1=window.getSelection,s2=d.getSelection,s3=d.selection,s=s1?s1():s2?s2():s3?s3.createRange().text:&#39;&#39;,r=&#39;http://www.douban.com/recommend/?url=&#39;+e(&#39;https://www.jianshu.com/p/336f19772046?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=douban&#39;)+&#39;&amp;title=&#39;+e(&#39;编程语言傻傻分不清：弱类型、强类型、动态类型、静态类型&#39;)+&#39;&amp;sel=&#39;+e(s)+&#39;&amp;v=1&#39;,x=function(){if(!window.open(r,&#39;douban&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330&#39;))location.href=r+&#39;&amp;r=1&#39;};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})()"><i class="social-icon-sprite social-icon-douban"></i><span>分享到豆瓣</span></a></li>
+          </ul>
+        '>更多分享</a>
+      </div>
+    </div>
+    <div id="vue_comment"></div>
+  </div>
+
+  <div class="vue-side-tool" props-data-props-show-qr-code="0"></div>
+</div>
+<div class="note-bottom">
+  <div class="js-included-collections"></div>
+  <div data-vcomp="recommended-notes" data-lazy="1.5" data-note-id="6135448"></div>
+  <!-- 相关文章 -->
+  <div class="seo-recommended-notes">
+
+        <div class="note have-img">
+          <a class="cover" target="_blank" href="/p/b2790ce7ad8e?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <img src="//upload-images.jianshu.io/upload_images/1233356-b94d8dfd045d2c22.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240" alt="240" />
+</a>          <a class="title" target="_blank" href="/p/b2790ce7ad8e?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">函数式编程与面向对象编程[2]: 静态类型语言的表达力 静态类型语言与动态类型语言</a>
+          <p class="description">函数式编程与面向对象编程[2]: 静态类型语言的表达力 静态类型语言与动态类型语言 之剑 2016.5.3  21:43:20 像Java或者C＃这样强类型的准静态语言在实现复杂的业务逻辑、开发大型商业系统、以及那些生命周期很长的应用中也有着非常强的优势 下面我们就来学习一...</p>
+          <a class="author" target="_blank" href="/u/c55c7a9c8de6?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <div class="avatar">
+              <img src="//upload.jianshu.io/users/upload_avatars/1233356/07e0c331-b9b9-410a-8345-510f7a697e44.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/48/h/48" alt="48" />
+            </div>
+            <span class="name">东海陈光剑</span>
+</a>        </div>
+
+        <div class="note ">
+                    <a class="title" target="_blank" href="/p/ab47a2fb090e?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">编译型&amp;解释型、动态语言&amp;静态语言、强类型语言&amp;弱类型语言</a>
+          <p class="description">顺着javascript在mdn上的定义，扒到了这么一篇文章：about JavaScript. It is a prototype-based, multi-paradigm scripting language that is dynamic, and supports...</p>
+          <a class="author" target="_blank" href="/u/1394f0508df7?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <div class="avatar">
+              <img src="//upload.jianshu.io/users/upload_avatars/1231311/25c28c44d003?imageMogr2/auto-orient/strip|imageView2/1/w/48/h/48" alt="48" />
+            </div>
+            <span class="name">叶世清pageYe</span>
+</a>        </div>
+
+        <div class="note ">
+                    <a class="title" target="_blank" href="/p/ec652d95f0e9?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">编译型语言、解释型语言、静态类型语言、动态类型语言、强类型语言、弱类型语言概念与区别</a>
+          <p class="description">编译型语言和解释型语言 1、编译型语言需通过编译器（compiler）将源代码编译成机器码，之后才能执行的语言。一般需经过编译（compile）、链接（linker）这两个步骤。编译是把源代码编译成机器码，链接是把各个模块的机器码和依赖库串连起来生成可执行文件。优点：编译器...</p>
+          <a class="author" target="_blank" href="/u/185a3c553fc6?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <div class="avatar">
+              <img src="//upload.jianshu.io/users/upload_avatars/1552893/8bd1f15a-ea45-49f3-bc0f-c36caf4c6b36.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/48/h/48" alt="48" />
+            </div>
+            <span class="name">Albert陈凯</span>
+</a>        </div>
+
+        <div class="note ">
+                    <a class="title" target="_blank" href="/p/dd8d464f7861?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">The Magic of Dynamic Language (Introduction Part)</a>
+          <p class="description">10月份准备UWA杭州站的技术分享，博客的内容也就没有太多时间准备。但是每个月一篇技术博客的规则还是不要打破地好，因此“偷懒”整理了一下之前在公司内部进行的一场分享，作为10月的博客。 1. 前言 公司内会不定期地组织一些内部的技术分享，内容大都集中在大家正在开发的功能模块...</p>
+          <a class="author" target="_blank" href="/u/5ccd10a133d9?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <div class="avatar">
+              <img src="//cdn2.jianshu.io/assets/default_avatar/2-9636b13945b9ccf345bc98d0d81074eb.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/48/h/48" alt="48" />
+            </div>
+            <span class="name">董夕</span>
+</a>        </div>
+
+        <div class="note ">
+                    <a class="title" target="_blank" href="/p/e7cb0e4bc9e6?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">Kotlin极简教程：第4章 基本数据类型与类型系统</a>
+          <p class="description">原文链接：https://github.com/EasyKotlin 到目前为止，我们已经了解了Kotlin的基本符号以及基础语法。我们可以看出，使用Kotlin写的代码更简洁、可读性更好、更富有生产力。 本章我们来学习一下Kotlin的基本数据类型与类型系统。 道生一，一...</p>
+          <a class="author" target="_blank" href="/u/d69302d431ff?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <div class="avatar">
+              <img src="//cdn2.jianshu.io/assets/default_avatar/15-a7ac401939dd4df837e3bbf82abaa2a8.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/48/h/48" alt="48" />
+            </div>
+            <span class="name">JackChen1024</span>
+</a>        </div>
+
+        <div class="note have-img">
+          <a class="cover" target="_blank" href="/p/7308088aef6d?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <img src="//upload-images.jianshu.io/upload_images/2160988-b89daa712194c91f.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240" alt="240" />
+</a>          <a class="title" target="_blank" href="/p/7308088aef6d?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">误解了“人之初，性本善”</a>
+          <p class="description">小的时候耳闻目染，对“人之初性本善”这句话深信不疑，以为这个世界上都是好人。后来听说了荀子的“人之初，性本恶”，开始把人区分成好的坏的两类。 这样的世界观影响了我很久，以为这个世界上遇到的一切非好即坏，非黑即白。从没有去想过人之复杂性。甚至也只允许自己的善念，对于自己身上产...</p>
+          <a class="author" target="_blank" href="/u/f7a6d4394b71?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <div class="avatar">
+              <img src="//upload.jianshu.io/users/upload_avatars/2160988/226bdf10fbc1.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/48/h/48" alt="48" />
+            </div>
+            <span class="name">更向远行</span>
+</a>        </div>
+
+        <div class="note have-img">
+          <a class="cover" target="_blank" href="/p/6fc59e379daf?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <img src="//upload-images.jianshu.io/upload_images/4866664-22916b73a9b4b8cd.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240" alt="240" />
+</a>          <a class="title" target="_blank" href="/p/6fc59e379daf?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">在这个看脸的社会，只有一样东西可以完胜颜值</a>
+          <p class="description">不久前，我在朋友圈发了个感慨，“在这个看脸的社会，只有一样东西可以完胜颜值。”很快就收到了很多评论：“钱”；“微笑”；“钱”；......“才华”，好像也只有这两个字与我的答案还算比较接近。 可能一般人在第一秒的反应就是钱，这也不值得怀疑和好奇，毕竟从历史遗留下来的“佳话”...</p>
+          <a class="author" target="_blank" href="/u/915d415e143d?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <div class="avatar">
+              <img src="//upload.jianshu.io/users/upload_avatars/4866664/eaeaef03534f.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/48/h/48" alt="48" />
+            </div>
+            <span class="name">半朵姑娘</span>
+</a>        </div>
+
+        <div class="note ">
+                    <a class="title" target="_blank" href="/p/91e1ea78a554?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">我想要的快乐</a>
+          <p class="description">我想要的快乐应该很简单，所有复杂的情绪，都只是云烟，叹口气的功夫就烟消云散了。</p>
+          <a class="author" target="_blank" href="/u/465d62712ce4?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <div class="avatar">
+              <img src="//upload.jianshu.io/users/upload_avatars/1459087/ae72cdc0fc59.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/48/h/48" alt="48" />
+            </div>
+            <span class="name">mia7777777</span>
+</a>        </div>
+
+        <div class="note ">
+                    <a class="title" target="_blank" href="/p/e6cee9a57e2a?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">陌生</a>
+          <p class="description">隔三差五来看看，每看一次，陌生一次。是我变了，还是简书变了。 我觉得不错的文章，首页没遇到。 首页的文章，大多是我觉得“不过如此”。就像没用心做的饭菜一样，看起来色泽，食欲很好。可是细品，才觉得那味道差的太多。 纯粹的东西哪里那么好找。就像最早的论坛，然后空间，然后朋友圈。...</p>
+          <a class="author" target="_blank" href="/u/0f69d7d777ec?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <div class="avatar">
+              <img src="//upload.jianshu.io/users/upload_avatars/1409600/94bd0f9b-5b0d-4038-a795-6471200a0de2.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/48/h/48" alt="48" />
+            </div>
+            <span class="name">琐城无忧</span>
+</a>        </div>
+
+        <div class="note have-img">
+          <a class="cover" target="_blank" href="/p/01e9b0d6b9ea?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <img src="//upload-images.jianshu.io/upload_images/1300535-a1c109fb3572627b.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240" alt="240" />
+</a>          <a class="title" target="_blank" href="/p/01e9b0d6b9ea?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">等你，爱我</a>
+          <p class="description">等你，爱我 哪怕只有一次也就足够。 等你，爱我， 也许只有一次才能永久。 从出生开始， 我们一直在寻找着， 等待一个人的出现， 永远也不会走，让我安心，让我快乐。 想要一个这样的爱人： 所有的内心骚动都不会落空， 可以被宠得有恃无恐…… 不用担心爱得不恰当而失去， 也不用担...</p>
+          <a class="author" target="_blank" href="/u/c08ddf45768f?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <div class="avatar">
+              <img src="//upload.jianshu.io/users/upload_avatars/1300535/94da8a05f035.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/48/h/48" alt="48" />
+            </div>
+            <span class="name">灵曦lingxi</span>
+</a>        </div>
+  </div>
+</div>
+
+    <script type="application/json" data-name="page-data">{"user_signed_in":true,"locale":"zh-CN","os":"windows","read_mode":"day","read_font":"font2","current_user":{"id":1762376,"nickname":"ati艾龙AttilaxAkb","slug":"c2ba64d5cedc","avatar":"http://upload.jianshu.io/users/upload_avatars/1762376/c091b5eb478e","unread_counts":{"chats":3,"others":6,"total":9},"has_editable_collection":true},"note_show":{"is_author":false,"is_following_author":false,"is_liked_note":false,"follow_state":0,"uuid":"dd58b54b-19f9-4707-be84-1588366391bf"},"note":{"id":6135448,"slug":"336f19772046","user_id":1283539,"notebook_id":6404197,"commentable":true,"likes_count":13,"views_count":2778,"public_wordage":2047,"comments_count":1,"featured_comments_count":0,"total_rewards_count":0,"is_author":false,"paid_type":"free","paid":false,"paid_content_accessible":false,"author":{"nickname":"陈满iOS","total_wordage":77679,"followers_count":803,"total_likes_count":971}}}</script>
+    
+    <script src="//cdn2.jianshu.io/assets/babel-polyfill-e9c9b9785eb2c39c58e4.js" crossorigin="anonymous"></script>
+    <script src="//cdn2.jianshu.io/assets/web-base-96f08bdb7c46d0408645.js" crossorigin="anonymous"></script>
+<script src="//cdn2.jianshu.io/assets/web-18de753f70eb0a4a071b.js" crossorigin="anonymous"></script>
+    
+    <script src="//cdn2.jianshu.io/assets/web/pages/notes/show/entry-42c5a18f221dc31b2d42.js" crossorigin="anonymous"></script>
+    <script>
+  (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+          bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else {
+          bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+  </body>
+</html>

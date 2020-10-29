@@ -1,0 +1,2154 @@
+
+
+<!DOCTYPE HTML><html lang="zh-CN"><head><meta charset="UTF-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/><meta name="renderer" content="webkit"/><meta property="qc:admins" content="15317273575564615446375"/><meta property="og:image" content="https://static.segmentfault.com/v-5ab0701d/global/img/touch-icon.png"/><meta name="viewport"
+              content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/><meta name="alexaVerifyID" content="LkzCRJ7rPEUwt6fVey2vhxiw1vQ"/><meta name="apple-itunes-app" content="app-id=958101793, app-argument="><title>本地数据存储之 IndexedDB 实践 - 王铁手的博客 - SegmentFault 思否</title><meta name="description" content="本地存储的类型 本地存储主要有以下几种： Web Sql IndexedDB Local Storage Session Storage Cookies Application Cache 项目需求 离线存储读取数据 允许用户对数据进行增删改操作 数据存储在本地，不依赖后端 ..."/><meta name="keywords" content="localstorage,indexeddb,本地存储"/><link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="SegmentFault"/><link rel="shortcut icon" href="https://static.segmentfault.com/v-5ab0701d/global/img/favicon.ico"/><link rel="apple-touch-icon" href="https://static.segmentfault.com/v-5ab0701d/global/img/touch-icon.png"><meta name="msapplication-TileColor" content="#009a61"/><meta name="msapplication-square150x150logo" content="https://static.segmentfault.com/v-5ab0701d/global/img/touch-icon.png"/><link rel="alternate" type="application/atom+xml" title="SegmentFault 最新问题" href="/feeds/questions"><link rel="alternate" type="application/atom+xml" title="SegmentFault 最新文章" href="/feeds/blogs"><link rel="stylesheet" href="https://static.segmentfault.com/v-5ab0701d/global/css/global.css"/><link rel="stylesheet" href="https://static.segmentfault.com/v-5ab0701d/blog/css/blog.css"/><link rel="stylesheet" href="https://static.segmentfault.com/v-5ab0701d/global/css/responsive.css"/></head><body data-mod="blog"
+    class="blog-post "><!--[if lt IE 9]><div class="alert alert-danger topframe" role="alert">你的浏览器实在<strong>太太太太太太旧了</strong>，放学别走，升级完浏览器再说 <a target="_blank" class="alert-link" href="http://browsehappy.com">立即升级</a></div><![endif]--><img id="icon4weChat" style="height: 0;width: 0;" data-src="https://static.segmentfault.com/v-5ab0701d/global/img/touch-icon-512.png"><div class="global-nav sf-header sf-header--index"><nav class="container nav"><div class="visible-xs header-response"><a href="/search" style="display:block"><i class="fa fa-search" aria-hidden="true"></i></a><div class="sf-header__logo sf-header__logo--response"><h1><a href="/" style="height:24px; background-size: auto 24px;"></a></h1></div><a href="/user/login" class="pull-right login-btn"><i class="fa fa-user" aria-hidden="true"></i></a><div class="bottom-nav"><div class="opts"><a class="opts-group " href="/"><i class="fa fa-home" aria-hidden="true"></i><span>首页</span></a><a class="opts-group " href="/questions"><i class="fa fa-comments" aria-hidden="true"></i><span>问答</span></a><a class="opts-group active" href="/blogs"><i class="fa fa-pencil-square" aria-hidden="true"></i><span>专栏</span></a><a class="opts-group " href="/lives"><i class="fa fa-play-circle" aria-hidden="true"></i><span>讲堂</span></a><div class="opts-group"><div class="btn-group dropup"><i class="fa fa-bars dropdown hoverDropdown" data-toggle="dropdown" aria-hidden="true"><span>更多</span></i><ul class="dropdown-menu"><li><a href="/jobs">职位</a></li><li><a href="/events">活动</a></li><li><a href="/tags">标签</a></li><li><a href="/badges">徽章</a></li></ul></div></div></div></div></div><script>
+mobileScroll(
+    function(direction) { 
+        if (direction === 'down') {
+            document.querySelector('.bottom-nav').classList.add('hidden')
+        } else {
+            document.querySelector('.bottom-nav').classList.remove('hidden')
+        }
+    }
+);    
+function mobileScroll( fn ) {
+    var beforeScrollTop = document.documentElement.scrollTop || document.body.scrollTop,
+        fn = fn || function() {};
+    window.addEventListener("scroll", function() {
+        var afterScrollTop = document.documentElement.scrollTop || document.body.scrollTop,
+            delta = afterScrollTop - beforeScrollTop;
+        if( delta === 0 ) return false;
+        fn( delta > 0 ? "down" : "up" );
+        beforeScrollTop = afterScrollTop;
+    }, false);
+}
+</script><div class="row hidden-xs"><div class="col-sm-8 col-md-9 col-lg-9"><div class="sf-header__logo"><h1><a href="/">SegmentFault</a></h1></div><div><ul class="menu list-inline pull-left hidden-xs"><li class="menu__item"><a href="/" class="">首页</a></li><li class="menu__item"><a href="/questions" class="">问答</a></li><li class="menu__item"><a href="/blogs" class="active-nav">专栏</a></li><li class="menu__item"><a href="/lives" class="">讲堂</a></li><li class="menu__item"><a href="/tags" class="">标签</a></li><li class="menu__item menu__item--more dropdown"><a href="##" class="dropdown-toggle dropdownBtn" data-toggle="dropdown">
+                                        发现<i class="fa fa-caret-down" style="font-size: 14px;margin-left: 5px;" aria-hidden="true"></i></a><div class="dropdown-block hidden"><ul class="dropdown-content-menu"><li><a href="/events">活动</a></li><li><a href="/groups">技术圈<span class="notice notice-menu">hi</span></a></li><li><a href="/jobs">找工作</a></li><li><a href="/users">排行榜</a></li><li><a href="/badges">徽章</a></li><li><a href="/notes">笔记</a></li><li><a href="https://docs.segmentfault.com" target="_blank">开发手册<i style="line-height: 20px;font-size: 12px;color: #F5A623;" class="ml10 fa fa-external-link-square"></i></a></li><li><a href="https://business.segmentfault.com/ads?utm_source=sf-header" target="_blank">广告投放<i style="line-height: 20px;font-size: 12px;color: #F5A623;" class="ml10 fa fa-external-link-square"></i></a></li></ul></div></li><li class="menu__item visible-sm-inline-block"><a href="/search"><span class="glyphicon glyphicon-search" style="vertical-align: middle;"></span></a></li></ul><form action="/search" class="header-search  hidden-sm hidden-xs pull-right" ><button class="btn btn-link"><span class="sr-only">搜索</span><span class="glyphicon glyphicon-search"></span></button><input id="searchBox" name="q" type="text"  placeholder="搜索问题或关键字" class="form-control" value="" /></form></div></div><div class="col-sm-4 col-md-3 col-lg-3 text-right"><ul class="opts list-inline hidden-xs"><li class="opts__item"><a href="/user/login" class="SFRegister btn-signin" style="margin-bottom:2px;">立即登录</a><a href="/user/register" class="SFLogin ml10 btn-signup"
+                                       onClick="_gaq.push(['_trackEvent', 'Button', 'Click', 'Login']);">免费注册</a></li></ul></div></div></nav></div>
+    
+<input id="articleId" value="1190000002416903" class="hidden" />
+<div class="wrap" data-blogid="1200000000366174">
+            <div id="loginBanner"  class="hidden-sm hidden-xs loginBanner">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-7">
+                <h1 class="title">在 SegmentFault，学习技能、解决问题</h1>
+                <p class="desc">每个月，我们帮助 1000 万的开发者解决各种各样的技术问题。并助力他们在技术能力、职业生涯、影响力上获得提升。</p>
+            </div>
+            <div class="col-lg-3 col-lg-offset-3 col-md-4 col-md-offset-1">
+                <form class="register-form clearfix" action="/api/user/phone/register">
+
+                    
+                    <a href="/user/register" class="SFLogin btn btn-lg btn-primary mr15">免费注册</a>
+                    <a href="/user/login" class="SFRegister btn btn-lg btn-primary">立即登录</a>
+                </form>
+            </div>
+        </div>
+    </div>
+        <i class="fa fa-times-circle" aria-hidden="true"></i>
+    </div>
+
+        <div class="post-topheader custom-">
+        <div class="container">
+            <div class="block-for-right-border">
+                <div class="row">
+                    <div class="col-md-9 col-sm-8 col-xs-12">
+                        <div class="post-topheader__info" data-username="王铁手"
+                             data-userslug="wtser"
+                             data-useravatar="https://sfault-avatar.b0.upaiyun.com/189/943/1899432665-5a250e5a9db66_big64">
+
+                            <h1 class="h3 post-topheader__info--title" id="articleTitle" data-id="1190000002416903">
+                                <a href="/a/1190000002416903"> 本地数据存储之 IndexedDB 实践</a>
+                            </h1>
+
+                            <div class="content__tech blog-type-common blog-type-0-before">
+                                <ul class="taglist--inline inline-block article__title--tag mr10">
+                                                                            <li class="tagPopup mb5">
+                                            <a class="tag" href="/t/localstorage/blogs" data-toggle="popover"
+                                                                    data-img="" data-placement="top"
+                                                                    data-original-title="localstorage"
+                                                                    data-id="1040000000123499">
+                                                                                        localstorage
+                                            </a>
+                                        </li>
+                                                                            <li class="tagPopup mb5">
+                                            <a class="tag" href="/t/indexeddb/blogs" data-toggle="popover"
+                                                                    data-img="" data-placement="top"
+                                                                    data-original-title="indexeddb"
+                                                                    data-id="1040000000441449">
+                                                                                        indexeddb
+                                            </a>
+                                        </li>
+                                                                            <li class="tagPopup mb5">
+                                            <a class="tag" href="/t/%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8/blogs" data-toggle="popover"
+                                                                    data-img="" data-placement="top"
+                                                                    data-original-title="本地存储"
+                                                                    data-id="1040000002416898">
+                                                                                        本地存储
+                                            </a>
+                                        </li>
+                                                                    </ul>
+                                                                                                <div class="article__author">
+                                    <a href="/u/wtser" class="mr5 "><strong>王铁手</strong></a>
+                                    2014年12月10日发布
+                                                                                                        </div>
+                            </div>
+
+                                                        <form class="form form__tech hidden" data-action="#">
+                                <span class="pull-right">
+                                    <button class="btn btn-default save-tags-btn" type="button">保存</button>
+                                </span>
+                                <div class="form-group" style="margin-right: 65px">
+                                    <label for="tags" class="sr-only">标签：至少1个，最多5个</label>
+                                    <input
+                                            class="tagsInput form-control"
+                                            data-init="[{&quot;name&quot;:&quot;localstorage&quot;,&quot;url&quot;:&quot;\/t\/localstorage&quot;,&quot;id&quot;:&quot;1040000000123499&quot;,&quot;thumbnailUrl&quot;:&quot;&quot;,&quot;contentCount&quot;:107,&quot;iconUrl&quot;:&quot;&quot;},{&quot;name&quot;:&quot;indexeddb&quot;,&quot;url&quot;:&quot;\/t\/indexeddb&quot;,&quot;id&quot;:&quot;1040000000441449&quot;,&quot;thumbnailUrl&quot;:&quot;&quot;,&quot;contentCount&quot;:19,&quot;iconUrl&quot;:&quot;&quot;},{&quot;name&quot;:&quot;\u672c\u5730\u5b58\u50a8&quot;,&quot;url&quot;:&quot;\/t\/%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8&quot;,&quot;id&quot;:&quot;1040000002416898&quot;,&quot;thumbnailUrl&quot;:&quot;&quot;,&quot;contentCount&quot;:15,&quot;iconUrl&quot;:&quot;&quot;}]"
+                                            name="tags"
+                                            type="text"
+                                            placeholder="标签，如：php 可使用逗号,分号;分隔"
+                                            data-role="tagsinput"/>
+                                    <div role="tabpanel" class="techTags panel panel-default techTags-panel" data-tech='{"\u5f00\u53d1\u8bed\u8a00":[{"id":"1040000000089436","name":"javascript","iconUrl":""},{"id":"1040000000089387","name":"php","iconUrl":""},{"id":"1040000000089434","name":"css","iconUrl":""},{"id":"1040000000089571","name":"html","iconUrl":""},{"id":"1040000000089449","name":"java","iconUrl":"https:\/\/sfault-avatar.b0.upaiyun.com\/868\/271\/868271510-54cb382abb7a1_small"},{"id":"1040000000089409","name":"html5","iconUrl":"https:\/\/sfault-avatar.b0.upaiyun.com\/102\/500\/1025005915-54cb538538eea_small"},{"id":"1040000000089534","name":"python","iconUrl":"https:\/\/sfault-avatar.b0.upaiyun.com\/252\/177\/2521771040-54cb53b372821_small"},{"id":"1040000000089918","name":"node.js","iconUrl":""},{"id":"1040000000089741","name":"c++","iconUrl":""},{"id":"1040000000089457","name":"c","iconUrl":""},{"id":"1040000000090209","name":"objective-c","iconUrl":""},{"id":"1040000000090203","name":"golang","iconUrl":""},{"id":"1040000000089669","name":"shell","iconUrl":""},{"id":"1040000000531223","name":"swift","iconUrl":""},{"id":"1040000000089581","name":"c#","iconUrl":""},{"id":"1040000000089699","name":"ruby","iconUrl":"https:\/\/sfault-avatar.b0.upaiyun.com\/336\/760\/3367608758-54cb53ca5a132_small"},{"id":"1040000000365394","name":"typescript","iconUrl":""},{"id":"1040000000089686","name":"bash","iconUrl":""},{"id":"1040000000091262","name":"sass","iconUrl":""},{"id":"1040000000090433","name":"asp.net","iconUrl":""},{"id":"1040000000090600","name":"less","iconUrl":""},{"id":"1040000000090208","name":"lua","iconUrl":""},{"id":"1040000000090228","name":"scala","iconUrl":""},{"id":"1040000000161068","name":"coffeescript","iconUrl":""},{"id":"1040000000090194","name":"actionscript","iconUrl":""},{"id":"1040000000090201","name":"erlang","iconUrl":""},{"id":"1040000000089698","name":"perl","iconUrl":""},{"id":"1040000000311191","name":"rust","iconUrl":""}],"\u5e73\u53f0\u6846\u67b6":[{"id":"1040000000196640","name":"laravel","iconUrl":""},{"id":"1040000000090103","name":"spring","iconUrl":""},{"id":"1040000000089564","name":"django","iconUrl":""},{"id":"1040000000125263","name":"flask","iconUrl":""},{"id":"1040000000166256","name":"express","iconUrl":""},{"id":"1040000000089646","name":"ruby-on-rails","iconUrl":""},{"id":"1040000000090398","name":"yii","iconUrl":""},{"id":"1040000000116331","name":"tornado","iconUrl":""},{"id":"1040000000622042","name":"koa","iconUrl":""},{"id":"1040000000089638","name":"struts","iconUrl":""}],"\u670d\u52a1\u5668":[{"id":"1040000000089392","name":"linux","iconUrl":""},{"id":"1040000000090145","name":"nginx","iconUrl":""},{"id":"1040000000089761","name":"apache","iconUrl":""},{"id":"1040000000366352","name":"docker","iconUrl":""},{"id":"1040000000090245","name":"ubuntu","iconUrl":"https:\/\/sfault-avatar.b0.upaiyun.com\/335\/109\/3351090335-569f0f26a2a86_small"},{"id":"1040000000090249","name":"centos","iconUrl":""},{"id":"1040000000090117","name":"tomcat","iconUrl":""},{"id":"1040000000090401","name":"\u7f13\u5b58","iconUrl":""},{"id":"1040000000090107","name":"\u8d1f\u8f7d\u5747\u8861","iconUrl":""},{"id":"1040000000090646","name":"unix","iconUrl":""},{"id":"1040000000089648","name":"hadoop","iconUrl":""},{"id":"1040000000090609","name":"windows-server","iconUrl":""}],"\u6570\u636e\u5e93\u548c\u7f13\u5b58":[{"id":"1040000000089439","name":"mysql","iconUrl":"https:\/\/sfault-avatar.b0.upaiyun.com\/949\/844\/9498447-54cb56e325a72_small"},{"id":"1040000000090049","name":"sql","iconUrl":""},{"id":"1040000000089431","name":"redis","iconUrl":""},{"id":"1040000000089488","name":"mongodb","iconUrl":"https:\/\/sfault-avatar.b0.upaiyun.com\/183\/816\/1838168166-54cb5552ef5de_small"},{"id":"1040000000090701","name":"oracle","iconUrl":""},{"id":"1040000000089432","name":"nosql","iconUrl":""},{"id":"1040000000089873","name":"memcached","iconUrl":""},{"id":"1040000000090424","name":"sqlserver","iconUrl":""},{"id":"1040000000090354","name":"sqlite","iconUrl":""},{"id":"1040000000090861","name":"postgresql","iconUrl":""}],"\u5f00\u53d1\u5de5\u5177":[{"id":"1040000000089459","name":"git","iconUrl":""},{"id":"1040000000091226","name":"github","iconUrl":""},{"id":"1040000000089467","name":"vim","iconUrl":""},{"id":"1040000000089579","name":"xcode","iconUrl":""},{"id":"1040000000126097","name":"sublime-text","iconUrl":""},{"id":"1040000002720957","name":"visual-studio-code","iconUrl":""},{"id":"1040000000090560","name":"intellij-idea","iconUrl":""},{"id":"1040000000089509","name":"eclipse","iconUrl":""},{"id":"1040000000090186","name":"maven","iconUrl":""},{"id":"1040000000089447","name":"svn","iconUrl":""},{"id":"1040000000090473","name":"ide","iconUrl":""},{"id":"1040000000090524","name":"atom","iconUrl":""},{"id":"1040000000090231","name":"visual-studio","iconUrl":""},{"id":"1040000000090216","name":"emacs","iconUrl":""},{"id":"1040000000183694","name":"hg","iconUrl":""},{"id":"1040000000089663","name":"textmate","iconUrl":""}],"\u7cfb\u7edf\u8bbe\u5907":[{"id":"1040000000089658","name":"android","iconUrl":"https:\/\/sfault-avatar.b0.upaiyun.com\/287\/281\/287281599-5a263edae47e9_small"},{"id":"1040000000089442","name":"ios","iconUrl":"https:\/\/sfault-avatar.b0.upaiyun.com\/300\/191\/3001919899-5488009eb028c_small"},{"id":"1040000000089407","name":"chrome","iconUrl":"https:\/\/sfault-avatar.b0.upaiyun.com\/281\/209\/2812096638-54cb55083b2cc_small"},{"id":"1040000000089709","name":"windows","iconUrl":""},{"id":"1040000000089498","name":"iphone","iconUrl":""},{"id":"1040000000090217","name":"firefox","iconUrl":"https:\/\/sfault-avatar.b0.upaiyun.com\/334\/705\/334705769-54cb552688a94_small"},{"id":"1040000000125504","name":"internet-explorer","iconUrl":""},{"id":"1040000000089499","name":"safari","iconUrl":""},{"id":"1040000000090638","name":"ipad","iconUrl":""},{"id":"1040000000090218","name":"opera","iconUrl":""},{"id":"1040000002871462","name":"apple-watch","iconUrl":""}],"\u5176\u5b83":[{"id":"1040000000089409","name":"html5","iconUrl":"https:\/\/sfault-avatar.b0.upaiyun.com\/102\/500\/1025005915-54cb538538eea_small"},{"id":"1040000002893277","name":"react.js","iconUrl":""},{"id":"1040000000090137","name":"\u641c\u7d22\u5f15\u64ce","iconUrl":""},{"id":"1040000000123810","name":"virtualenv","iconUrl":""},{"id":"1040000000090316","name":"lucene","iconUrl":""}]}'>
+    <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a
+                        href="#开发语言"
+                        aria-controls="type"
+                        role="tab"
+                        data-toggle="tab">开发语言</a>
+            </li>
+                    <li role="presentation" class=""><a
+                        href="#平台框架"
+                        aria-controls="type"
+                        role="tab"
+                        data-toggle="tab">平台框架</a>
+            </li>
+                    <li role="presentation" class=""><a
+                        href="#服务器"
+                        aria-controls="type"
+                        role="tab"
+                        data-toggle="tab">服务器</a>
+            </li>
+                    <li role="presentation" class=""><a
+                        href="#数据库和缓存"
+                        aria-controls="type"
+                        role="tab"
+                        data-toggle="tab">数据库和缓存</a>
+            </li>
+                    <li role="presentation" class=""><a
+                        href="#开发工具"
+                        aria-controls="type"
+                        role="tab"
+                        data-toggle="tab">开发工具</a>
+            </li>
+                    <li role="presentation" class=""><a
+                        href="#系统设备"
+                        aria-controls="type"
+                        role="tab"
+                        data-toggle="tab">系统设备</a>
+            </li>
+                    <li role="presentation" class=""><a
+                        href="#其它"
+                        aria-controls="type"
+                        role="tab"
+                        data-toggle="tab">其它</a>
+            </li>
+            </ul>
+    <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active"
+                 id="开发语言">
+                <ul class="taglist--inline">
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000089436","name":"javascript","iconUrl":""}' href="javascript: void(0);">
+                                                                javascript
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000089387","name":"php","iconUrl":""}' href="javascript: void(0);">
+                                                                php
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000089434","name":"css","iconUrl":""}' href="javascript: void(0);">
+                                                                css
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000089571","name":"html","iconUrl":""}' href="javascript: void(0);">
+                                                                html
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000089449","name":"java","iconUrl":"https:\/\/sfault-avatar.b0.upaiyun.com\/868\/271\/868271510-54cb382abb7a1_small"}' href="javascript: void(0);">
+                                                                    <img src="https://sfault-avatar.b0.upaiyun.com/868/271/868271510-54cb382abb7a1_small">
+                                                                java
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000089409","name":"html5","iconUrl":"https:\/\/sfault-avatar.b0.upaiyun.com\/102\/500\/1025005915-54cb538538eea_small"}' href="javascript: void(0);">
+                                                                    <img src="https://sfault-avatar.b0.upaiyun.com/102/500/1025005915-54cb538538eea_small">
+                                                                html5
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000089534","name":"python","iconUrl":"https:\/\/sfault-avatar.b0.upaiyun.com\/252\/177\/2521771040-54cb53b372821_small"}' href="javascript: void(0);">
+                                                                    <img src="https://sfault-avatar.b0.upaiyun.com/252/177/2521771040-54cb53b372821_small">
+                                                                python
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000089918","name":"node.js","iconUrl":""}' href="javascript: void(0);">
+                                                                node.js
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000089741","name":"c++","iconUrl":""}' href="javascript: void(0);">
+                                                                c++
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000089457","name":"c","iconUrl":""}' href="javascript: void(0);">
+                                                                c
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000090209","name":"objective-c","iconUrl":""}' href="javascript: void(0);">
+                                                                objective-c
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000090203","name":"golang","iconUrl":""}' href="javascript: void(0);">
+                                                                golang
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000089669","name":"shell","iconUrl":""}' href="javascript: void(0);">
+                                                                shell
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000531223","name":"swift","iconUrl":""}' href="javascript: void(0);">
+                                                                swift
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000089581","name":"c#","iconUrl":""}' href="javascript: void(0);">
+                                                                c#
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000089699","name":"ruby","iconUrl":"https:\/\/sfault-avatar.b0.upaiyun.com\/336\/760\/3367608758-54cb53ca5a132_small"}' href="javascript: void(0);">
+                                                                    <img src="https://sfault-avatar.b0.upaiyun.com/336/760/3367608758-54cb53ca5a132_small">
+                                                                ruby
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000365394","name":"typescript","iconUrl":""}' href="javascript: void(0);">
+                                                                typescript
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000089686","name":"bash","iconUrl":""}' href="javascript: void(0);">
+                                                                bash
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000091262","name":"sass","iconUrl":""}' href="javascript: void(0);">
+                                                                sass
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000090433","name":"asp.net","iconUrl":""}' href="javascript: void(0);">
+                                                                asp.net
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000090600","name":"less","iconUrl":""}' href="javascript: void(0);">
+                                                                less
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000090208","name":"lua","iconUrl":""}' href="javascript: void(0);">
+                                                                lua
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000090228","name":"scala","iconUrl":""}' href="javascript: void(0);">
+                                                                scala
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000161068","name":"coffeescript","iconUrl":""}' href="javascript: void(0);">
+                                                                coffeescript
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000090194","name":"actionscript","iconUrl":""}' href="javascript: void(0);">
+                                                                actionscript
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000090201","name":"erlang","iconUrl":""}' href="javascript: void(0);">
+                                                                erlang
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000089698","name":"perl","iconUrl":""}' href="javascript: void(0);">
+                                                                perl
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000311191","name":"rust","iconUrl":""}' href="javascript: void(0);">
+                                                                rust
+                            </a>
+                        </li>
+                                    </ul>
+            </div>
+                    <div role="tabpanel" class="tab-pane "
+                 id="平台框架">
+                <ul class="taglist--inline">
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000196640","name":"laravel","iconUrl":""}' href="javascript: void(0);">
+                                                                laravel
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000090103","name":"spring","iconUrl":""}' href="javascript: void(0);">
+                                                                spring
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000089564","name":"django","iconUrl":""}' href="javascript: void(0);">
+                                                                django
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000125263","name":"flask","iconUrl":""}' href="javascript: void(0);">
+                                                                flask
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000166256","name":"express","iconUrl":""}' href="javascript: void(0);">
+                                                                express
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000089646","name":"ruby-on-rails","iconUrl":""}' href="javascript: void(0);">
+                                                                ruby-on-rails
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000090398","name":"yii","iconUrl":""}' href="javascript: void(0);">
+                                                                yii
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000116331","name":"tornado","iconUrl":""}' href="javascript: void(0);">
+                                                                tornado
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000622042","name":"koa","iconUrl":""}' href="javascript: void(0);">
+                                                                koa
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000089638","name":"struts","iconUrl":""}' href="javascript: void(0);">
+                                                                struts
+                            </a>
+                        </li>
+                                    </ul>
+            </div>
+                    <div role="tabpanel" class="tab-pane "
+                 id="服务器">
+                <ul class="taglist--inline">
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000089392","name":"linux","iconUrl":""}' href="javascript: void(0);">
+                                                                linux
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000090145","name":"nginx","iconUrl":""}' href="javascript: void(0);">
+                                                                nginx
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000089761","name":"apache","iconUrl":""}' href="javascript: void(0);">
+                                                                apache
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000366352","name":"docker","iconUrl":""}' href="javascript: void(0);">
+                                                                docker
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000090245","name":"ubuntu","iconUrl":"https:\/\/sfault-avatar.b0.upaiyun.com\/335\/109\/3351090335-569f0f26a2a86_small"}' href="javascript: void(0);">
+                                                                    <img src="https://sfault-avatar.b0.upaiyun.com/335/109/3351090335-569f0f26a2a86_small">
+                                                                ubuntu
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000090249","name":"centos","iconUrl":""}' href="javascript: void(0);">
+                                                                centos
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000090117","name":"tomcat","iconUrl":""}' href="javascript: void(0);">
+                                                                tomcat
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000090401","name":"\u7f13\u5b58","iconUrl":""}' href="javascript: void(0);">
+                                                                缓存
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000090107","name":"\u8d1f\u8f7d\u5747\u8861","iconUrl":""}' href="javascript: void(0);">
+                                                                负载均衡
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000090646","name":"unix","iconUrl":""}' href="javascript: void(0);">
+                                                                unix
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000089648","name":"hadoop","iconUrl":""}' href="javascript: void(0);">
+                                                                hadoop
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000090609","name":"windows-server","iconUrl":""}' href="javascript: void(0);">
+                                                                windows-server
+                            </a>
+                        </li>
+                                    </ul>
+            </div>
+                    <div role="tabpanel" class="tab-pane "
+                 id="数据库和缓存">
+                <ul class="taglist--inline">
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000089439","name":"mysql","iconUrl":"https:\/\/sfault-avatar.b0.upaiyun.com\/949\/844\/9498447-54cb56e325a72_small"}' href="javascript: void(0);">
+                                                                    <img src="https://sfault-avatar.b0.upaiyun.com/949/844/9498447-54cb56e325a72_small">
+                                                                mysql
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000090049","name":"sql","iconUrl":""}' href="javascript: void(0);">
+                                                                sql
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000089431","name":"redis","iconUrl":""}' href="javascript: void(0);">
+                                                                redis
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000089488","name":"mongodb","iconUrl":"https:\/\/sfault-avatar.b0.upaiyun.com\/183\/816\/1838168166-54cb5552ef5de_small"}' href="javascript: void(0);">
+                                                                    <img src="https://sfault-avatar.b0.upaiyun.com/183/816/1838168166-54cb5552ef5de_small">
+                                                                mongodb
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000090701","name":"oracle","iconUrl":""}' href="javascript: void(0);">
+                                                                oracle
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000089432","name":"nosql","iconUrl":""}' href="javascript: void(0);">
+                                                                nosql
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000089873","name":"memcached","iconUrl":""}' href="javascript: void(0);">
+                                                                memcached
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000090424","name":"sqlserver","iconUrl":""}' href="javascript: void(0);">
+                                                                sqlserver
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000090354","name":"sqlite","iconUrl":""}' href="javascript: void(0);">
+                                                                sqlite
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000090861","name":"postgresql","iconUrl":""}' href="javascript: void(0);">
+                                                                postgresql
+                            </a>
+                        </li>
+                                    </ul>
+            </div>
+                    <div role="tabpanel" class="tab-pane "
+                 id="开发工具">
+                <ul class="taglist--inline">
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000089459","name":"git","iconUrl":""}' href="javascript: void(0);">
+                                                                git
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000091226","name":"github","iconUrl":""}' href="javascript: void(0);">
+                                                                github
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000089467","name":"vim","iconUrl":""}' href="javascript: void(0);">
+                                                                vim
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000089579","name":"xcode","iconUrl":""}' href="javascript: void(0);">
+                                                                xcode
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000126097","name":"sublime-text","iconUrl":""}' href="javascript: void(0);">
+                                                                sublime-text
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000002720957","name":"visual-studio-code","iconUrl":""}' href="javascript: void(0);">
+                                                                visual-studio-code
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000090560","name":"intellij-idea","iconUrl":""}' href="javascript: void(0);">
+                                                                intellij-idea
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000089509","name":"eclipse","iconUrl":""}' href="javascript: void(0);">
+                                                                eclipse
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000090186","name":"maven","iconUrl":""}' href="javascript: void(0);">
+                                                                maven
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000089447","name":"svn","iconUrl":""}' href="javascript: void(0);">
+                                                                svn
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000090473","name":"ide","iconUrl":""}' href="javascript: void(0);">
+                                                                ide
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000090524","name":"atom","iconUrl":""}' href="javascript: void(0);">
+                                                                atom
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000090231","name":"visual-studio","iconUrl":""}' href="javascript: void(0);">
+                                                                visual-studio
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000090216","name":"emacs","iconUrl":""}' href="javascript: void(0);">
+                                                                emacs
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000183694","name":"hg","iconUrl":""}' href="javascript: void(0);">
+                                                                hg
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000089663","name":"textmate","iconUrl":""}' href="javascript: void(0);">
+                                                                textmate
+                            </a>
+                        </li>
+                                    </ul>
+            </div>
+                    <div role="tabpanel" class="tab-pane "
+                 id="系统设备">
+                <ul class="taglist--inline">
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000089658","name":"android","iconUrl":"https:\/\/sfault-avatar.b0.upaiyun.com\/287\/281\/287281599-5a263edae47e9_small"}' href="javascript: void(0);">
+                                                                    <img src="https://sfault-avatar.b0.upaiyun.com/287/281/287281599-5a263edae47e9_small">
+                                                                android
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000089442","name":"ios","iconUrl":"https:\/\/sfault-avatar.b0.upaiyun.com\/300\/191\/3001919899-5488009eb028c_small"}' href="javascript: void(0);">
+                                                                    <img src="https://sfault-avatar.b0.upaiyun.com/300/191/3001919899-5488009eb028c_small">
+                                                                ios
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000089407","name":"chrome","iconUrl":"https:\/\/sfault-avatar.b0.upaiyun.com\/281\/209\/2812096638-54cb55083b2cc_small"}' href="javascript: void(0);">
+                                                                    <img src="https://sfault-avatar.b0.upaiyun.com/281/209/2812096638-54cb55083b2cc_small">
+                                                                chrome
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000089709","name":"windows","iconUrl":""}' href="javascript: void(0);">
+                                                                windows
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000089498","name":"iphone","iconUrl":""}' href="javascript: void(0);">
+                                                                iphone
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000090217","name":"firefox","iconUrl":"https:\/\/sfault-avatar.b0.upaiyun.com\/334\/705\/334705769-54cb552688a94_small"}' href="javascript: void(0);">
+                                                                    <img src="https://sfault-avatar.b0.upaiyun.com/334/705/334705769-54cb552688a94_small">
+                                                                firefox
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000125504","name":"internet-explorer","iconUrl":""}' href="javascript: void(0);">
+                                                                internet-explorer
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000089499","name":"safari","iconUrl":""}' href="javascript: void(0);">
+                                                                safari
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000090638","name":"ipad","iconUrl":""}' href="javascript: void(0);">
+                                                                ipad
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000090218","name":"opera","iconUrl":""}' href="javascript: void(0);">
+                                                                opera
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000002871462","name":"apple-watch","iconUrl":""}' href="javascript: void(0);">
+                                                                apple-watch
+                            </a>
+                        </li>
+                                    </ul>
+            </div>
+                    <div role="tabpanel" class="tab-pane "
+                 id="其它">
+                <ul class="taglist--inline">
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000089409","name":"html5","iconUrl":"https:\/\/sfault-avatar.b0.upaiyun.com\/102\/500\/1025005915-54cb538538eea_small"}' href="javascript: void(0);">
+                                                                    <img src="https://sfault-avatar.b0.upaiyun.com/102/500/1025005915-54cb538538eea_small">
+                                                                html5
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000002893277","name":"react.js","iconUrl":""}' href="javascript: void(0);">
+                                                                react.js
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000090137","name":"\u641c\u7d22\u5f15\u64ce","iconUrl":""}' href="javascript: void(0);">
+                                                                搜索引擎
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000123810","name":"virtualenv","iconUrl":""}' href="javascript: void(0);">
+                                                                virtualenv
+                            </a>
+                        </li>
+                                            <li class="mb5">
+                            <a class="tag" data-tag='{"id":"1040000000090316","name":"lucene","iconUrl":""}' href="javascript: void(0);">
+                                                                lucene
+                            </a>
+                        </li>
+                                    </ul>
+            </div>
+            </div>
+</div>
+
+                                </div>
+                               
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-4 hidden-xs">
+                        <ul class="post-topheader__side list-unstyled">
+                            <li>
+                                <button type="button" class="btn btn-success btn-sm "
+                                            data-id="1190000002416903" id="sideLike"><span id="sideLikeText">赞</span>&nbsp;&nbsp;<span class="seprator">|</span>&nbsp;&nbsp;
+                                            <span id="sideLikeNum">1</span></button><button type="button" id="sideBookmark" class="btn btn-default btn-sm "
+                                            data-id="1190000002416903" data-id="1190000002416903" data-type="article"><span id="sideBookmarkText">收藏</span>&nbsp;&nbsp;<span class="seprator">|</span>&nbsp;&nbsp;<span id="sideBookmarkNum">13</span></button>                            </li>
+                            <li>
+                                <strong class="no-stress">3.9k</strong> 次浏览
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- end .post-topheader -->
+
+    <div class="container mt30">
+        <div class="row">
+            <div class="col-xs-12 col-md-9 main ">
+
+                
+                <div class="article fmt article__content" data-id="1190000002416903" data-license="cc">
+                    <html><body>
+<h2>本地存储的类型</h2>
+
+<p>本地存储主要有以下几种：</p>
+
+<ul>
+<li>Web Sql</li>
+<li>IndexedDB</li>
+<li>Local Storage</li>
+<li>Session Storage</li>
+<li>Cookies</li>
+<li>Application Cache</li>
+</ul>
+<h2>项目需求</h2>
+
+<ul>
+<li>离线存储读取数据</li>
+<li>允许用户对数据进行增删改操作</li>
+<li>数据存储在本地，不依赖后端</li>
+<li>数据支持索引查询</li>
+</ul>
+<p>由于 WebSQL 在标准上还存在争议，而 localStorage 实现数据分页、查询比较复杂，最终考虑使用了 IndexedDB 来满足需求。</p>
+
+<h2>IndexedDB 支持情况</h2>
+
+<p><span class="img-wrap"><img data-src="/img/bVkobM"></span></p>
+
+<h2>IndexedDB　数据库的使用</h2>
+
+<h3>定义数据库对象</h3>
+
+<pre><code>var wxbDB = {
+    name   : "wxb",
+    version: 1,
+    db     : null
+};
+</code></pre>
+
+<p>此处我们定义了一个数据库对象，包括<code>name</code> 数据库名称，<code>version</code> 数据库的版本，以及 <code>db</code> 数据对象。</p>
+
+<h3>数据库初始化</h3>
+
+<pre><code>function initDB(dbObj) {
+    dbObj.version = dbObj.version || 1;
+    var request = indexedDB.open(dbObj.name, dbObj.version);
+    request.onerror = function (e) {
+        console.log(e.currentTarget.error.message);
+    };
+    request.onsuccess = function (e) {
+        dbObj.db = e.target.result;
+    };
+    request.onupgradeneeded = function (e) {
+        var thisDB = e.target.result;
+        if (!thisDB.objectStoreNames.contains("material")) {
+            var objStore = thisDB.createObjectStore("material", {keyPath: "id", autoIncrement: true});
+            objStore.createIndex("wxid", "wxid", {unique: true});
+        }
+        if (!thisDB.objectStoreNames.contains("account")) {
+            var objStore = thisDB.createObjectStore("account", {keyPath: "id", autoIncrement: true});
+            objStore.createIndex("wxid", "wxid", {unique: true});
+            objStore.createIndex("nickName", "nickName", {unique: false});
+        }
+    };
+}
+</code></pre>
+
+<p><code>indexedDB.open</code> 方法可以创建或者打开一个 <code>IndexedDB</code>，并返回 <code>IDBOpenDBRequest</code> 对象。</p>
+
+<p><code>IDBOpenDBRequest</code> 对象除了<code>onerror</code> 和 <code>onsuccess</code>，还有一个类似回调函数句柄 <code>onupgradeneeded</code>。这个句柄在我们请求打开的数据库的版本号和已经存在的数据库版本号不一致的时候调用。</p>
+
+<p><code>indexedDB.open</code> 方法的第二个可选参数是数据库版本号，数据库创建的时候默认版本号为 <code>1</code>，当我们传入的版本号和数据库当前版本号不一致时 <code>onupgradeneeded</code> 就会被调用，当然我们不能试图打开比当前数据库版本低的<code>version</code>，否则调用的就是 <code>onerror</code> 了。</p>
+
+<p><code>onupgradeneeded</code> 被调用时，我们可以做一些建表、索引等操作。</p>
+
+<p>有了数据库后我们自然希望创建一个表用来存储数据，但 <code>indexedDB</code> 中没有表的概念，而是 <code>objectStore</code>，一个数据库中可以包含多个 <code>objectStore</code>，<code>objectStore</code> 是一个灵活的数据结构，可以存放多种类型数据。</p>
+
+<p>我们可以使用每条记录中的某个指定字段作为键值（keyPath），也可以使用自动生成的递增数字作为键值（keyGenerator），也可以不指定。选择键的类型不同，<code>objectStore</code> 可以存储的数据结构也有差异。</p>
+
+<ul>
+<li>不使用   ：任意值，但是没添加一条数据的时候需要指定键参数</li>
+<li>keyPath : Javascript 对象，对象必须有一属性作为键值</li>
+<li>keyGenerator : 任意值</li>
+<li>都使用 : Javascript 对象，如果对象中有 keyPath 指定的属性则不生成新的键值，如果没有自动生成递增键值，填充 keyPath 指定属性</li>
+</ul>
+<p><span class="img-wrap"><img data-src="/img/bVkoes"></span></p>
+
+<h3>关闭数据库</h3>
+
+<pre><code>function closeDB(dbObj) {
+    dbObj.db.close();
+}
+</code></pre>
+
+<h3>删除数据库</h3>
+
+<pre><code>function deleteDB(dbObj) {
+    indexedDB.deleteDatabase(dbObj.name);
+}
+</code></pre>
+
+<h3>数据库表的 CURD</h3>
+
+<p>在对新数据库做任何事情之前，需要开始一个事务。事务中需要指定该事务跨越哪些 <code>object store</code>。</p>
+
+<p>事务具有三种模式</p>
+
+<ul>
+<li>只读：<code>read</code>，不能修改数据库数据，可以并发执行</li>
+<li>读写：<code>readwrite</code>，可以进行读写操作</li>
+<li><p>版本变更：<code>verionchange</code></p></li>
+<li>
+<h4>添加数据</h4>
+
+<pre><code>function addData(dbObj, tableName, data, cb) {
+    var transaction = dbObj.db.transaction(tableName, 'readwrite');
+    transaction.oncomplete = function () {
+        console.log("transaction complete");
+    };
+    transaction.onerror = function (event) {
+        console.dir(event)
+    };
+
+    var objectStore = transaction.objectStore(tableName);
+    var request = objectStore.add(data);
+    request.onsuccess = function (e) {
+        if (cb) {
+            cb({
+                error: 0,
+                data : data
+            })
+        }
+    };
+    request.onerror = function (e) {
+        if (cb) {
+            cb({
+                error: 1
+            })
+        }
+    }
+}
+</code></pre>
+</li>
+</ul>
+<p><span class="img-wrap"><img data-src="/img/bVkod5"></span></p>
+
+<p><span class="img-wrap"><img data-src="/img/bVkoef"></span></p>
+
+<ul>
+<li>
+<h4>删除数据</h4>
+
+<pre><code>function deleteData(dbObj, tableName, id, cb) {
+    var transaction = dbObj.db.transaction(tableName, 'readwrite');
+    transaction.oncomplete = function () {
+        console.log("transaction complete");
+    };
+    transaction.onerror = function (event) {
+        console.dir(event)
+    };
+    var objectStore = transaction.objectStore(tableName);
+    var request = objectStore.delete(parseInt(id));
+    request.onsuccess = function (e) {
+        if (cb) {
+            cb({
+                error: 0,
+                data : parseInt(id)
+            })
+        }
+    };
+    request.onerror = function (e) {
+        if (cb) {
+            cb({
+                error: 1
+            })
+        }
+    }
+}
+</code></pre>
+</li>
+<li>
+<h4>查询数据</h4>
+
+<ol>
+<li>
+<h5>获取全部数据</h5>
+
+<pre><code>function getDataAll(dbObj, tableName, cb) {
+    var transaction = dbObj.db.transaction(tableName, 'readonly');
+    transaction.oncomplete = function () {
+        console.log("transaction complete");
+    };
+    transaction.onerror = function (event) {
+        console.dir(event)
+    };
+
+    var objectStore = transaction.objectStore(tableName);
+    var rowData = [];
+    objectStore.openCursor(IDBKeyRange.lowerBound(0)).onsuccess = function (event) {
+        var cursor = event.target.result;
+        if (!cursor &amp;&amp; cb) {
+            cb({
+                error: 0,
+                data : rowData
+            });
+            return;
+        }
+        rowData.push(cursor.value);
+        cursor.continue();
+    };
+}
+</code></pre>
+
+<p><span class="img-wrap"><img data-src="/img/bVkoen"></span></p>
+</li>
+<li>
+<h4>根据 id 获取数据</h4>
+
+<pre><code>function getDataById(dbObj, tableName, id, cb) {
+    var transaction = dbObj.db.transaction(tableName, 'readwrite');
+    transaction.oncomplete = function () {
+        console.log("transaction complete");
+    };
+    transaction.onerror = function (event) {
+        console.dir(event)
+    };
+
+    var objectStore = transaction.objectStore(tableName);
+    var request = objectStore.get(id);
+    request.onsuccess = function (e) {
+        if (cb) {
+            cb({
+                error: 0,
+                data : e.target.result
+            })
+        }
+    };
+    request.onerror = function (e) {
+        if (cb) {
+            cb({
+                error: 1
+            })
+        }
+    }
+}
+</code></pre>
+</li>
+<li>
+<h4>根据关键词索引获取数据</h4>
+
+<pre><code>function getDataBySearch(dbObj, tableName, keywords, cb) {
+    var transaction = dbObj.db.transaction(tableName, 'readwrite');
+    transaction.oncomplete = function () {
+        console.log("transaction complete");
+    };
+    transaction.onerror = function (event) {
+        console.dir(event)
+    };
+
+    var objectStore = transaction.objectStore(tableName);
+    var boundKeyRange = IDBKeyRange.only(keywords);
+    var rowData;
+    objectStore.index("nickName").openCursor(boundKeyRange).onsuccess = function (event) {
+        var cursor = event.target.result;
+        if (!cursor) {
+            if (cb) {
+                cb({
+                    error: 0,
+                    data : rowData
+                })
+            }
+            return;
+        }
+        rowData = cursor.value;
+        cursor.continue();
+    };
+}
+</code></pre>
+</li>
+<li>
+<h4>根据页码获取数据</h4>
+
+<pre><code>function getDataByPager(dbObj, tableName, start, end, cb) {
+    var transaction = dbObj.db.transaction(tableName, 'readwrite');
+    transaction.oncomplete = function () {
+        console.log("transaction complete");
+    };
+    transaction.onerror = function (event) {
+        console.dir(event)
+    };
+
+    var objectStore = transaction.objectStore(tableName);
+    var boundKeyRange = IDBKeyRange.bound(start, end, false, true);
+    var rowData = [];
+    objectStore.openCursor(boundKeyRange).onsuccess = function (event) {
+        var cursor = event.target.result;
+        if (!cursor &amp;&amp; cb) {
+            cb({
+                error: 0,
+                data : rowData
+            });
+            return;
+        }
+        rowData.push(cursor.value);
+        cursor.continue();
+    };
+}
+</code></pre>
+</li>
+</ol>
+</li>
+<li>
+<h3>更新数据</h3>
+
+<pre><code>function updateData(dbObj, tableName, id, updateData, cb) {
+    var transaction = dbObj.db.transaction(tableName, 'readwrite');
+    transaction.oncomplete = function () {
+        console.log("transaction complete");
+    };
+    transaction.onerror = function (event) {
+        console.dir(event)
+    };
+
+    var objectStore = transaction.objectStore(tableName);
+    var request = objectStore.get(id);
+    request.onsuccess = function (e) {
+        var thisDB = e.target.result;
+        for (key in updateData) {
+            thisDB[key] = updateData[key];
+        }
+        objectStore.put(thisDB);
+        if (cb) {
+            cb({
+                error: 0,
+                data : thisDB
+            })
+        }
+    };
+    request.onerror = function (e) {
+        if (cb) {
+            cb({
+                error: 1
+            })
+        }
+    }
+}
+</code></pre>
+</li>
+</ul>
+<p>ps: 实现细节部分待有时间进行补充完善～</p>
+</body></html>
+                </div>
+                                                
+                <div class="clearfix mt10">
+                    <ul class="article-operation list-inline pull-left"><li><a href="/a/1190000002416903">2014年12月10日发布</a></li><li class="dropdown js__content-ops" data-module="article"
+                                data-id="1190000002416903"
+                                data-typetext="文章"><a href="javascript:void(0);" class="dropdown-toggle text-muted" data-toggle="dropdown"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a><ul class="dropdown-menu dropdown-menu-left"><li><a href="#911"
+                                           data-toggle="modal"
+                                           data-target="#911"
+                                           data-action="report"
+                                        >举报</a></li></ul></li></ul>
+                    <div class="pull-right">
+                        <div class="widget-share__full" data-text="本地数据存储之 IndexedDB 实践"
+ data-url="https://segmentfault.com/a/1190000002416903" data-shorturl="http://sfau.lt/b5kiUt"></div>
+
+
+                    </div>
+                </div>
+                <div class="mt10 text-center"><button type="button" data-id="1190000002416903"
+                                        class="btn btn-danger btn-lg mr15 article__reward-btn">
+                                    赞赏支持
+                                </button><button type="button" id="mainLike" data-id="1190000002416903"
+                                    class="btn btn-success btn-lg mr15 "><span id="mainLikeText">赞</span>&nbsp;&nbsp;<span class="seprator">|</span>&nbsp;&nbsp;
+                                <span id="mainLikeNum">1 </span></button><button type="button" id="mainBookmark" data-type="article" data-id="1190000002416903"
+                                    class="btn btn-default btn-lg "><span id="mainBookmarkText">收藏</span>&nbsp;&nbsp;<span class="seprator">|</span>&nbsp;&nbsp;<span id="mainBookmarkNum">13</span></button></div><div class="mt20 text-center article__reward-info"><span class="mr10">如果觉得我的文章对你有用，请随意赞赏</span></div>
+                                                <div id="mm_124884735_33830642_143436142" class="mt20 ad-detail-mm hidden-xs"></div>
+                <style>
+                    #mm_124884735_33830642_143436142 {
+                        display: flex;
+                        justify-content: center;
+                    }
+                </style>
+
+                                    <div class="recommend-post pt30 mt40 mb30 border-top">
+                        <div class="row">
+                            <div class="col-md-8">
+                                                                    <h4 class="mt0">你可能感兴趣的文章</h4>
+                                    <ul class="widget-links list-unstyled">
+                                                                                    <li class="widget-links__item">
+                                                <a href="/a/1190000011004376"
+                                                   title="浅谈 ： web 前端本地存储">浅谈 ： web 前端本地存储</a>
+                                                <small class="text-muted">
+                                                    6 收藏，561
+                                                    浏览
+                                                </small>
+                                            </li>
+                                                                                    <li class="widget-links__item">
+                                                <a href="/a/1190000010568805"
+                                                   title="JavaScript の MUI-APP 数据储存方法">JavaScript の MUI-APP 数据储存方法</a>
+                                                <small class="text-muted">
+                                                    3 收藏，826
+                                                    浏览
+                                                </small>
+                                            </li>
+                                                                                    <li class="widget-links__item">
+                                                <a href="/a/1190000010149864"
+                                                   title="说说cookie、localstorage等前端存储">说说cookie、localstorage等前端存储</a>
+                                                <small class="text-muted">
+                                                    3 收藏，543
+                                                    浏览
+                                                </small>
+                                            </li>
+                                                                            </ul>
+                                                            </div>
+                            <div class="col-md-4">
+                                                            </div>
+                        </div>
+
+                    </div>
+                                <!-- <ul class="list-unstyled text-muted mt30">
+                                        <li>上一篇：<a href="/a/1190000000749988">开启Mac OSX原生NTFS读写支持</a></li>
+                                                            <li class="mt5">下一篇：<a href="/a/1190000002482527">公司网络架构的重新调整</a></li>
+                                    </ul> -->
+
+                <h2 class="h4 post-comment-title"></h2>
+                
+        <div class="comments--news comments--default comments--article 
+    " 
+    data-id="1190000002416903" data-user-id="" data-author-id="1030000000344032 "
+         data-is-admin="null" id="goToReplyArea">
+                    <div class="mb10 clearfix">
+                <strong class="comments-stat pull-left mr10">7 条评论</strong>
+
+                                                    <div class="btn-group btn-group-xs pull-right comments-sort btn-group-menu" role="menu">
+                        <a href="javascript:;" 
+                           class="btn btn-default active" data-sort="default">默认排序</a>
+                        <a href="javascript:;" 
+                           class="btn btn-default" data-sort="desc">时间排序</a>
+                    </div>
+                            </div>
+                <div class="comments-container">
+                                <div class="comments-list">
+                <div class="comments-item" data-id="1050000002423306">
+            <div class="pull-left">
+                <a href="/u/sushengbuhuo" target="_blank"><img class="avatar-32 " src="https://sfault-avatar.b0.upaiyun.com/175/934/175934663-572d654c6f521_big64" alt=""></a>
+            </div>
+            <div class="comments-content">
+                <div class="comment-trigger">
+                    <div class="pull-right comment-option">
+                                                <a href="#911" class="ml10" data-toggle="modal" data-target="#911" data-action="report" data-action-text="举报" data-module="comment" data-id="1050000002423306" data-typetext="评论" data-placement="top" title="举报"><span class="glyphicon glyphicon-flag" aria-hidden="true"></span></a>
+                                            </div>
+                    <strong><a target="_blank" href="/u/sushengbuhuo">苏生不惑</a></strong>
+                    <span class="comments-isAuthor hide"></span>
+                    <span class="comments-date">  ·  2014年12月14日</span>
+                </div>
+
+                <div class="fmt mb10">
+<p>还有IndexedDB数据库，都没用过，如果有实例就nice了</p>
+</div>
+
+                <form action="/api/comment/1050000002423306/edit">
+                    <div class="form-group">
+                        <textarea class="editTextarea mono form-control mb10 hidden" rows="1" name="text" style="height: 28px; overflow: hidden; word-wrap: break-word;" >还有IndexedDB数据库，都没用过，如果有实例就nice了</textarea>
+                    </div>
+                </form>
+
+                <p class="comment-ops not-reply">
+                    <span class="comments-zan ">
+                        <i class="fa fa-thumbs-up mr4" aria-hidden="true"></i>
+                        <span class="comments-zan-text">赞</span>
+                        <span class="comments-zan-value"></span>
+                    </span>
+                    
+                    <span class="ml15 comments-reply-btn">回复</span>
+
+                    <span class="pull-right editBtns hidden">
+                      <button class="btn btn-link btn-xs cancel" type="button">取消</button>
+                      <button class="btn btn-primary btn-xs edit ml10" type="button">保存</button>
+                    </span>
+                </p>
+
+                <div class="reply-list reply-list--empty">
+
+                    
+                    <div class="reply-item reply-item--ops" data-obj="obj">
+                        <a class="reply-inner-btn" href="javascript:;">添加回复</a>
+                        
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+                <div class="comments-item" data-id="1050000002423379">
+            <div class="pull-left">
+                <a href="/u/wtser" target="_blank"><img class="avatar-32 " src="https://sfault-avatar.b0.upaiyun.com/189/943/1899432665-5a250e5a9db66_big64" alt=""></a>
+            </div>
+            <div class="comments-content">
+                <div class="comment-trigger">
+                    <div class="pull-right comment-option">
+                                                <a href="#911" class="ml10" data-toggle="modal" data-target="#911" data-action="report" data-action-text="举报" data-module="comment" data-id="1050000002423379" data-typetext="评论" data-placement="top" title="举报"><span class="glyphicon glyphicon-flag" aria-hidden="true"></span></a>
+                                            </div>
+                    <strong><a target="_blank" href="/u/wtser">王铁手</a></strong>
+                    <span class="comments-isAuthor ">作者</span>
+                    <span class="comments-date">  ·  2014年12月14日</span>
+                </div>
+
+                <div class="fmt mb10">
+<p>嗯，有时间把配图搞上</p>
+</div>
+
+                <form action="/api/comment/1050000002423379/edit">
+                    <div class="form-group">
+                        <textarea class="editTextarea mono form-control mb10 hidden" rows="1" name="text" style="height: 28px; overflow: hidden; word-wrap: break-word;" >嗯，有时间把配图搞上</textarea>
+                    </div>
+                </form>
+
+                <p class="comment-ops not-reply">
+                    <span class="comments-zan ">
+                        <i class="fa fa-thumbs-up mr4" aria-hidden="true"></i>
+                        <span class="comments-zan-text">赞</span>
+                        <span class="comments-zan-value"></span>
+                    </span>
+                    
+                    <span class="ml15 comments-reply-btn">回复</span>
+
+                    <span class="pull-right editBtns hidden">
+                      <button class="btn btn-link btn-xs cancel" type="button">取消</button>
+                      <button class="btn btn-primary btn-xs edit ml10" type="button">保存</button>
+                    </span>
+                </p>
+
+                <div class="reply-list reply-list--empty">
+
+                    
+                    <div class="reply-item reply-item--ops" data-obj="obj">
+                        <a class="reply-inner-btn" href="javascript:;">添加回复</a>
+                        
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+                <div class="comments-item" data-id="1050000002980568">
+            <div class="pull-left">
+                <a href="/u/nero_zou" target="_blank"><img class="avatar-32 " src="https://sfault-avatar.b0.upaiyun.com/329/884/3298845715-56aac2243f2d7_big64" alt=""></a>
+            </div>
+            <div class="comments-content">
+                <div class="comment-trigger">
+                    <div class="pull-right comment-option">
+                                                <a href="#911" class="ml10" data-toggle="modal" data-target="#911" data-action="report" data-action-text="举报" data-module="comment" data-id="1050000002980568" data-typetext="评论" data-placement="top" title="举报"><span class="glyphicon glyphicon-flag" aria-hidden="true"></span></a>
+                                            </div>
+                    <strong><a target="_blank" href="/u/nero_zou">Nero_Zzz</a></strong>
+                    <span class="comments-isAuthor hide"></span>
+                    <span class="comments-date">  ·  2015年07月11日</span>
+                </div>
+
+                <div class="fmt mb10">
+<p>我看你在客户端中，功能都实现了，为什么没用起来？</p>
+</div>
+
+                <form action="/api/comment/1050000002980568/edit">
+                    <div class="form-group">
+                        <textarea class="editTextarea mono form-control mb10 hidden" rows="1" name="text" style="height: 28px; overflow: hidden; word-wrap: break-word;" >我看你在客户端中，功能都实现了，为什么没用起来？</textarea>
+                    </div>
+                </form>
+
+                <p class="comment-ops not-reply">
+                    <span class="comments-zan ">
+                        <i class="fa fa-thumbs-up mr4" aria-hidden="true"></i>
+                        <span class="comments-zan-text">赞</span>
+                        <span class="comments-zan-value"></span>
+                    </span>
+                    
+                    <span class="ml15 comments-reply-btn">回复</span>
+
+                    <span class="pull-right editBtns hidden">
+                      <button class="btn btn-link btn-xs cancel" type="button">取消</button>
+                      <button class="btn btn-primary btn-xs edit ml10" type="button">保存</button>
+                    </span>
+                </p>
+
+                <div class="reply-list reply-list--empty">
+
+                    
+                    <div class="reply-item reply-item--ops" data-obj="obj">
+                        <a class="reply-inner-btn" href="javascript:;">添加回复</a>
+                        
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+                <div class="comments-item" data-id="1050000002982130">
+            <div class="pull-left">
+                <a href="/u/wtser" target="_blank"><img class="avatar-32 " src="https://sfault-avatar.b0.upaiyun.com/189/943/1899432665-5a250e5a9db66_big64" alt=""></a>
+            </div>
+            <div class="comments-content">
+                <div class="comment-trigger">
+                    <div class="pull-right comment-option">
+                                                <a href="#911" class="ml10" data-toggle="modal" data-target="#911" data-action="report" data-action-text="举报" data-module="comment" data-id="1050000002982130" data-typetext="评论" data-placement="top" title="举报"><span class="glyphicon glyphicon-flag" aria-hidden="true"></span></a>
+                                            </div>
+                    <strong><a target="_blank" href="/u/wtser">王铁手</a></strong>
+                    <span class="comments-isAuthor ">作者</span>
+                    <span class="comments-date">  ·  2015年07月12日</span>
+                </div>
+
+                <div class="fmt mb10">
+<p>因为懒</p>
+</div>
+
+                <form action="/api/comment/1050000002982130/edit">
+                    <div class="form-group">
+                        <textarea class="editTextarea mono form-control mb10 hidden" rows="1" name="text" style="height: 28px; overflow: hidden; word-wrap: break-word;" >因为懒</textarea>
+                    </div>
+                </form>
+
+                <p class="comment-ops not-reply">
+                    <span class="comments-zan ">
+                        <i class="fa fa-thumbs-up mr4" aria-hidden="true"></i>
+                        <span class="comments-zan-text">赞</span>
+                        <span class="comments-zan-value"></span>
+                    </span>
+                    
+                    <span class="ml15 comments-reply-btn">回复</span>
+
+                    <span class="pull-right editBtns hidden">
+                      <button class="btn btn-link btn-xs cancel" type="button">取消</button>
+                      <button class="btn btn-primary btn-xs edit ml10" type="button">保存</button>
+                    </span>
+                </p>
+
+                <div class="reply-list reply-list--empty">
+
+                    
+                    <div class="reply-item reply-item--ops" data-obj="obj">
+                        <a class="reply-inner-btn" href="javascript:;">添加回复</a>
+                        
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+                <div class="comments-item" data-id="1050000004135913">
+            <div class="pull-left">
+                <a href="/u/diogoxiang" target="_blank"><img class="avatar-32 " src="https://sfault-avatar.b0.upaiyun.com/601/177/601177794-555bfc7d4b5ad_big64" alt=""></a>
+            </div>
+            <div class="comments-content">
+                <div class="comment-trigger">
+                    <div class="pull-right comment-option">
+                                                <a href="#911" class="ml10" data-toggle="modal" data-target="#911" data-action="report" data-action-text="举报" data-module="comment" data-id="1050000004135913" data-typetext="评论" data-placement="top" title="举报"><span class="glyphicon glyphicon-flag" aria-hidden="true"></span></a>
+                                            </div>
+                    <strong><a target="_blank" href="/u/diogoxiang">Diogoxiang</a></strong>
+                    <span class="comments-isAuthor hide"></span>
+                    <span class="comments-date">  ·  2015年12月12日</span>
+                </div>
+
+                <div class="fmt mb10"><p>如果有一个完整的实例就好咯</p></div>
+
+                <form action="/api/comment/1050000004135913/edit">
+                    <div class="form-group">
+                        <textarea class="editTextarea mono form-control mb10 hidden" rows="1" name="text" style="height: 28px; overflow: hidden; word-wrap: break-word;" >如果有一个完整的实例就好咯</textarea>
+                    </div>
+                </form>
+
+                <p class="comment-ops not-reply">
+                    <span class="comments-zan ">
+                        <i class="fa fa-thumbs-up mr4" aria-hidden="true"></i>
+                        <span class="comments-zan-text">赞</span>
+                        <span class="comments-zan-value"></span>
+                    </span>
+                    
+                    <span class="ml15 comments-reply-btn">回复</span>
+
+                    <span class="pull-right editBtns hidden">
+                      <button class="btn btn-link btn-xs cancel" type="button">取消</button>
+                      <button class="btn btn-primary btn-xs edit ml10" type="button">保存</button>
+                    </span>
+                </p>
+
+                <div class="reply-list reply-list--empty">
+
+                    
+                    <div class="reply-item reply-item--ops" data-obj="obj">
+                        <a class="reply-inner-btn" href="javascript:;">添加回复</a>
+                        
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+                <div class="comments-item" data-id="1050000004135942">
+            <div class="pull-left">
+                <a href="/u/wtser" target="_blank"><img class="avatar-32 " src="https://sfault-avatar.b0.upaiyun.com/189/943/1899432665-5a250e5a9db66_big64" alt=""></a>
+            </div>
+            <div class="comments-content">
+                <div class="comment-trigger">
+                    <div class="pull-right comment-option">
+                                                <a href="#911" class="ml10" data-toggle="modal" data-target="#911" data-action="report" data-action-text="举报" data-module="comment" data-id="1050000004135942" data-typetext="评论" data-placement="top" title="举报"><span class="glyphicon glyphicon-flag" aria-hidden="true"></span></a>
+                                            </div>
+                    <strong><a target="_blank" href="/u/wtser">王铁手</a></strong>
+                    <span class="comments-isAuthor ">作者</span>
+                    <span class="comments-date">  ·  2015年12月12日</span>
+                </div>
+
+                <div class="fmt mb10"><p>还不够完整吗，各个功能都已经封装成函数了</p></div>
+
+                <form action="/api/comment/1050000004135942/edit">
+                    <div class="form-group">
+                        <textarea class="editTextarea mono form-control mb10 hidden" rows="1" name="text" style="height: 28px; overflow: hidden; word-wrap: break-word;" >还不够完整吗，各个功能都已经封装成函数了</textarea>
+                    </div>
+                </form>
+
+                <p class="comment-ops not-reply">
+                    <span class="comments-zan ">
+                        <i class="fa fa-thumbs-up mr4" aria-hidden="true"></i>
+                        <span class="comments-zan-text">赞</span>
+                        <span class="comments-zan-value"></span>
+                    </span>
+                    
+                    <span class="ml15 comments-reply-btn">回复</span>
+
+                    <span class="pull-right editBtns hidden">
+                      <button class="btn btn-link btn-xs cancel" type="button">取消</button>
+                      <button class="btn btn-primary btn-xs edit ml10" type="button">保存</button>
+                    </span>
+                </p>
+
+                <div class="reply-list reply-list--empty">
+
+                    
+                    <div class="reply-item reply-item--ops" data-obj="obj">
+                        <a class="reply-inner-btn" href="javascript:;">添加回复</a>
+                        
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+                <div class="comments-item" data-id="1050000007013361">
+            <div class="pull-left">
+                <a href="/u/ssshooter" target="_blank"><img class="avatar-32 " src="https://sfault-avatar.b0.upaiyun.com/147/970/1479700542-59c2788130cdb_big64" alt=""></a>
+            </div>
+            <div class="comments-content">
+                <div class="comment-trigger">
+                    <div class="pull-right comment-option">
+                                                <a href="#911" class="ml10" data-toggle="modal" data-target="#911" data-action="report" data-action-text="举报" data-module="comment" data-id="1050000007013361" data-typetext="评论" data-placement="top" title="举报"><span class="glyphicon glyphicon-flag" aria-hidden="true"></span></a>
+                                            </div>
+                    <strong><a target="_blank" href="/u/ssshooter">ssshooter</a></strong>
+                    <span class="comments-isAuthor hide"></span>
+                    <span class="comments-date">  ·  2016年09月26日</span>
+                </div>
+
+                <div class="fmt mb10"><p>为什么调用函数的时候写在文件里会提示ncaught TypeError: Cannot read property 'transaction' of undefined？</p></div>
+
+                <form action="/api/comment/1050000007013361/edit">
+                    <div class="form-group">
+                        <textarea class="editTextarea mono form-control mb10 hidden" rows="1" name="text" style="height: 28px; overflow: hidden; word-wrap: break-word;" >为什么调用函数的时候写在文件里会提示ncaught TypeError: Cannot read property &#039;transaction&#039; of undefined？</textarea>
+                    </div>
+                </form>
+
+                <p class="comment-ops not-reply">
+                    <span class="comments-zan ">
+                        <i class="fa fa-thumbs-up mr4" aria-hidden="true"></i>
+                        <span class="comments-zan-text">赞</span>
+                        <span class="comments-zan-value"></span>
+                    </span>
+                    
+                    <span class="ml15 comments-reply-btn">回复</span>
+
+                    <span class="pull-right editBtns hidden">
+                      <button class="btn btn-link btn-xs cancel" type="button">取消</button>
+                      <button class="btn btn-primary btn-xs edit ml10" type="button">保存</button>
+                    </span>
+                </p>
+
+                <div class="reply-list reply-list--empty">
+
+                    
+                    <div class="reply-item reply-item--ops" data-obj="obj">
+                        <a class="reply-inner-btn" href="javascript:;">添加回复</a>
+                        
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+            </div>
+    <div class="comments-loading hide">载入中...</div>
+        <div class="comments-more hide"><a href="javascript:;">显示更多评论</a></div>
+    
+
+                                    <div class="comments-box" id="goToReplyEditor">
+                <div class="pull-left">
+                    <img class="avatar-32 "
+                         src="https://static.segmentfault.com/v-5ab0701d/global/img/user-128.png"
+                         alt=""/>
+                </div>
+                <div class="comments-box-content">
+                    <form action="/api/article/1190000002416903/comments/add">
+                        <div class="form-group mb0">
+                            <textarea name="text" rows="3" class="form-control"placeholder="文明社会，理性评论"></textarea>
+                            <div class="mt15 text-right">
+                                <button type="button" class="hide"></button>
+                                <button class=" btn btn-primary" type="button">发布评论</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+                                                        </div>
+    </div>
+
+
+                                    
+                
+            </div><!-- /.main -->
+
+
+            <div class="col-xs-12 col-md-3 side">
+                
+                <div class="widget-box widget_lives pt0 hidden" style="border-top: none" id="live-recommend-wrapper">
+                    <h2 class="widget-box__title">
+                        讲堂推荐
+                        <i class="fa fa-youtube-play fa-sm" aria-hidden="true"></i>
+                        <a href="/lives" class="pull-right more">更多</a>
+                    </h2>
+                    <div id="live-recommend" class="mb20"></div>
+                </div>
+                
+                                
+                <div id="mm_124884735_33830642_120290173" class="mb25"></div>
+                
+                <div class="widget-box widget-box--blog-info">
+                    <div class="blog__sidebar-author " >
+                                                    <button type="button"
+                                    class="btn btn-sm btn-success follow-user ml10 pull-right"
+                                    data-do="follow"
+                                    data-type="user"
+                                    data-id="1030000000344032">关注作者
+                            </button>
+                        
+                        <div class="article__widget--author">
+                            <a href="/u/wtser" class="inline-block">
+                                <img class="avatar-40" src="https://sfault-avatar.b0.upaiyun.com/189/943/1899432665-5a250e5a9db66_big64" alt="王铁手">
+                            </a>
+                            <a class="article__widget-author-name inline-block" href="/u/wtser">
+                                <strong>王铁手</strong>
+                            </a>
+                            <p class="article__widget-author-text-muted mb0">
+                                <span>4k 声望</span>
+
+                            </p>
+
+
+                        </div>
+
+
+                    </div>
+                                        <div class="blog__sidebar-blog-name">
+                        <p class="article__widget-author-text-muted mt15 mb5">发布于专栏</p>
+
+                        <h4 class="fz16"><a style="word-break: break-all;" href="/blog/wtser">王铁手的博客</a></h4>
+                        <p class="article__widget-author-desc">怀着一颗铁匠的心，凭借一双铁手，打造自己的人生。</p>
+
+                        <p>
+                            <span class="article__widget-author-text-muted">25 人关注</span>
+                            
+                                                                    <button type="button mb20"
+                                            class="btn btn-sm btn-default follow-article pull-right"
+                                            data-do="follow"
+                                            data-type="blog"
+                                            data-id="1200000000366174">关注专栏
+                                    </button>
+                                
+                                                    </p>
+
+                    </div>
+                    
+
+                </div>
+                
+                
+                                <div id="mm_124884735_33830642_145440102" class="mb25 ad-should-be-fixed"></div>
+ 
+                <div class="post-nav hidden-xs">
+                    <div class="panel panel-default widget-outline">
+                        <div class="panel-heading">目录</div>
+                        <div class="panel-body">
+                            <div class="nav-body">
+                                <div class="highlight-title"></div>
+                                <ul class="articleIndex"></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+            </div><!-- /.side -->
+        </div>
+    </div>
+</div>
+
+<div id="shareToWeiboModal" class="modal" tabindex='-1'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span><span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title">分享</h4>
+            </div>
+            <div class="modal-body">
+                <p class="sfModal-content">
+                    分享到微博？
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default dont-likeweibo" data-dismiss="modal">取消</button>
+                <a href="" id="shareLink" class="btn btn-primary done-btn" target="_blank"
+                   onclick="$('#shareToWeiboModal').modal('hide')">分享</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal widget-911" id="911" tabindex='-1'>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" data-dismiss="modal" type="button">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+        </button>
+        <h4 class="modal-title"><span data-model="action"></span><span data-model="type"></span></h4>
+      </div>
+      <div class="modal-body">
+        <form id="reportForm">
+          <!-- 后台返回信息 -->
+          <p class="alert alert-warning" data-model="returnMsg"></p>
+          <div data-role="base">
+            <p>
+              <strong class="required">我要<span data-model="action"></span>该<span data-model="type"></span>，理由是：</strong>
+            </p>
+            <ul class="list-unstyled" data-model="list"></ul>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default pull-left" type="button" data-role="back" style="display:none">返回重选</button>
+                <button class="btn btn-default" data-dismiss="modal" type="button">取消</button>
+        <button class="btn btn-primary" data-role="submit" type="button">提交</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+    <div id="loginBanner"  class="hidden-sm hidden-xs loginBanner">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-7">
+                <h1 class="title">在 SegmentFault，学习技能、解决问题</h1>
+                <p class="desc">每个月，我们帮助 1000 万的开发者解决各种各样的技术问题。并助力他们在技术能力、职业生涯、影响力上获得提升。</p>
+            </div>
+            <div class="col-lg-3 col-lg-offset-3 col-md-4 col-md-offset-1">
+                <form class="register-form clearfix" action="/api/user/phone/register">
+
+                    
+                    <a href="/user/register" class="SFLogin btn btn-lg btn-primary mr15">免费注册</a>
+                    <a href="/user/login" class="SFRegister btn btn-lg btn-primary">立即登录</a>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+
+
+
+
+
+<footer id="footer">
+    <div class="container">
+        <div class="row hidden-xs">
+            <dl class="col-sm-2 site-link">
+                <dt>产品</dt>
+                
+                <dd><a href="/questions/hottest?utm_source=sf-footer&utm_medium=footer-nav&utm_campaign=product&utm_content=footer-links-hottest-questions&utm_term=热门问答">热门问答</a></dd>
+                <dd><a href="/blogs/hottest?utm_source=sf-footer&utm_medium=footer-nav&utm_campaign=product&utm_content=footer-links-hottest-questions&utm_term=热门专栏">热门专栏</a></dd>
+                <dd><a href="/lives?utm_source=sf-footer&utm_medium=footer-nav&utm_campaign=product&utm_content=footer-links-hottest-questions&utm_term=热门讲堂">热门讲堂</a></dd>
+                <dd><a href="/events?utm_source=sf-footer&utm_medium=footer-nav&utm_campaign=product&utm_content=footer-links-hottest-questions&utm_term=最新活动">最新活动</a></dd>
+                <dd><a href="/groups?utm_source=sf-footer&utm_medium=footer-nav&utm_campaign=product&utm_content=footer-links-hottest-questions&utm_term=技术圈">技术圈</a></dd>
+                <dd><a href="/jobs?utm_source=sf-footer&utm_medium=footer-nav&utm_campaign=product&utm_content=footer-links-hottest-questions&utm_term=找工作">找工作</a></dd>
+                <dd><a href="/app?utm_source=sf-footer&utm_medium=footer-nav&utm_campaign=product&utm_content=footer-links-hottest-questions&utm_term=app">移动客户端</a></dd>
+                
+            </dl>
+            
+            <dl class="col-sm-2 site-link">
+                <dt>资源</dt>
+                <dd><a href="/weekly?utm_source=sf-footer&utm_medium=footer-nav&utm_campaign=resource&utm_content=footer-links-weekly&utm_term=每周精选">每周精选</a></dd>
+                <dd><a href="/users?utm_source=sf-footer&utm_medium=footer-nav&utm_campaign=resource&utm_content=footer-links-users&utm_term=用户排行榜">用户排行榜</a></dd>
+                <dd><a href="/badges?utm_source=sf-footer&utm_medium=footer-nav&utm_campaign=resource&utm_content=footer-links-badges&utm_term=徽章">徽章</a></dd>
+                <dd><a href="/faq?utm_source=sf-footer&utm_medium=footer-nav&utm_campaign=resource&utm_content=footer-links-faq&utm_term=帮助中心">帮助中心</a></dd>
+                <dd><a href="/repu?utm_source=sf-footer&utm_medium=footer-nav&utm_campaign=resource&utm_content=footer-links-repu&utm_term=声望与权限">声望与权限</a></dd>
+                <dd><a href="/community?utm_source=sf-footer&utm_medium=footer-nav&utm_campaign=resource&utm_content=footer-links-community&utm_term=社区服务中心">社区服务中心</a></dd>
+                <dd><a href="https://docs.segmentfault.com?utm_source=sf-footer&utm_medium=footer-nav&utm_campaign=resource&utm_content=footer-links-docs&utm_term=开发手册">开发手册</a></dd>
+
+   
+            </dl>
+
+            <dl class="col-sm-2 site-link">
+                <dt>商务</dt>
+                <dd><a href="https://business.segmentfault.com/services?utm_source=sf-footer&utm_medium=footer-nav&utm_campaign=business&utm_content=footer-links-services-rencai&utm_term=人才服务" target="_blank">人才服务</a></dd>
+                <dd><a href="https://business.segmentfault.com/services?utm_source=sf-footer&utm_medium=footer-nav&utm_campaign=business&utm_content=footer-links-services-qiyeneixun&utm_term=企业服务" target="_blank">企业培训</a></dd>
+                <dd><a href="https://business.segmentfault.com/services?utm_source=sf-footer&utm_medium=footer-nav&utm_campaign=business&utm_content=footer-links-services-huodongcehua&utm_term=活动策划" target="_blank">活动策划</a></dd>
+                <dd><a href="https://business.segmentfault.com/ads?utm_source=sf-footer&utm_medium=footer-nav&utm_campaign=business&utm_content=footer-links-ads&utm_term=广告投放" target="_blank">广告投放</a></dd>
+                <dd><a href="https://business.segmentfault.com/bc?utm_source=sf-footer&utm_medium=footer-nav&utm_campaign=business&utm_content=footer-links-bc&utm_term=区块链解决方案" target="_blank">区块链解决方案</a></dd>
+                <dd><a href="https://business.segmentfault.com/contact?utm_source=sf-footer&utm_medium=footer-nav&utm_campaign=business&utm_content=footer-links-contact&utm_term=合作联系" target="_blank">合作联系</a></dd>
+            </dl>
+            
+            <dl class="col-sm-2 site-link">
+                <dt>关于</dt>
+                <dd><a href="https://about.segmentfault.com/?utm_source=sf-footer&utm_medium=footer-nav&utm_campaign=about&utm_content=about-index&utm_term=关于我们">关于我们</a></dd>
+                <dd><a href="https://about.segmentfault.com/careers.html?utm_source=sf-footer&utm_medium=footer-nav&utm_campaign=about&utm_content=about-careers&utm_term=加入我们">加入我们</a></dd>
+                <dd><a href="https://about.segmentfault.com/contact.html?utm_source=sf-footer&utm_medium=footer-nav&utm_campaign=about&utm_content=about-contact&utm_term=联系我们">联系我们</a></dd>
+            </dl>
+
+            <dl class="col-sm-2 site-link">
+                <dt>关注</dt>
+                                <dd><a href="//segmentfault.com/blog/segmentfault" target="_blank">产品技术日志</a></dd>
+                                <dd><a href="//segmentfault.com/blog/community_admin" target="_blank">社区运营日志</a></dd>
+                                <dd><a href="//segmentfault.com/blog/segmentfault_news" target="_blank">市场运营日志</a></dd>
+                                <dd><a href="//segmentfault.com/blog/segmentfault_team" target="_blank">团队日志</a></dd>
+                                <dd><a href="//segmentfault.com/blog/interview" target="_blank">社区访谈</a></dd>
+                                <dd>
+                    <ul class="sn-inline">
+                        <li>
+                            <a class="entypo-wechart icon-sn-weixin weixin-popover-qrcode" data-toggle="popover" data-placement="top"  data-content="">微信</a>
+                        </li>
+                        <li>
+                            <a href="http://weibo.com/segmentfault" target="_blank" class="entypo-weibo icon-sn-weibo" >新浪微博</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/SegmentFault" target="_blank" class="entypo-facebook icon-sn-github">Github</a>
+                        </li>
+                        <li>
+                            <a href="https://twitter.com/segment_fault" target="_blank" class="entypo-twitter icon-sn-twitter">Twitter</a>
+                        </li>
+                    </ul>
+                </dd>
+            </dl>
+
+            <dl class="col-sm-2 site-link" id="license">
+                <dt>条款</dt>
+                <dd><a href="/tos">服务条款</a></dd>
+                <dd><a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">内容许可</a></dd>
+                <dd>
+                    <a href="/app" class="clearfix mt10 block"><img src="https://static.segmentfault.com/v-5ab0701d/page/img/app/appQrcode.png" class="app-qrcode"></a>
+                    <div class="app-download-desc">
+                        <p>扫一扫下载 App</p>
+                    </div>
+                    
+                </dd>
+            </dl>
+        </div>
+        <div class="copyright">
+            Copyright &copy; 2011-2018 SegmentFault. 当前呈现版本 17.06.16<br>
+            <a href="http://www.miibeian.gov.cn/" rel="nofollow">浙ICP备 15005796号-2</a> &nbsp;
+            <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010602002000" rel="nofollow">浙公网安备 33010602002000号</a>
+            <span class="ml5">杭州堆栈科技有限公司版权所有</span>
+            <P class="mt30">CDN 存储服务由 <a target="_blank" href="https://www.upyun.com/?utm_source=segmentfault&utm_medium=link&utm_campaign=upyun&md=segmentfault">又拍云</a> 赞助提供 </p>
+        </div>
+        <p class="text-center">
+            <a class="js__view--selector hidden-sm hidden-md hidden-lg" data-action="mobile" href="javascript:;">移动版</a>
+            <a class="js__view--selector hidden-sm hidden-md hidden-lg" data-action="desktop" href="javascript:;">桌面版</a>
+        </p>
+    </div>
+</footer>
+
+<div id="fixedTools" class="hidden-xs hidden-sm">
+    <a id="backtop" class="hidden border-bottom" href="#">回顶部</a>
+</div>
+
+<script id="loginModal" type="text/template">
+    <div class="row bg-white login-modal">
+        <div class="col-md-12 login-wrap">
+            <form action="/api/user/login" method="POST" role="form" class="mt15">
+                <div class="form-group hidden">
+                                        <input type="text" class="form-control" name="remember" value="1"
+                           autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="username" class="control-label">手机号 或 Email</label>
+                    <input type="text" class="form-control" name="username" tabindex="1" required placeholder="11 位手机号 或 Email"
+                           autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label class="control-label">密码</label><span class="pull-right"><a
+                                href="/user/forgot" tabindex="4">忘记密码</a></span>
+                    <input type="password" class="form-control" name="password" tabindex="2" required placeholder="请输入密码">
+                </div>
+                <div class="form-group clearfix">
+                    <button type="submit" class="btn-block btn btn-primary pull-right pl20 pr20" tabindex="3"
+                            onclick='ga("send", "event", "email login button", "clicked", "login modal");'>登录
+                    </button>
+                </div>
+            </form>
+            <div class="text-muted text-center more-login-area">
+    <span class="more-login-words">更多登录方式</span>
+</div>
+<div class="widget-login mb15 text-center">
+    <a href="/user/oauth/google" class=""
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "google"});'><span
+                class="icon-sn-google"></span></a>
+    <a href="/user/oauth/github" class=""
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "github"});");'><span
+                class="icon-sn-github"></span></a>
+    <a href="/user/oauth/weibo" class=""
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "weibo"});'><span
+                class="icon-sn-weibo"></span></a>
+    <a href="/user/oauth/qq" class=""
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "qq"});'><span
+                class="icon-sn-qq"></span></a>
+    <a href="/user/oauth/weixin" class=""
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "qq"});'><span
+                class="icon-sn-weixin"></span></a>
+    <a href="/user/oauth/linkedin" class=""
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "linkedin"});'><span
+                class="icon-sn-linkedin"></span></a>
+    <span id="loginShowMore" style="cursor: pointer" class="mb5"><span class="icon-sn-dotted"></span></span>
+    <a href="/user/oauth/twitter" class=" hidden"
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "twitter"});'><span
+                class="icon-sn-twitter"></span></a>
+    <a href="/user/oauth/facebook" class=" hidden"
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "facebook"});'><span
+                class="icon-sn-facebook"></span></a>
+    <a href="/user/oauth/douban" class=" hidden"
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "douban"});'><span
+                class="icon-sn-douban"></span></a>
+</div>
+<div class="form-group clearfix">
+    <a class="btn-block btn btn-default pull-right pl20 pr20 
+                        SFLogin
+             "
+
+            
+        onclick='ga("send", "event", "email login button", "clicked", "login modal");'>
+                    注册新账号
+            </a>
+</div>
+<p class="text-muted text-center mb15">登录即表示你同意网站的<a href="/tos" target="_blank">《服务条款》</a></p>        </div>
+    </div>
+</script>
+<script id="registerModal" type="text/template">
+    <div class="row bg-white login-modal">
+        <div class="col-md-12 login-wrap">
+            
+            <form action="/api/user/register" method="POST" role="form" class="mt15">
+                <div class="form-group">
+                    <label for="name" class="control-label">你的名字</label>
+                    <input type="text" class="form-control" name="name" required placeholder="真实姓名或常用昵称">
+                </div>
+                
+                <div class="form-group">
+                    <label for="mail" class="control-label">手机号 或 Email</label>
+                    <input type="text" class="form-control" id="login-name" name="mail" required placeholder="11 位手机号 或 Email">
+                </div>
+                
+                <input type="text" class="hidden" name="register_type" value="mail">
+
+                <div class="form-group">
+                    <div class="phone-register-only hidden">
+                        <div class="captchaInput mb10">
+                            <input type="text" class="form-control" name="cap" placeholder="右侧的验证码" style="width:50%; display: inline; margin-right: 15px;">
+                            <span class="mt10">
+                                <a id="loginReloadCaptcha" href="javascript:void(0)">
+                                <img src="/user/captcha?w=135&h=34" class="cap" width="135" height="34"/></a>
+                            </span>
+                        </div>
+                        <div class="input-group">
+                            <input name="code" type="text" class="form-control js-user-login__phone-code-value" placeholder="短信验证码">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default js-user-login__phone-vaild-btn" style="width:96px;" type="button">
+                                获取验证码</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="control-label">密码</label>
+                    <input type="password" class="form-control" name="password" required placeholder="不少于 6 位的密码">
+                </div>
+                <div class="form-group clearfix">
+                    <button type="submit" class="btn-block btn btn-primary pl20 pr20 pull-right"
+                            onclick='ga("send", "event", "email register button", "clicked", "login modal");'>注册
+                    </button>
+                </div>
+                                <div class="text-muted text-center more-login-area">
+    <span class="more-login-words">更多登录方式</span>
+</div>
+<div class="widget-login mb15 text-center">
+    <a href="/user/oauth/google" class=""
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "google"});'><span
+                class="icon-sn-google"></span></a>
+    <a href="/user/oauth/github" class=""
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "github"});");'><span
+                class="icon-sn-github"></span></a>
+    <a href="/user/oauth/weibo" class=""
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "weibo"});'><span
+                class="icon-sn-weibo"></span></a>
+    <a href="/user/oauth/qq" class=""
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "qq"});'><span
+                class="icon-sn-qq"></span></a>
+    <a href="/user/oauth/weixin" class=""
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "qq"});'><span
+                class="icon-sn-weixin"></span></a>
+    <a href="/user/oauth/linkedin" class=""
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "linkedin"});'><span
+                class="icon-sn-linkedin"></span></a>
+    <span id="loginShowMore" style="cursor: pointer" class="mb5"><span class="icon-sn-dotted"></span></span>
+    <a href="/user/oauth/twitter" class=" hidden"
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "twitter"});'><span
+                class="icon-sn-twitter"></span></a>
+    <a href="/user/oauth/facebook" class=" hidden"
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "facebook"});'><span
+                class="icon-sn-facebook"></span></a>
+    <a href="/user/oauth/douban" class=" hidden"
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "douban"});'><span
+                class="icon-sn-douban"></span></a>
+</div>
+<div class="form-group clearfix">
+    <a class="btn-block btn btn-default pull-right pl20 pr20 
+                        SFRegister
+             "
+
+            
+        onclick='ga("send", "event", "email login button", "clicked", "login modal");'>
+                    已有账号登录
+            </a>
+</div>
+<p class="text-muted text-center mb15">登录即表示你同意网站的<a href="/tos" target="_blank">《服务条款》</a></p>            </form>
+        </div>
+    </div>
+</script>
+<script id="bindPhoneModal" type="text/template">
+    <div class="bg-white bindphone-model">
+        <div class="alert alert-warning" role="alert">
+            为了保证账号安全，请先绑定手机
+        </div>
+        <div>
+            <form class="form-horizontal form__bindphone-apply" style="background-color:#fff;padding:0;">
+                <div class="form-group ">
+                    <label for="phoneNumber" class="col-sm-3 control-label required" >手机号码</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control bindphone--phone" id="phoneNumber" name="phone" placeholder="仅只支持大陆手机号">
+                    </div>
+                    <div class="col-sm-3"></div>
+                </div>
+                <div class="form-group">
+                    <label for="authCode" class="col-sm-3 control-label required">验证码</label>
+                    <div class="col-sm-6">
+                        <div class="input-group">
+                            <input type="text" class="form-control bindphone--code" name="code" placeholder="短信验证码">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default user-bind__phone-vaild-btn" type="button">获取验证码</button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-sm-3"></div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</script>
+
+
+<script>
+    window.serverTime = 1521794528000;
+</script>
+
+<script>
+    </script>
+<script id="taskFollowList" type="x-template">
+    null
+</script>
+<script>
+    try {
+        window.taskFollowList = JSON.parse(document.getElementById('taskFollowList').innerHTML)
+    } catch(err) {}
+</script>
+
+<script>
+    (function (w) {
+        w.SF = {
+            staticUrl: "https://static.segmentfault.com/v-5ab0701d"
+        };
+        w.SF.token = (function () {
+    var _Iv8 = //'dV'
+'19'+//'HU'
+'HU'+'3'//'jx2'
++'f2'//'f'
++//'I5'
+'68'+//'vBZ'
+'c3'+//'qNu'
+'f7'+//'u4g'
+'ac'+'c'//'YR'
++//'U'
+'2'+'f'//'bap'
++''///*'yk'*/'yk'
++'8'//'a6'
++//'nQs'
+'6'+//'9S'
+'c3'+'03'//'jc'
++//'S'
+'6'+'2f2'//'blv'
++''///*'g'*/'g'
++//'Hs'
+'1'+'1'//'jW'
++'9d'//'WaL'
++//'2'
+'5'+''///*'Q'*/'Q'
++'5'//'1C'
+, _lXi8Ft = [[2,4]];
+
+    for (var i = 0; i < _lXi8Ft.length; i ++) {
+        _Iv8 = _Iv8.substring(0, _lXi8Ft[i][0]) + _Iv8.substring(_lXi8Ft[i][1]);
+    }
+
+    return _Iv8;
+})();;
+    })(window);
+
+                var lock = {
+        type: "",
+        text: '',
+        table: {"ban_post":[1,"\u4f60\u5df2\u7ecf\u88ab\u7981\u8a00, \u65e0\u6cd5\u8fdb\u884c\u6b64\u64cd\u4f5c, \u5982\u6709\u7591\u4e49\u8bf7\u63d0\u4ea4\u7533\u8bc9, \u6216\u8005\u53d1\u90ae\u4ef6\u5230pr@segmentfault.com"]}
+    };
+
+        var ddosMode = false;
+    
+    (function (currentUrl) {
+        if (typeof URL != 'undefined') {
+            // 测试环境
+            if ('https://segmentfault.com' === '//localhost:3000') return
+
+            var baseUrl = new URL('https://segmentfault.com');
+
+            if (baseUrl.protocol != currentUrl.protocol
+                || baseUrl.host != currentUrl.host) {
+                window.location.href = baseUrl.protocol + '//' + baseUrl.host
+                    + currentUrl.pathname + currentUrl.search + currentUrl.hash;
+            }
+        }
+    })(window.location);
+</script>
+             <script crossorigin src="https://static.segmentfault.com/v-5ab0701d/3rd/assets.js"></script>
+                 
+        <script crossorigin src="https://static.segmentfault.com/v-5ab0701d/blog/script/post.min.js"></script>
+            
+
+<script>
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-918487-8']);
+    _gaq.push(['_trackPageview']);
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+                
+        
+
+            
+
+    ga('create', 'UA-918487-8', 'auto', {
+        'userID'
+    : 0,
+        'createdTime'
+    : 0,
+        'now'
+    : 1521794529,
+        'allowLinker'
+    : true });
+    ga('require', 'linker');
+    ga('linker:autoLink', ['docs.segmentfault.com'] );
+    ga('set', 'dimension1', 'guest');
+    ga('send', 'pageview');
+
+</script>
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?e23800c454aa573c0ccb16b52665ac26";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+        <script type="text/javascript" src="//afpmm.alicdn.com/g/mm/afp-cdn/JS/k.js"></script>
+            <script>
+                    ac_keywords_targeting = "localstorage";
+                _acM({
+            aid: "mm_124884735_33830642_145440102",
+            format: 1,
+            mode: 1,
+            gid: 1,
+            destid: "mm_124884735_33830642_145440102",
+            sendkeywords: 1,
+            serverbaseurl: "afpeng.alimama.com/"
+        });
+        </script>
+            <script>
+                    ac_keywords_targeting = "localstorage";
+                _acM({
+            aid: "mm_124884735_33830642_120290173",
+            format: 1,
+            mode: 1,
+            gid: 1,
+            destid: "mm_124884735_33830642_120290173",
+            sendkeywords: 1,
+            serverbaseurl: "afpeng.alimama.com/"
+        });
+        </script>
+     
+
+        <script type="text/javascript" src="//afpmm.alicdn.com/g/mm/afp-cdn/JS/k.js"></script>
+            <script>
+                    ac_keywords_targeting = "localstorage";
+                _acM({
+            aid: "mm_124884735_33830642_143436142",
+            format: 1,
+            mode: 1,
+            gid: 1,
+            destid: "mm_124884735_33830642_143436142",
+            sendkeywords: 1,
+            serverbaseurl: "afpeng.alimama.com/"
+        });
+        </script>
+     
+
+</body>
+</html>
+

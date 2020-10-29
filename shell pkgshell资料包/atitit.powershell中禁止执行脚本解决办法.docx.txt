@@ -1,0 +1,19 @@
+atitit.powershell中禁止执行脚本解决办法
+
+
+
+、
+输入
+get-ExecutionPolicy
+命令
+----
+得到的返回值如果是
+Restricted
+则说明当前的权限不具备安装
+模块的权限
+
+
+set-ExecutionPolicy          RemoteSigned
+
+
+

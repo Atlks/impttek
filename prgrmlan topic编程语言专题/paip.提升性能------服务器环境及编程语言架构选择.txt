@@ -1,0 +1,24 @@
+paip.提升性能------服务器环境及编程语言架构选择
+
+
+操作系统: 换LINUX，不要Windows ,相同硬件平台下，LINUX大概会比WINDOWS性能好3-5倍..
+
+
+代理器: nginx:nginx的并发请求相当于 apache的100倍s
+
+WEB服务器: apache VS IIS :  当然选择APACHE，性能大概比IIS提升最少3-5倍..
+
+程序语言:java,c#(asp.net)的性能大概是PHP，ASP这种脚本语言的5--10倍之多..
+
+数据库：用ORACLE，性能大概是MS SQL的3--5倍最起码..
+
+
+
+所以，最佳的组合是 linux+nginx+apache+java+oracle
+
+
+
+
+
+
+

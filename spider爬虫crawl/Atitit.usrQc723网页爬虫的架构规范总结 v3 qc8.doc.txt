@@ -1,0 +1,59 @@
+Atitit.usrQc723网页爬虫的架构规范总结 v3 qc8.doc
+
+
+11
+11
+11
+22
+22
+22
+22
+22
+22
+22
+33
+3
+
+总数的结构..(接口方法)
+
+ 	public String exec( ) throws IOException     {
+ 
+		
+	 
+		fx.close();
+
+获得页数
+getpage();
+跳页处理(接口方法)
+
+if(i<pageStart)
+				continue;
+
+单个的页面处理(接口方法)
+	 */
+	private void singlePage(int page) throws ConnEx, NoRztEx, ParseLsitEx {
+ 		String html = null;
+ 		}
+获得页面url	
+获得页面html	
+
+获得list
+	private List getList(String html) throws NoRztEx, ParseLsitEx {
+ 	}
+	 
+ 
+	处理单个的数据条目
+	private void processItem(Object obj) {
+	 
+		
+	}
+调用
+
+ 
+
+日志的实现
+使用默认的console最简单的..或者使用queue+textarea....麻烦的
+参考
+paip.c++ qt 网页爬虫 的 网络编程 总结 - attilax的专栏 - 博客频道 - CSDN.NET.htm
+极简单之爬虫入门 - 星夜落尘 - 博客园.htm
+
